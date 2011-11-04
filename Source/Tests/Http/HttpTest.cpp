@@ -357,6 +357,9 @@ Test5(NPT_HttpUrl url)
     // try again
     delete response;
     response = NULL;
+    request_entity = new NPT_HttpEntity();
+    request_entity->SetInputStream("Testing2");
+    request.SetEntity(request_entity);
     client.SendRequest(request, response);
     entity = NULL;
     if (response && (entity = response->GetEntity())) {
