@@ -52,7 +52,8 @@ NPT_SET_LOCAL_LOGGER("platinum.core.http.test")
 //#define TEST1
 //#define TEST2
 //#define TEST3
-#define TEST4
+//#define TEST4
+#define TEST5
 
 /*----------------------------------------------------------------------
 |   globals
@@ -328,6 +329,45 @@ Test4(PLT_TaskManager* task_manager, NPT_HttpUrl url, NPT_TimeInterval wait_befo
 }
 #endif
 
+#ifdef TEST5
+/*----------------------------------------------------------------------
+|   Test5
++---------------------------------------------------------------------*/
+static bool
+Test5(NPT_HttpUrl url)
+{
+    NPT_LOG_INFO("########### TEST 5 ######################");
+    
+    NPT_HttpClient client;
+    
+    // first request
+    NPT_HttpRequest request(url, NPT_HTTP_METHOD_POST, NPT_HTTP_PROTOCOL_1_1);
+    NPT_HttpEntity* request_entity = new NPT_HttpEntity();
+    request_entity->SetInputStream("Testing");
+    request.SetEntity(request_entity);
+    
+    NPT_HttpResponse* response = NULL;
+    client.SendRequest(request, response);
+    NPT_HttpEntity* entity = NULL;
+    if (response && (entity = response->GetEntity())) {
+        NPT_DataBuffer buffer;
+        if (NPT_FAILED(entity->Load(buffer))) return false;
+    }
+    
+    // try again
+    delete response;
+    response = NULL;
+    client.SendRequest(request, response);
+    entity = NULL;
+    if (response && (entity = response->GetEntity())) {
+        NPT_DataBuffer buffer;
+        if (NPT_FAILED(entity->Load(buffer))) return false;
+    }
+    
+    return true;
+}
+#endif
+
 /*----------------------------------------------------------------------
 |   PrintUsageAndExit
 +---------------------------------------------------------------------*/
@@ -429,8 +469,7 @@ main(int argc, char** argv)
     NPT_InputStreamReference stream(ringbuffer_stream);
     NPT_HttpRequestHandler* custom_handler = new PLT_HttpCustomRequestHandler(stream, "text/xml");
     http_server.AddRequestHandler(custom_handler, "/custom");
-    NPT_String custom_url = "/custom";
-
+    
     /* start server */
     NPT_CHECK_SEVERE(http_server.Start());
 
@@ -455,18 +494,23 @@ main(int argc, char** argv)
 #endif
     
 #ifdef TEST3
-    result = Test3(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), custom_url), ringbuffer_stream, size);
+    result = Test3(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), "/custom"), ringbuffer_stream, size);
     if (!result) return -1;
 #endif
     
 #ifdef TEST4
-    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), custom_url), NPT_TimeInterval(.1f));
+    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), "/custom"), NPT_TimeInterval(.1f));
     if (!result) return -1;
     
-    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), custom_url), NPT_TimeInterval(1.f));
+    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), "/custom"), NPT_TimeInterval(1.f));
     if (!result) return -1;
     
-    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), custom_url), NPT_TimeInterval(2.f));
+    result = Test4(&task_manager, NPT_HttpUrl("127.0.0.1", http_server.GetPort(), "/custom"), NPT_TimeInterval(2.f));
+    if (!result) return -1;
+#endif
+    
+#ifdef TEST5
+    result = Test5(NPT_HttpUrl("127.0.0.1", http_server.GetPort(), "/test"));
     if (!result) return -1;
 #endif
     
