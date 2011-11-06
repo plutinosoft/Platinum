@@ -1,3 +1,14 @@
+Platinum 0.6.7
+--------------
+fixed: request would fail when retrying on a new connection after the previous one failed because server closed it without using a Connection:close header. Only happens with requests containing a body.
+fixed: always adding Connection:close in HTTP 1.1 responses due to checking content-length prior to setting it.
+changed: allow DLNA interactive request. 
+changed: Don't override accept-range header if already set.
+changed: more DLNA compliance for DMC
+changed: better handling of path extraction. Now url encodes url root as well
+changed: better support for persistent connections with http 1.0
+changed: eturn HTTP 416 if Accept-Range header is not bytes in the request and the server makes a range request
+
 Platinum 0.6.6
 --------------
 fixed: mime type detection was not properly handled
