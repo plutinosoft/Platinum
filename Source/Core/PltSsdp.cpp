@@ -152,6 +152,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
     if (!niaddr) return NPT_SUCCESS;
 
     NPT_UdpSocket socket;
+    //NPT_CHECK_WARNING(socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -172,7 +173,6 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
     }
 
     NPT_HttpResponse response(200, "OK", NPT_HTTP_PROTOCOL_1_1);
-    //PLT_UPnPMessageHelper::SetLocation(response, m_Device->GetDescriptionUrl((*niaddr).GetPrimaryAddress().ToString()));
     PLT_UPnPMessageHelper::SetLocation(response, m_Device->GetDescriptionUrl(info.local_address.GetIpAddress().ToString()));
     PLT_UPnPMessageHelper::SetLeaseTime(response, m_Device->GetLeaseTime());
     PLT_UPnPMessageHelper::SetServer(response, PLT_HTTP_DEFAULT_SERVER, false);
