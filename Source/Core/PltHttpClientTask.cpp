@@ -63,6 +63,15 @@ PLT_HttpClientSocketTask::~PLT_HttpClientSocketTask()
 }
 
 /*----------------------------------------------------------------------
+|   PLT_HttpClientSocketTask::SetHttpClientConfig
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_HttpClientSocketTask::SetHttpClientConfig(const NPT_HttpClient::Config& config)
+{
+    return m_Client.SetConfig(config);
+}
+
+/*----------------------------------------------------------------------
 |   PLT_HttpClientSocketTask::AddRequest
 +---------------------------------------------------------------------*/
 NPT_Result
