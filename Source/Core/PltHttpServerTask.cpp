@@ -316,7 +316,11 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
         }
     }
     
-    headers.SetHeader(NPT_HTTP_HEADER_CONNECTION, keep_alive?"keep-alive":"close", true);
+    // only write keep-alive header for 1.1 if it's close
+    NPT_String protocol = response->GetProtocol();
+    if (protocol.Compare(NPT_HTTP_PROTOCOL_1_0, true) == 0 || !keep_alive) {
+        headers.SetHeader(NPT_HTTP_HEADER_CONNECTION, keep_alive?"keep-alive":"close", true);
+    }
     headers.SetHeader(NPT_HTTP_HEADER_SERVER, PLT_HTTP_DEFAULT_SERVER, false); // set but don't replace
 
     NPT_LOG_FINER("PLT_HttpServerTask Sending response:");
