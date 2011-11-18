@@ -50,7 +50,8 @@ PLT_HttpFileRequestHandler_DefaultFileTypeMap[] = {
     {"l16m",  "audio/L16;rate=44100;channels=1"},
     
     {"wav",  "audio/wav"},
-    {"wavm",  "audio/wav"},
+    {"wavm", "audio/wav"},
+    {"alac", "audio/x-alac"},
     //{"wavm",  "audio/x-wav"},
     {"l16m32",  "audio/L16;rate=32000;channels=1"}
 };
