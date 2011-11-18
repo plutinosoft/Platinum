@@ -108,11 +108,6 @@ PLT_FileMediaServerDelegate::ServeFile(const NPT_HttpRequest&        request,
                                        const NPT_String&             file_path)
 {
     NPT_CHECK_WARNING(PLT_HttpServer::ServeFile(request, context, response, file_path));
-    
-    /* Update content type header according to file and context */
-    NPT_HttpEntity* entity = response.GetEntity();
-    PLT_HttpRequestContext tmp_context(request, context);
-    if (entity) entity->SetContentType(PLT_MimeType::GetMimeType(file_path, &tmp_context));
     return NPT_SUCCESS;
 }
 
