@@ -57,7 +57,7 @@ class PLT_InputDatagramStream : public NPT_InputStream
 public:
     // methods
     PLT_InputDatagramStream(NPT_UdpSocket* socket,
-                            NPT_Size       buffer_size);
+                            NPT_Size       buffer_size = 2000);
     virtual ~PLT_InputDatagramStream();
     
     NPT_Result GetInfo(NPT_SocketInfo& info);
