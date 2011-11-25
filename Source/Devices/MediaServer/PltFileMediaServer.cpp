@@ -77,8 +77,7 @@ PLT_FileMediaServerDelegate::ProcessFileRequest(NPT_HttpRequest&              re
 {
     NPT_HttpUrlQuery query(request.GetUrl().GetQuery());
     
-    NPT_LOG_FINE("PLT_FileMediaServerDelegate::ProcessFileRequest Received Request:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, "PLT_FileMediaServerDelegate::ProcessFileRequest:", &request);
     
     if (request.GetMethod().Compare("GET") && request.GetMethod().Compare("HEAD")) {
         response.SetStatus(500, "Internal Server Error");

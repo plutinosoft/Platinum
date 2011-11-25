@@ -79,10 +79,10 @@ public:
     static bool         IsConnectionKeepAlive(NPT_HttpMessage& message);
     static bool         IsBodyStreamSeekable(NPT_HttpMessage& message);
 
-    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, NPT_HttpRequest* request);
-    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const NPT_HttpRequest& request);
-    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, NPT_HttpResponse* response);
-    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const NPT_HttpResponse& response);
+    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const char* prefix, NPT_HttpRequest* request);
+    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const char* prefix, const NPT_HttpRequest& request);
+    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const char* prefix, NPT_HttpResponse* response);
+    static NPT_Result   ToLog(NPT_LoggerReference logger, int level, const char* prefix, const NPT_HttpResponse& response);
 
     static NPT_Result   GetContentType(const NPT_HttpMessage& message, NPT_String& type);
     static NPT_Result   GetContentLength(const NPT_HttpMessage& message, NPT_LargeSize& len);
@@ -130,10 +130,10 @@ private:
 |   macros
 +---------------------------------------------------------------------*/
 #if defined(NPT_CONFIG_ENABLE_LOGGING)
-#define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _msg) \
-    PLT_HttpHelper::ToLog((_logger), (_level), (_msg))
-#define PLT_LOG_HTTP_MESSAGE(_level, _msg) \
-	PLT_HttpHelper::ToLog((_NPT_LocalLogger), (_level), (_msg))
+#define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _prefix, _msg) \
+    PLT_HttpHelper::ToLog((_logger), (_level), (_prefix), (_msg))
+#define PLT_LOG_HTTP_MESSAGE(_level, _prefix, _msg) \
+	PLT_HttpHelper::ToLog((_NPT_LocalLogger), (_level), (_prefix), (_msg))
 
 #else /* NPT_CONFIG_ENABLE_LOGGING */
 #define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _msg)

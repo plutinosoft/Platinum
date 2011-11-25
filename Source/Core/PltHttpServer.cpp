@@ -142,11 +142,11 @@ PLT_HttpServer::SetupResponse(NPT_HttpRequest&              request,
                               const NPT_HttpRequestContext& context,
                               NPT_HttpResponse&             response) 
 {
-    NPT_LOG_FINE_3("Received %s request from %s for \"%s\"", 
+    NPT_String prefix = NPT_String::Format("PLT_HttpServer::SetupResponse %s request from %s for \"%s\"", 
         (const char*) request.GetMethod(),
         (const char*) context.GetRemoteAddress().ToString(),
-        (const char*) request.GetUrl().ToRequestString(true));
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+        (const char*) request.GetUrl().ToString());
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &request);
 
     NPT_List<NPT_HttpRequestHandler*> handlers = FindRequestHandlers(request);
     if (handlers.GetItemCount() == 0) return NPT_ERROR_NO_SUCH_ITEM;

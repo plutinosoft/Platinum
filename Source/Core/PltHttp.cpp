@@ -339,7 +339,8 @@ PLT_HttpHelper::SetHost(NPT_HttpRequest& request, const char* host)
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_HttpHelper::ToLog(NPT_LoggerReference logger, 
-                      int                 level, 
+                      int                 level,
+                      const char*          prefix,
                       NPT_HttpRequest*    request)
 {
     if (!request) {
@@ -347,7 +348,7 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
         return NPT_FAILURE;
     }
 
-    return ToLog(logger, level, *request);
+    return ToLog(logger, level, prefix, *request);
 }
 
 /*----------------------------------------------------------------------
@@ -355,7 +356,8 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_HttpHelper::ToLog(NPT_LoggerReference    logger, 
-                      int                    level, 
+                      int                    level,
+                      const char*            prefix, 
                       const NPT_HttpRequest& request)
 {
     NPT_COMPILER_UNUSED(logger);
@@ -365,7 +367,8 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference    logger,
     NPT_OutputStreamReference output = stream;
     request.GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output));
 
-    NPT_LOG_L4(logger, level, "\n%s %s %s\n%s", 
+    NPT_LOG_L5(logger, level, "%s\n%s %s %s\n%s", 
+        prefix,
         (const char*)request.GetMethod(), 
         (const char*)request.GetUrl().ToRequestString(true), 
         (const char*)request.GetProtocol(),
@@ -402,7 +405,8 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
-                      int                 level, 
+                      int                 level,
+                      const char*         prefix, 
                       NPT_HttpResponse*   response)
 {
     if (!response) {
@@ -410,7 +414,7 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
         return NPT_FAILURE;
     }
 
-    return ToLog(logger, level, *response);
+    return ToLog(logger, level, prefix, *response);
 }
 
 /*----------------------------------------------------------------------
@@ -418,7 +422,8 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_HttpHelper::ToLog(NPT_LoggerReference     logger, 
-                      int                     level, 
+                      int                     level,
+                      const char*             prefix, 
                       const NPT_HttpResponse& response)
 {
     NPT_COMPILER_UNUSED(logger);
@@ -428,7 +433,8 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference     logger,
     NPT_OutputStreamReference output = stream;
     response.GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output));
 
-    NPT_LOG_L4(logger, level, "\n%s %d %s\n%s", 
+    NPT_LOG_L5(logger, level, "%s\n%s %d %s\n%s", 
+        prefix,
         (const char*)response.GetProtocol(), 
         response.GetStatusCode(), 
         (const char*)response.GetReasonPhrase(),

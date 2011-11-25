@@ -323,8 +323,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
     }
     headers.SetHeader(NPT_HTTP_HEADER_SERVER, PLT_HTTP_DEFAULT_SERVER, false); // set but don't replace
 
-    NPT_LOG_FINER("PLT_HttpServerTask Sending response:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, "PLT_HttpServerSocketTask::Write", response);
 
     // get the socket stream to send the request
     NPT_OutputStreamReference output_stream;
