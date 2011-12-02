@@ -193,7 +193,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - ((unsigned short)NPT_System::GetRandomInteger() % (leaseTime >> 2))):30);
     
-    // the XBOX cannot receive multicast, so we blast every 7 secs
+    // the XBOX cannot receive multicast SSDP search requests, so we blast announcement every 7 secs
 #ifdef _XBOX
     repeat.SetSeconds(7);
 #endif
@@ -204,7 +204,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
         m_ByeByeFirst);
     m_TaskManager.StartTask(announce_task, &delay);
 
-    // register ourselves as a listener for ssdp requests
+    // register ourselves as a listener for SSDP search requests
     task->AddListener(this);
     return NPT_SUCCESS;
 }
