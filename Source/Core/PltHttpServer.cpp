@@ -41,6 +41,7 @@
 #include "PltVersion.h"
 #include "PltUPnPHelper.h"
 #include "PltProtocolInfo.h"
+#include "PltMimeType.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.http.server")
 
@@ -92,7 +93,7 @@ PLT_HttpServer::Start()
         int retries = 100;
         do {    
             int random = NPT_System::GetRandomInteger();
-            int port = (unsigned short)(50000 + (random % 15000));
+            int port = (unsigned short)(9000 + (random % 1000));
             if (NPT_SUCCEEDED(SetListenPort(port, m_ReuseAddress))) {
                 break;
             }
@@ -141,33 +142,17 @@ PLT_HttpServer::SetupResponse(NPT_HttpRequest&              request,
                               const NPT_HttpRequestContext& context,
                               NPT_HttpResponse&             response) 
 {
-    NPT_LOG_FINE_3("Received %s request from %s for \"%s\"", 
+    NPT_String prefix = NPT_String::Format("PLT_HttpServer::SetupResponse %s request from %s for \"%s\"", 
         (const char*) request.GetMethod(),
         (const char*) context.GetRemoteAddress().ToString(),
-        (const char*) request.GetUrl().ToRequestString(true));
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+        (const char*) request.GetUrl().ToString());
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &request);
 
     NPT_List<NPT_HttpRequestHandler*> handlers = FindRequestHandlers(request);
     if (handlers.GetItemCount() == 0) return NPT_ERROR_NO_SUCH_ITEM;
 
     // ask the handler to setup the response
     return (*handlers.GetFirstItem())->SetupResponse(request, context, response);
-}
-
-/*----------------------------------------------------------------------
-|   PLT_HttpServer::GetMimeType
-+---------------------------------------------------------------------*/
-const char* 
-PLT_HttpServer::GetMimeType(const NPT_String& filename)
-{
-    int last_dot = filename.ReverseFind('.');
-    if (last_dot > 0) {
-        NPT_String extension = filename.GetChars()+last_dot+1;
-        const char* type = NPT_HttpFileRequestHandler::GetDefaultContentType(extension);
-        if (type) return type;
-    }
-
-    return "application/octet-stream";
 }
 
 /*----------------------------------------------------------------------
@@ -226,9 +211,11 @@ PLT_HttpServer::ServeFile(const NPT_HttpRequest&        request,
         NPT_DateTime last_modified = NPT_DateTime(file_info.m_ModificationTime);
         response.GetHeaders().SetHeader("Last-Modified", last_modified.ToString(NPT_DateTime::FORMAT_RFC_1123), true);
         response.GetHeaders().SetHeader("Cache-Control", "max-age=0,must-revalidate", true);
+        //response.GetHeaders().SetHeader("Cache-Control", "max-age=1800", true);
     }
     
-    return ServeStream(request, context, response, stream, GetMimeType(file_path));
+    PLT_HttpRequestContext tmp_context(request, context);
+    return ServeStream(request, context, response, stream, PLT_MimeType::GetMimeType(file_path, &tmp_context));
 }
 
 /*----------------------------------------------------------------------
@@ -283,6 +270,8 @@ PLT_HttpServer::ServeStream(const NPT_HttpRequest&        request,
         }*/
         
         response.GetHeaders().SetHeader("TransferMode.DLNA.ORG", value->GetChars(), false);
+    } else {
+        response.GetHeaders().SetHeader("TransferMode.DLNA.ORG", "Streaming", false);
     }
     
     if (request.GetHeaders().GetHeaderValue("TimeSeekRange.dlna.org")) {

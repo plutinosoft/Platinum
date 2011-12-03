@@ -193,7 +193,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - ((unsigned short)NPT_System::GetRandomInteger() % (leaseTime >> 2))):30);
     
-    // the XBOX cannot receive multicast, so we blast every 7 secs
+    // the XBOX cannot receive multicast SSDP search requests, so we blast announcement every 7 secs
 #ifdef _XBOX
     repeat.SetSeconds(7);
 #endif
@@ -204,7 +204,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
         m_ByeByeFirst);
     m_TaskManager.StartTask(announce_task, &delay);
 
-    // register ourselves as a listener for ssdp requests
+    // register ourselves as a listener for SSDP search requests
     task->AddListener(this);
     return NPT_SUCCESS;
 }
@@ -343,8 +343,7 @@ PLT_DeviceHost::SetupResponse(NPT_HttpRequest&              request,
     NPT_String method     = request.GetMethod();
     NPT_String protocol   = request.GetProtocol(); 
 
-    NPT_LOG_FINER("PLT_DeviceHost Received Request:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_DeviceHost::SetupResponse:", &request);
 
     if (method.Compare("POST") == 0) {
         return ProcessHttpPostRequest(request, context, response);
@@ -707,10 +706,10 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
 	const NPT_String* st   = PLT_UPnPMessageHelper::GetST(request);
 
 	if (method.Compare("M-SEARCH") == 0) {
-		NPT_LOG_INFO_3("Received M-SEARCH for %s from %s:%d", 
+		NPT_String prefix = NPT_String::Format("PLT_DeviceHost::OnSsdpPacket M-SEARCH for %s from %s:%d", 
 			st?st->GetChars():"Unknown",
 			(const char*) ip_address, remote_port);
-		PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, request);
+		PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_INFO, prefix, request);
 
         // DLNA 7.2.3.5 support
         if (remote_port <= 1024 || remote_port == 1900) {

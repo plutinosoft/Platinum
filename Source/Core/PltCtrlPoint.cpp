@@ -721,7 +721,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     NPT_String method   = request.GetMethod();
     NPT_String uri      = request.GetUrl().GetPath(true);
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", request);
 
     const NPT_String* sid = PLT_UPnPMessageHelper::GetSID(request);
     const NPT_String* nt  = PLT_UPnPMessageHelper::GetNT(request);
@@ -849,10 +849,10 @@ PLT_CtrlPoint::ProcessSsdpSearchResponse(NPT_Result                    res,
     NPT_String ip_address = context.GetRemoteAddress().GetIpAddress().ToString();
     NPT_String protocol   = response->GetProtocol();
     
-    NPT_LOG_FINE_2("Received SSDP search response from %s:%d",
+    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSsdpSearchResponse from %s:%d",
         (const char*)context.GetRemoteAddress().GetIpAddress().ToString() , 
         context.GetRemoteAddress().GetPort());
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_INFO, prefix, response);
     
     // any 2xx responses are ok
     if (response->GetStatusCode()/100 == 2) {
@@ -925,11 +925,11 @@ PLT_CtrlPoint::ProcessSsdpNotify(const NPT_HttpRequest&        request,
         const NPT_String* nt  = PLT_UPnPMessageHelper::GetNT(request);
         const NPT_String* usn = PLT_UPnPMessageHelper::GetUSN(request);
 
-        NPT_LOG_FINE_3("Received SSDP NOTIFY from %s:%d (%s)",
+        NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSsdpNotify from %s:%d (%s)",
             context.GetRemoteAddress().GetIpAddress().ToString().GetChars(), 
             context.GetRemoteAddress().GetPort(),
             usn?usn->GetChars():"unknown");
-        PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, request);
+        PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, request);
 
         if ((uri.Compare("*") != 0) || (protocol.Compare("HTTP/1.1") != 0))
             return NPT_FAILURE;
@@ -1221,7 +1221,7 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
     PLT_CtrlPointGetSCPDsTask* task = NULL;
     NPT_String desc;
 
-    NPT_LOG_INFO_4("Received device description for %s @ %s (result = %d, status = %d)", 
+    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessGetDescriptionResponse for %s @ %s (result = %d, status = %d)", 
         (const char*)root_device->GetUUID(), 
         (const char*)request.GetUrl().ToString(),
         res,
@@ -1231,7 +1231,7 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
     NPT_CHECK_LABEL_FATAL(res, bad_response);
     NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // get response body
     res = PLT_HttpHelper::GetBody(*response, desc);
@@ -1300,7 +1300,7 @@ PLT_CtrlPoint::ProcessGetSCPDResponse(NPT_Result                    res,
     PLT_DeviceDataReference root_device;
     PLT_Service*            service;
 
-    NPT_LOG_INFO_4("Received SCPD response for a service of device \"%s\" @ %s (result = %d, status = %d)", 
+    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessGetSCPDResponse for a service of device \"%s\" @ %s (result = %d, status = %d)", 
         (const char*)device->GetFriendlyName(), 
         (const char*)request.GetUrl().ToString(),
         res,
@@ -1310,7 +1310,7 @@ PLT_CtrlPoint::ProcessGetSCPDResponse(NPT_Result                    res,
     NPT_CHECK_LABEL_FATAL(res, bad_response);
     NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // make sure root device hasn't disappeared
     {
@@ -1512,12 +1512,12 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
 
     NPT_AutoLock lock(m_Lock);
 
-    NPT_LOG_INFO_4("Received %subscription response for service \"%s\" (result = %d, status code = %d)", 
+    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSubscribeResponse for service \"%s\" (result = %d, status code = %d)", 
         (const char*)subscription?"S":"Uns",
         (const char*)service->GetServiceID(),
         res,
         response?response->GetStatusCode():0);
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // if there's a failure or it's a response to a cancellation
     // we get out (any 2xx status code ok)
@@ -1642,8 +1642,7 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result           res,
         goto failure;
     }
 
-    NPT_LOG_FINE("Received Action Response:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessActionResponse:", response);
 
     NPT_LOG_FINER("Reading/Parsing Action Response Body...");
     if (NPT_FAILED(PLT_HttpHelper::ParseBody(*response, xml))) {

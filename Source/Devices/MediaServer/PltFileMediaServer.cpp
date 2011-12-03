@@ -77,8 +77,7 @@ PLT_FileMediaServerDelegate::ProcessFileRequest(NPT_HttpRequest&              re
 {
     NPT_HttpUrlQuery query(request.GetUrl().GetQuery());
     
-    NPT_LOG_FINE("PLT_FileMediaServerDelegate::ProcessFileRequest Received Request:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, "PLT_FileMediaServerDelegate::ProcessFileRequest:", &request);
     
     if (request.GetMethod().Compare("GET") && request.GetMethod().Compare("HEAD")) {
         response.SetStatus(500, "Internal Server Error");
@@ -108,11 +107,6 @@ PLT_FileMediaServerDelegate::ServeFile(const NPT_HttpRequest&        request,
                                        const NPT_String&             file_path)
 {
     NPT_CHECK_WARNING(PLT_HttpServer::ServeFile(request, context, response, file_path));
-    
-    /* Update content type header according to file and context */
-    NPT_HttpEntity* entity = response.GetEntity();
-    PLT_HttpRequestContext tmp_context(request, context);
-    if (entity) entity->SetContentType(PLT_MimeType::GetMimeType(file_path, &tmp_context));
     return NPT_SUCCESS;
 }
 

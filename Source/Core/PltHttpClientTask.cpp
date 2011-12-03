@@ -63,6 +63,15 @@ PLT_HttpClientSocketTask::~PLT_HttpClientSocketTask()
 }
 
 /*----------------------------------------------------------------------
+|   PLT_HttpClientSocketTask::SetHttpClientConfig
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_HttpClientSocketTask::SetHttpClientConfig(const NPT_HttpClient::Config& config)
+{
+    return m_Client.SetConfig(config);
+}
+
+/*----------------------------------------------------------------------
 |   PLT_HttpClientSocketTask::AddRequest
 +---------------------------------------------------------------------*/
 NPT_Result
@@ -113,8 +122,8 @@ PLT_HttpClientSocketTask::DoRun()
             // send request
             res = m_Client.SendRequest(*request, response, &context);
 
-            NPT_LOG_FINER_1("PLT_HttpClientSocketTask receiving: res = %d", res);
-            PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, response);
+            NPT_String prefix = NPT_String::Format("PLT_HttpClientSocketTask::DoRun (res = %d):", res);
+            PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
 
             // process response
             ProcessResponse(res, *request, context, response);

@@ -248,6 +248,11 @@ PLT_EventSubscriber::Notify(NPT_List<PLT_StateVariable*>& vars)
         // from the list of subscribers inside the device host
         m_SubscriberTask = new PLT_HttpClientSocketTask(request, true);
         
+        // short connection time out in case subscriber is not alive
+        NPT_HttpClient::Config config;
+        config.m_ConnectionTimeout = 2000;
+        m_SubscriberTask->SetHttpClientConfig(config);
+        
         // add initial delay to make sure ctrlpoint receives response to subscription
         // before our first NOTIFY. Also make sure task is not auto-destroy
         // since we want to destroy it manually when the subscriber goes away.

@@ -149,8 +149,7 @@ PLT_HttpStreamRequestHandler::SetupResponse(NPT_HttpRequest&              reques
                                             const NPT_HttpRequestContext& context,
                                             NPT_HttpResponse&             response)
 {
-    NPT_LOG_FINE("Received Request:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, "PLT_HttpStreamRequestHandler::SetupResponse:", &request);
 
     if (request.GetMethod().Compare("GET") && 
         request.GetMethod().Compare("HEAD")) {

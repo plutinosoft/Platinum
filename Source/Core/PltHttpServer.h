@@ -73,8 +73,7 @@ public:
                                   NPT_HttpResponse&             response,
                                   NPT_InputStreamReference&     stream, 
                                   const char*                   content_type);
-    static const char* GetMimeType(const NPT_String& filename);
-    
+
     // NPT_HttpRequestHandler methods
     virtual NPT_Result SetupResponse(NPT_HttpRequest&              request,
                                      const NPT_HttpRequestContext& context,

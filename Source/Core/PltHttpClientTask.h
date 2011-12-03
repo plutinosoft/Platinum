@@ -47,44 +47,6 @@
 #include "PltThreadTask.h"
 
 /*----------------------------------------------------------------------
-|   PLT_HttpTcpConnector
-+---------------------------------------------------------------------*/
-/**
- The PLT_HttpTcpConnector class provides a way for a Neptune HTTP client to use
- persistent connections.
- */
-/*
-class PLT_HttpTcpConnector : public NPT_HttpClient::Connector
-{
-public:
-    PLT_HttpTcpConnector();
-    virtual ~PLT_HttpTcpConnector();
-    
-    // NPT_HttpClient::Connector methods
-    virtual NPT_Result Connect(const char*                   hostname, 
-                               NPT_UInt16                    port, 
-                               bool                          secure,
-                               NPT_Timeout                   connection_timeout,
-                               NPT_Timeout                   io_timeout,
-                               NPT_Timeout                   name_resolver_timeout,
-                               NPT_InputStreamReference&     input_stream, 
-                               NPT_OutputStreamReference&    output_stream);
-    NPT_Result Abort() { if (!m_Socket.IsNull()) m_Socket->Cancel(); return NPT_SUCCESS; }
-
-public:
-    void GetInfo(NPT_SocketInfo& info) { info = m_SocketInfo;}
-
-private:
-    NPT_String                 m_HostName;
-    NPT_UInt16                 m_Port;
-    NPT_InputStreamReference   m_InputStream;
-    NPT_OutputStreamReference  m_OutputStream;
-    NPT_SocketInfo             m_SocketInfo;
-    NPT_Reference<NPT_Socket>  m_Socket;
-    bool                       m_Valid;
-};*/
-
-/*----------------------------------------------------------------------
 |   PLT_HttpClientSocketTask class
 +---------------------------------------------------------------------*/
 /**
@@ -102,6 +64,7 @@ public:
                              bool             wait_forever = false);
 
     virtual NPT_Result AddRequest(NPT_HttpRequest* request);
+    virtual NPT_Result SetHttpClientConfig(const NPT_HttpClient::Config& config);
 
 protected:
     virtual ~PLT_HttpClientSocketTask();

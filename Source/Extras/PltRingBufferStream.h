@@ -64,6 +64,11 @@ public:
         NPT_COMPILER_UNUSED(size);
         return NPT_ERROR_NOT_SUPPORTED;
     }
+    NPT_Result GetSpace(NPT_LargeSize& space) { 
+        NPT_AutoLock autoLock(m_Lock);
+        space = m_RingBuffer->GetSpace();
+        return NPT_SUCCESS;
+    }
     NPT_Result GetAvailable(NPT_LargeSize& available) { 
         NPT_AutoLock autoLock(m_Lock);
         available = m_RingBuffer->GetAvailable();

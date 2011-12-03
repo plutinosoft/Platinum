@@ -302,7 +302,7 @@ public:
         // after reading everything from the socket even though
         // more stuff arrived
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
-        m_Socket->SetReadTimeout(1000);
+        m_Socket->SetReadTimeout(10000);
 #endif
     }
 
