@@ -265,7 +265,7 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
     NPT_List<NPT_NetworkInterface*> if_list;
 
     while (1) {
-        NPT_CHECK_LABEL_FATAL(PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true),
+        NPT_CHECK_LABEL_FATAL(PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, false),
                               cleanup);
 
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
