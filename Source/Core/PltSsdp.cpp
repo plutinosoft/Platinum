@@ -64,10 +64,10 @@ PLT_SsdpSender::SendSsdp(NPT_HttpRequest&   request,
     NPT_CHECK_SEVERE(FormatPacket(request, usn, target, socket, notify));
 
     // logging
-    NPT_LOG_FINER_2("Sending SSDP %s for %s",
+    NPT_String prefix = NPT_String::Format("Sending SSDP %s packet for %s",
         (const char*)request.GetMethod(), 
         usn);
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &request);
 
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
@@ -98,8 +98,8 @@ PLT_SsdpSender::SendSsdp(NPT_HttpResponse&  response,
     NPT_CHECK_SEVERE(FormatPacket(response, usn, target, socket, notify));
 
     // logging
-    NPT_LOG_FINER("Sending SSDP:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, &response);
+    NPT_String prefix = NPT_String::Format("Sending SSDP Response:");
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &response);
 
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
@@ -152,6 +152,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
     if (!niaddr) return NPT_SUCCESS;
 
     NPT_UdpSocket socket;
+    //NPT_CHECK_WARNING(socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -172,7 +173,6 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
     }
 
     NPT_HttpResponse response(200, "OK", NPT_HTTP_PROTOCOL_1_1);
-    //PLT_UPnPMessageHelper::SetLocation(response, m_Device->GetDescriptionUrl((*niaddr).GetPrimaryAddress().ToString()));
     PLT_UPnPMessageHelper::SetLocation(response, m_Device->GetDescriptionUrl(info.local_address.GetIpAddress().ToString()));
     PLT_UPnPMessageHelper::SetLeaseTime(response, m_Device->GetLeaseTime());
     PLT_UPnPMessageHelper::SetServer(response, PLT_HTTP_DEFAULT_SERVER, false);
@@ -265,7 +265,7 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
     NPT_List<NPT_NetworkInterface*> if_list;
 
     while (1) {
-        NPT_CHECK_LABEL_FATAL(PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true),
+        NPT_CHECK_LABEL_FATAL(PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, false),
                               cleanup);
 
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
@@ -302,8 +302,8 @@ PLT_SsdpListenTask::GetInputStream(NPT_InputStreamReference& stream)
         if (NPT_FAILED(res)) {
             return res;
         }
-        // for datagrams, we can't simply write to the socket directly
-        // we need to write into a datagramstream (buffer) that redirects to the real stream when flushed
+        // for datagrams, we can't simply read from the socket directly
+        // we need to read datagram into a buffer
         m_Datagram = new PLT_InputDatagramStream((NPT_UdpSocket*)m_Socket);
         stream = m_Datagram;
         return NPT_SUCCESS;
@@ -374,7 +374,7 @@ PLT_SsdpSearchTask::DoAbort()
 }
 
 /*----------------------------------------------------------------------
-|   PLT_HttpServerSocketTask::DoRun
+|   PLT_SsdpSearchTask::DoRun
 +---------------------------------------------------------------------*/
 void
 PLT_SsdpSearchTask::DoRun()

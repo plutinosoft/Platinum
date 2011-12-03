@@ -211,7 +211,8 @@ public:
         
         const NPT_String* value = 
             message.GetHeaders().GetHeaderValue("If-Modified-Since");
-        NPT_CHECK_POINTER(value);
+        if (!value) return NPT_FAILURE;
+        
         // Try RFC 1123, RFC 1036, then ANSI
         if (NPT_SUCCEEDED(date.FromString(*value, NPT_DateTime::FORMAT_RFC_1123))) 
             return NPT_SUCCESS;
