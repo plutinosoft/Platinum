@@ -140,7 +140,7 @@ public:
         // look for the host and port of the device
         NPT_String scpd_url = service->GetSCPDURL(true);
 
-        NPT_LOG_INFO_3("Queueing SCPD request for service \"%s\" of device \"%s\" @ %s", 
+        NPT_LOG_FINER_3("Queueing SCPD request for service \"%s\" of device \"%s\" @ %s", 
             (const char*)service->GetServiceID(),
             (const char*)service->GetDevice()->GetFriendlyName(),
             (const char*)scpd_url);
@@ -852,7 +852,7 @@ PLT_CtrlPoint::ProcessSsdpSearchResponse(NPT_Result                    res,
     NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSsdpSearchResponse from %s:%d",
         (const char*)context.GetRemoteAddress().GetIpAddress().ToString() , 
         context.GetRemoteAddress().GetPort());
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_INFO, prefix, response);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
     
     // any 2xx responses are ok
     if (response->GetStatusCode()/100 == 2) {

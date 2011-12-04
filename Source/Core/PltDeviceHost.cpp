@@ -709,7 +709,7 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
 		NPT_String prefix = NPT_String::Format("PLT_DeviceHost::OnSsdpPacket M-SEARCH for %s from %s:%d", 
 			st?st->GetChars():"Unknown",
 			(const char*) ip_address, remote_port);
-		PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_INFO, prefix, request);
+		PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, request);
 
         // DLNA 7.2.3.5 support
         if (remote_port <= 1024 || remote_port == 1900) {
