@@ -248,7 +248,11 @@ PLT_HttpServer::ServeStream(const NPT_HttpRequest&        request,
               
     // set some default headers
     if (response.GetEntity()->GetTransferEncoding() != NPT_HTTP_TRANSFER_ENCODING_CHUNKED) {
-        response.GetHeaders().SetHeader(NPT_HTTP_HEADER_ACCEPT_RANGES, "bytes", false); // set but don't replace
+        // set but don't replace Accept-Range header only if body is seekable
+        NPT_Position offset;
+        if (NPT_SUCCEEDED(body->Tell(offset)) && NPT_SUCCEEDED(body->Seek(offset))) {
+            response.GetHeaders().SetHeader(NPT_HTTP_HEADER_ACCEPT_RANGES, "bytes", false); 
+        }
     }
     
     // set getcontentFeatures.dlna.org
