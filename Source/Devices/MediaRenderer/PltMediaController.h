@@ -282,7 +282,7 @@ public:
 
     // methods    
     virtual NPT_Result FindRenderer(const char* uuid, PLT_DeviceDataReference& device);
-    virtual NPT_Result GetProtocolInfoSink(PLT_DeviceDataReference& device, NPT_List<NPT_String>& sinks);
+    virtual NPT_Result GetProtocolInfoSink(const NPT_String& device_uuid, NPT_List<NPT_String>& sinks);
     virtual NPT_Result FindMatchingProtocolInfo(NPT_List<NPT_String>& sinks,
                                                 const char*           protocol_info);
     virtual NPT_Result FindBestResource(PLT_DeviceDataReference& device, PLT_MediaObject& item, NPT_Cardinal& resource_index);

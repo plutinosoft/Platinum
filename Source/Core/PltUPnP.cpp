@@ -170,6 +170,7 @@ PLT_UPnP::Start()
     NPT_CHECK_SEVERE(m_TaskManager.StartTask(m_SsdpListenTask));
 
     /* start devices & ctrlpoints */
+    // TODO: Starting devices and ctrlpoints could fail?
     m_CtrlPoints.Apply(PLT_UPnP_CtrlPointStartIterator(m_SsdpListenTask));
     m_Devices.Apply(PLT_UPnP_DeviceStartIterator(m_SsdpListenTask));
 
