@@ -289,8 +289,8 @@ public:
 
 private:
     NPT_Result InvokeActionWithInstance(PLT_ActionReference& action,
-        NPT_UInt32               instance_id,
-        void*                    userdata = NULL);
+                                        NPT_UInt32           instance_id,
+                                        void*                userdata = NULL);
 
     NPT_Result OnGetCurrentTransportActionsResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
     NPT_Result OnGetDeviceCapabilitiesResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
