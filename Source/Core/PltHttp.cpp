@@ -382,22 +382,29 @@ PLT_HttpHelper::ToLog(NPT_LoggerReference    logger,
 PLT_DeviceSignature
 PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
 {
-	const NPT_String* agent = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_USER_AGENT);
-	const NPT_String* hdr   = request.GetHeaders().GetHeaderValue("X-AV-Client-Info");
+	const NPT_String* agent  = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_USER_AGENT);
+	const NPT_String* hdr    = request.GetHeaders().GetHeaderValue("X-AV-Client-Info");
+    const NPT_String* server = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_SERVER);
 
-	if (agent && (agent->Find("XBox", 0, true) >= 0 || agent->Find("Xenon", 0, true) >= 0)) {
-		return PLT_XBOX;
-	} else if (agent && (agent->Find("Windows-Media-Player", 0, true) >= 0 || agent->Find("Mozilla/4.0", 0, true) >= 0)) {
-		return PLT_WMP;
+	if ((agent && (agent->Find("XBox", 0, true) >= 0 || agent->Find("Xenon", 0, true) >= 0)) ||
+        (server && server->Find("Xbox", 0, true) >= 0)) {
+		return PLT_DEVICE_XBOX;
+	} else if (agent && (agent->Find("Windows Media Player", 0, true) >= 0 || agent->Find("Windows-Media-Player", 0, true) >= 0 || agent->Find("Mozilla/4.0", 0, true) >= 0 || agent->Find("WMFSDK", 0, true) >= 0)) {
+		return PLT_DEVICE_WMP;
 	} else if (agent && (agent->Find("Sonos", 0, true) >= 0)) {
-		return PLT_SONOS;
-	} else if (hdr && hdr->Find("PLAYSTATION 3", 0, true) >= 0) {
-		return PLT_PS3;
-	} else {
+		return PLT_DEVICE_SONOS;
+	} else if ((agent && agent->Find("PLAYSTATION 3", 0, true) >= 0) || 
+               (hdr && hdr->Find("PLAYSTATION 3", 0, true) >= 0)) {
+		return PLT_DEVICE_PS3;
+	} else if (agent && agent->Find("Windows", 0, true) >= 0) {
+        return PLT_DEVICE_WINDOWS;
+    } else if (agent && (agent->Find("Mac", 0, true) >= 0 || agent->Find("OS X", 0, true) >= 0 || agent->Find("OSX", 0, true) >= 0)) {
+        return PLT_DEVICE_MAC;
+    } else {
         NPT_LOG_FINE_1("Unknown device signature (ua=%s)", agent?agent->GetChars():"none");
     }
 
-	return PLT_UNKNOWN_DEVICE;
+	return PLT_DEVICE_UNKNOWN;
 }
 
 /*----------------------------------------------------------------------

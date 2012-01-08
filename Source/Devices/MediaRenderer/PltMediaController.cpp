@@ -221,7 +221,9 @@ PLT_MediaController::FindMatchingProtocolInfo(NPT_List<NPT_String>& sinks,
          iter;
          iter++) {
         PLT_ProtocolInfo sink(*iter);
-        if (sink.Match(protocol)) return NPT_SUCCESS;
+        if (sink.Match(protocol)) {
+            return NPT_SUCCESS;
+        }
     }
 
     return NPT_ERROR_NO_SUCH_ITEM;
