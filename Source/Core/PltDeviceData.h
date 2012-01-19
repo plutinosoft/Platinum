@@ -114,7 +114,8 @@ public:
     const NPT_String&   GetType()             const { return m_DeviceType;       }
     const NPT_String&   GetModelDescription() const { return m_ModelDescription; }
     const NPT_String&   GetParentUUID()       const { return m_ParentUUID;       }
-    bool                IsRoot()              { return m_ParentUUID.IsEmpty(); }
+    bool                IsRoot()              { return m_ParentUUID.IsEmpty();   }
+    const NPT_IpAddress& GetLocalIP()          const { return m_LocalIfaceIp;     }
 
     const NPT_Array<PLT_Service*>&            GetServices()        const { return m_Services; }
     const NPT_Array<PLT_DeviceDataReference>& GetEmbeddedDevices() const { return m_EmbeddedDevices; }

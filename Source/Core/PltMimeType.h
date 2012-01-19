@@ -43,7 +43,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "Neptune.h"
-
+#include "PltHttp.h"
 /*----------------------------------------------------------------------
 |   forward declarations
 +---------------------------------------------------------------------*/
@@ -59,8 +59,13 @@ public:
 
     static const char* GetMimeType(const NPT_String&             filename, 
                                    const PLT_HttpRequestContext* context = NULL);
+    static const char* GetMimeType(const NPT_String&   filename,
+                                   PLT_DeviceSignature signature = PLT_DEVICE_UNKNOWN);
+    
     static const char* GetMimeTypeFromExtension(const NPT_String&             extension, 
                                                 const PLT_HttpRequestContext* context = NULL);
+    static const char* GetMimeTypeFromExtension(const NPT_String&   extension,
+                                                PLT_DeviceSignature signature = PLT_DEVICE_UNKNOWN);
 
 private:
     PLT_MimeType() {}

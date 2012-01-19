@@ -483,24 +483,34 @@ const char*
 PLT_ProtocolInfo::GetDlnaExtension(const char*                   mime_type,
                                    const PLT_HttpRequestContext* context /* = NULL */)
 {
+    return GetDlnaExtension(mime_type, 
+                            context?PLT_HttpHelper::GetDeviceSignature(context->GetRequest()):PLT_DEVICE_UNKNOWN);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_ProtocolInfo::GetDlnaExtension
++---------------------------------------------------------------------*/
+const char* 
+PLT_ProtocolInfo::GetDlnaExtension(const char*         mime_type,
+                                   PLT_DeviceSignature signature /* = PLT_DEVICE_UNKNOWN */)
+{
     NPT_String _mime_type = mime_type;
     
-    if (context) {
+    if (signature != PLT_DEVICE_UNKNOWN) {
         // look for special case for 360
-        if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_XBOX || 
-			PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_WMP ) {
+        if (signature == PLT_DEVICE_XBOX || signature == PLT_DEVICE_WMP) {
 			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360DlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_360DlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_360DlnaMap[i].dlna_ext;
                 }
             }
-		} else if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_SONOS) {
+		} else if (signature == PLT_DEVICE_SONOS) {
 			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_SonosDlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_SonosDlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_SonosDlnaMap[i].dlna_ext;
                 }
             }
-		} else if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_PS3) {
+		} else if (signature == PLT_DEVICE_PS3) {
             for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_PS3DlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_PS3DlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_PS3DlnaMap[i].dlna_ext;
@@ -524,14 +534,40 @@ PLT_ProtocolInfo::GetDlnaExtension(const char*                   mime_type,
 |   PLT_ProtocolInfo::GetProtocolInfoFromMimeType
 +---------------------------------------------------------------------*/
 PLT_ProtocolInfo
+PLT_ProtocolInfo::GetProtocolInfoFromMimeType(const char*         mime_type, 
+                                              bool                with_dlna_extension /* = true */,
+                                              PLT_DeviceSignature signature /* = PLT_DEVICE_UNKNOWN */)
+{
+    return PLT_ProtocolInfo("http-get:*:"+NPT_String(mime_type)+":"+ \
+                            (with_dlna_extension?GetDlnaExtension(mime_type, signature):"*"));
+}
+
+
+/*----------------------------------------------------------------------
+|   PLT_ProtocolInfo::GetProtocolInfoFromMimeType
++---------------------------------------------------------------------*/
+PLT_ProtocolInfo
 PLT_ProtocolInfo::GetProtocolInfoFromMimeType(const char*                   mime_type, 
                                               bool                          with_dlna_extension /* = true */,
                                               const PLT_HttpRequestContext* context /* = NULL */)
 {
-    return PLT_ProtocolInfo("http-get:*:"+NPT_String(mime_type)+":"+ \
-        (with_dlna_extension?GetDlnaExtension(mime_type, context):"*"));
+    return GetProtocolInfoFromMimeType(mime_type, 
+                                       with_dlna_extension, 
+                                       context?PLT_HttpHelper::GetDeviceSignature(context->GetRequest()):PLT_DEVICE_UNKNOWN);
 }
 
+/*----------------------------------------------------------------------
+|   PLT_ProtocolInfo::GetProtocolInfo
++---------------------------------------------------------------------*/
+PLT_ProtocolInfo
+PLT_ProtocolInfo::GetProtocolInfo(const char*         filename, 
+                                  bool                with_dlna_extension /* = true */,
+                                  PLT_DeviceSignature signature /* = PLT_DEVICE_UNKNOWN */)
+{
+    return GetProtocolInfoFromMimeType(PLT_MimeType::GetMimeType(filename, signature), 
+                                       with_dlna_extension, 
+                                       signature);
+}
 /*----------------------------------------------------------------------
 |   PLT_ProtocolInfo::GetProtocolInfo
 +---------------------------------------------------------------------*/

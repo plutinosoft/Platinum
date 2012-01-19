@@ -116,7 +116,7 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
     
     PLT_DeviceSignature signature = PLT_HttpHelper::GetDeviceSignature(request);
 
-    if (signature == PLT_XBOX /*|| signature == PLT_SONOS*/) {
+    if (signature == PLT_DEVICE_XBOX /*|| signature == PLT_SONOS*/) {
         // XBox needs to see something behind a ':'
         if (m_AddHostname && hostname.GetLength() > 0) {
             m_FriendlyName += ": " + hostname;
@@ -128,13 +128,13 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
     }
 
     // change some things based on device signature from request
-    if (signature == PLT_XBOX || signature == PLT_WMP /*|| signature == PLT_SONOS*/) {
+    if (signature == PLT_DEVICE_XBOX || signature == PLT_DEVICE_WMP /*|| signature == PLT_SONOS*/) {
         m_ModelName        = "Windows Media Player Sharing";
-        m_ModelNumber      = (signature == PLT_SONOS)?"3.0":"12.0";
+        m_ModelNumber      = (signature == PLT_DEVICE_SONOS)?"3.0":"12.0";
         m_ModelURL         = "http://www.microsoft.com/";//"http://go.microsoft.com/fwlink/?LinkId=105926";
-        m_Manufacturer     = (signature == PLT_SONOS)?"Microsoft":"Microsoft Corporation";
+        m_Manufacturer     = (signature == PLT_DEVICE_SONOS)?"Microsoft":"Microsoft Corporation";
         m_ManufacturerURL  = "http://www.microsoft.com/";
-        m_DlnaDoc          = (signature == PLT_SONOS)?"DMS-1.00":"DMS-1.50";
+        m_DlnaDoc          = (signature == PLT_DEVICE_SONOS)?"DMS-1.00":"DMS-1.50";
         m_DlnaCap          = "";
         m_AggregationFlags = "";
         
@@ -142,10 +142,10 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
         // TODO: http://msdn.microsoft.com/en-us/library/ff362657(PROT.10).aspx
         // TODO: <serialNumber>GUID</serialNumber>
 
-    } else if (signature == PLT_SONOS) {
+    } else if (signature == PLT_DEVICE_SONOS) {
         m_ModelName = "Rhapsody";
         m_ModelNumber = "3.0";
-    } else if (signature == PLT_PS3) {
+    } else if (signature == PLT_DEVICE_PS3) {
        m_DlnaDoc = "DMS-1.50";
        m_DlnaCap = "";//"av-upload,image-upload,audio-upload";
        m_AggregationFlags = "10";
@@ -181,7 +181,7 @@ PLT_MediaConnect::ProcessGetSCPD(PLT_Service*                  service,
     // Override SCPD response by providing an SCPD without a Search action
     // to all devices except XBox or WMP which need it
     if (service->GetServiceType() == "urn:schemas-upnp-org:service:ContentDirectory:1" &&
-        signature != PLT_XBOX && signature != PLT_WMP && signature != PLT_SONOS) {
+        signature != PLT_DEVICE_XBOX && signature != PLT_DEVICE_WMP && signature != PLT_DEVICE_SONOS) {
         NPT_HttpEntity* entity;
         PLT_HttpHelper::SetBody(response, (const char*) MS_ContentDirectorySCPD, &entity);    
         entity->SetContentType("text/xml; charset=\"utf-8\"");
