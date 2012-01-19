@@ -37,7 +37,7 @@
 +---------------------------------------------------------------------*/
 #include "PltArgument.h"
 #include "PltStateVariable.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltAction.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.argument")

@@ -1,6 +1,6 @@
 /*****************************************************************
 |
-|   Platinum - UPnP Helper
+|   Platinum - Utilities
 |
 | Copyright (c) 2004-2010, Plutinosoft, LLC.
 | All rights reserved.
@@ -32,13 +32,278 @@
 |
 ****************************************************************/
 
-#ifndef _PLT_UPNP_HELPER_H_
-#define _PLT_UPNP_HELPER_H_
+#ifndef _PLT_UTILITIES_H_
+#define _PLT_UTILITIES_H_
 
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
 #include "Neptune.h"
+
+/*----------------------------------------------------------------------
+|   PLT_XmlAttributeFinder
++---------------------------------------------------------------------*/
+/**
+ The PLT_XmlAttributeFinder class is used to determine if an attribute 
+ exists given an xml element node, an attribute name and namespace.
+ */
+class PLT_XmlAttributeFinder
+{
+public:
+    // if 'namespc' is NULL, we're looking for ANY namespace
+    // if 'namespc' is '\0', we're looking for NO namespace
+    // if 'namespc' is non-empty, look for that SPECIFIC namespace
+    PLT_XmlAttributeFinder(const NPT_XmlElementNode& element, 
+                           const char*               name, 
+                           const char*               namespc) : 
+      m_Element(element), m_Name(name), m_Namespace(namespc) {}
+
+    bool operator()(const NPT_XmlAttribute* const & attribute) const {
+        if (attribute->GetName() == m_Name) {
+            if (m_Namespace) {
+                const NPT_String& prefix = attribute->GetPrefix();
+                if (m_Namespace[0] == '\0') {
+                    // match if the attribute has NO namespace
+                    return prefix.IsEmpty();
+                } else {
+                    // match if the attribute has the SPECIFIC namespace
+                    // we're looking for
+                    const NPT_String* namespc = m_Element.GetNamespaceUri(prefix);
+                    return namespc && *namespc == m_Namespace;
+                }
+            } else {
+                // ANY namespace will match
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+
+private:
+    const NPT_XmlElementNode& m_Element;
+    const char*               m_Name;
+    const char*               m_Namespace;
+};
+
+/*----------------------------------------------------------------------
+|   PLT_XmlHelper
++---------------------------------------------------------------------*/
+/**
+ The PLT_XmlHelper class is a set of utility functions for manipulating 
+ xml documents and DOM trees.
+ */
+class PLT_XmlHelper
+{
+public:
+
+    // static methods
+    static NPT_Result GetChildText(NPT_XmlElementNode* node, 
+                                   const char*         tag, 
+                                   NPT_String&         value,
+                                   const char*         namespc = "",
+                                   NPT_Cardinal        max_size = 1024) {
+        value = "";
+
+        if (!node) return NPT_FAILURE;
+
+        // special case "" means we look for the same namespace as the parent
+        if (namespc && namespc[0] == '\0') namespc = node->GetNamespace()?node->GetNamespace()->GetChars():NPT_XML_NO_NAMESPACE;
+
+        NPT_XmlElementNode* child = node->GetChild(tag, namespc);
+        if (!child) return NPT_FAILURE;
+
+        const NPT_String* text = child->GetText();
+        // DLNA 7.3.17
+        value = text?text->SubString(0, max_size):"";
+        return NPT_SUCCESS;
+    }
+                                   
+    static NPT_Result RemoveAttribute(NPT_XmlElementNode* node, 
+                                      const char*         name,
+                                      const char*         namespc = "") {
+        if (!node) return NPT_FAILURE;
+
+        // special case "" means we look for the same namespace as the parent
+        if (namespc && namespc[0] == '\0') namespc = node->GetNamespace()?node->GetNamespace()->GetChars():NPT_XML_NO_NAMESPACE;
+
+        NPT_List<NPT_XmlAttribute*>::Iterator attribute;
+        attribute = node->GetAttributes().Find(PLT_XmlAttributeFinder(*node, name, namespc));
+        if (!attribute) return NPT_FAILURE;
+
+        delete *attribute;
+        NPT_CHECK(node->GetAttributes().Erase(attribute));
+
+        return NPT_SUCCESS;
+    }
+                                   
+    static NPT_Result GetAttribute(NPT_XmlElementNode* node, 
+                                   const char*         name,
+                                   NPT_XmlAttribute*&  attr,
+                                   const char*         namespc = "") {
+        attr = NULL;
+
+        if (!node) return NPT_FAILURE;
+
+        // special case "" means we look for the same namespace as the parent
+        if (namespc && namespc[0] == '\0') namespc = node->GetNamespace()?node->GetNamespace()->GetChars():NPT_XML_NO_NAMESPACE;
+
+        NPT_List<NPT_XmlAttribute*>::Iterator attribute;
+        attribute = node->GetAttributes().Find(PLT_XmlAttributeFinder(*node, name, namespc));
+        if (!attribute) {
+            //NPT_Debug("Failed to find attribute [%s]:%s", namespc, name);
+            return NPT_FAILURE;
+        }
+
+        attr = (*attribute);
+        return NPT_SUCCESS;
+    }
+
+    static NPT_Result GetAttribute(NPT_XmlElementNode* node, 
+                                   const char*         name,
+                                   NPT_String&         value,
+                                   const char*         namespc = "",
+                                   NPT_Cardinal        max_size = 1024) {
+        value = "";
+        
+        NPT_XmlAttribute* attribute = NULL;
+        NPT_Result result = GetAttribute(node, name, attribute, namespc);
+        if (NPT_FAILED(result)) return result;
+        
+        if (!attribute) return NPT_FAILURE;
+        // DLNA 7.3.17 truncate to 1024 bytes
+        value = attribute->GetValue().SubString(0, max_size);
+        return NPT_SUCCESS;
+    }
+
+    static NPT_Result SetAttribute(NPT_XmlElementNode* node, 
+                                   const char*         name,
+                                   NPT_String&         value,
+                                   const char*         namespc = "") {
+        NPT_XmlAttribute* attribute = NULL;
+        NPT_CHECK(GetAttribute(node, name, attribute, namespc));
+        if (!attribute) return NPT_FAILURE;
+
+        attribute->SetValue(value);
+        return NPT_SUCCESS;
+    }
+
+    static NPT_Result AddChildText(NPT_XmlElementNode* node,
+                                   const char*         tag,
+                                   const char*         text,
+                                   const char*         prefix = NULL) {
+        if (!node) return NPT_FAILURE;
+        NPT_XmlElementNode* child = new NPT_XmlElementNode(prefix, tag);
+        child->AddText(text);
+        return node->AddChild(child);
+    }
+
+    static bool IsMatch(const NPT_XmlNode* const & node, const char* tag, const char* namespc_mapped) {
+        // if m_Namespace is NULL, we're looking for ANY namespace
+        // if m_Namespace is '\0', we're looking for NO namespace
+        // if m_Namespace is non-empty, look for that SPECIFIC namespace
+        
+        const NPT_XmlElementNode* element = node->AsElementNode();
+        // is tag the same (case sensitive)?
+        if (element && element->GetTag() == tag) {
+            if (namespc_mapped) {
+                // look for a SPECIFIC namespace or NO namespace
+                const NPT_String* namespc = element->GetNamespace();
+                if (namespc) {
+                    // the element has a namespace, match if it is equal to
+                    // what we're looking for
+                    return *namespc == namespc_mapped;
+                } else {
+                    // the element does not have a namespace, match if we're
+                    // looking for NO namespace
+                    return namespc_mapped[0] == '\0';
+                }
+            } else {
+                // ANY namespace will match
+                return true;
+            }
+        }
+        return false;
+    } 
+
+    static NPT_Result GetChildren(NPT_XmlElementNode*              node,
+                                  NPT_Array<NPT_XmlElementNode*>&  children,
+                                  const char*                      tag,
+                                  const char*                      namespc = "") {
+        if (!node) return NPT_FAILURE;
+
+        // special case "" means we look for the same namespace as the parent
+        if (namespc && namespc[0] == '\0') namespc = node->GetNamespace()?node->GetNamespace()->GetChars():NPT_XML_NO_NAMESPACE;
+
+        const char* namespc_mapped = (namespc==NULL)?"":(namespc[0]=='*' && namespc[1]=='\0')?NULL:namespc;
+
+        // get all children first
+        NPT_List<NPT_XmlNode*>& allchildren = node->GetChildren();
+
+        // iterate through children and add only elements with matching tag
+        NPT_List<NPT_XmlNode*>::Iterator child = allchildren.GetFirstItem();
+        while  (child) {
+            if (IsMatch(*child, tag, namespc_mapped)) {
+                children.Add((*child)->AsElementNode());
+            }
+            ++child;
+        }
+        return NPT_SUCCESS;
+    }
+
+    static NPT_XmlElementNode* GetChild(NPT_XmlElementNode* node,
+                                        const char*         tag,
+                                        const char*         namespc = "") {
+        if (!node) return NULL;
+
+        // special case "" means we look for the same namespace as the parent
+        if (namespc && namespc[0] == '\0') namespc = node->GetNamespace()?node->GetNamespace()->GetChars():NPT_XML_NO_NAMESPACE;
+
+        return node->GetChild(tag, namespc);
+    }
+
+    static NPT_Result GetChild(NPT_XmlElementNode*  parent,
+                               NPT_XmlElementNode*& child,
+                               NPT_Ordinal          n = 0) {
+        if (!parent) return NPT_FAILURE;
+
+        // reset child
+        child = NULL;
+
+        // get all children first
+        NPT_List<NPT_XmlNode*>::Iterator children = parent->GetChildren().GetFirstItem();
+        while  (children) {
+            if ((*children)->AsElementNode() && n-- == 0) {
+                child = (*children)->AsElementNode();
+                return NPT_SUCCESS;
+            }
+            children++;
+        }
+
+        return NPT_FAILURE;
+    }
+
+    static NPT_Result Serialize(NPT_XmlNode& node, NPT_String& xml, bool add_header = true, NPT_Int8 indentation = 0) {
+        NPT_XmlWriter writer(indentation);
+        NPT_StringOutputStreamReference stream(new NPT_StringOutputStream(&xml));
+        NPT_CHECK(writer.Serialize(node, *stream, add_header));
+        return NPT_SUCCESS;
+    }
+
+	static NPT_String Serialize(NPT_XmlNode& node, bool add_header = true, NPT_Int8 indentation = 0) {
+		NPT_XmlWriter writer(indentation);
+		NPT_String xml;
+		NPT_StringOutputStreamReference stream(new NPT_StringOutputStream(&xml));
+		if (NPT_FAILED(writer.Serialize(node, *stream, add_header))) {
+			NPT_Debug("Failed to serialize xml node");
+			return "";
+		}
+
+		return xml;
+	}
+private:
+    // members
+};
 
 /*----------------------------------------------------------------------
 |   NPT_StringFinder
@@ -52,7 +317,7 @@ class NPT_StringFinder
 public:
     // methods
     NPT_StringFinder(const char* value, bool ignore_case = false) : 
-        m_Value(value), m_IgnoreCase(ignore_case) {}
+    m_Value(value), m_IgnoreCase(ignore_case) {}
     virtual ~NPT_StringFinder() {}
     bool operator()(const NPT_String* const & value) const {
         return value->Compare(m_Value, m_IgnoreCase) ? false : true;
@@ -60,7 +325,7 @@ public:
     bool operator()(const NPT_String& value) const {
         return value.Compare(m_Value, m_IgnoreCase) ? false : true;
     }
-
+    
 private:
     // members
     NPT_String   m_Value;
@@ -79,16 +344,16 @@ class NPT_IpAddressFinder
 public:
     // methods
     NPT_IpAddressFinder(NPT_IpAddress ip) : 
-        m_Value(ip) {}
+    m_Value(ip) {}
     virtual ~NPT_IpAddressFinder() {}
-
+    
     bool operator()(const NPT_IpAddress* const & value) const {
         return *value == m_Value;
     }
     bool operator()(const NPT_IpAddress& value) const {
         return value == m_Value;
     }
-
+    
 private:
     // members
     NPT_IpAddress m_Value;
@@ -148,9 +413,9 @@ public:
                                 const char*      server, 
                                 bool             replace = true) { 
         return message.GetHeaders().SetHeader(
-            NPT_HTTP_HEADER_SERVER, 
-            server, 
-            replace); 
+                                              NPT_HTTP_HEADER_SERVER, 
+                                              server, 
+                                              replace); 
     }
     static const NPT_String* GetUSN(const NPT_HttpMessage& message) { 
         return message.GetHeaders().GetHeaderValue("USN"); 
@@ -176,21 +441,21 @@ public:
     static NPT_Result GetLeaseTime(const NPT_HttpMessage& message, 
                                    NPT_TimeInterval&      lease) { 
         const NPT_String* cc = 
-            message.GetHeaders().GetHeaderValue("Cache-Control");
+        message.GetHeaders().GetHeaderValue("Cache-Control");
         NPT_CHECK_POINTER(cc);
         return ExtractLeaseTime(*cc, lease);
     }
     static NPT_Result SetLeaseTime(NPT_HttpMessage&        message, 
                                    const NPT_TimeInterval& lease) { 
         return message.GetHeaders().SetHeader(
-            "Cache-Control", 
-            "max-age="+NPT_String::FromInteger(lease.ToSeconds())); 
+                                              "Cache-Control", 
+                                              "max-age="+NPT_String::FromInteger(lease.ToSeconds())); 
     }
     static NPT_Result GetTimeOut(const NPT_HttpMessage& message, 
                                  NPT_Int32&             seconds) { 
         seconds = 0;
         const NPT_String* timeout = 
-            message.GetHeaders().GetHeaderValue("TIMEOUT"); 
+        message.GetHeaders().GetHeaderValue("TIMEOUT"); 
         NPT_CHECK_POINTER(timeout);
         return ExtractTimeOut(*timeout, seconds); 
     }
@@ -198,19 +463,19 @@ public:
                                  const NPT_Int32  seconds) { 
         if (seconds >= 0) {
             return message.GetHeaders().SetHeader(
-                "TIMEOUT", 
-                "Second-"+NPT_String::FromInteger(seconds)); 
+                                                  "TIMEOUT", 
+                                                  "Second-"+NPT_String::FromInteger(seconds)); 
         } else {
             return message.GetHeaders().SetHeader(
-                "TIMEOUT", 
-                "Second-infinite"); 
+                                                  "TIMEOUT", 
+                                                  "Second-infinite"); 
         }
     }
     static NPT_Result GetIfModifiedSince(const NPT_HttpMessage& message,
                                          NPT_DateTime&          date) {
         
         const NPT_String* value = 
-            message.GetHeaders().GetHeaderValue("If-Modified-Since");
+        message.GetHeaders().GetHeaderValue("If-Modified-Since");
         if (!value) return NPT_FAILURE;
         
         // Try RFC 1123, RFC 1036, then ANSI
@@ -223,36 +488,36 @@ public:
     static NPT_Result SetIfModifiedSince(NPT_HttpMessage&    message,
                                          const NPT_DateTime& date) {
         return message.GetHeaders().SetHeader(
-            "If-Modified-Since",
-            date.ToString(NPT_DateTime::FORMAT_RFC_1123));
+                                              "If-Modified-Since",
+                                              date.ToString(NPT_DateTime::FORMAT_RFC_1123));
     }
     static NPT_Result GetMX(const NPT_HttpMessage& message, 
                             NPT_UInt32&            value) { 
         value = 0;
         const NPT_String* mx = 
-            message.GetHeaders().GetHeaderValue("MX");
+        message.GetHeaders().GetHeaderValue("MX");
         NPT_CHECK_POINTER(mx);
         return NPT_ParseInteger32(*mx, value, false); // no relax to be UPnP compliant
     }
     static NPT_Result SetMX(NPT_HttpMessage& message, 
                             const NPT_UInt32 mx) {
         return message.GetHeaders().SetHeader(
-            "MX", 
-            NPT_String::FromInteger(mx)); 
+                                              "MX", 
+                                              NPT_String::FromInteger(mx)); 
     }
     static NPT_Result GetSeq(const NPT_HttpMessage& message,  
                              NPT_UInt32&      value) { 
         value = 0;
         const NPT_String* seq = 
-            message.GetHeaders().GetHeaderValue("SEQ");
+        message.GetHeaders().GetHeaderValue("SEQ");
         NPT_CHECK_POINTER(seq);
         return NPT_ParseInteger32(*seq, value);
     }
     static NPT_Result SetSeq(NPT_HttpMessage& message, 
                              const NPT_UInt32 seq) {
         return message.GetHeaders().SetHeader(
-            "SEQ", 
-            NPT_String::FromInteger(seq)); 
+                                              "SEQ", 
+                                              NPT_String::FromInteger(seq)); 
     }
     static const char* GenerateUUID(int         count, 
                                     NPT_String& uuid) {   
@@ -291,7 +556,7 @@ public:
         if (temp.CompareN("Second-", 7, true)) {
             return NPT_ERROR_INVALID_FORMAT;
         }
-
+        
         if (temp.Compare("Second-infinite", true) == 0) {
             len = NPT_TIMEOUT_INFINITE;
             return NPT_SUCCESS;
@@ -302,7 +567,7 @@ public:
                                      bool with_localhost = false) {
         NPT_List<NPT_NetworkInterface*> if_list;
         NPT_CHECK(GetNetworkInterfaces(if_list, with_localhost));
-
+        
         NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
         while (iface) {
             NPT_IpAddress ip = (*(*iface)->GetAddresses().GetFirstItem()).GetPrimaryAddress();
@@ -312,32 +577,32 @@ public:
             }
             ++iface;
         }
-
+        
         if (with_localhost && !ips.Find(NPT_IpAddressFinder(NPT_IpAddress(127, 0, 0, 1)))) {
             NPT_IpAddress localhost;
             localhost.Parse("127.0.0.1");
             ips.Add(localhost);
         }
-
+        
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
         return NPT_SUCCESS;
     }
-
+    
     static NPT_Result GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& if_list, 
                                            bool with_localhost = false) {
         NPT_CHECK(_GetNetworkInterfaces(if_list, false));
-
+        
         // if no valid interfaces or if requested, add localhost interface
         if (if_list.GetItemCount() == 0 || with_localhost) {
             NPT_CHECK(_GetNetworkInterfaces(if_list, true));
         }
         return NPT_SUCCESS;
     }
-
+    
 	static NPT_Result GetMACAddresses(NPT_List<NPT_String>& addresses) {
         NPT_List<NPT_NetworkInterface*> if_list;
         NPT_CHECK(GetNetworkInterfaces(if_list));
-
+        
         NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
         while (iface) {
             NPT_String ip = (*(*iface)->GetAddresses().GetFirstItem()).GetPrimaryAddress().ToString();
@@ -346,35 +611,35 @@ public:
             }
             ++iface;
         }
-
+        
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
         return NPT_SUCCESS;
     }
-
-
+    
+    
 	static bool IsLocalNetworkAddress(const NPT_IpAddress& address) {
 		if (address.ToString() == "127.0.0.1") return true;
-
+        
 		NPT_List<NPT_NetworkInterface*> if_list;
         NPT_NetworkInterface::GetNetworkInterfaces(if_list);
-
+        
 		NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
         while (iface) {
 			if((*iface)->IsAddressInNetwork(address)) return true;
             ++iface;
         }
-
+        
 		if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
 		return false;
 	}
-
+    
 private:
-
+    
     static NPT_Result _GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& if_list, 
                                             bool only_localhost = false) {
         NPT_List<NPT_NetworkInterface*> _if_list;
         NPT_CHECK(NPT_NetworkInterface::GetNetworkInterfaces(_if_list));
-
+        
         NPT_NetworkInterface* iface;
         while (NPT_SUCCEEDED(_if_list.PopHead(iface))) {
             // only interested in non PTP & multicast capable interfaces
@@ -384,7 +649,7 @@ private:
                 delete iface;
                 continue;
             }
-
+            
             NPT_String ip = iface->GetAddresses().GetFirstItem()->GetPrimaryAddress().ToString();
             
             if (only_localhost && (iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_LOOPBACK)) {
@@ -396,11 +661,20 @@ private:
                 delete iface;
             }
         }
-
+        
         // cleanup any remaining items in list if we breaked early
         _if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
         return NPT_SUCCESS;
     }
 };
 
-#endif /* _PLT_UPNP_HELPER_H_ */
+#endif // _PLT_UTILITIES_H_
+
+
+
+
+
+
+
+
+

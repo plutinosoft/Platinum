@@ -36,6 +36,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "PltHttpClientTask.h"
+#include "PltConstants.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.http.clienttask")
 
@@ -46,7 +47,7 @@ PLT_HttpClientSocketTask::PLT_HttpClientSocketTask(NPT_HttpRequest* request /* =
                                                    bool             wait_forever /* = false */) :
     m_WaitForever(wait_forever)
 {
-    m_Client.SetUserAgent(PLT_HTTP_DEFAULT_USER_AGENT);
+    m_Client.SetUserAgent(PLT_Constants::GetInstance().m_DefaultUserAgent);
     if (request) m_Requests.Push(request);
 }
 

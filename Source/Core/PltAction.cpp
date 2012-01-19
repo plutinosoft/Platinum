@@ -37,7 +37,7 @@
 +---------------------------------------------------------------------*/
 #include "PltAction.h"
 #include "PltService.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 
 #define REMOVE_WMP_DATATYPE_EXTENSION
 

@@ -37,7 +37,7 @@
 +---------------------------------------------------------------------*/
 #include "PltStateVariable.h"
 #include "PltService.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltUPnP.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.statevariable")

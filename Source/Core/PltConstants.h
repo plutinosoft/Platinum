@@ -63,6 +63,7 @@ public:
     // members
     NPT_TimeInterval m_DefaultDeviceLease;
     NPT_TimeInterval m_DefaultSubscribeLease;
+    NPT_String       m_DefaultUserAgent;
 };
 
 #endif /* _PLT_UPNP_CONSTANTS_H_ */

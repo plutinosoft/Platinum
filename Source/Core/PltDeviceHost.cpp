@@ -38,7 +38,7 @@
 #include "PltService.h"
 #include "PltDeviceHost.h"
 #include "PltUPnP.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltSsdp.h"
 #include "PltHttpServer.h"
 #include "PltVersion.h"

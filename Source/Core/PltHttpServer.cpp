@@ -39,7 +39,7 @@
 #include "PltHttpServer.h"
 #include "PltHttp.h"
 #include "PltVersion.h"
-#include "PltUPnPHelper.h"
+#include "PltUtilities.h"
 #include "PltProtocolInfo.h"
 #include "PltMimeType.h"
 

@@ -38,10 +38,11 @@
 #include "PltCtrlPoint.h"
 #include "PltUPnP.h"
 #include "PltDeviceData.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltCtrlPointTask.h"
 #include "PltSsdp.h"
 #include "PltHttpServer.h"
+#include "PltConstants.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.ctrlpoint")
 
@@ -373,7 +374,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_HTTP_DEFAULT_USER_AGENT);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_Constants::GetInstance().m_DefaultUserAgent);
 
     // create task
     PLT_SsdpSearchTask* task = new PLT_SsdpSearchTask(
@@ -446,7 +447,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_HTTP_DEFAULT_USER_AGENT);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_Constants::GetInstance().m_DefaultUserAgent);
 
     // force HOST to be the regular multicast address:port
     // Some servers do care (like WMC) otherwise they won't respond to us

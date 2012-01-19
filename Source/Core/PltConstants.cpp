@@ -36,6 +36,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "PltConstants.h"
+#include "PltHttp.h"
 
 static PLT_Constants Constants; 
 
@@ -44,7 +45,8 @@ static PLT_Constants Constants;
 +---------------------------------------------------------------------*/
 PLT_Constants::PLT_Constants() :
     m_DefaultDeviceLease(NPT_TimeInterval(1800.)),
-    m_DefaultSubscribeLease(NPT_TimeInterval(1800.))
+    m_DefaultSubscribeLease(NPT_TimeInterval(1800.)),
+    m_DefaultUserAgent(PLT_HTTP_DEFAULT_USER_AGENT)
 {
 }
 
