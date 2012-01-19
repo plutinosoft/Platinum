@@ -60,10 +60,21 @@ public:
     PLT_Constants();
     ~PLT_Constants() {};
     
+    void SetDefaultDeviceLease(NPT_TimeInterval lease) { m_DefaultDeviceLease = new NPT_TimeInterval(lease); }
+    NPT_Reference<NPT_TimeInterval> GetDefaultDeviceLease() { return m_DefaultDeviceLease; }
+  
+    void SetDefaultSubscribeLease(NPT_TimeInterval lease) { m_DefaultSubscribeLease = new NPT_TimeInterval(lease); }
+    NPT_Reference<NPT_TimeInterval> GetDefaultSubscribeLease() { return m_DefaultSubscribeLease; }
+    
+    void SetDefaultUserAgent(const char* agent) { m_DefaultUserAgent = new NPT_String(agent); }
+    NPT_Reference<NPT_String> GetDefaultUserAgent() { return m_DefaultUserAgent; }
+    
+    
+private:
     // members
-    NPT_TimeInterval m_DefaultDeviceLease;
-    NPT_TimeInterval m_DefaultSubscribeLease;
-    NPT_String       m_DefaultUserAgent;
+    NPT_Reference<NPT_TimeInterval> m_DefaultDeviceLease;
+    NPT_Reference<NPT_TimeInterval> m_DefaultSubscribeLease;
+    NPT_Reference<NPT_String>       m_DefaultUserAgent;
 };
 
 #endif /* _PLT_UPNP_CONSTANTS_H_ */

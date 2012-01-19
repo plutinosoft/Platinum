@@ -374,7 +374,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_Constants::GetInstance().m_DefaultUserAgent);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, *PLT_Constants::GetInstance().GetDefaultUserAgent());
 
     // create task
     PLT_SsdpSearchTask* task = new PLT_SsdpSearchTask(
@@ -447,7 +447,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_Constants::GetInstance().m_DefaultUserAgent);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, *PLT_Constants::GetInstance().GetDefaultUserAgent());
 
     // force HOST to be the regular multicast address:port
     // Some servers do care (like WMC) otherwise they won't respond to us
@@ -1112,7 +1112,7 @@ PLT_CtrlPoint::ProcessSsdpMessage(const NPT_HttpMessage&        message,
     // be nice and assume a default lease time if not found
     NPT_TimeInterval leasetime;
     if (NPT_FAILED(PLT_UPnPMessageHelper::GetLeaseTime(message, leasetime))) {
-        leasetime = PLT_Constants::GetInstance().m_DefaultSubscribeLease;
+        leasetime = *PLT_Constants::GetInstance().GetDefaultSubscribeLease();
     }
 
     {
@@ -1388,7 +1388,7 @@ PLT_CtrlPoint::RenewSubscriber(PLT_EventSubscriber& subscriber)
 
     PLT_UPnPMessageHelper::SetSID(*request, subscriber.GetSID());
     PLT_UPnPMessageHelper::SetTimeOut(*request, 
-        (NPT_Int32)PLT_Constants::GetInstance().m_DefaultSubscribeLease.ToSeconds());
+        (NPT_Int32)PLT_Constants::GetInstance().GetDefaultSubscribeLease()->ToSeconds());
 
     // Prepare the request
     // create a task to post the request
@@ -1457,7 +1457,7 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
             PLT_UPnPMessageHelper::SetCallbacks(*request, 
                 "<" + callbackUrl.ToString() + ">");
             PLT_UPnPMessageHelper::SetTimeOut(*request, 
-                (NPT_Int32)PLT_Constants::GetInstance().m_DefaultSubscribeLease.ToSeconds());
+                (NPT_Int32)PLT_Constants::GetInstance().GetDefaultSubscribeLease()->ToSeconds());
         } else {
             NPT_LOG_INFO_3("Unsubscribing subscriber \"%s\" for service \"%s\" of device \"%s\"",
                 (const char*)(sub?sub->GetSID().GetChars():"unknown"),

@@ -43,11 +43,11 @@ static PLT_Constants Constants;
 /*----------------------------------------------------------------------
 |   PLT_Constants::PLT_Constant
 +---------------------------------------------------------------------*/
-PLT_Constants::PLT_Constants() :
-    m_DefaultDeviceLease(NPT_TimeInterval(1800.)),
-    m_DefaultSubscribeLease(NPT_TimeInterval(1800.)),
-    m_DefaultUserAgent(PLT_HTTP_DEFAULT_USER_AGENT)
+PLT_Constants::PLT_Constants()
 {
+    SetDefaultUserAgent(PLT_HTTP_DEFAULT_USER_AGENT);
+    SetDefaultDeviceLease(NPT_TimeInterval(1800.));
+    SetDefaultSubscribeLease(NPT_TimeInterval(1800.));
 }
 
 /*----------------------------------------------------------------------
