@@ -45,7 +45,7 @@
 #include "PltTaskManager.h"
 #include "PltCtrlPoint.h"
 #include "PltDeviceHost.h"
-#include "PltUPnPHelper.h"
+#include "PltUtilities.h"
 
 /*----------------------------------------------------------------------
 |   constants

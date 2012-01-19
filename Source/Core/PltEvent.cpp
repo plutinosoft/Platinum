@@ -40,7 +40,7 @@
 #include "PltService.h"
 #include "PltUPnP.h"
 #include "PltDeviceData.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltCtrlPointTask.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.event")

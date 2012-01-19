@@ -38,7 +38,7 @@
 #include "Neptune.h"
 #include "PltXbox360.h"
 #include "PltService.h"
-#include "PltUPnPHelper.h"
+#include "PltUtilities.h"
 #include "PltSsdp.h"
 
 /*----------------------------------------------------------------------

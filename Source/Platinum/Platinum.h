@@ -93,8 +93,7 @@ cross-platform logging system.
 #include "PltStateVariable.h"
 #include "PltTaskManager.h"
 #include "PltThreadTask.h"
-#include "PltUPnPHelper.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 
 #include "PltMediaServer.h"
 #include "PltMediaBrowser.h"

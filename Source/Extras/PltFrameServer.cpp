@@ -37,7 +37,7 @@
 +---------------------------------------------------------------------*/
 #include "PltFrameStream.h"
 #include "PltFrameServer.h"
-#include "PltUPnPHelper.h"
+#include "PltUtilities.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.media.server.frame")
 

@@ -38,7 +38,7 @@
 #include "PltMediaItem.h"
 #include "PltMediaServer.h"
 #include "PltDidl.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltService.h"
 #include "PltMimeType.h"
 

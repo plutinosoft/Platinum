@@ -183,7 +183,7 @@ private:
                                 NPT_Cardinal               level);
     NPT_Result InspectDevice(const NPT_HttpUrl& location, 
                              const char*        uuid, 
-                             NPT_TimeInterval   leasetime = PLT_Constants::GetInstance().m_DefaultDeviceLease);
+                             NPT_TimeInterval   leasetime = *PLT_Constants::GetInstance().GetDefaultDeviceLease());
     NPT_Result FindDevice(const char* uuid, PLT_DeviceDataReference& device, bool return_root = false);
     NPT_Result AddDevice(PLT_DeviceDataReference& data);
     NPT_Result NotifyDeviceReady(PLT_DeviceDataReference& data);

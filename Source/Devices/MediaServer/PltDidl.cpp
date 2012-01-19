@@ -36,7 +36,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "PltDidl.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltService.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.media.server.didl")
