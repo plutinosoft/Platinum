@@ -373,7 +373,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    //request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, NPT_HttpClient::m_UserAgentHeader);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_HTTP_DEFAULT_USER_AGENT);
 
     // create task
     PLT_SsdpSearchTask* task = new PLT_SsdpSearchTask(
@@ -446,7 +446,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
     PLT_UPnPMessageHelper::SetMX(*request, mx);
     PLT_UPnPMessageHelper::SetST(*request, target);
     PLT_UPnPMessageHelper::SetMAN(*request, "\"ssdp:discover\"");
-    //request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, NPT_HttpClient::m_UserAgentHeader);
+    request->GetHeaders().SetHeader(NPT_HTTP_HEADER_USER_AGENT, PLT_HTTP_DEFAULT_USER_AGENT);
 
     // force HOST to be the regular multicast address:port
     // Some servers do care (like WMC) otherwise they won't respond to us
