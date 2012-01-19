@@ -77,6 +77,9 @@
 #define PLT_FILTER_MASK_RES_NRAUDIOCHANNELS			0x00800000
 #define PLT_FILTER_MASK_RES_SAMPLEFREQUENCY			0x01000000
 
+#define PLT_FILTER_MASK_LONGDESCRIPTION             0x02000000
+#define PLT_FILTER_MASK_ICON                        0x04000000
+
 #define PLT_FILTER_MASK_TOC							0x02000000
 #define PLT_FILTER_MASK_SEARCHCLASS					0x04000000
 #define PLT_FILTER_MASK_REFID                       0x08000000
@@ -91,7 +94,9 @@
 #define PLT_FILTER_FIELD_GENRE                      "upnp:genre"
 #define PLT_FILTER_FIELD_ALBUMARTURI                "upnp:albumArtURI"
 #define PLT_FILTER_FIELD_ALBUMARTURI_DLNAPROFILEID  "upnp:albumArtURI@dlna:profileID"
-#define PLT_FILTER_FIELD_DESCRIPTION                "upnp:longDescription"
+#define PLT_FILTER_FIELD_DESCRIPTION                "dc:description"
+#define PLT_FILTER_FIELD_LONGDESCRIPTION            "upnp:longDescription"
+#define PLT_FILTER_FIELD_ICON                       "upnp:icon"
 #define PLT_FILTER_FIELD_ORIGINALTRACK              "upnp:originalTrackNumber"
 #define PLT_FILTER_FIELD_PROGRAMTITLE               "upnp:programTitle"
 #define PLT_FILTER_FIELD_SERIESTITLE                "upnp:seriesTitle"
