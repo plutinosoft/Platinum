@@ -228,6 +228,8 @@ PLT_HttpServer::ServeStream(const NPT_HttpRequest&        request,
                             NPT_InputStreamReference&     body, 
                             const char*                   content_type) 
 {    
+    if (body.IsNull()) return NPT_FAILURE;
+    
     // set date
     NPT_TimeStamp now;
     NPT_System::GetCurrentTimeStamp(now);
