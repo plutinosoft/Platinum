@@ -96,7 +96,7 @@ public:
     PLT_DeviceData(
         NPT_HttpUrl      description_url = NPT_HttpUrl(NULL, 0, "/"), 
         const char*      uuid = "",
-        NPT_TimeInterval lease_time = PLT_Constants::GetInstance().m_DefaultDeviceLease,
+        NPT_TimeInterval lease_time = *PLT_Constants::GetInstance().GetDefaultDeviceLease(),
         const char*      device_type = "",
         const char*      friendly_name = "");
 

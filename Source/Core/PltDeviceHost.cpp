@@ -38,7 +38,7 @@
 #include "PltService.h"
 #include "PltDeviceHost.h"
 #include "PltUPnP.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 #include "PltSsdp.h"
 #include "PltHttpServer.h"
 #include "PltVersion.h"
@@ -65,7 +65,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                                bool         port_rebind      /* = false */) :
     PLT_DeviceData(NPT_HttpUrl(NULL, 0, description_path), 
                    uuid, 
-                   PLT_Constants::GetInstance().m_DefaultDeviceLease, 
+                   *PLT_Constants::GetInstance().GetDefaultDeviceLease(), 
                    device_type, 
                    friendly_name), 
     m_HttpServer(NULL),

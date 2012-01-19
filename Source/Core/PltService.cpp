@@ -39,7 +39,7 @@
 #include "PltSsdp.h"
 #include "PltUPnP.h"
 #include "PltDeviceData.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.service")
 

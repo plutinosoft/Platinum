@@ -38,7 +38,7 @@
 #include "PltDeviceData.h"
 #include "PltService.h"
 #include "PltUPnP.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.devicedata")
 
@@ -203,7 +203,7 @@ NPT_Result
 PLT_DeviceData::SetLeaseTime(NPT_TimeInterval lease_time) 
 {
     // Enforce 10 seconds min lease time
-    m_LeaseTime = (lease_time.ToSeconds()>=10)?lease_time:PLT_Constants::GetInstance().m_DefaultDeviceLease;
+    m_LeaseTime = (lease_time.ToSeconds()>=10)?lease_time:*PLT_Constants::GetInstance().GetDefaultDeviceLease();
     NPT_System::GetCurrentTimeStamp(m_LeaseTimeLastUpdate);
     return NPT_SUCCESS;
 }
