@@ -81,7 +81,7 @@ PLT_InputDatagramStream::Read(void*     buffer,
     if (bytes_to_read == 0) return res;
     
     if (NPT_SUCCEEDED(res)) {
-        NPT_Size available = m_Buffer.GetDataSize()-m_BufferOffset;
+        NPT_Size available = m_Buffer.GetDataSize()-(NPT_Size)m_BufferOffset;
         NPT_Size _bytes_to_read = bytes_to_read<available?bytes_to_read:available;
         NPT_CopyMemory(buffer, m_Buffer.UseData()+m_BufferOffset, _bytes_to_read);
         m_BufferOffset += _bytes_to_read;

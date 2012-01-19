@@ -178,6 +178,7 @@ PLT_MediaObject::Reset()
 
     m_Description.description	       = "";
     m_Description.long_description     = "";
+    m_Description.icon_uri             = "";
     m_ExtraInfo.album_arts.Clear();
     m_ExtraInfo.artist_discography_uri = "";
 
@@ -287,12 +288,26 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
             didl += "</upnp:albumArtURI>";
         }
     }
+    
+    // long description
+    if ((mask & PLT_FILTER_MASK_DESCRIPTION) && !m_Description.description.IsEmpty()) {
+        didl += "<dc:description>";
+        PLT_Didl::AppendXmlEscape(didl, m_Description.description);
+        didl += "</dc:description>";
+    }
 
-    // description
-    if ((mask & PLT_FILTER_MASK_DESCRIPTION) && !m_Description.long_description.IsEmpty()) {
+    // long description
+    if ((mask & PLT_FILTER_MASK_LONGDESCRIPTION) && !m_Description.long_description.IsEmpty()) {
         didl += "<upnp:longDescription>";
         PLT_Didl::AppendXmlEscape(didl, m_Description.long_description);
         didl += "</upnp:longDescription>";
+    }
+    
+    // icon
+    if ((mask & PLT_FILTER_MASK_ICON) && !m_Description.icon_uri.IsEmpty()) {
+        didl += "<upnp:icon>";
+        PLT_Didl::AppendXmlEscape(didl, m_Description.icon_uri);
+        didl += "</upnp:icon>";
     }
 
     // original track number
@@ -474,8 +489,10 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
             m_Affiliation.genres.Add(children[i]->GetText()->SubString(0, 256));
         }
     }
-
+    
+    PLT_XmlHelper::GetChildText(entry, "description", m_Description.description, didl_namespace_dc);
     PLT_XmlHelper::GetChildText(entry, "longDescription", m_Description.long_description, didl_namespace_upnp);
+    PLT_XmlHelper::GetChildText(entry, "icon", m_Description.icon_uri, didl_namespace_upnp);
 	PLT_XmlHelper::GetChildText(entry, "toc", m_MiscInfo.toc, didl_namespace_upnp);
     
     // album arts
