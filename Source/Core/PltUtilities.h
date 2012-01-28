@@ -528,6 +528,16 @@ public:
         }
         return uuid;
     }
+    
+    static const char* GenerateSerialNumber(NPT_String& sn, int count = 40) {
+        sn = "{";
+        for (int i=0;i<count;i++) {
+            char nibble = (char)(NPT_System::GetRandomInteger() % 16);
+            sn += (nibble < 10) ? ('0' + nibble) : ('a' + (nibble-10));
+        }
+        sn += "}";
+        return sn;
+    }
     static const char* GenerateGUID(NPT_String& guid) {   
         guid = "";
         for (int i=0;i<32;i++) {

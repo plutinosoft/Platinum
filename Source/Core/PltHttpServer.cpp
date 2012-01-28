@@ -93,7 +93,7 @@ PLT_HttpServer::Start()
         int retries = 100;
         do {    
             int random = NPT_System::GetRandomInteger();
-            int port = (unsigned short)(9000 + (random % 1000));
+            int port = (unsigned short)(1024 + (random % 1024));
             if (NPT_SUCCEEDED(SetListenPort(port, m_ReuseAddress))) {
                 break;
             }
