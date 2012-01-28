@@ -151,8 +151,9 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         net_if->GetAddresses().GetFirstItem();
     if (!niaddr) return NPT_SUCCESS;
 
+    // try to bind on port 1900, ok if fails
     NPT_UdpSocket socket;
-    //NPT_CHECK_WARNING(socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
+    socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -238,6 +239,8 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
 
     NPT_UdpMulticastSocket multicast_socket;
     NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
+    
+    multicast_socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
     
     NPT_HttpUrl url = NPT_HttpUrl("239.255.255.250", 1900, "*");
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
