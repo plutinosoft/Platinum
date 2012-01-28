@@ -266,6 +266,7 @@ public:
     NPT_Result Previous(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, void* userdata);
     NPT_Result Seek(PLT_DeviceDataReference&  device, NPT_UInt32 instance_id, NPT_String unit, NPT_String target, void* userdata);
     NPT_Result SetAVTransportURI(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* uri, const char* metadata, void* userdata);
+    NPT_Result SetNextAVTransportURI(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* next_uri, const char* next_metadata, void* userdata);
     NPT_Result SetPlayMode(PLT_DeviceDataReference&  device, NPT_UInt32 instance_id, NPT_String new_play_mode, void* userdata);
     NPT_Result Stop(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, void* userdata);
 
@@ -282,15 +283,14 @@ public:
 
     // methods    
     virtual NPT_Result FindRenderer(const char* uuid, PLT_DeviceDataReference& device);
-    virtual NPT_Result GetProtocolInfoSink(PLT_DeviceDataReference& device, NPT_List<NPT_String>& sinks);
-    virtual NPT_Result FindMatchingProtocolInfo(NPT_List<NPT_String>& sinks,
-                                                const char*           protocol_info);
+    virtual NPT_Result GetProtocolInfoSink(const NPT_String& device_uuid, NPT_List<NPT_String>& sinks);
+    virtual NPT_Result GetTransportState(const NPT_String&  device_uuid, NPT_String& state);
+    
+    virtual NPT_Result FindMatchingProtocolInfo(NPT_List<NPT_String>& sinks, const char* protocol_info);
     virtual NPT_Result FindBestResource(PLT_DeviceDataReference& device, PLT_MediaObject& item, NPT_Cardinal& resource_index);
 
 private:
-    NPT_Result InvokeActionWithInstance(PLT_ActionReference& action,
-        NPT_UInt32               instance_id,
-        void*                    userdata = NULL);
+    NPT_Result InvokeActionWithInstance(PLT_ActionReference& action, NPT_UInt32 instance_id, void* userdata = NULL);
 
     NPT_Result OnGetCurrentTransportActionsResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
     NPT_Result OnGetDeviceCapabilitiesResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);

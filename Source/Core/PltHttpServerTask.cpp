@@ -98,11 +98,13 @@ PLT_HttpServerSocketTask::DoRun()
 
         // wait for a request
         res = Read(buffered_input_stream, request, &context);
-        if (NPT_FAILED(res) || (request == NULL)) goto cleanup;
+        if (NPT_FAILED(res) || (request == NULL)) 
+            goto cleanup;
         
         // process request and setup response
         res = RespondToClient(*request, context, response);
-        if (NPT_FAILED(res) || (response == NULL)) goto cleanup;
+        if (NPT_FAILED(res) || (response == NULL)) 
+            goto cleanup;
 
         // send response
         keep_alive = PLT_HttpHelper::IsConnectionKeepAlive(*request);

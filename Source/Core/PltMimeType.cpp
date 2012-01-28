@@ -81,32 +81,51 @@ PLT_HttpFileRequestHandler_SonosFileTypeMap[] = {
 };
 
 /*----------------------------------------------------------------------
-|   PLT_MimeType::GetMimeType
-+---------------------------------------------------------------------*/
+ |   PLT_MimeType::GetMimeType
+ +---------------------------------------------------------------------*/
 const char* 
 PLT_MimeType::GetMimeType(const NPT_String&             filename,
                           const PLT_HttpRequestContext* context /* = NULL */)
 {
+    return GetMimeType(filename, context?PLT_HttpHelper::GetDeviceSignature(context->GetRequest()):PLT_DEVICE_UNKNOWN);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_MimeType::GetMimeType
++---------------------------------------------------------------------*/
+const char* 
+PLT_MimeType::GetMimeType(const NPT_String&   filename,
+                          PLT_DeviceSignature signature /* = PLT_DEVICE_UNKNOWN */)
+{
     int last_dot = filename.ReverseFind('.');
     if (last_dot >= 0) { // passing just the extension is ok (ex .mp3)
         NPT_String extension = filename.GetChars()+last_dot+1;
-        return GetMimeTypeFromExtension(extension, context);
+        return GetMimeTypeFromExtension(extension, signature);
     }
 
     return "application/octet-stream";
 }
 
 /*----------------------------------------------------------------------
-|   PLT_MimeType::GetMimeTypeFromExtension
-+---------------------------------------------------------------------*/
+ |   PLT_MimeType::GetMimeTypeFromExtension
+ +---------------------------------------------------------------------*/
 const char* 
 PLT_MimeType::GetMimeTypeFromExtension(const NPT_String&             extension,
                                        const PLT_HttpRequestContext* context /* = NULL */)
 {
-    if (context) {
+    return GetMimeTypeFromExtension(extension, context?PLT_HttpHelper::GetDeviceSignature(context->GetRequest()):PLT_DEVICE_UNKNOWN);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_MimeType::GetMimeTypeFromExtension
++---------------------------------------------------------------------*/
+const char* 
+PLT_MimeType::GetMimeTypeFromExtension(const NPT_String&   extension,
+                                       PLT_DeviceSignature signature /* = PLT_DEVICE_UNKNOWN */)
+{
+    if (signature != PLT_DEVICE_UNKNOWN) {
         // look for special case for 360
-        if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_XBOX || 
-			PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_WMP ) {
+        if (signature == PLT_DEVICE_XBOX || signature == PLT_DEVICE_WMP ) {
 			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360FileTypeMap); i++) {
                 if (extension.Compare(PLT_HttpFileRequestHandler_360FileTypeMap[i].extension, true) == 0) {
                     return PLT_HttpFileRequestHandler_360FileTypeMap[i].mime_type;
@@ -114,7 +133,7 @@ PLT_MimeType::GetMimeTypeFromExtension(const NPT_String&             extension,
             }
 
             // fallback to default if not found
-		} else if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_PS3) {
+		} else if (signature == PLT_DEVICE_PS3) {
             for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_PS3FileTypeMap); i++) {
                 if (extension.Compare(PLT_HttpFileRequestHandler_PS3FileTypeMap[i].extension, true) == 0) {
                     return PLT_HttpFileRequestHandler_PS3FileTypeMap[i].mime_type;
@@ -122,7 +141,7 @@ PLT_MimeType::GetMimeTypeFromExtension(const NPT_String&             extension,
             }
 
             // fallback to default if not found
-        } else if (PLT_HttpHelper::GetDeviceSignature(context->GetRequest()) == PLT_SONOS) {
+        } else if (signature == PLT_DEVICE_SONOS) {
             for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_SonosFileTypeMap); i++) {
                 if (extension.Compare(PLT_HttpFileRequestHandler_SonosFileTypeMap[i].extension, true) == 0) {
                     return PLT_HttpFileRequestHandler_SonosFileTypeMap[i].mime_type;

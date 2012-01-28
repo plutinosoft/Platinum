@@ -188,15 +188,15 @@ PLT_MediaController::FindRenderer(const char* uuid, PLT_DeviceDataReference& dev
 |   PLT_MediaController::GetProtocolInfoSink
 +---------------------------------------------------------------------*/
 NPT_Result 
-PLT_MediaController::GetProtocolInfoSink(PLT_DeviceDataReference& device, 
-                                         NPT_List<NPT_String>&    sinks)
+PLT_MediaController::GetProtocolInfoSink(const NPT_String&     device_uuid, 
+                                         NPT_List<NPT_String>& sinks)
 {
     PLT_DeviceDataReference renderer;
-    NPT_CHECK_WARNING(FindRenderer(device->GetUUID(), renderer));
+    NPT_CHECK_WARNING(FindRenderer(device_uuid, renderer));
 
     // look for ConnectionManager service
     PLT_Service* serviceCMR;
-    NPT_CHECK_SEVERE(device->FindServiceByType(
+    NPT_CHECK_SEVERE(renderer->FindServiceByType(
         "urn:schemas-upnp-org:service:ConnectionManager:*", 
         serviceCMR));
 
@@ -210,18 +210,42 @@ PLT_MediaController::GetProtocolInfoSink(PLT_DeviceDataReference& device,
 }
 
 /*----------------------------------------------------------------------
+|   PLT_MediaController::GetTransportState
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_MediaController::GetTransportState(const NPT_String&  device_uuid, 
+                                       NPT_String&        state)
+{
+    PLT_DeviceDataReference renderer;
+    NPT_CHECK_WARNING(FindRenderer(device_uuid, renderer));
+    
+    // look for ConnectionManager service
+    PLT_Service* serviceAVT;
+    NPT_CHECK_SEVERE(renderer->FindServiceByType(
+                                                 "urn:schemas-upnp-org:service:AVTransport:*", 
+                                                 serviceAVT));
+    
+    NPT_CHECK_SEVERE(serviceAVT->GetStateVariableValue("TransportState", 
+                                                       state));
+    
+    return NPT_SUCCESS;
+}
+
+/*----------------------------------------------------------------------
 |   PLT_MediaController::FindMatchingProtocolInfo
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_MediaController::FindMatchingProtocolInfo(NPT_List<NPT_String>& sinks,
-                                              const char* protocol_info)
+                                              const char*           protocol_info)
 {
     PLT_ProtocolInfo protocol(protocol_info);
     for (NPT_List<NPT_String>::Iterator iter = sinks.GetFirstItem();
          iter;
          iter++) {
         PLT_ProtocolInfo sink(*iter);
-        if (sink.Match(protocol)) return NPT_SUCCESS;
+        if (sink.Match(protocol)) {
+            return NPT_SUCCESS;
+        }
     }
 
     return NPT_ERROR_NO_SUCH_ITEM;
@@ -238,7 +262,7 @@ PLT_MediaController::FindBestResource(PLT_DeviceDataReference& device,
     if (item.m_Resources.GetItemCount() <= 0) return NPT_ERROR_INVALID_PARAMETERS;
 
     NPT_List<NPT_String> sinks;
-    NPT_CHECK_SEVERE(GetProtocolInfoSink(device, sinks));
+    NPT_CHECK_SEVERE(GetProtocolInfoSink(device->GetUUID(), sinks));
 
     // look for best resource
     for (NPT_Cardinal i=0; i< item.m_Resources.GetItemCount(); i++) {
@@ -504,6 +528,36 @@ PLT_MediaController::SetAVTransportURI(PLT_DeviceDataReference& device,
         return NPT_ERROR_INVALID_PARAMETERS;
     }
 
+    return InvokeActionWithInstance(action, instance_id, userdata);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_MediaController::SetNextAVTransportURI
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_MediaController::SetNextAVTransportURI(PLT_DeviceDataReference& device, 
+                                           NPT_UInt32               instance_id, 
+                                           const char*              next_uri,
+                                           const char*              next_metadata,
+                                           void*                    userdata)
+{
+    PLT_ActionReference action;
+    NPT_CHECK_SEVERE(m_CtrlPoint->CreateAction(
+                                               device, 
+                                               "urn:schemas-upnp-org:service:AVTransport:1", 
+                                               "SetNextAVTransportURI", 
+                                               action));
+    
+    // set the uri
+    if (NPT_FAILED(action->SetArgumentValue("NextURI", next_uri))) {
+        return NPT_ERROR_INVALID_PARAMETERS;
+    }
+    
+    // set the uri metadata
+    if (NPT_FAILED(action->SetArgumentValue("NextURIMetaData", next_metadata))) {
+        return NPT_ERROR_INVALID_PARAMETERS;
+    }
+    
     return InvokeActionWithInstance(action, instance_id, userdata);
 }
 

@@ -60,11 +60,13 @@
 |   types
 +---------------------------------------------------------------------*/
 typedef enum {
-	PLT_UNKNOWN_DEVICE,
-	PLT_XBOX,
-	PLT_PS3,
-	PLT_WMP,
-    PLT_SONOS
+	PLT_DEVICE_UNKNOWN,
+	PLT_DEVICE_XBOX,
+	PLT_DEVICE_PS3,
+	PLT_DEVICE_WMP,
+    PLT_DEVICE_SONOS,
+    PLT_DEVICE_MAC,
+    PLT_DEVICE_WINDOWS
 } PLT_DeviceSignature;
 
 /*----------------------------------------------------------------------

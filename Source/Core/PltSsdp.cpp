@@ -443,6 +443,7 @@ PLT_SsdpSearchTask::DoRun()
                 response = NULL;
             } else if (res != NPT_ERROR_TIMEOUT) {
                 NPT_LOG_WARNING_1("PLT_SsdpSearchTask got an error (%d) waiting for response", res);
+                NPT_System::Sleep(NPT_TimeInterval(.5f));
             }
 
             input_stream = NULL;
