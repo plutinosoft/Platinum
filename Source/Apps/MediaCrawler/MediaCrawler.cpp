@@ -41,7 +41,7 @@
 #include "PltMediaServer.h"
 #include "PltHttpServer.h"
 #include "PltDidl.h"
-#include "PltXmlHelper.h"
+#include "PltUtilities.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.apps.crawler")
 
