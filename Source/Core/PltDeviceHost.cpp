@@ -756,7 +756,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
         NPT_String::Compare(st, "upnp:rootdevice") == 0) {
 
         if (device->m_ParentUUID.IsEmpty()) {
-            NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+            NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
            // upnp:rootdevice
            PLT_SsdpSender::SendSsdp(response, 
@@ -772,7 +772,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
         NPT_String::Compare(st, "uuid:" + device->m_UUID, false) == 0) {
 
-        NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+        NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
         // uuid:device-UUID
         PLT_SsdpSender::SendSsdp(response, 
@@ -787,7 +787,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
         NPT_String::Compare(st, device->m_DeviceType, false) == 0) {
 
-        NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+        NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
         // uuid:device-UUID::urn:schemas-upnp-org:device:deviceType:ver
         PLT_SsdpSender::SendSsdp(response, 
@@ -803,7 +803,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
         if (NPT_String::Compare(st, "ssdp:all") == 0 || 
             NPT_String::Compare(st, device->m_Services[i]->GetServiceType(), false) == 0) {
 
-            NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+            NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
             // uuid:device-UUID::urn:schemas-upnp-org:service:serviceType:ver
             PLT_SsdpSender::SendSsdp(response, 
