@@ -69,6 +69,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                    device_type, 
                    friendly_name), 
     m_HttpServer(NULL),
+    m_Broadcast(false),
     m_Port(port),
     m_PortRebind(port_rebind),
     m_ByeByeFirst(false)
@@ -201,7 +202,8 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     PLT_ThreadTask* announce_task = new PLT_SsdpDeviceAnnounceTask(
         this, 
         repeat, 
-        m_ByeByeFirst);
+        m_ByeByeFirst, 
+        m_Broadcast);
     m_TaskManager.StartTask(announce_task, &delay);
 
     // register ourselves as a listener for SSDP search requests
@@ -230,7 +232,7 @@ PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
         // notify we're gone
         NPT_List<NPT_NetworkInterface*> if_list;
         PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true));
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true, m_Broadcast));
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
     }
     
@@ -770,7 +772,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
 
     // uuid:device-UUID
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-        NPT_String::Compare(st, "uuid:" + device->m_UUID, false) == 0) {
+        NPT_String::Compare(st, (const char*)("uuid:" + device->m_UUID)) == 0) {
 
         NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
@@ -785,7 +787,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
 
     // urn:schemas-upnp-org:device:deviceType:ver
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-        NPT_String::Compare(st, device->m_DeviceType, false) == 0) {
+        NPT_String::Compare(st, (const char*)(device->m_DeviceType)) == 0) {
 
         NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
@@ -801,7 +803,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
     // services
     for (int i=0; i < (int)device->m_Services.GetItemCount(); i++) {
         if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-            NPT_String::Compare(st, device->m_Services[i]->GetServiceType(), false) == 0) {
+            NPT_String::Compare(st, (const char*)(device->m_Services[i]->GetServiceType())) == 0) {
 
             NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 

@@ -181,11 +181,11 @@ PLT_MediaRenderer::SetupServices()
         service->SetStateVariableRate("LastChange", NPT_TimeInterval(0.2f));
 
         service->SetStateVariable("Mute", "0");
-        service->SetStateVariableExtraAttribute("Mute", "channel", "Master");
+        service->SetStateVariableExtraAttribute("Mute", "Channel", "Master");
         service->SetStateVariable("Volume", "100");
-        service->SetStateVariableExtraAttribute("Volume", "channel", "Master");
+        service->SetStateVariableExtraAttribute("Volume", "Channel", "Master");
         service->SetStateVariable("VolumeDB", "0");
-        service->SetStateVariableExtraAttribute("VolumeDB", "channel", "Master");
+        service->SetStateVariableExtraAttribute("VolumeDB", "Channel", "Master");
 
         service->SetStateVariable("PresetNameList", "FactoryDefaults");
     }
