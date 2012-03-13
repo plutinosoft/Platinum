@@ -208,6 +208,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_BrowseDataReference& browse_data,
     NPT_Result res;
 
     browse_data->shared_var.SetValue(0);
+    browse_data->info.si = index;
 
     // send off the browse packet.  Note that this will
     // not block.  There is a call to WaitForResponse in order
@@ -265,6 +266,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             NPT_CHECK_LABEL_WARNING(res, done);
         }
 
+        // server returned no more, bail now
         if (browse_data->info.items->GetItemCount() == 0)
             break;
 
@@ -278,13 +280,13 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             browse_data->info.items->Clear();
         }
 
-        // stop now if our list contains exactly what the server said it had.
+        // stop now if our list contains exactly what the server says it has.
         // Note that the server could return 0 if it didn't know how many items were
         // available. In this case we have to continue browsing until
         // nothing is returned back by the server.
         // Unless we were told to stop after reaching a certain amount to avoid
         // length delays
-        if ((browse_data->info.tm && browse_data->info.tm == list->GetItemCount()) ||
+        if ((browse_data->info.tm && browse_data->info.tm <= list->GetItemCount()) ||
             (max_results && list->GetItemCount() >= max_results))
             break;
 
