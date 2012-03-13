@@ -208,6 +208,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_BrowseDataReference& browse_data,
     NPT_Result res;
 
     browse_data->shared_var.SetValue(0);
+    browse_data->info.si = index;
 
     // send off the browse packet.  Note that this will
     // not block.  There is a call to WaitForResponse in order
@@ -268,6 +269,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             NPT_CHECK_LABEL_WARNING(res, done);
         }
 
+        // server returned no more, bail now
         if (browse_data->info.items->GetItemCount() == 0)
             break;
 
