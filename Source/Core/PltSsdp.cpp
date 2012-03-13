@@ -151,9 +151,9 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         net_if->GetAddresses().GetFirstItem();
     if (!niaddr) return NPT_SUCCESS;
 
-    // try to bind on port 1900, ok if fails
+    // don't try to bind on port 1900 or connect will fail later
     NPT_UdpSocket socket;
-    socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
+    //socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -221,6 +221,11 @@ done:
 NPT_Result
 PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) const 
 {
+    // don't use this interface address if it's not broadcast capable
+    if (m_Broadcast && !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_BROADCAST)) {
+        return NPT_FAILURE;
+    }
+
     NPT_List<NPT_NetworkInterfaceAddress>::Iterator niaddr = 
         net_if->GetAddresses().GetFirstItem();
     if (!niaddr) return NPT_FAILURE;
@@ -229,20 +234,31 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     NPT_IpAddress addr = (*niaddr).GetPrimaryAddress();
     if (!addr.ToString().Compare("0.0.0.0")) return NPT_FAILURE;
     
-    if ((!(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_BROADCAST) ||
-         !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST)) && 
+    if (!m_Broadcast && 
+        !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST) && 
         !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_LOOPBACK)) {
         NPT_LOG_INFO_2("Not a valid interface: %s (flags: %d)", 
                        (const char*)addr.ToString(), net_if->GetFlags());
         return NPT_FAILURE;
     }
 
+    NPT_HttpUrl            url;
     NPT_UdpMulticastSocket multicast_socket;
-    NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
+    NPT_UdpSocket          broadcast_socket;
+    NPT_UdpSocket*         socket;
+
+    if (m_Broadcast) {
+        url = NPT_HttpUrl((*niaddr).GetBroadcastAddress().ToString(), 1900, "*");
+        socket = &broadcast_socket;
+    } else {
+        url = NPT_HttpUrl("239.255.255.250", 1900, "*");    
+        NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
+        socket = &multicast_socket;
+    }
     
-    multicast_socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
+    // try to bind on port 1900, ok if it fails
+    //socket->Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
     
-    NPT_HttpUrl url = NPT_HttpUrl("239.255.255.250", 1900, "*");
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
     PLT_HttpHelper::SetHost(req, "239.255.255.250:1900");
     
@@ -251,9 +267,9 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
         PLT_UPnPMessageHelper::SetLocation(req, m_Device->GetDescriptionUrl(addr.ToString()));
     }
 
-    NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
-    NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 #endif
 
     return NPT_SUCCESS;
@@ -274,13 +290,24 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
         if (m_IsByeByeFirst == true) {
             m_IsByeByeFirst = false;
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true));
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_IsBroadcast));
+            
+            // multicast now
+            if (m_IsBroadcast) {
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
+            }
             
             // schedule to announce alive in 300 ms
             if (IsAborting(300)) break;
         }
             
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false));
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_IsBroadcast));
+        
+        // multicast now
+        if (m_IsBroadcast) {
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
+        }
+        
         
 cleanup:
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
