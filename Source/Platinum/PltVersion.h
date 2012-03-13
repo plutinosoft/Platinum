@@ -36,14 +36,9 @@
 #define _PLT_VERSION_H_
 
 /*----------------------------------------------------------------------
-|   includes
-+---------------------------------------------------------------------*/
-#include "PltSvnVersion.h"
-
-/*----------------------------------------------------------------------
 |   constants
 +---------------------------------------------------------------------*/
-#define PLT_PLATINUM_SDK_VERSION            0x00060700
-#define PLT_PLATINUM_SDK_VERSION_STRING     "0.6.7.0"
+#define PLT_PLATINUM_SDK_VERSION            0x00060800
+#define PLT_PLATINUM_SDK_VERSION_STRING     "0.6.8.0"
 
 #endif // _PLT_VERSION_H_

@@ -1,3 +1,23 @@
+Platinum 0.6.8
+--------------
+changed: try to bind source port to 1900 for ssdp notify and search responses
+added: capability to change user agent on the fly
+added: didl parsing and formatting of dc:description & upnp:icon
+added: user agent header to SSDP packets
+fixed: Windows build
+added: UPnP AV Renderer functions
+changed: verify we can seek the body of the response before returning Accept-Range: bytes
+fixed: don't use localhost address for SSDP announcements
+changed: short connection time out for subscribers since they may not exist and this would block when exiting
+fixed: bug when parsing W3C date time
+fixed: compiling issues when removing TLS support
+fixed: recursion that prevented some logs to be written
+fixed: potential issue with thread safe references
+added: support for removing HTTP header in a request or response before sending it
+changed: support bytes:0- range request for non seekable streams and avoid returning 416.
+changed: return 416 instead of 500 in case we can't stream the body and a range request was made (this makes XBox and PS3 happier)
+changed: make all references thread safe by default
+
 Platinum 0.6.7
 --------------
 fixed: request would fail when retrying on a new connection after the previous one failed because server closed it without using a Connection:close header. Only happens with requests containing a body.
