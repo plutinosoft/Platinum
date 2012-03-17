@@ -165,11 +165,7 @@ PLT_DeviceHost::SetupDevice()
 NPT_Result
 PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 {
-#ifdef _XBOX
-    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 5);  
-#else
     m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max  
-#endif
 
     // start the server
     NPT_CHECK_SEVERE(m_HttpServer->Start());
@@ -193,11 +189,6 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_Size leaseTime = (NPT_Size)GetLeaseTime().ToSeconds();
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - ((unsigned short)NPT_System::GetRandomInteger() % (leaseTime >> 2))):30);
-    
-    // the XBOX cannot receive multicast SSDP search requests, so we blast announcement every 7 secs
-#ifdef _XBOX
-    repeat.SetSeconds(7);
-#endif
 
     PLT_ThreadTask* announce_task = new PLT_SsdpDeviceAnnounceTask(
         this, 
