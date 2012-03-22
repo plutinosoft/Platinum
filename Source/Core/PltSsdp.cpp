@@ -72,7 +72,7 @@ PLT_SsdpSender::SendSsdp(NPT_HttpRequest&   request,
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
     NPT_Result res = request.Emit(stream);
-    if (NPT_FAILED(res)) return res;
+    NPT_CHECK(res);
 
     // copy stream into a data packet and send it
     NPT_LargeSize size;
@@ -133,6 +133,7 @@ PLT_SsdpSender::FormatPacket(NPT_HttpMessage& message,
         PLT_UPnPMessageHelper::SetNT(message, target);
     } else {
         PLT_UPnPMessageHelper::SetST(message, target);
+        PLT_UPnPMessageHelper::SetDate(message);
     }
     //PLT_HttpHelper::SetContentLength(message, 0);
 
@@ -153,7 +154,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
 
     // try to bind on port 1900, ok if fails
     NPT_UdpSocket socket;
-    socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
+    //socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -240,7 +241,8 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     NPT_UdpMulticastSocket multicast_socket;
     NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
     
-    multicast_socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
+    multicast_socket.SetTimeToLive(4);
+    //multicast_socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
     
     NPT_HttpUrl url = NPT_HttpUrl("239.255.255.250", 1900, "*");
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
@@ -252,7 +254,9 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     }
 
     NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
+    
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
+    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
     NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
 #endif
 
@@ -276,8 +280,8 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
             m_IsByeByeFirst = false;
             if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true));
             
-            // schedule to announce alive in 300 ms
-            if (IsAborting(300)) break;
+            // schedule to announce alive in 200 ms
+            if (IsAborting(200)) break;
         }
             
         if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false));
