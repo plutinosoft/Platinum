@@ -152,7 +152,14 @@ PLT_HttpServer::SetupResponse(NPT_HttpRequest&              request,
     if (handlers.GetItemCount() == 0) return NPT_ERROR_NO_SUCH_ITEM;
 
     // ask the handler to setup the response
-    return (*handlers.GetFirstItem())->SetupResponse(request, context, response);
+    NPT_Result result = (*handlers.GetFirstItem())->SetupResponse(request, context, response);
+    
+    // DLNA compliance
+    PLT_UPnPMessageHelper::SetDate(response);
+    if (request.GetHeaders().GetHeader("Accept-Language")) {
+        response.GetHeaders().SetHeader("Content-Language", "en");
+    }
+    return result;
 }
 
 /*----------------------------------------------------------------------
