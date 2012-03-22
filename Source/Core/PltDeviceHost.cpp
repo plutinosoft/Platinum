@@ -69,6 +69,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                    device_type, 
                    friendly_name), 
     m_HttpServer(NULL),
+    m_Broadcast(false),
     m_Port(port),
     m_PortRebind(port_rebind),
     m_ByeByeFirst(false)
@@ -164,11 +165,7 @@ PLT_DeviceHost::SetupDevice()
 NPT_Result
 PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 {
-#ifdef _XBOX
-    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 5);  
-#else
     m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max  
-#endif
 
     // start the server
     NPT_CHECK_SEVERE(m_HttpServer->Start());
@@ -192,16 +189,12 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_Size leaseTime = (NPT_Size)GetLeaseTime().ToSeconds();
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - 10):30);
-    
-    // the XBOX cannot receive multicast SSDP search requests, so we blast announcement every 7 secs
-#ifdef _XBOX
-    repeat.SetSeconds(7);
-#endif
 
     PLT_ThreadTask* announce_task = new PLT_SsdpDeviceAnnounceTask(
         this, 
         repeat, 
-        m_ByeByeFirst);
+        m_ByeByeFirst, 
+        m_Broadcast);
     m_TaskManager.StartTask(announce_task, &delay);
 
     // register ourselves as a listener for SSDP search requests
@@ -230,7 +223,7 @@ PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
         // notify we're gone
         NPT_List<NPT_NetworkInterface*> if_list;
         PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true));
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true, m_Broadcast));
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
     }
     
@@ -756,7 +749,7 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
         NPT_String::Compare(st, "upnp:rootdevice") == 0) {
 
         if (device->m_ParentUUID.IsEmpty()) {
-            NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+            NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
            // upnp:rootdevice
            PLT_SsdpSender::SendSsdp(response, 
@@ -770,9 +763,9 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
 
     // uuid:device-UUID
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-        NPT_String::Compare(st, "uuid:" + device->m_UUID, false) == 0) {
+        NPT_String::Compare(st, (const char*)("uuid:" + device->m_UUID)) == 0) {
 
-        NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+        NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
         // uuid:device-UUID
         PLT_SsdpSender::SendSsdp(response, 
@@ -785,9 +778,9 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
 
     // urn:schemas-upnp-org:device:deviceType:ver
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-        NPT_String::Compare(st, device->m_DeviceType, false) == 0) {
+        NPT_String::Compare(st, (const char*)(device->m_DeviceType)) == 0) {
 
-        NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+        NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
         // uuid:device-UUID::urn:schemas-upnp-org:device:deviceType:ver
         PLT_SsdpSender::SendSsdp(response, 
@@ -801,9 +794,9 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
     // services
     for (int i=0; i < (int)device->m_Services.GetItemCount(); i++) {
         if (NPT_String::Compare(st, "ssdp:all") == 0 || 
-            NPT_String::Compare(st, device->m_Services[i]->GetServiceType(), false) == 0) {
+            NPT_String::Compare(st, (const char*)(device->m_Services[i]->GetServiceType())) == 0) {
 
-            NPT_LOG_INFO_1("Responding to a M-SEARCH request for %s", st);
+            NPT_LOG_FINE_1("Responding to a M-SEARCH request for %s", st);
 
             // uuid:device-UUID::urn:schemas-upnp-org:service:serviceType:ver
             PLT_SsdpSender::SendSsdp(response, 

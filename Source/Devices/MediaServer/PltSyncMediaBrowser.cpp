@@ -239,12 +239,15 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
 {
     NPT_Result res = NPT_FAILURE;
     NPT_Int32  index = start;
+    
+    // only cache metadata or if starting from 0 and asking for maximum
+    bool cache = m_UseCache && (metadata || (start == 0 && max_results == 0));
 
     // reset output params
     list = NULL;
 
     // look into cache first
-    if (m_UseCache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
+    if (cache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
 
     do {	
         PLT_BrowseDataReference browse_data(new PLT_BrowseData(), true);
@@ -280,12 +283,13 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             browse_data->info.items->Clear();
         }
 
-        // stop now if our list contains exactly what the server says it has.
+        // stop now if our list contains exactly what the server said it had.
         // Note that the server could return 0 if it didn't know how many items were
         // available. In this case we have to continue browsing until
         // nothing is returned back by the server.
         // Unless we were told to stop after reaching a certain amount to avoid
         // length delays
+        // (some servers may return a total matches out of whack at some point too)
         if ((browse_data->info.tm && browse_data->info.tm <= list->GetItemCount()) ||
             (max_results && list->GetItemCount() >= max_results))
             break;
@@ -296,12 +300,12 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
 
 done:
     // cache the result
-    if (m_UseCache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
+    if (cache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
         m_Cache.Put(device->GetUUID(), object_id, list);
     }
 
     // clear entire cache data for device if failed, the device could be gone
-    if (NPT_FAILED(res) && m_UseCache) m_Cache.Clear(device->GetUUID());
+    if (NPT_FAILED(res) && cache) m_Cache.Clear(device->GetUUID());
     
     return res;
 }

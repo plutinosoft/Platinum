@@ -336,4 +336,6 @@ private:
     NPT_Lock<PLT_DeviceDataReferenceList> m_MediaRenderers;
 };
 
+typedef NPT_Reference<PLT_MediaController> PLT_MediaControllerReference;
+
 #endif /* _PLT_MEDIA_CONTROLLER_H_ */
