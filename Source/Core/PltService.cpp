@@ -531,7 +531,7 @@ PLT_Service::ProcessNewSubscription(PLT_TaskManager*         task_manager,
                                     int                      timeout, 
                                     NPT_HttpResponse&        response)
 {
-    NPT_LOG_FINE_1("New subscription for %s", m_EventSubURL.GetChars());
+    NPT_LOG_FINE_2("New subscription for %s (timeout = %d)", m_EventSubURL.GetChars(), timeout);
 
 //    // first look if we don't have a subscriber with same callbackURL
 //    PLT_EventSubscriber* subscriber = NULL;
