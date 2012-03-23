@@ -186,7 +186,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         //NPT_UdpSocket socket;
         NPT_CHECK_SEVERE(m_Device->SendSsdpSearchResponse(response, socket, m_ST, remote_addr));
     }
-    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
 #endif
     {
         //NPT_UdpSocket socket;
@@ -262,15 +262,15 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     PLT_HttpHelper::SetHost(req, "239.255.255.250:1900");
     
     // put a location only if alive message
-    if (m_IsByeBye == false) {
+    if (!m_IsByeBye) {
         PLT_UPnPMessageHelper::SetLocation(req, m_Device->GetDescriptionUrl(addr.ToString()));
     }
 
-    
     NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
-    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    // delay alive only as we don't want to delay when stopping
+    if (!m_IsByeBye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
     NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 #endif
 
@@ -292,23 +292,24 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
         if (m_IsByeByeFirst == true) {
             m_IsByeByeFirst = false;
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_IsBroadcast));
+            
+            if (m_ExtraBroadcast) {
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_ExtraBroadcast));
+            }
             
             // multicast now
-            if (m_IsBroadcast) {
-                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
-            }
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
             
             // schedule to announce alive in 200 ms
             if (IsAborting(200)) break;
         }
-            
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_IsBroadcast));
+        
+        if (m_ExtraBroadcast) {
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_ExtraBroadcast));
+        }
         
         // multicast now
-        if (m_IsBroadcast) {
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
-        }
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
         
         
 cleanup:

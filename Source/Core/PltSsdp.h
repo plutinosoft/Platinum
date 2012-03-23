@@ -224,10 +224,10 @@ public:
     PLT_SsdpDeviceAnnounceTask(PLT_DeviceHost*  device, 
                                NPT_TimeInterval repeat,
                                bool             is_byebye_first = false,
-                               bool             broadcast = false) : 
+                               bool             extra_broadcast = false) : 
         m_Device(device), 
         m_Repeat(repeat), m_IsByeByeFirst(is_byebye_first), 
-        m_IsBroadcast(broadcast) {}
+        m_ExtraBroadcast(extra_broadcast) {}
 
 protected:
     virtual ~PLT_SsdpDeviceAnnounceTask() {}
@@ -239,7 +239,7 @@ protected:
     PLT_DeviceHost*             m_Device;
     NPT_TimeInterval            m_Repeat;
     bool                        m_IsByeByeFirst;
-    bool                        m_IsBroadcast;
+    bool                        m_ExtraBroadcast;
 };
 
 /*----------------------------------------------------------------------
