@@ -135,8 +135,7 @@ PLT_RingBufferStream::Read(void*     buffer,
             if (bytes_to_read == 0) break;
 
             // read into buffer and advance
-            NPT_CHECK(m_RingBuffer->Read((unsigned char*)buffer+bytes_read, 
-                                         bytes_to_read));
+            NPT_CHECK(m_RingBuffer->Read((unsigned char*)buffer+bytes_read, bytes_to_read));
 
             // keep track of the total bytes we have read so far
             m_TotalBytesRead += bytes_to_read;
