@@ -188,7 +188,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     // calculate when we should send another announcement
     NPT_Size leaseTime = (NPT_Size)GetLeaseTime().ToSeconds();
     NPT_TimeInterval repeat;
-    repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - ((unsigned short)NPT_System::GetRandomInteger() % (leaseTime >> 2))):30);
+    repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - 10):30);
 
     PLT_ThreadTask* announce_task = new PLT_SsdpDeviceAnnounceTask(
         this, 
@@ -592,7 +592,7 @@ done:
 
 bad_request:
     delete xml;
-    response.SetStatus(400, "Bad Request");
+    response.SetStatus(500, "Bad Request");
     return NPT_SUCCESS;
 }
 
@@ -624,10 +624,9 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
                 goto cleanup;
             }
           
-            NPT_Int32 timeout;
-            if (NPT_FAILED(PLT_UPnPMessageHelper::GetTimeOut(request, timeout)) || timeout < 0) {
-                timeout = 300;
-            }
+            // default lease
+            NPT_Int32 timeout = *PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+
             // subscription renewed
             // send the info to the service
             service->ProcessRenewSubscription(context.GetLocalAddress(), 
@@ -648,10 +647,8 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
                 return NPT_SUCCESS;
             }
 
-            NPT_Int32 timeout;
-            if (NPT_FAILED(PLT_UPnPMessageHelper::GetTimeOut(request, timeout))) {
-                timeout = 300;
-            }
+            // default lease time
+            NPT_Int32 timeout = *PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
 
             // send the info to the service
             service->ProcessNewSubscription(&m_TaskManager,
@@ -676,10 +673,13 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
                                                response);
             return NPT_SUCCESS;
         }
+        
+        response.SetStatus(412, "Precondition failed");
+        return NPT_SUCCESS;
     }
 
 cleanup:
-    response.SetStatus(405, "Bad Request");
+    response.SetStatus(400, "Bad Request");
     return NPT_SUCCESS;
 }
 

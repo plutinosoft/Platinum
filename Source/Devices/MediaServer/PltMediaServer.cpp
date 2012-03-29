@@ -75,7 +75,6 @@ PLT_MediaServer::PLT_MediaServer(const char*  friendly_name,
 {
     m_ModelDescription = "Plutinosoft AV Media Server Device";
     m_ModelName        = "AV Media Server Device";
-    m_ModelNumber      = "1.0";
     m_ModelURL         = "http://www.plutinosoft.com/platinum";
     m_DlnaDoc          = "DMS-1.50";
 }

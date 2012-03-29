@@ -72,7 +72,7 @@ PLT_SsdpSender::SendSsdp(NPT_HttpRequest&   request,
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
     NPT_Result res = request.Emit(stream);
-    if (NPT_FAILED(res)) return res;
+    NPT_CHECK(res);
 
     // copy stream into a data packet and send it
     NPT_LargeSize size;
@@ -133,6 +133,7 @@ PLT_SsdpSender::FormatPacket(NPT_HttpMessage& message,
         PLT_UPnPMessageHelper::SetNT(message, target);
     } else {
         PLT_UPnPMessageHelper::SetST(message, target);
+        PLT_UPnPMessageHelper::SetDate(message);
     }
     //PLT_HttpHelper::SetContentLength(message, 0);
 
@@ -185,7 +186,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         //NPT_UdpSocket socket;
         NPT_CHECK_SEVERE(m_Device->SendSsdpSearchResponse(response, socket, m_ST, remote_addr));
     }
-    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
 #endif
     {
         //NPT_UdpSocket socket;
@@ -254,21 +255,22 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
         url = NPT_HttpUrl("239.255.255.250", 1900, "*");    
         NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
         socket = &multicast_socket;
+        multicast_socket.SetTimeToLive(4);
     }
-    
-    // try to bind on port 1900, ok if it fails
-    //socket->Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
     
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
     PLT_HttpHelper::SetHost(req, "239.255.255.250:1900");
     
     // put a location only if alive message
-    if (m_IsByeBye == false) {
+    if (!m_IsByeBye) {
         PLT_UPnPMessageHelper::SetLocation(req, m_Device->GetDescriptionUrl(addr.ToString()));
     }
 
     NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
+
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
+    // delay alive only as we don't want to delay when stopping
+    if (!m_IsByeBye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
     NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 #endif
 
@@ -290,23 +292,24 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
         if (m_IsByeByeFirst == true) {
             m_IsByeByeFirst = false;
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_IsBroadcast));
             
-            // multicast now
-            if (m_IsBroadcast) {
-                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
+            if (m_ExtraBroadcast) {
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_ExtraBroadcast));
             }
             
-            // schedule to announce alive in 300 ms
-            if (IsAborting(300)) break;
-        }
+            // multicast now
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
             
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_IsBroadcast));
+            // schedule to announce alive in 200 ms
+            if (IsAborting(200)) break;
+        }
+        
+        if (m_ExtraBroadcast) {
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_ExtraBroadcast));
+        }
         
         // multicast now
-        if (m_IsBroadcast) {
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
-        }
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
         
         
 cleanup:

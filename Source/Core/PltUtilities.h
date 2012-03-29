@@ -471,6 +471,13 @@ public:
                                                   "Second-infinite"); 
         }
     }
+    static NPT_Result SetDate(NPT_HttpMessage& message) { 
+        NPT_TimeStamp now;
+        NPT_System::GetCurrentTimeStamp(now);
+        NPT_DateTime date(now);
+        
+        return message.GetHeaders().SetHeader("Date", date.ToString(NPT_DateTime::FORMAT_RFC_1123)); 
+    }
     static NPT_Result GetIfModifiedSince(const NPT_HttpMessage& message,
                                          NPT_DateTime&          date) {
         
