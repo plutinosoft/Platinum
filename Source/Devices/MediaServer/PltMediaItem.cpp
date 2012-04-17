@@ -289,7 +289,7 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
         }
     }
     
-    // long description
+    // description
     if ((mask & PLT_FILTER_MASK_DESCRIPTION) && !m_Description.description.IsEmpty()) {
         didl += "<dc:description>";
         PLT_Didl::AppendXmlEscape(didl, m_Description.description);
