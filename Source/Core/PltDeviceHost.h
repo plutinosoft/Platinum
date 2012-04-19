@@ -328,7 +328,6 @@ protected:
     friend class PLT_SsdpDeviceSearchResponseTask;
     friend class PLT_SsdpAnnounceInterfaceIterator;
 
-private:
     PLT_TaskManager m_TaskManager;
     PLT_HttpServer* m_HttpServer;
     bool            m_Broadcast;
