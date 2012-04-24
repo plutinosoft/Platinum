@@ -141,16 +141,22 @@ protected:
     virtual ~PLT_DeviceData();
     virtual void       Cleanup();
     virtual NPT_Result OnAddExtraInfo(NPT_XmlElementNode* /*device_node*/) { return NPT_SUCCESS; }
-    NPT_Result         SetLeaseTime(NPT_TimeInterval lease_time);
+    NPT_Result         SetLeaseTime(NPT_TimeInterval lease_time, NPT_TimeStamp lease_time_last_update = 0.);
 
 private:
     /* called by PLT_CtrlPoint when new device is discovered */
     NPT_Result    SetURLBase(NPT_HttpUrl& url_base);
     NPT_TimeStamp GetLeaseTimeLastUpdate();
-    NPT_Result    SetDescription(const char*                   description, 
-                                 const NPT_HttpRequestContext& context);
-    NPT_Result    SetDescriptionDevice(NPT_XmlElementNode*           device_node, 
-                                       const NPT_HttpRequestContext& context);
+    
+    /* class methods */
+    static NPT_Result SetDescription(PLT_DeviceDataReference&      root_device,
+                                     NPT_TimeInterval              leasetime,
+                                     NPT_HttpUrl                   description_url,
+                                     const char*                   description, 
+                                     const NPT_HttpRequestContext& context);
+    static NPT_Result SetDescriptionDevice(PLT_DeviceDataReference&      device,
+                                           NPT_XmlElementNode*           device_node, 
+                                           const NPT_HttpRequestContext& context);
 
 public:
     NPT_String m_Manufacturer;
