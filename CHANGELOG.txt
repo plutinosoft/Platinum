@@ -1,3 +1,10 @@
+Platinum 0.6.9.1
+----------------
+added: support to bridge Neptune Logging to other loggers such as Cocoa Lumberjack
+fixed: better support for embedded devices detection
+added: GetVolumeState to PltMediaController
+fixed: crash in NPT_Socket::Cancel when stopping HTTP clients
+
 Platinum 0.6.9
 --------------
 changed: reverted trying to bind to source port 1900, it would fail eventually
