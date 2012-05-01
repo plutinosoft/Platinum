@@ -43,12 +43,12 @@
 /*----------------------------------------------------------------------
 |    PLT_CtrlPointGetDescriptionTask::PLT_CtrlPointGetDescriptionTask
 +---------------------------------------------------------------------*/
-PLT_CtrlPointGetDescriptionTask::PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl&       url,
-                                                                 PLT_CtrlPoint*           ctrl_point, 
-                                                                 PLT_DeviceDataReference& root_device) :
+PLT_CtrlPointGetDescriptionTask::PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl& url,
+                                                                 PLT_CtrlPoint*     ctrl_point,
+                                                                 NPT_TimeInterval   leasetime) :
     PLT_HttpClientSocketTask(new NPT_HttpRequest(url, "GET", NPT_HTTP_PROTOCOL_1_1)), 
-    m_CtrlPoint(ctrl_point), 
-    m_RootDevice(root_device) 
+    m_CtrlPoint(ctrl_point),
+    m_LeaseTime(leasetime)
 {
 }
 
@@ -73,8 +73,8 @@ PLT_CtrlPointGetDescriptionTask::ProcessResponse(NPT_Result                    r
         res, 
         request, 
         context, 
-        response, 
-        m_RootDevice);
+        response,
+        m_LeaseTime);
 }
 
 /*----------------------------------------------------------------------

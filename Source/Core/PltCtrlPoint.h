@@ -153,7 +153,7 @@ protected:
                                                const NPT_HttpRequest&        request, 
                                                const NPT_HttpRequestContext& context,
                                                NPT_HttpResponse*             response,
-                                               PLT_DeviceDataReference&      root_device);
+                                               NPT_TimeInterval              leasetime);
     NPT_Result   ProcessGetSCPDResponse(NPT_Result                    res, 
                                         const NPT_HttpRequest&        request,
                                         const NPT_HttpRequestContext& context,
@@ -215,7 +215,7 @@ private:
     PLT_HttpServer*                              m_EventHttpServer;
     PLT_TaskManager                              m_TaskManager;
     NPT_Mutex                                    m_Lock;
-    NPT_List<PLT_DeviceDataReference>            m_Devices;
+    NPT_List<PLT_DeviceDataReference>            m_RootDevices;
     NPT_List<PLT_EventSubscriber*>               m_Subscribers;
     NPT_String                                   m_SearchCriteria;
 };

@@ -57,7 +57,7 @@
 int main(void)
 {
     // setup Neptune logging
-    NPT_LogManager::GetDefault().Configure("plist:.level=INFO;.handlers=ConsoleHandler;.ConsoleHandler.colors=off;.ConsoleHandler.filter=42");
+    NPT_LogManager::GetDefault().Configure("plist:.level=INFO;.handlers=ConsoleHandler;.ConsoleHandler.colors=off;.ConsoleHandler.filter=63");
 
     // Create upnp engine
     PLT_UPnP upnp;

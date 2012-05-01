@@ -63,9 +63,9 @@ class PLT_Action;
 class PLT_CtrlPointGetDescriptionTask : public PLT_HttpClientSocketTask
 {
 public:
-    PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl&       url,
-                                    PLT_CtrlPoint*           ctrl_point,
-                                    PLT_DeviceDataReference& root_device);
+    PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl& url,
+                                    PLT_CtrlPoint*     ctrl_point,
+                                    NPT_TimeInterval   leasetime);
     virtual ~PLT_CtrlPointGetDescriptionTask();
 
 protected:
@@ -76,8 +76,8 @@ protected:
                                NPT_HttpResponse*             response);
 
 protected:
-    PLT_CtrlPoint*          m_CtrlPoint;
-    PLT_DeviceDataReference m_RootDevice;
+    PLT_CtrlPoint*   m_CtrlPoint;
+    NPT_TimeInterval m_LeaseTime;
 };
 
 /*----------------------------------------------------------------------
