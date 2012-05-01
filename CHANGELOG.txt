@@ -1,3 +1,18 @@
+Platinum 0.6.9
+--------------
+changed: reverted trying to bind to source port 1900, it would fail eventually
+added: added back support for sending SSDP messages over broadcast in case multicast is blocked by routers or firewalls
+fixed: MediaRenderer channel attribute for volume was wrong
+changed: MediaBrowser caches only metadata now
+fixed: Scons XCode 4.3.1 support
+added: workaround for servers that start to return bogus total matches on the last page
+updated: Neptune 1.1.3
+added: some CTT 2.0 compliance re SSDP
+added: Date HTTP header to requests
+fixed: crash on exit due to static finalizers being called in random order
+fixed: Host HTTP header wasn't being reset properly on redirects
+removed: OSX Platinum frameworks depending on SystemConfiguration and Foundation frameworks
+
 Platinum 0.6.8
 --------------
 changed: try to bind source port to 1900 for ssdp notify and search responses

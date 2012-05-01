@@ -93,7 +93,7 @@ public:
                    bool         port_rebind = false);
     virtual ~PLT_DeviceHost();
     
-    virtual void       SetBroadcast(bool broadcast) { m_Broadcast = broadcast; }
+    virtual void SetBroadcast(bool broadcast) { m_Broadcast = broadcast; }
      
     /**
      When a UPnP device comes up, the specifications require that a SSDP bye-bye
@@ -328,7 +328,6 @@ protected:
     friend class PLT_SsdpDeviceSearchResponseTask;
     friend class PLT_SsdpAnnounceInterfaceIterator;
 
-private:
     PLT_TaskManager m_TaskManager;
     PLT_HttpServer* m_HttpServer;
     bool            m_Broadcast;
