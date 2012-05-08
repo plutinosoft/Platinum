@@ -704,13 +704,15 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
 			(const char*) ip_address, remote_port);
 		PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, request);
 
+        /*
         // DLNA 7.2.3.5 support
-        if (remote_port <= 1024 || remote_port == 1900) {
+        if (remote_port < 1024 || remote_port == 1900) {
             NPT_LOG_INFO_2("Ignoring M-SEARCH from %s:%d (invalid source port)", 
                 (const char*) ip_address,
                 remote_port);
             return NPT_FAILURE;
         }
+         */
 
         NPT_CHECK_POINTER_SEVERE(st);
 
