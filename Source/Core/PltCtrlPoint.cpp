@@ -435,7 +435,8 @@ NPT_Result
 PLT_CtrlPoint::Discover(const NPT_HttpUrl& url, 
                         const char*        target, 
                         NPT_Cardinal       mx, /* = 5 */
-                        NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */)
+                        NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */,
+                        NPT_TimeInterval   initial_delay /* = NPT_TimeInterval(0.) */)
 {
     // make sure mx is at least 1
     if (mx<1) mx = 1;
@@ -460,7 +461,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
         this, 
         request,
         frequency.ToMillis()<mx*5000?NPT_TimeInterval(mx*5.):frequency);  /* repeat no less than every 5 secs */
-    return m_TaskManager.StartTask(task);
+    return m_TaskManager.StartTask(task, &initial_delay);
 }
 
 /*----------------------------------------------------------------------
@@ -566,6 +567,8 @@ PLT_CtrlPoint::FindActionDesc(PLT_DeviceDataReference& device,
                               const char*              action_name,
                               PLT_ActionDesc*&         action_desc)
 {
+    if (device.IsNull()) return NPT_ERROR_INVALID_PARAMETERS;
+    
     // look for the service
     PLT_Service* service;
     if (NPT_FAILED(device->FindServiceByType(service_type, service))) {
@@ -591,6 +594,8 @@ PLT_CtrlPoint::CreateAction(PLT_DeviceDataReference& device,
                             const char*              action_name,
                             PLT_ActionReference&     action)
 {
+    if (device.IsNull()) return NPT_ERROR_INVALID_PARAMETERS;
+    
     PLT_ActionDesc* action_desc;
     NPT_CHECK_SEVERE(FindActionDesc(device, 
         service_type, 
@@ -1060,6 +1065,8 @@ PLT_CtrlPoint::NotifyDeviceRemoved(PLT_DeviceDataReference& data)
 NPT_Result
 PLT_CtrlPoint::CleanupDevice(PLT_DeviceDataReference& data)
 {
+    if (data.IsNull()) return NPT_ERROR_INVALID_PARAMETERS;
+    
     NPT_LOG_INFO_1("Removing %s from device list\n", (const char*)data->GetUUID());
     
     // Note: This must take the lock prior to being called

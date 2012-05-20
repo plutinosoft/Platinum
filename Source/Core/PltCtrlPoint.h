@@ -108,7 +108,8 @@ public:
     NPT_Result Discover(const NPT_HttpUrl& url = NPT_HttpUrl("239.255.255.250", 1900, "*"), 
                         const char*        target = "ssdp:all", 
                         NPT_Cardinal       mx = 5,
-                        NPT_TimeInterval   frequency = NPT_TimeInterval(50.)); // pass NPT_TimeInterval(0.) for one time only
+                        NPT_TimeInterval   frequency = NPT_TimeInterval(50.), // pass NPT_TimeInterval(0.) for one time only
+                        NPT_TimeInterval   initial_delay = NPT_TimeInterval(0.));
 
     // actions
     NPT_Result FindActionDesc(PLT_DeviceDataReference& device, 
