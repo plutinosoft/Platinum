@@ -241,10 +241,10 @@ public:
 |   PLT_CtrlPoint::PLT_CtrlPoint
 +---------------------------------------------------------------------*/
 PLT_CtrlPoint::PLT_CtrlPoint(const char* search_criteria /* = "upnp:rootdevice" */) :
-    m_EventHttpServer(new PLT_HttpServer()),
-    m_SearchCriteria(search_criteria)
+    m_EventHttpServer(NULL),
+    m_SearchCriteria(search_criteria),
+    m_Aborted(false)
 {
-    m_EventHttpServer->AddRequestHandler(new PLT_HttpRequestHandler(this), "/", true, true);
 }
 
 /*----------------------------------------------------------------------
@@ -272,6 +272,11 @@ PLT_CtrlPoint::IgnoreUUID(const char* uuid)
 NPT_Result
 PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 {
+    m_Aborted = false;
+    m_TaskManager.Reset();
+    
+    m_EventHttpServer = new PLT_HttpServer();
+    m_EventHttpServer->AddRequestHandler(new PLT_HttpRequestHandler(this), "/", true, true);
     m_EventHttpServer->Start();
 
     // house keeping task
@@ -294,11 +299,24 @@ PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 NPT_Result
 PLT_CtrlPoint::Stop(PLT_SsdpListenTask* task)
 {
+    m_Aborted = true;
     task->RemoveListener(this);
 
     m_TaskManager.StopAllTasks();
-    m_EventHttpServer->Stop();
 
+    // force remove all devices
+    NPT_List<PLT_DeviceDataReference>::Iterator iter = m_RootDevices.GetFirstItem();
+    while (iter) {
+        NotifyDeviceRemoved(*iter);
+        ++iter;
+    }
+    
+    if (m_EventHttpServer) {
+        m_EventHttpServer->Stop();
+        delete m_EventHttpServer;
+        m_EventHttpServer = NULL;
+    }
+    
     // we can safely clear everything without a lock
     // as there are no more tasks pending
     m_RootDevices.Clear();
@@ -396,6 +414,8 @@ PLT_CtrlPoint::Search(const NPT_HttpUrl& url,
                       NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */,
                       NPT_TimeInterval   initial_delay /* = NPT_TimeInterval(0.) */)
 {
+    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
     NPT_List<NPT_NetworkInterface*> if_list;
     NPT_List<NPT_NetworkInterface*>::Iterator net_if;
     NPT_List<NPT_NetworkInterfaceAddress>::Iterator net_if_addr;
@@ -438,6 +458,8 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
                         NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */,
                         NPT_TimeInterval   initial_delay /* = NPT_TimeInterval(0.) */)
 {
+    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+
     // make sure mx is at least 1
     if (mx<1) mx = 1;
 
@@ -752,7 +774,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
         if (NPT_FAILED(NPT_ContainerFind(m_Subscribers, 
                                          PLT_EventSubscriberFinderBySID(*sid), 
                                          sub))) {
-            NPT_LOG_FINE_1("Subscriber %s not found\n", (const char*)*sid);
+            NPT_LOG_WARNING_1("Subscriber %s not found\n", (const char*)*sid);
             NPT_CHECK_LABEL_WARNING(NPT_FAILURE, bad_request);
         }
 
@@ -1413,6 +1435,8 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
                          bool         cancel, 
                          void*        userdata)
 {
+    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+
     NPT_HttpRequest* request = NULL;
 
     // make sure service is subscribable
@@ -1588,6 +1612,8 @@ NPT_Result
 PLT_CtrlPoint::InvokeAction(PLT_ActionReference& action, 
                             void*                userdata)
 {
+    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
     PLT_Service* service = action->GetActionDesc().GetService();
     
     // create the request

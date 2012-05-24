@@ -141,7 +141,7 @@ public:
                                     const NPT_HttpRequestContext& context);
 
 protected:
-
+    // methods
     NPT_Result   Start(PLT_SsdpListenTask* task);
     NPT_Result   Stop(PLT_SsdpListenTask* task);
 
@@ -219,6 +219,7 @@ private:
     NPT_List<PLT_DeviceDataReference>            m_RootDevices;
     NPT_List<PLT_EventSubscriber*>               m_Subscribers;
     NPT_String                                   m_SearchCriteria;
+    bool                                         m_Aborted;
 };
 
 typedef NPT_Reference<PLT_CtrlPoint> PLT_CtrlPointReference;
