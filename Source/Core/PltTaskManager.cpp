@@ -72,6 +72,15 @@ PLT_TaskManager::StartTask(PLT_ThreadTask*   task,
 }
 
 /*----------------------------------------------------------------------
+|   PLT_TaskManager::Reset
++---------------------------------------------------------------------*/
+void
+PLT_TaskManager::Reset()
+{
+    m_Stopping = false;
+}
+
+/*----------------------------------------------------------------------
 |   PLT_TaskManager::StopAllTasks
 +---------------------------------------------------------------------*/
 NPT_Result
@@ -125,6 +134,9 @@ NPT_Result
 PLT_TaskManager::AddTask(PLT_ThreadTask* task) 
 {
     NPT_AutoLock lock(m_TasksLock);
+    
+    // returning an error if we're stopping
+    // NOTE: this could leak the task if not handled by caller properly
     if (m_Stopping) NPT_CHECK_SEVERE(NPT_ERROR_INVALID_STATE);
     
     if (!m_Queue && m_MaxTasks) {
