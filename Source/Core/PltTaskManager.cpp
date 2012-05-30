@@ -77,34 +77,29 @@ PLT_TaskManager::StartTask(PLT_ThreadTask*   task,
 NPT_Result
 PLT_TaskManager::StopAllTasks()
 {
-    // first instruct all tasks to stop but without waiting
-    // otherwise when RemoveTask is called by PLT_ThreadTask::Run
-    // it will deadlock with m_TasksLock
-    {      
-        NPT_AutoLock lock(m_TasksLock);
-        
-        m_Stopping = true;
-        
-        // unblock the queue if any
-        if (m_Queue) {
-            NPT_Queue<int>* queue = m_Queue;
-            m_Queue = NULL;
-            delete queue;
-        }  
-        
-        NPT_List<PLT_ThreadTask*>::Iterator task = m_Tasks.GetFirstItem();
-        while (task) {
-            (*task)->Stop(false);
-            ++task;
-        }
-    }
-
-    // then wait for list to become empty
-    // as tasks remove themselves from the list
     NPT_Cardinal num_running_tasks;
     do {
         {
             NPT_AutoLock lock(m_TasksLock);
+            
+            m_Stopping = true;
+            
+            // unblock the queue if any
+            if (m_Queue) {
+                NPT_Queue<int>* queue = m_Queue;
+                m_Queue = NULL;
+                delete queue;
+            }  
+            
+            NPT_List<PLT_ThreadTask*>::Iterator task = m_Tasks.GetFirstItem();
+            while (task) {
+                // stop task if it's not already stopping
+                if (!(*task)->IsAborting(0)) {
+                    (*task)->Stop(false);
+                }
+                ++task;
+            }
+            
             num_running_tasks = m_Tasks.GetItemCount();
         }
 
@@ -125,6 +120,9 @@ NPT_Result
 PLT_TaskManager::AddTask(PLT_ThreadTask* task) 
 {
     NPT_AutoLock lock(m_TasksLock);
+    
+    // returning an error if we're stopping
+    // NOTE: this could leak the task if not handled by caller properly
     if (m_Stopping) NPT_CHECK_SEVERE(NPT_ERROR_INVALID_STATE);
     
     if (!m_Queue && m_MaxTasks) {

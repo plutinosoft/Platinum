@@ -321,6 +321,9 @@ public:
         m_Listeners.Remove(listener);
         return NPT_SUCCESS;
     }
+    
+    // PLT_Task methods
+    void DoAbort();
 
 protected:
     virtual ~PLT_SsdpListenTask() {}

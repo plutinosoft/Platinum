@@ -91,6 +91,7 @@ private:
     bool                m_AllowRandomPortOnBindFailure;
     bool                m_ReuseAddress;
     PLT_HttpListenTask* m_HttpListenTask;
+    bool                m_Aborted;
 };
 
 #endif /* _PLT_HTTP_SERVER_H_ */

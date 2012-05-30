@@ -58,7 +58,8 @@ PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
     m_Port(port),
     m_AllowRandomPortOnBindFailure(allow_random_port_on_bind_failure),
     m_ReuseAddress(reuse_address),
-    m_HttpListenTask(NULL)
+    m_HttpListenTask(NULL),
+    m_Aborted(false)
 {
 }
 
@@ -78,6 +79,9 @@ NPT_Result
 PLT_HttpServer::Start()
 {
     NPT_Result res = NPT_FAILURE;
+    
+    // we can't restart an aborted server
+    if (m_Aborted) return NPT_ERROR_INVALID_STATE;
     
     // if we're given a port for our http server, try it
     if (m_Port) {
@@ -124,6 +128,8 @@ PLT_HttpServer::Start()
 NPT_Result
 PLT_HttpServer::Stop()
 {
+    m_Aborted = true;
+    
     if (m_HttpListenTask) {
         m_HttpListenTask->Kill();
         m_HttpListenTask = NULL;
