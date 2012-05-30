@@ -273,7 +273,6 @@ NPT_Result
 PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 {
     m_Aborted = false;
-    m_TaskManager.Reset();
     
     m_EventHttpServer = new PLT_HttpServer();
     m_EventHttpServer->AddRequestHandler(new PLT_HttpRequestHandler(this), "/", true, true);

@@ -69,7 +69,7 @@ public:
 	PLT_TaskManager(NPT_Cardinal max_items = 0);
 	virtual ~PLT_TaskManager();
     
-    virtual void Reset();
+    //virtual void Reset();
 
     /**
      Start a new new task and associates it with this task manager.

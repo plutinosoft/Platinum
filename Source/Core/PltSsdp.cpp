@@ -346,6 +346,15 @@ PLT_SsdpListenTask::GetInputStream(NPT_InputStreamReference& stream)
 /*----------------------------------------------------------------------
 |    PLT_SsdpListenTask::GetInfo
 +---------------------------------------------------------------------*/
+void 
+PLT_SsdpListenTask::DoAbort()
+{
+    PLT_HttpServerSocketTask::DoAbort();
+}
+
+/*----------------------------------------------------------------------
+|    PLT_SsdpListenTask::GetInfo
++---------------------------------------------------------------------*/
 NPT_Result 
 PLT_SsdpListenTask::GetInfo(NPT_SocketInfo& info) 
 {

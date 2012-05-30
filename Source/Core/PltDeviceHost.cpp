@@ -165,7 +165,6 @@ PLT_DeviceHost::SetupDevice()
 NPT_Result
 PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 {
-    m_TaskManager.Reset();
     m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max  
 
     // start the server

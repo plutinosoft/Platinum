@@ -150,7 +150,6 @@ PLT_UPnP::Start()
     NPT_LOG_INFO("Starting UPnP...");
 
     NPT_AutoLock lock(m_Lock);
-    m_TaskManager.Reset();
 
     if (m_Started == true) return NPT_ERROR_INVALID_STATE;
     
