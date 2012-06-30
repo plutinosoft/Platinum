@@ -32,6 +32,15 @@ __attribute__((constructor)) static void onDlOpen(void)
 {
 }
 
+/*----------------------------------------------------------------------
+|    JNI_OnLoad
++---------------------------------------------------------------------*/
+JNIEXPORT jint JNICALL JNI_OnLoad(JavaVM* vm, void* reserved)
+{
+    NPT_LogManager::GetDefault().Configure("plist:.level=FINE;.handlers=ConsoleHandler;.ConsoleHandler.outputs=2;.ConsoleHandler.colors=false;.ConsoleHandler.filter=59");
+    return JNI_VERSION_1_4;
+}
+
 /*
  * Class:     com_plutinosoft_platinum_UPnP
  * Method:    _init
@@ -51,6 +60,7 @@ JNIEXPORT jlong JNICALL Java_com_plutinosoft_platinum_UPnP__1init(JNIEnv *env, j
  */
 JNIEXPORT jint JNICALL Java_com_plutinosoft_platinum_UPnP__1start(JNIEnv *, jclass, jlong _self)
 {
+    NPT_LOG_INFO("start");
     PLT_UPnP* self = (PLT_UPnP*)_self;
     
     return self->Start();
@@ -63,6 +73,7 @@ JNIEXPORT jint JNICALL Java_com_plutinosoft_platinum_UPnP__1start(JNIEnv *, jcla
  */
 JNIEXPORT jint JNICALL Java_com_plutinosoft_platinum_UPnP__1stop(JNIEnv *, jclass, jlong _self)
 {
+    NPT_LOG_INFO("stop");
     PLT_UPnP* self = (PLT_UPnP*)_self;
     
     return self->Stop();

@@ -5,12 +5,12 @@ public class UPnP {
         cSelf = _init();
     }
 
-    public void start() {
-        _start(cSelf);
+    public int start() {
+        return _start(cSelf);
     }
     
-    public void stop() {
-        _stop(cSelf);
+    public int stop() {
+        return _stop(cSelf);
     }
 
     // C glue

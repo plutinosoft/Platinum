@@ -2,6 +2,7 @@ package com.plutinosoft.platinum.sample;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -24,14 +25,18 @@ public class PlatinumUPnPActivity extends Activity {
         if (isRunning) {
             upnp.stop();
             isRunning = false;
-            startStopButton.setText("Start");
+            startStopButton.setText("Start`");
         } else {
-            upnp.start();
-            isRunning = true;
-            startStopButton.setText("Stop");
+            int result = upnp.start();
+            Log.d(TAG, "upnp.Start returned: " + result);
+            if (result == 0) {
+                isRunning = true;
+                startStopButton.setText("Stop");
+            }
         }
     }
-    
+
+    private final String TAG = PlatinumUPnPActivity.this.getClass().getName();
     private UPnP  upnp;
     private boolean isRunning;
     
