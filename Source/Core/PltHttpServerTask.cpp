@@ -346,7 +346,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
             *body_stream.AsPointer(), 
             *output_stream.AsPointer(),
             0,
-            entity->GetContentLength()));
+            entity->GetContentLength())); /* passing 0 if content length is unknown will read until nothing is left */
     }
 
     // flush the output stream so that everything is sent to the client
