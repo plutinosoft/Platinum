@@ -1,3 +1,11 @@
+Platinum 0.6.9.2
+----------------
+changed: less strict about invalid protocol info extra params parsing
+fixed: fixed embedded test
+added: android jni module and sample
+fixed: subscription notification events wouldn't be received after upnp got restarted
+fixed: task manager stop could be hanging while waiting for tasks to finish if a task was started during cancellation
+
 Platinum 0.6.9.1
 ----------------
 added: support to bridge Neptune Logging to other loggers such as Cocoa Lumberjack
