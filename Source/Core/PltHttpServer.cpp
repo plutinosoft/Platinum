@@ -108,6 +108,12 @@ PLT_HttpServer::Start()
 
     // keep track of port server has successfully bound
     m_Port = m_BoundPort;
+
+    // Tell server to try to listen to more incoming sockets
+    // (this could fail silently)
+    if (m_TaskManager->GetMaxTasks() > 20) {
+        m_Socket.Listen(m_TaskManager->GetMaxTasks());
+    }
     
     // start a task to listen for incoming connections
     // and keep it around so we can abort the server
