@@ -770,7 +770,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
         NPT_AutoLock lock(m_Lock);
 
         // look for the subscriber with that subscription url
-        if (NPT_FAILED(NPT_ContainerFind(m_Subscribers, 
+        if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
                                          PLT_EventSubscriberFinderBySID(*sid), 
                                          sub))) {
             NPT_LOG_WARNING_1("Subscriber %s not found\n", (const char*)*sid);
@@ -855,7 +855,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     return NPT_SUCCESS;
 
 bad_request:
-    NPT_LOG_SEVERE("CtrlPoint received bad request\r\n");
+    NPT_LOG_SEVERE("CtrlPoint received bad event notify request\r\n");
     if (response.GetStatusCode() == 200) {
         response.SetStatus(412, "Precondition Failed");
     }
