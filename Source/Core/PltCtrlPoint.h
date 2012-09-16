@@ -145,6 +145,7 @@ protected:
     NPT_Result   Start(PLT_SsdpListenTask* task);
     NPT_Result   Stop(PLT_SsdpListenTask* task);
 
+    // SSDP & HTTP Notifications handling
     NPT_Result   ProcessSsdpNotify(const NPT_HttpRequest&        request, 
                                    const NPT_HttpRequestContext& context);
     NPT_Result   ProcessSsdpMessage(const NPT_HttpMessage&        message, 
@@ -173,6 +174,11 @@ protected:
     NPT_Result   ProcessHttpNotify(const NPT_HttpRequest&        request,
                                    const NPT_HttpRequestContext& context,
                                    NPT_HttpResponse&             response);
+
+    // Device management
+    NPT_Result   AddDevice(PLT_DeviceDataReference& data);
+    NPT_Result   RemoveDevice(PLT_DeviceDataReference& data);
+    
 private:
     // methods
     NPT_Result RenewSubscribers();
@@ -182,13 +188,13 @@ private:
     NPT_Result FetchDeviceSCPDs(PLT_CtrlPointGetSCPDsTask* task,
                                 PLT_DeviceDataReference&   device, 
                                 NPT_Cardinal               level);
+
+    // Device management
     NPT_Result InspectDevice(const NPT_HttpUrl& location, 
                              const char*        uuid, 
                              NPT_TimeInterval   leasetime = *PLT_Constants::GetInstance().GetDefaultDeviceLease());
     NPT_Result FindDevice(const char* uuid, PLT_DeviceDataReference& device, bool return_root = false);
-    NPT_Result AddDevice(PLT_DeviceDataReference& data);
     NPT_Result NotifyDeviceReady(PLT_DeviceDataReference& data);
-    NPT_Result RemoveDevice(PLT_DeviceDataReference& data);
     NPT_Result NotifyDeviceRemoved(PLT_DeviceDataReference& data);
     NPT_Result CleanupDevice(PLT_DeviceDataReference& data);
     
