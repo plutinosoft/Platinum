@@ -1,3 +1,11 @@
+Platinum 0.6.9.3
+----------------
+added: support for Scons 2.1
+changed: improved UPnP stopping process 
+changed: limit max number of tasks per task manager to 50 by default
+changed: limit max number of HTTP clients handled by HTTP server to 50 by default
+changed: made PltCtrlPoint AddDevice & RemoveDevice protected so they can be called by custom implementations to manually remove expired devices
+
 Platinum 0.6.9.2
 ----------------
 changed: less strict about invalid protocol info extra params parsing
