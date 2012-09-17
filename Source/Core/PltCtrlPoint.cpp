@@ -399,7 +399,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
         socket,
         this, 
         request,
-        frequency.ToMillis()<mx*5000?NPT_TimeInterval(mx*5.):frequency);
+        (frequency.ToMillis()>0 && frequency.ToMillis()<5000)?NPT_TimeInterval(5.):frequency);  /* repeat no less than every 5 secs */
     return task;
 }
 
@@ -481,7 +481,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
         socket,
         this, 
         request,
-        frequency.ToMillis()<mx*5000?NPT_TimeInterval(mx*5.):frequency);  /* repeat no less than every 5 secs */
+        (frequency.ToMillis()>0 && frequency.ToMillis()<5000)?NPT_TimeInterval(5.):frequency);  /* repeat no less than every 5 secs */
     return m_TaskManager.StartTask(task, &initial_delay);
 }
 
