@@ -1,5 +1,6 @@
 Platinum 0.6.9.3
 ----------------
+fixed: passing 0 for frequency to Search/Discover now disables repeat
 added: support for Scons 2.1
 changed: improved UPnP stopping process 
 changed: limit max number of tasks per task manager to 50 by default
