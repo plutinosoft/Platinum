@@ -400,6 +400,8 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
         return PLT_DEVICE_WINDOWS;
     } else if (agent && (agent->Find("Mac", 0, true) >= 0 || agent->Find("OS X", 0, true) >= 0 || agent->Find("OSX", 0, true) >= 0)) {
         return PLT_DEVICE_MAC;
+    } else if (agent && (agent->Find("VLC", 0, true) >= 0 || agent->Find("VideoLan", 0, true) >= 0)) {
+        return PLT_DEVICE_VLC;
     } else {
         NPT_LOG_FINE_1("Unknown device signature (ua=%s)", agent?agent->GetChars():"none");
     }
