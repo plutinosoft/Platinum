@@ -58,7 +58,8 @@ PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
     m_Port(port),
     m_AllowRandomPortOnBindFailure(allow_random_port_on_bind_failure),
     m_ReuseAddress(reuse_address),
-    m_HttpListenTask(NULL)
+    m_HttpListenTask(NULL),
+    m_Aborted(false)
 {
 }
 
@@ -79,6 +80,9 @@ PLT_HttpServer::Start()
 {
     NPT_Result res = NPT_FAILURE;
     
+    // we can't restart an aborted server
+    if (m_Aborted) return NPT_ERROR_INVALID_STATE;
+    
     // if we're given a port for our http server, try it
     if (m_Port) {
         res = SetListenPort(m_Port, m_ReuseAddress);
@@ -93,7 +97,7 @@ PLT_HttpServer::Start()
         int retries = 100;
         do {    
             int random = NPT_System::GetRandomInteger();
-            int port = (unsigned short)(9000 + (random % 1000));
+            int port = (unsigned short)(1024 + (random % 1024));
             if (NPT_SUCCEEDED(SetListenPort(port, m_ReuseAddress))) {
                 break;
             }
@@ -104,6 +108,12 @@ PLT_HttpServer::Start()
 
     // keep track of port server has successfully bound
     m_Port = m_BoundPort;
+
+    // Tell server to try to listen to more incoming sockets
+    // (this could fail silently)
+    if (m_TaskManager->GetMaxTasks() > 20) {
+        m_Socket.Listen(m_TaskManager->GetMaxTasks());
+    }
     
     // start a task to listen for incoming connections
     // and keep it around so we can abort the server
@@ -124,6 +134,8 @@ PLT_HttpServer::Start()
 NPT_Result
 PLT_HttpServer::Stop()
 {
+    m_Aborted = true;
+    
     if (m_HttpListenTask) {
         m_HttpListenTask->Kill();
         m_HttpListenTask = NULL;
@@ -146,13 +158,20 @@ PLT_HttpServer::SetupResponse(NPT_HttpRequest&              request,
         (const char*) request.GetMethod(),
         (const char*) context.GetRemoteAddress().ToString(),
         (const char*) request.GetUrl().ToString());
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &request);
+    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, prefix, &request);
 
     NPT_List<NPT_HttpRequestHandler*> handlers = FindRequestHandlers(request);
     if (handlers.GetItemCount() == 0) return NPT_ERROR_NO_SUCH_ITEM;
 
     // ask the handler to setup the response
-    return (*handlers.GetFirstItem())->SetupResponse(request, context, response);
+    NPT_Result result = (*handlers.GetFirstItem())->SetupResponse(request, context, response);
+    
+    // DLNA compliance
+    PLT_UPnPMessageHelper::SetDate(response);
+    if (request.GetHeaders().GetHeader("Accept-Language")) {
+        response.GetHeaders().SetHeader("Content-Language", "en");
+    }
+    return result;
 }
 
 /*----------------------------------------------------------------------

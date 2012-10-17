@@ -144,12 +144,17 @@ PLT_ThreadTask::Run()
     
     // wait before starting task if necessary
     if ((float)m_Delay > 0.f) {
-        NPT_TimeStamp start, now;
-        NPT_System::GetCurrentTimeStamp(start);
-        do {
-            NPT_System::GetCurrentTimeStamp(now);
-            if (now >= start + m_Delay) break;
-        } while(!IsAborting(100));
+        // more than 100ms, loop so we can abort it
+        if ((float)m_Delay > 0.1f) {
+            NPT_TimeStamp start, now;
+            NPT_System::GetCurrentTimeStamp(start);
+            do {
+                NPT_System::GetCurrentTimeStamp(now);
+                if (now >= start + m_Delay) break;
+            } while (!IsAborting(100));
+        } else {
+            NPT_System::Sleep(m_Delay);
+        }
     }
 
     // loop

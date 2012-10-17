@@ -256,8 +256,8 @@ PLT_EventSubscriber::Notify(NPT_List<PLT_StateVariable*>& vars)
         // add initial delay to make sure ctrlpoint receives response to subscription
         // before our first NOTIFY. Also make sure task is not auto-destroy
         // since we want to destroy it manually when the subscriber goes away.
-        NPT_TimeInterval delay(0.2f);
-        NPT_CHECK_FATAL(m_TaskManager->StartTask(m_SubscriberTask, &delay, false));
+        NPT_TimeInterval delay(0.05f);
+        NPT_CHECK_FATAL(m_TaskManager->StartTask(m_SubscriberTask, NULL /*&delay*/, false));
     } else {
         m_SubscriberTask->AddRequest(request);
     }

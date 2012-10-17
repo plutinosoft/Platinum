@@ -471,6 +471,13 @@ public:
                                                   "Second-infinite"); 
         }
     }
+    static NPT_Result SetDate(NPT_HttpMessage& message) { 
+        NPT_TimeStamp now;
+        NPT_System::GetCurrentTimeStamp(now);
+        NPT_DateTime date(now);
+        
+        return message.GetHeaders().SetHeader("Date", date.ToString(NPT_DateTime::FORMAT_RFC_1123)); 
+    }
     static NPT_Result GetIfModifiedSince(const NPT_HttpMessage& message,
                                          NPT_DateTime&          date) {
         
@@ -527,6 +534,16 @@ public:
             uuid += (char)((random % 25) + 66);
         }
         return uuid;
+    }
+    
+    static const char* GenerateSerialNumber(NPT_String& sn, int count = 40) {
+        sn = "{";
+        for (int i=0;i<count;i++) {
+            char nibble = (char)(NPT_System::GetRandomInteger() % 16);
+            sn += (nibble < 10) ? ('0' + nibble) : ('a' + (nibble-10));
+        }
+        sn += "}";
+        return sn;
     }
     static const char* GenerateGUID(NPT_String& guid) {   
         guid = "";

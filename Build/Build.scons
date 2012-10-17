@@ -30,7 +30,7 @@ def GetDirPath(dir):
     return '#/'+dir
     
 def DeclareBuildDir(dir):
-    env.BuildDir(dir, GetDirPath(dir), duplicate=0)
+    env.VariantDir(dir, GetDirPath(dir), duplicate=0)
     
 def GetIncludeDirs(modules, exclude=None):
     dirs = []
@@ -94,7 +94,7 @@ class LibraryModule(Module):
         # store this new object in the module dictionary
         Modules[name] = self
                 
-        # for each source drct to build, create a BuildDir
+        # for each source drct to build, create a VariantDir
         # to say where we want the object files to be built,
         # and compute the list of source files to build
         sources = []
@@ -207,9 +207,14 @@ if not env.has_key('NPT_CONFIG_NO_ZIP'):
     
 if not env.has_key('NPT_CONFIG_NO_SSL'):
     extra_cpp_flags += ['NPT_CONFIG_ENABLE_TLS']
+    tls_data_dirs  = ['Data/TLS']
+    tls_tests      = ['Tls1']
+else:
+    tls_data_dirs = []
+    tls_tests     = []
     
 LibraryModule(name                  = 'Neptune',
-              build_source_dirs     = ['Core', 'Data/TLS'],
+              build_source_dirs     = ['Core']+tls_data_dirs,
               build_source_files    = env['NPT_SYSTEM_SOURCES'],
               extra_cpp_defines     = extra_cpp_flags,
               linked_modules        = env['NPT_EXTRA_LIBS']+['Zlib']+['axTLS'],
@@ -220,14 +225,6 @@ LibraryModule(name               = 'Platinum',
               build_source_dirs  = ['Core', 'Extras'],
               build_include_dirs = ['Source/Platinum'],
               included_modules   = ['Neptune'])
-
-# Platinum (jni)
-if env['target'] == 'arm-android-linux':
-     LibraryModule(name               = 'PlatinumJNI', 
-                   build_source_dirs  = ['Extras/JNI/C++'],
-                   linked_modules     = ['Platinum'],
-                   shared             = True,
-                   install            = True)
 
 # Platinum MediaServer         
 LibraryModule(name               = 'PltMediaServer',

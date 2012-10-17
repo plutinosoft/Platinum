@@ -106,12 +106,15 @@ PLT_HttpServerSocketTask::DoRun()
         if (NPT_FAILED(res) || (response == NULL)) 
             goto cleanup;
 
-        // send response
+        // check if client requested keep-alive
         keep_alive = PLT_HttpHelper::IsConnectionKeepAlive(*request);
         headers_only = request->GetMethod() == NPT_HTTP_METHOD_HEAD;
+
+        // send response, pass keep-alive request from client
+        // (it can be overridden if response handler did not allow it)
         res = Write(response, keep_alive, headers_only);
 
-        // on write error, don't keep connection alive
+        // on write error, reset keep_alive so we can close this connection
         if (NPT_FAILED(res)) keep_alive = false;
 
 cleanup:
@@ -297,7 +300,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
         if (!content_encoding.IsEmpty()) {
             headers.SetHeader(NPT_HTTP_HEADER_CONTENT_ENCODING, content_encoding);
         }
-    } else {
+    } else if (!headers.GetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH)) {
         // force content length to 0 if there is no message body
 		// (necessary for 1.1 or 1.0 with keep-alive connections)
         headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH, "0");
@@ -346,7 +349,7 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
             *body_stream.AsPointer(), 
             *output_stream.AsPointer(),
             0,
-            entity->GetContentLength()));
+            entity->GetContentLength())); /* passing 0 if content length is unknown will read until nothing is left */
     }
 
     // flush the output stream so that everything is sent to the client

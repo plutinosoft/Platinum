@@ -55,6 +55,7 @@
 typedef struct {
     NPT_String                   object_id;
     PLT_MediaObjectListReference items;
+    NPT_UInt32                   si;
     NPT_UInt32                   nr;
     NPT_UInt32                   tm;
     NPT_UInt32                   uid;

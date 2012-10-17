@@ -196,14 +196,12 @@ PLT_MediaController::GetProtocolInfoSink(const NPT_String&     device_uuid,
 
     // look for ConnectionManager service
     PLT_Service* serviceCMR;
-    NPT_CHECK_SEVERE(renderer->FindServiceByType(
-        "urn:schemas-upnp-org:service:ConnectionManager:*", 
-        serviceCMR));
+    NPT_CHECK_SEVERE(renderer->FindServiceByType("urn:schemas-upnp-org:service:ConnectionManager:*", 
+                                                 serviceCMR));
 
     NPT_String value;
-    NPT_CHECK_SEVERE(serviceCMR->GetStateVariableValue(
-        "SinkProtocolInfo", 
-        value));
+    NPT_CHECK_SEVERE(serviceCMR->GetStateVariableValue("SinkProtocolInfo", 
+                                                       value));
 
     sinks = value.Split(",");
     return NPT_SUCCESS;
@@ -219,16 +217,37 @@ PLT_MediaController::GetTransportState(const NPT_String&  device_uuid,
     PLT_DeviceDataReference renderer;
     NPT_CHECK_WARNING(FindRenderer(device_uuid, renderer));
     
-    // look for ConnectionManager service
+    // look for AVTransport service
     PLT_Service* serviceAVT;
-    NPT_CHECK_SEVERE(renderer->FindServiceByType(
-                                                 "urn:schemas-upnp-org:service:AVTransport:*", 
+    NPT_CHECK_SEVERE(renderer->FindServiceByType("urn:schemas-upnp-org:service:AVTransport:*", 
                                                  serviceAVT));
     
     NPT_CHECK_SEVERE(serviceAVT->GetStateVariableValue("TransportState", 
                                                        state));
     
     return NPT_SUCCESS;
+}
+
+/*----------------------------------------------------------------------
+|   PLT_MediaController::GetVolumeState
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_MediaController::GetVolumeState(const NPT_String&  device_uuid, 
+                                    NPT_UInt32&        volume)
+{
+    PLT_DeviceDataReference renderer;
+    NPT_CHECK_WARNING(FindRenderer(device_uuid, renderer));
+    
+    // look for RenderingControl service
+    PLT_Service* serviceRC;
+    NPT_CHECK_SEVERE(renderer->FindServiceByType("urn:schemas-upnp-org:service:RenderingControl:*", 
+                                                 serviceRC));
+    
+    NPT_String value;
+    NPT_CHECK_SEVERE(serviceRC->GetStateVariableValue("Volume", 
+                                                      value));
+    
+    return value.ToInteger32(volume);
 }
 
 /*----------------------------------------------------------------------

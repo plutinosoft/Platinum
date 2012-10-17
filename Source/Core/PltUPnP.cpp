@@ -151,7 +151,7 @@ PLT_UPnP::Start()
 
     NPT_AutoLock lock(m_Lock);
 
-    if (m_Started == true) return NPT_ERROR_INVALID_STATE;
+    if (m_Started == true) NPT_CHECK_SEVERE(NPT_ERROR_INVALID_STATE);
     
     NPT_List<NPT_IpAddress> ips;
     PLT_UPnPMessageHelper::GetIPAddresses(ips);
@@ -159,7 +159,7 @@ PLT_UPnP::Start()
     /* Create multicast socket and bind on 1900. If other apps didn't
        play nicely by setting the REUSE_ADDR flag, this could fail */
     NPT_UdpMulticastSocket* socket = new NPT_UdpMulticastSocket();
-    NPT_CHECK(socket->Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
+    NPT_CHECK_SEVERE(socket->Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
     
     /* Join multicast group for every ip we found */
     NPT_CHECK_SEVERE(ips.ApplyUntil(PLT_SsdpInitMulticastIterator(socket),

@@ -182,7 +182,6 @@ protected:
     
 private:
     PLT_MediaServerDelegate* m_Delegate;
-    //NPT_Map<NPT_String, NPT_UInt32> 
 };
 
 #endif /* _PLT_MEDIA_SERVER_H_ */

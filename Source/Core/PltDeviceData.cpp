@@ -200,11 +200,16 @@ PLT_DeviceData::GetIconUrl(const char* mimetype,
 |   PLT_DeviceData::SetLeaseTime
 +---------------------------------------------------------------------*/
 NPT_Result   
-PLT_DeviceData::SetLeaseTime(NPT_TimeInterval lease_time) 
+PLT_DeviceData::SetLeaseTime(NPT_TimeInterval lease_time, NPT_TimeStamp lease_time_last_update /* = 0 */) 
 {
     // Enforce 10 seconds min lease time
     m_LeaseTime = (lease_time.ToSeconds()>=10)?lease_time:*PLT_Constants::GetInstance().GetDefaultDeviceLease();
-    NPT_System::GetCurrentTimeStamp(m_LeaseTimeLastUpdate);
+    
+    // get current time as last update time if none passed
+    if ((double)lease_time_last_update == 0.) {
+        NPT_System::GetCurrentTimeStamp(lease_time_last_update);
+    }
+    m_LeaseTimeLastUpdate = lease_time_last_update;
     return NPT_SUCCESS;
 }
 
@@ -333,7 +338,7 @@ PLT_DeviceData::GetDescription(NPT_XmlElementNode* root, NPT_XmlElementNode** de
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelDescription", m_ModelDescription));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelName", m_ModelName));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelURL", m_ModelURL));
-    NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelNumber", m_ModelNumber));
+    if (!m_ModelNumber.IsEmpty()) NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelNumber", m_ModelNumber));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "serialNumber", m_SerialNumber));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "UDN", "uuid:" + m_UUID));
     
@@ -434,7 +439,10 @@ cleanup:
 |   PLT_DeviceData::SetDescription
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_DeviceData::SetDescription(const char*                   description, 
+PLT_DeviceData::SetDescription(PLT_DeviceDataReference&      root_device,
+                               NPT_TimeInterval              leasetime,
+                               NPT_HttpUrl                   description_url,
+                               const char*                   description, 
                                const NPT_HttpRequestContext& context)
 {
     NPT_XmlParser       parser;
@@ -442,6 +450,11 @@ PLT_DeviceData::SetDescription(const char*                   description,
     NPT_Result          res;
     NPT_XmlElementNode* root = NULL;
     NPT_String          URLBase;
+    
+    // create new device if none passed
+    if (root_device.IsNull()) {
+        root_device = new PLT_DeviceData(description_url, "", leasetime);
+    }
     
     res = parser.Parse(description, tree);
     NPT_CHECK_LABEL_SEVERE(res, cleanup);
@@ -464,7 +477,10 @@ PLT_DeviceData::SetDescription(const char*                   description,
             url.GetHost().ToLowercase() == "127.0.0.1") {
             url.SetHost(context.GetRemoteAddress().GetIpAddress().ToString());
         }
-        SetURLBase(url);
+        root_device->SetURLBase(url);
+    } else {
+        // No URLBase, derive from description url
+        root_device->SetURLBase(description_url);
     }
 
     // at least one root device child element is required
@@ -473,7 +489,7 @@ PLT_DeviceData::SetDescription(const char*                   description,
         NPT_CHECK_LABEL_SEVERE(NPT_FAILURE, cleanup);
     }
 
-    res = SetDescriptionDevice(device, context);
+    res = SetDescriptionDevice(root_device, device, context);
 
 cleanup:
     // delete the tree
@@ -485,28 +501,31 @@ cleanup:
 |   PLT_DeviceData::SetDescriptionDevice
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_DeviceData::SetDescriptionDevice(NPT_XmlElementNode*           device_node, 
+PLT_DeviceData::SetDescriptionDevice(PLT_DeviceDataReference&      device,
+                                     NPT_XmlElementNode*           device_node, 
                                      const NPT_HttpRequestContext& context)
 {
     NPT_Result res;
     
-    m_LocalIfaceIp = context.GetLocalAddress().GetIpAddress();
+    device->m_LocalIfaceIp = context.GetLocalAddress().GetIpAddress();
     
-    NPT_CHECK_SEVERE(PLT_XmlHelper::GetChildText(device_node, "deviceType", m_DeviceType));
-    NPT_CHECK_SEVERE(PLT_XmlHelper::GetChildText(device_node, "UDN", m_UUID));
+    NPT_CHECK_SEVERE(PLT_XmlHelper::GetChildText(device_node, "deviceType", device->m_DeviceType));
+    NPT_CHECK_SEVERE(PLT_XmlHelper::GetChildText(device_node, "UDN", device->m_UUID));
 
-    // jump uuid: we should probably check first
-    m_UUID = ((const char*)m_UUID)+5;
+    // remove uuid: prefix
+    if (device->m_UUID.StartsWith("uuid:")) {
+        device->m_UUID = ((const char*)device->m_UUID)+5;
+    }
 
     // optional attributes
-    PLT_XmlHelper::GetChildText(device_node, "friendlyName", m_FriendlyName);
-    PLT_XmlHelper::GetChildText(device_node, "manufacturer", m_Manufacturer);
-    PLT_XmlHelper::GetChildText(device_node, "manufacturerURL", m_ManufacturerURL);
-    PLT_XmlHelper::GetChildText(device_node, "modelDescription", m_ModelDescription);
-    PLT_XmlHelper::GetChildText(device_node, "modelName", m_ModelName);
-    PLT_XmlHelper::GetChildText(device_node, "modelURL", m_ModelURL);
-    PLT_XmlHelper::GetChildText(device_node, "modelNumber", m_ModelNumber);
-    PLT_XmlHelper::GetChildText(device_node, "serialNumber", m_SerialNumber);
+    PLT_XmlHelper::GetChildText(device_node, "friendlyName", device->m_FriendlyName);
+    PLT_XmlHelper::GetChildText(device_node, "manufacturer", device->m_Manufacturer);
+    PLT_XmlHelper::GetChildText(device_node, "manufacturerURL", device->m_ManufacturerURL);
+    PLT_XmlHelper::GetChildText(device_node, "modelDescription", device->m_ModelDescription);
+    PLT_XmlHelper::GetChildText(device_node, "modelName", device->m_ModelName);
+    PLT_XmlHelper::GetChildText(device_node, "modelURL", device->m_ModelURL);
+    PLT_XmlHelper::GetChildText(device_node, "modelNumber", device->m_ModelNumber);
+    PLT_XmlHelper::GetChildText(device_node, "serialNumber", device->m_SerialNumber);
 
     // enumerate icons
     NPT_XmlElementNode* iconList = PLT_XmlHelper::GetChild(device_node, "iconList");
@@ -528,7 +547,7 @@ PLT_DeviceData::SetDescriptionDevice(NPT_XmlElementNode*           device_node,
             if(NPT_SUCCEEDED(PLT_XmlHelper::GetChildText(icons[k], "depth", integer)))
                 NPT_ParseInteger32(integer, icon.m_Depth);
 
-            m_Icons.Add(icon);
+            device->m_Icons.Add(icon);
         }
     }
 
@@ -541,7 +560,7 @@ PLT_DeviceData::SetDescriptionDevice(NPT_XmlElementNode*           device_node,
             NPT_String type, id, url;
             PLT_XmlHelper::GetChildText(services[k], "serviceType", type);
             PLT_XmlHelper::GetChildText(services[k], "serviceId", id);    
-            PLT_Service* service = new PLT_Service(this, type, id, NULL);
+            PLT_Service* service = new PLT_Service(device.AsPointer(), type, id, NULL);
             
             PLT_XmlHelper::GetChildText(services[k], "SCPDURL", url);
             service->SetSCPDURL(url);
@@ -552,7 +571,7 @@ PLT_DeviceData::SetDescriptionDevice(NPT_XmlElementNode*           device_node,
             PLT_XmlHelper::GetChildText(services[k], "eventSubURL", url);
             service->SetEventSubURL(url);
             
-            if (NPT_FAILED(res = AddService(service))) {
+            if (NPT_FAILED(res = device->AddService(service))) {
                 delete service;
                 return res;
             }
@@ -565,9 +584,10 @@ PLT_DeviceData::SetDescriptionDevice(NPT_XmlElementNode*           device_node,
         NPT_Array<NPT_XmlElementNode*> devices;
         PLT_XmlHelper::GetChildren(deviceList, devices, "device");
         for (int k = 0; k<(int)devices.GetItemCount(); k++) {    
-            PLT_DeviceDataReference device(new PLT_DeviceData(m_URLDescription, "", m_LeaseTime));
-            NPT_CHECK_SEVERE(device->SetDescriptionDevice(devices[k], context));
-            AddEmbeddedDevice(device);
+            // create an embedded device with same url base and leasetime as parent
+            PLT_DeviceDataReference embedded_device(new PLT_DeviceData(device->m_URLDescription, "", device->m_LeaseTime));
+            NPT_CHECK_SEVERE(PLT_DeviceData::SetDescriptionDevice(embedded_device, devices[k], context));
+            device->AddEmbeddedDevice(embedded_device);
         }
     }
     

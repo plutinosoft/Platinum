@@ -174,14 +174,15 @@ protected:
 class PLT_SsdpAnnounceInterfaceIterator
 {
 public:
-    PLT_SsdpAnnounceInterfaceIterator(PLT_DeviceHost* device, bool is_byebye = false) :
-        m_Device(device), m_IsByeBye(is_byebye) {}
+    PLT_SsdpAnnounceInterfaceIterator(PLT_DeviceHost* device, bool is_byebye = false, bool broadcast = false) :
+        m_Device(device), m_IsByeBye(is_byebye), m_Broadcast(broadcast) {}
       
     NPT_Result operator()(NPT_NetworkInterface*& if_addr) const;
     
 private:
     PLT_DeviceHost* m_Device;
     bool            m_IsByeBye;
+    bool            m_Broadcast;
 };
 
 /*----------------------------------------------------------------------
@@ -222,9 +223,11 @@ class PLT_SsdpDeviceAnnounceTask : public PLT_ThreadTask
 public:
     PLT_SsdpDeviceAnnounceTask(PLT_DeviceHost*  device, 
                                NPT_TimeInterval repeat,
-                               bool             is_byebye_first = false) : 
+                               bool             is_byebye_first = false,
+                               bool             extra_broadcast = false) : 
         m_Device(device), 
-        m_Repeat(repeat), m_IsByeByeFirst(is_byebye_first) {}
+        m_Repeat(repeat), m_IsByeByeFirst(is_byebye_first), 
+        m_ExtraBroadcast(extra_broadcast) {}
 
 protected:
     virtual ~PLT_SsdpDeviceAnnounceTask() {}
@@ -236,6 +239,7 @@ protected:
     PLT_DeviceHost*             m_Device;
     NPT_TimeInterval            m_Repeat;
     bool                        m_IsByeByeFirst;
+    bool                        m_ExtraBroadcast;
 };
 
 /*----------------------------------------------------------------------
@@ -317,6 +321,9 @@ public:
         m_Listeners.Remove(listener);
         return NPT_SUCCESS;
     }
+    
+    // PLT_Task methods
+    void DoAbort();
 
 protected:
     virtual ~PLT_SsdpListenTask() {}

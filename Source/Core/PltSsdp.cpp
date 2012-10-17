@@ -72,7 +72,7 @@ PLT_SsdpSender::SendSsdp(NPT_HttpRequest&   request,
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
     NPT_Result res = request.Emit(stream);
-    if (NPT_FAILED(res)) return res;
+    NPT_CHECK(res);
 
     // copy stream into a data packet and send it
     NPT_LargeSize size;
@@ -133,6 +133,7 @@ PLT_SsdpSender::FormatPacket(NPT_HttpMessage& message,
         PLT_UPnPMessageHelper::SetNT(message, target);
     } else {
         PLT_UPnPMessageHelper::SetST(message, target);
+        PLT_UPnPMessageHelper::SetDate(message);
     }
     //PLT_HttpHelper::SetContentLength(message, 0);
 
@@ -151,8 +152,9 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         net_if->GetAddresses().GetFirstItem();
     if (!niaddr) return NPT_SUCCESS;
 
+    // don't try to bind on port 1900 or connect will fail later
     NPT_UdpSocket socket;
-    //NPT_CHECK_WARNING(socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true));
+    //socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
 
     // by connecting, the kernel chooses which interface to use to route to the remote
     // this is the IP we should use in our Location URL header
@@ -184,7 +186,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
         //NPT_UdpSocket socket;
         NPT_CHECK_SEVERE(m_Device->SendSsdpSearchResponse(response, socket, m_ST, remote_addr));
     }
-    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
 #endif
     {
         //NPT_UdpSocket socket;
@@ -220,6 +222,11 @@ done:
 NPT_Result
 PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) const 
 {
+    // don't use this interface address if it's not broadcast capable
+    if (m_Broadcast && !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_BROADCAST)) {
+        return NPT_FAILURE;
+    }
+
     NPT_List<NPT_NetworkInterfaceAddress>::Iterator niaddr = 
         net_if->GetAddresses().GetFirstItem();
     if (!niaddr) return NPT_FAILURE;
@@ -228,29 +235,43 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     NPT_IpAddress addr = (*niaddr).GetPrimaryAddress();
     if (!addr.ToString().Compare("0.0.0.0")) return NPT_FAILURE;
     
-    if ((!(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_BROADCAST) ||
-         !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST)) && 
+    if (!m_Broadcast && 
+        !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST) && 
         !(net_if->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_LOOPBACK)) {
         NPT_LOG_INFO_2("Not a valid interface: %s (flags: %d)", 
                        (const char*)addr.ToString(), net_if->GetFlags());
         return NPT_FAILURE;
     }
 
+    NPT_HttpUrl            url;
     NPT_UdpMulticastSocket multicast_socket;
-    NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
+    NPT_UdpSocket          broadcast_socket;
+    NPT_UdpSocket*         socket;
+
+    if (m_Broadcast) {
+        url = NPT_HttpUrl((*niaddr).GetBroadcastAddress().ToString(), 1900, "*");
+        socket = &broadcast_socket;
+    } else {
+        url = NPT_HttpUrl("239.255.255.250", 1900, "*");    
+        NPT_CHECK_SEVERE(multicast_socket.SetInterface(addr));
+        socket = &multicast_socket;
+        multicast_socket.SetTimeToLive(4);
+    }
     
-    NPT_HttpUrl url = NPT_HttpUrl("239.255.255.250", 1900, "*");
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
     PLT_HttpHelper::SetHost(req, "239.255.255.250:1900");
     
     // put a location only if alive message
-    if (m_IsByeBye == false) {
+    if (!m_IsByeBye) {
         PLT_UPnPMessageHelper::SetLocation(req, m_Device->GetDescriptionUrl(addr.ToString()));
     }
 
-    NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
+
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
-    NPT_CHECK_SEVERE(m_Device->Announce(req, multicast_socket, m_IsByeBye));
+    // delay alive only as we don't want to delay when stopping
+    if (!m_IsByeBye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
 #endif
 
     return NPT_SUCCESS;
@@ -271,13 +292,25 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
         // if we're announcing our arrival, sends a byebye first (NMPR compliance)
         if (m_IsByeByeFirst == true) {
             m_IsByeByeFirst = false;
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true));
             
-            // schedule to announce alive in 300 ms
-            if (IsAborting(300)) break;
+            if (m_ExtraBroadcast) {
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_ExtraBroadcast));
+            }
+            
+            // multicast now
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
+            
+            // schedule to announce alive in 200 ms
+            if (IsAborting(200)) break;
         }
-            
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false));
+        
+        if (m_ExtraBroadcast) {
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_ExtraBroadcast));
+        }
+        
+        // multicast now
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
+        
         
 cleanup:
         if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
@@ -308,6 +341,15 @@ PLT_SsdpListenTask::GetInputStream(NPT_InputStreamReference& stream)
         stream = m_Datagram;
         return NPT_SUCCESS;
     }
+}
+
+/*----------------------------------------------------------------------
+|    PLT_SsdpListenTask::GetInfo
++---------------------------------------------------------------------*/
+void 
+PLT_SsdpListenTask::DoAbort()
+{
+    PLT_HttpServerSocketTask::DoAbort();
 }
 
 /*----------------------------------------------------------------------

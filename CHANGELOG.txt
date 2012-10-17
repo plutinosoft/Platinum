@@ -1,3 +1,62 @@
+Platinum 0.6.9.3
+----------------
+fixed: passing 0 for frequency to Search/Discover now disables repeat
+added: support for Scons 2.1
+changed: improved UPnP stopping process 
+changed: limit max number of tasks per task manager to 50 by default
+changed: limit max number of HTTP clients handled by HTTP server to 50 by default
+changed: made PltCtrlPoint AddDevice & RemoveDevice protected so they can be called by custom implementations to manually remove expired devices
+
+Platinum 0.6.9.2
+----------------
+changed: less strict about invalid protocol info extra params parsing
+fixed: fixed embedded test
+added: android jni module and sample
+fixed: subscription notification events wouldn't be received after upnp got restarted
+fixed: task manager stop could be hanging while waiting for tasks to finish if a task was started during cancellation
+
+Platinum 0.6.9.1
+----------------
+added: support to bridge Neptune Logging to other loggers such as Cocoa Lumberjack
+fixed: better support for embedded devices detection
+added: GetVolumeState to PltMediaController
+fixed: crash in NPT_Socket::Cancel when stopping HTTP clients
+
+Platinum 0.6.9
+--------------
+changed: reverted trying to bind to source port 1900, it would fail eventually
+added: added back support for sending SSDP messages over broadcast in case multicast is blocked by routers or firewalls
+fixed: MediaRenderer channel attribute for volume was wrong
+changed: MediaBrowser caches only metadata now
+fixed: Scons XCode 4.3.1 support
+added: workaround for servers that start to return bogus total matches on the last page
+updated: Neptune 1.1.3
+added: some CTT 2.0 compliance re SSDP
+added: Date HTTP header to requests
+fixed: crash on exit due to static finalizers being called in random order
+fixed: Host HTTP header wasn't being reset properly on redirects
+removed: OSX Platinum frameworks depending on SystemConfiguration and Foundation frameworks
+
+Platinum 0.6.8
+--------------
+changed: try to bind source port to 1900 for ssdp notify and search responses
+added: capability to change user agent on the fly
+added: didl parsing and formatting of dc:description & upnp:icon
+added: user agent header to SSDP packets
+fixed: Windows build
+added: UPnP AV Renderer functions
+changed: verify we can seek the body of the response before returning Accept-Range: bytes
+fixed: don't use localhost address for SSDP announcements
+changed: short connection time out for subscribers since they may not exist and this would block when exiting
+fixed: bug when parsing W3C date time
+fixed: compiling issues when removing TLS support
+fixed: recursion that prevented some logs to be written
+fixed: potential issue with thread safe references
+added: support for removing HTTP header in a request or response before sending it
+changed: support bytes:0- range request for non seekable streams and avoid returning 416.
+changed: return 416 instead of 500 in case we can't stream the body and a range request was made (this makes XBox and PS3 happier)
+changed: make all references thread safe by default
+
 Platinum 0.6.7
 --------------
 fixed: request would fail when retrying on a new connection after the previous one failed because server closed it without using a Connection:close header. Only happens with requests containing a body.

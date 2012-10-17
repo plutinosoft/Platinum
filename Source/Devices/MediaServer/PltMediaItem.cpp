@@ -273,7 +273,6 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
 
     // album art URI
     if ((mask & PLT_FILTER_MASK_ALBUMARTURI) && m_ExtraInfo.album_arts.GetItemCount()) {
-        //NPT_List<PLT_AlbumArtInfo>::Iterator album_art = m_ExtraInfo.album_arts.GetFirstItem();
         for (NPT_List<PLT_AlbumArtInfo>::Iterator iter = m_ExtraInfo.album_arts.GetFirstItem();
              iter;
              iter++) {
@@ -289,7 +288,7 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
         }
     }
     
-    // long description
+    // description
     if ((mask & PLT_FILTER_MASK_DESCRIPTION) && !m_Description.description.IsEmpty()) {
         didl += "<dc:description>";
         PLT_Didl::AppendXmlEscape(didl, m_Description.description);

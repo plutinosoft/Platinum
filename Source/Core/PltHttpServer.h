@@ -59,7 +59,7 @@ public:
     PLT_HttpServer(NPT_IpAddress address = NPT_IpAddress::Any,
                    NPT_IpPort    port = 0,
                    bool          allow_random_port_on_bind_failure = false,
-                   NPT_Cardinal  max_clients = 0,
+                   NPT_Cardinal  max_clients = 50,
                    bool          reuse_address = false);
     virtual ~PLT_HttpServer();
     
@@ -91,6 +91,7 @@ private:
     bool                m_AllowRandomPortOnBindFailure;
     bool                m_ReuseAddress;
     PLT_HttpListenTask* m_HttpListenTask;
+    bool                m_Aborted;
 };
 
 #endif /* _PLT_HTTP_SERVER_H_ */
