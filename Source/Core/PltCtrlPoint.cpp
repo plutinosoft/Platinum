@@ -366,7 +366,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     // create socket
     NPT_UdpMulticastSocket* socket = new NPT_UdpMulticastSocket();
     socket->SetInterface(address);
-    socket->SetTimeToLive(4);
+    socket->SetTimeToLive(PLT_Constants::GetInstance().GetSearchMulticastTimeToLive());
 
     // bind to something > 1024 and different than 1900
     int retries = 20;

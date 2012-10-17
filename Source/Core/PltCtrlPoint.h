@@ -178,12 +178,14 @@ protected:
     // Device management
     NPT_Result   AddDevice(PLT_DeviceDataReference& data);
     NPT_Result   RemoveDevice(PLT_DeviceDataReference& data);
+
+    // State Variable Handling
+    NPT_Result DecomposeLastChangeVar(NPT_List<PLT_StateVariable*>& vars);
     
 private:
     // methods
     NPT_Result RenewSubscribers();
     NPT_Result RenewSubscriber(PLT_EventSubscriber& subscriber);
-    NPT_Result DecomposeLastChangeVar(NPT_List<PLT_StateVariable*>& vars);
     NPT_Result DoHouseKeeping();
     NPT_Result FetchDeviceSCPDs(PLT_CtrlPointGetSCPDsTask* task,
                                 PLT_DeviceDataReference&   device, 
