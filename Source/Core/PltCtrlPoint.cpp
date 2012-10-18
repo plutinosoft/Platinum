@@ -1649,10 +1649,12 @@ PLT_CtrlPoint::InvokeAction(PLT_ActionReference& action,
 |   PLT_CtrlPoint::ProcessActionResponse
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_CtrlPoint::ProcessActionResponse(NPT_Result           res, 
-                                     NPT_HttpResponse*    response,
-                                     PLT_ActionReference& action,
-                                     void*                userdata)
+PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
+                                     const NPT_HttpRequest&        request,
+                                     const NPT_HttpRequestContext& /*context*/,
+                                     NPT_HttpResponse*             response,
+                                     PLT_ActionReference&          action,
+                                     void*                         userdata)
 {
     NPT_String          service_type;
     NPT_String          str;
@@ -1670,6 +1672,12 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result           res,
 
     // check context validity
     if (NPT_FAILED(res) || response == NULL) {
+        PLT_Service* service = action_desc.GetService();
+        NPT_LOG_WARNING_4("Failed to reach %s for %s.%s (%d)",
+                          request.GetUrl().ToString().GetChars(),
+                          service->GetDevice()->GetUUID().GetChars(),
+                          service->GetServiceName().GetChars(),
+                          res);
         goto failure;
     }
 

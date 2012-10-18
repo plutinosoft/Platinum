@@ -110,6 +110,9 @@ public:
                         NPT_Cardinal       mx = 5,
                         NPT_TimeInterval   frequency = NPT_TimeInterval(50.), // pass NPT_TimeInterval(0.) for one time only
                         NPT_TimeInterval   initial_delay = NPT_TimeInterval(0.));
+    NPT_Result InspectDevice(const NPT_HttpUrl& location,
+                             const char*        uuid,
+                             NPT_TimeInterval   leasetime = *PLT_Constants::GetInstance().GetDefaultDeviceLease());
 
     // actions
     NPT_Result FindActionDesc(PLT_DeviceDataReference& device, 
@@ -161,10 +164,12 @@ protected:
                                         const NPT_HttpRequestContext& context,
                                         NPT_HttpResponse*             response,
                                         PLT_DeviceDataReference&      device);
-    NPT_Result   ProcessActionResponse(NPT_Result               res, 
-                                       NPT_HttpResponse*        response,
-                                       PLT_ActionReference&     action,
-                                       void*                    userdata);
+    NPT_Result   ProcessActionResponse(NPT_Result                    res,
+                                       const NPT_HttpRequest&        request,
+                                       const NPT_HttpRequestContext& context,
+                                       NPT_HttpResponse*             response,
+                                       PLT_ActionReference&          action,
+                                       void*                         userdata);
     NPT_Result   ProcessSubscribeResponse(NPT_Result                    res, 
                                           const NPT_HttpRequest&        request, 
                                           const NPT_HttpRequestContext& context, 
@@ -190,9 +195,6 @@ private:
                                 NPT_Cardinal               level);
 
     // Device management
-    NPT_Result InspectDevice(const NPT_HttpUrl& location, 
-                             const char*        uuid, 
-                             NPT_TimeInterval   leasetime = *PLT_Constants::GetInstance().GetDefaultDeviceLease());
     NPT_Result FindDevice(const char* uuid, PLT_DeviceDataReference& device, bool return_root = false);
     NPT_Result NotifyDeviceReady(PLT_DeviceDataReference& data);
     NPT_Result NotifyDeviceRemoved(PLT_DeviceDataReference& data);

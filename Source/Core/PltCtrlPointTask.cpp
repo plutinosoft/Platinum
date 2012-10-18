@@ -146,7 +146,7 @@ PLT_CtrlPointInvokeActionTask::ProcessResponse(NPT_Result                    res
     NPT_COMPILER_UNUSED(request);
     NPT_COMPILER_UNUSED(context);
 
-    return m_CtrlPoint->ProcessActionResponse(res, response, m_Action, m_Userdata);
+    return m_CtrlPoint->ProcessActionResponse(res, request, context, response, m_Action, m_Userdata);
 }
 
 /*----------------------------------------------------------------------
