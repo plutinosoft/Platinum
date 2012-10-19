@@ -141,6 +141,10 @@ public:
                                     const NPT_HttpRequestContext& context);
 
 protected:
+
+    // State Variable Handling
+    virtual NPT_Result DecomposeLastChangeVar(NPT_List<PLT_StateVariable*>& vars);
+
     // methods
     NPT_Result   Start(PLT_SsdpListenTask* task);
     NPT_Result   Stop(PLT_SsdpListenTask* task);
@@ -178,9 +182,6 @@ protected:
     // Device management
     NPT_Result   AddDevice(PLT_DeviceDataReference& data);
     NPT_Result   RemoveDevice(PLT_DeviceDataReference& data);
-
-    // State Variable Handling
-    NPT_Result DecomposeLastChangeVar(NPT_List<PLT_StateVariable*>& vars);
     
 private:
     // methods
