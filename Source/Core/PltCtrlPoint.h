@@ -186,7 +186,13 @@ protected:
 private:
     // methods
     NPT_Result RenewSubscribers();
-    NPT_Result RenewSubscriber(PLT_EventSubscriber& subscriber);
+    PLT_ThreadTask* RenewSubscriber(PLT_EventSubscriberReference subscriber);
+    NPT_Result AddPendingEventNotification(PLT_EventNotification *notification);
+    NPT_Result ProcessPendingEventNotifications();
+    NPT_Result ProcessEventNotification(PLT_EventSubscriberReference subscriber,
+                                        PLT_EventNotification*       notification,
+                                        NPT_List<PLT_StateVariable*> &vars);
+    
     NPT_Result DoHouseKeeping();
     NPT_Result FetchDeviceSCPDs(PLT_CtrlPointGetSCPDsTask* task,
                                 PLT_DeviceDataReference&   device, 
@@ -226,9 +232,11 @@ private:
     PLT_TaskManager                              m_TaskManager;
     NPT_Mutex                                    m_Lock;
     NPT_List<PLT_DeviceDataReference>            m_RootDevices;
-    NPT_List<PLT_EventSubscriber*>               m_Subscribers;
+    NPT_List<PLT_EventSubscriberReference>       m_Subscribers;
     NPT_String                                   m_SearchCriteria;
     bool                                         m_Aborted;
+    NPT_Lock<NPT_List<PLT_EventNotification *> > m_PendingNotifications;
+    NPT_List<NPT_String>                         m_PendingInspections;
 };
 
 typedef NPT_Reference<PLT_CtrlPoint> PLT_CtrlPointReference;
