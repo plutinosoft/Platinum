@@ -827,6 +827,7 @@ PLT_CtrlPoint::AddPendingEventNotification(PLT_EventNotification *notification)
     while (m_PendingNotifications.GetItemCount() > 20) {
         PLT_EventNotification *garbage;
         m_PendingNotifications.PopHead(garbage);
+        delete garbage;
     }
 
     m_PendingNotifications.Add(notification);
@@ -862,10 +863,10 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
 
             service = sub->GetService();
 
-            if (NPT_FAILED(ProcessEventNotification(sub, notification, vars))) {
-                delete notification;
-                continue;
-            }
+            NPT_Result result = ProcessEventNotification(sub, notification, vars);
+            delete notification;
+            
+            if (NPT_FAILED(result)) continue;
         }
         
         // notify listeners
@@ -891,6 +892,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     NPT_List<PLT_StateVariable*> vars;
     PLT_Service* service = NULL;
     PLT_EventSubscriberReference sub;
+    NPT_Result result;
 
     PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", request);
 
@@ -910,11 +912,15 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
             return NPT_SUCCESS;
         }
     }
-    
-    service = sub->GetService();
-    NPT_CHECK_LABEL_WARNING(ProcessEventNotification(sub, notification, vars), bad_request);
 
-    // notify listeners
+    // Process notification for subscriber
+    service = sub->GetService();
+    result = ProcessEventNotification(sub, notification, vars);
+    delete notification;
+    
+    NPT_CHECK_LABEL_WARNING(result, bad_request);
+
+    // Notify listeners
     if (vars.GetItemCount()) {
         NPT_AutoLock lock(m_ListenerList);
         m_ListenerList.Apply(PLT_CtrlPointListenerOnEventNotifyIterator(service, &vars));
