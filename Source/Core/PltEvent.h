@@ -55,6 +55,33 @@ class PLT_TaskManager;
 class PLT_CtrlPoint;
 
 /*----------------------------------------------------------------------
+|   PLT_EventNotification class
++---------------------------------------------------------------------*/
+/**
+ The PLT_EventNotification class represents an event notification for a given
+ service to a given subscriber 
+ */
+class PLT_EventNotification
+{
+public:
+    ~PLT_EventNotification() {}
+
+    static PLT_EventNotification* Parse(const NPT_HttpRequest&        request,
+                                        const NPT_HttpRequestContext& context,
+                                        NPT_HttpResponse&             response);
+
+
+    NPT_TimeStamp                 m_ReceptionTime;
+    NPT_HttpUrl                   m_RequestUrl;
+    NPT_String                    m_SID;
+    NPT_Ordinal                   m_EventKey;
+    NPT_String                    m_XmlBody;
+    
+protected:
+    PLT_EventNotification() {}
+};
+
+/*----------------------------------------------------------------------
 |   PLT_EventSubscriber class
 +---------------------------------------------------------------------*/
 /**
@@ -94,6 +121,8 @@ protected:
     NPT_TimeStamp             m_ExpirationTime;
 };
 
+typedef NPT_Reference<PLT_EventSubscriber> PLT_EventSubscriberReference;
+
 /*----------------------------------------------------------------------
 |   PLT_EventSubscriberFinderBySID
 +---------------------------------------------------------------------*/
@@ -107,7 +136,7 @@ public:
     // methods
     PLT_EventSubscriberFinderBySID(const char* sid) : m_SID(sid) {}
 
-    bool operator()(PLT_EventSubscriber* const & sub) const {
+    bool operator()(PLT_EventSubscriberReference const & sub) const {
         return m_SID.Compare(sub->GetSID(), true) ? false : true;
     }
 
@@ -130,7 +159,7 @@ public:
     PLT_EventSubscriberFinderByCallbackURL(const char* callback_url) : 
       m_CallbackURL(callback_url) {}
 
-    bool operator()(PLT_EventSubscriber* const & sub) const {
+    bool operator()(PLT_EventSubscriberReference const & sub) const {
         return NPT_SUCCEEDED(sub->FindCallbackURL(m_CallbackURL));
     }
 
@@ -152,7 +181,7 @@ public:
     // methods
     PLT_EventSubscriberFinderByService(PLT_Service* service) : m_Service(service) {}
     virtual ~PLT_EventSubscriberFinderByService() {}
-    bool operator()(PLT_EventSubscriber* const & eventSub) const;
+    bool operator()(PLT_EventSubscriberReference const & eventSub) const;
 
 private:
     // members

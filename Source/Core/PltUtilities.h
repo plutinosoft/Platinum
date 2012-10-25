@@ -98,6 +98,30 @@ class PLT_XmlHelper
 public:
 
     // static methods
+
+    static NPT_Result Parse(const NPT_String&    xml,
+                            NPT_XmlElementNode*& tree) {
+        // reset tree
+        tree = NULL;
+
+        // parse body
+        NPT_XmlParser parser;
+        NPT_XmlNode*  node;
+        NPT_Result result = parser.Parse(xml, node);
+        if (NPT_FAILED(result)) {
+            //NPT_LOG_FINEST_1("Failed to parse %s", xml.IsEmpty()?"(empty string)":xml.GetChars());
+            NPT_CHECK(result);
+        }
+
+        tree = node->AsElementNode();
+        if (!tree) {
+            delete node;
+            return NPT_FAILURE;
+        }
+        
+        return NPT_SUCCESS;
+    }
+
     static NPT_Result GetChildText(NPT_XmlElementNode* node, 
                                    const char*         tag, 
                                    NPT_String&         value,
@@ -317,7 +341,7 @@ class NPT_StringFinder
 public:
     // methods
     NPT_StringFinder(const char* value, bool ignore_case = false) : 
-    m_Value(value), m_IgnoreCase(ignore_case) {}
+        m_Value(value), m_IgnoreCase(ignore_case) {}
     virtual ~NPT_StringFinder() {}
     bool operator()(const NPT_String* const & value) const {
         return value->Compare(m_Value, m_IgnoreCase) ? false : true;
@@ -343,8 +367,7 @@ class NPT_IpAddressFinder
 {
 public:
     // methods
-    NPT_IpAddressFinder(NPT_IpAddress ip) : 
-    m_Value(ip) {}
+    NPT_IpAddressFinder(NPT_IpAddress ip) : m_Value(ip) {}
     virtual ~NPT_IpAddressFinder() {}
     
     bool operator()(const NPT_IpAddress* const & value) const {

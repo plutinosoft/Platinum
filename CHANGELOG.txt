@@ -1,3 +1,12 @@
+Platinum 1.0.9.3
+----------------
+changed: reworked event notifications to be reprocessed if subscriber is not known yet immediately after a subscription.
+fixed: some deadlocks due limiting number of tasks in task manager by default now.
+added: now keep track of pending inspections so that a bunch of SSDP notifications don't all trigger a bunch description requests.
+added: support for armv7s, Xcode 4.5
+added: added support for changing default TTL values
+changed: made DecomposeVar protected virtual
+
 Platinum 0.6.9.3
 ----------------
 fixed: passing 0 for frequency to Search/Discover now disables repeat

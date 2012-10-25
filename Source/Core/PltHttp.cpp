@@ -38,6 +38,7 @@
 #include "PltHttp.h"
 #include "PltDatagramStream.h"
 #include "PltVersion.h"
+#include "PltUtilities.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.http")
 
@@ -248,22 +249,7 @@ PLT_HttpHelper::ParseBody(const NPT_HttpMessage& message,
     NPT_String body;
     NPT_CHECK_WARNING(GetBody(message, body));
 
-    // parse body
-    NPT_XmlParser parser;
-    NPT_XmlNode*  node;
-    NPT_Result result = parser.Parse(body, node);
-    if (NPT_FAILED(result)) {
-        NPT_LOG_FINEST_1("Failed to parse %s", body.IsEmpty()?"(empty string)":body.GetChars());
-        NPT_CHECK_WARNING(result);
-    }
-    
-    tree = node->AsElementNode();
-    if (!tree) {
-        delete node;
-        return NPT_FAILURE;
-    }
-
-    return NPT_SUCCESS;
+    return PLT_XmlHelper::Parse(body, tree);
 }
 
 /*----------------------------------------------------------------------
