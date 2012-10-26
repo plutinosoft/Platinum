@@ -850,19 +850,24 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
         PLT_Service *service = NULL;
 
         if (NPT_SUCCEEDED(m_PendingNotifications.PopHead(notification))) {
-            NPT_AutoLock lock(m_Lock);
-
-            // look for the subscriber with that sid
             PLT_EventSubscriberReference sub;
-            if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
-                                             PLT_EventSubscriberFinderBySID(notification->m_SID),
-                                             sub))) {
-                m_PendingNotifications.Add(notification);
-                continue;
+            {
+                NPT_AutoLock lock(m_Lock);
+
+                // look for the subscriber with that sid
+                if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
+                                                 PLT_EventSubscriberFinderBySID(notification->m_SID),
+                                                 sub))) {
+                    m_PendingNotifications.Add(notification);
+                    continue;
+                }
             }
 
+            // keep track of service for listeners later
             service = sub->GetService();
 
+            // Reprocess notification
+            NPT_LOG_WARNING_1("Reprocessing delayed notification for subscriber", (const char*)notification->m_SID);
             NPT_Result result = ProcessEventNotification(sub, notification, vars);
             delete notification;
             
@@ -1652,15 +1657,15 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
                            (const char*)service->GetServiceID(),
                            (const char*)service->GetDevice()->GetFriendlyName(),
                            seconds);
-        }
         
-        // create new subscriber if sid never seen before
-        if (sub.IsNull()) {
-            sub = new PLT_EventSubscriber(&m_TaskManager, service, *sid, seconds);
-            m_Subscribers.Add(sub);
-        } else {
-            // simply update subscriber expiration
-            sub->SetTimeout(seconds);
+            // create new subscriber if sid never seen before
+            if (sub.IsNull()) {
+                sub = new PLT_EventSubscriber(&m_TaskManager, service, *sid, seconds);
+                m_Subscribers.Add(sub);
+            } else {
+                // simply update subscriber expiration
+                sub->SetTimeout(seconds);
+            }
         }
 
         // Process any pending notifcations for that subscriber we got a bit too early

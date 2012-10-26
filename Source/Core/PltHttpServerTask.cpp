@@ -269,24 +269,24 @@ PLT_HttpServerSocketTask::RespondToClient(NPT_HttpRequest&              request,
 }
 
 /*----------------------------------------------------------------------
-|   PLT_HttpServerSocketTask::Write
+|   PLT_HttpServerSocketTask::SendResponseHeaders
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response, 
-                                bool&             keep_alive, 
-                                bool              headers_only /* = false */) 
+PLT_HttpServerSocketTask::SendResponseHeaders(NPT_HttpResponse* response,
+                                              NPT_OutputStream& output_stream,
+                                              bool&             keep_alive)
 {
     // add any headers that may be missing
     NPT_HttpHeaders& headers = response->GetHeaders();
-                      
+
     // get the request entity to set additional headers
     NPT_InputStreamReference body_stream;
     NPT_HttpEntity* entity = response->GetEntity();
     if (entity && NPT_SUCCEEDED(entity->GetInputStream(body_stream))) {
         // set the content length if known
         if (entity->ContentLengthIsKnown()) {
-            headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH, 
-                NPT_String::FromIntegerU(entity->GetContentLength()));
+            headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH,
+                              NPT_String::FromIntegerU(entity->GetContentLength()));
         }
 
         // content type
@@ -300,27 +300,34 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
         if (!content_encoding.IsEmpty()) {
             headers.SetHeader(NPT_HTTP_HEADER_CONTENT_ENCODING, content_encoding);
         }
+        
+        // transfer encoding
+        const NPT_String& transfer_encoding = entity->GetTransferEncoding();
+        if (!transfer_encoding.IsEmpty()) {
+            headers.SetHeader(NPT_HTTP_HEADER_TRANSFER_ENCODING, transfer_encoding);
+        }
+        
     } else if (!headers.GetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH)) {
         // force content length to 0 if there is no message body
 		// (necessary for 1.1 or 1.0 with keep-alive connections)
         headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH, "0");
     }
-    
+
     const NPT_String* content_length  = headers.GetHeaderValue(NPT_HTTP_HEADER_CONTENT_LENGTH);
-    const NPT_String* encoding  = headers.GetHeaderValue(NPT_HTTP_HEADER_TRANSFER_ENCODING);
-    const NPT_String* value  = headers.GetHeaderValue(NPT_HTTP_HEADER_CONNECTION);
+    const NPT_String* transfer_encoding  = headers.GetHeaderValue(NPT_HTTP_HEADER_TRANSFER_ENCODING);
+    const NPT_String* connection_header  = headers.GetHeaderValue(NPT_HTTP_HEADER_CONNECTION);
     if (keep_alive) {
-        if (value && value->Compare("close") == 0) {
+        if (connection_header && connection_header->Compare("close") == 0) {
             keep_alive = false;
         } else {
-            // the request says client supports keep-alive 
+            // the request says client supports keep-alive
             // but override if response has content-length header or
             // transfer chunked encoding
-            keep_alive = content_length || 
-            (encoding && encoding->Compare(NPT_HTTP_TRANSFER_ENCODING_CHUNKED) == 0);
+            keep_alive = content_length ||
+                (transfer_encoding && transfer_encoding->Compare(NPT_HTTP_TRANSFER_ENCODING_CHUNKED) == 0);
         }
     }
-    
+
     // only write keep-alive header for 1.1 if it's close
     NPT_String protocol = response->GetProtocol();
     if (protocol.Compare(NPT_HTTP_PROTOCOL_1_0, true) == 0 || !keep_alive) {
@@ -330,29 +337,77 @@ PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response,
 
     PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, "PLT_HttpServerSocketTask::Write", response);
 
-    // get the socket stream to send the request
-    NPT_OutputStreamReference output_stream;
-    NPT_CHECK_WARNING(m_Socket->GetOutputStream(output_stream));
-
     // create a memory stream to buffer the headers
     NPT_MemoryStream header_stream;
-    
-    // emit the response headers into the header buffer
     response->Emit(header_stream);
 
     // send the headers
-    NPT_CHECK_WARNING(output_stream->WriteFully(header_stream.GetData(), header_stream.GetDataSize()));
+    NPT_CHECK_WARNING(output_stream.WriteFully(header_stream.GetData(), header_stream.GetDataSize()));
 
-    // send response body if any
-    if (!headers_only && !body_stream.IsNull()) {
-        NPT_CHECK_WARNING(NPT_StreamToStreamCopy(
-            *body_stream.AsPointer(), 
-            *output_stream.AsPointer(),
-            0,
-            entity->GetContentLength())); /* passing 0 if content length is unknown will read until nothing is left */
+    return NPT_SUCCESS;
+}
+
+/*----------------------------------------------------------------------
+|   PLT_HttpServerSocketTask::SendResponseBody
++---------------------------------------------------------------------*/
+NPT_Result
+PLT_HttpServerSocketTask::SendResponseBody(NPT_HttpResponse* response,
+                                           NPT_OutputStream& output_stream)
+{
+    NPT_HttpEntity* entity = response->GetEntity();
+    if (!entity) return NPT_SUCCESS;
+
+    NPT_InputStreamReference body_stream;
+    entity->GetInputStream(body_stream);
+    if (body_stream.IsNull()) return NPT_SUCCESS;
+
+    // check for chunked transfer encoding
+    NPT_OutputStream* dest = &output_stream;
+    if (entity->GetTransferEncoding() == NPT_HTTP_TRANSFER_ENCODING_CHUNKED) {
+        dest = new NPT_HttpChunkedOutputStream(output_stream);
     }
 
-    // flush the output stream so that everything is sent to the client
+    // send body
+    NPT_LOG_FINE_1("sending body stream, %lld bytes", entity->GetContentLength());
+    NPT_LargeSize bytes_written = 0;
+    NPT_Result result = NPT_StreamToStreamCopy(*body_stream, *dest, 0, entity->GetContentLength(), &bytes_written); /* passing 0 if content length is unknown will read until nothing is left */
+    if (NPT_FAILED(result)) {
+        NPT_LOG_FINE_3("body stream only partially sent, %lld bytes (%d:%s)",
+                       bytes_written,
+                       result,
+                       NPT_ResultText(result));
+    }
+
+    // flush to write out any buffered data left in chunked output if used
+    dest->Flush();
+
+    // cleanup (this will send zero size chunk followed by CRLF)
+    if (dest != &output_stream) delete dest;
+
+    return result;
+}
+
+/*----------------------------------------------------------------------
+|   PLT_HttpServerSocketTask::Write
++---------------------------------------------------------------------*/
+NPT_Result
+PLT_HttpServerSocketTask::Write(NPT_HttpResponse* response, 
+                                bool&             keep_alive, 
+                                bool              headers_only /* = false */) 
+{
+    // get the socket output stream
+    NPT_OutputStreamReference output_stream;
+    NPT_CHECK_WARNING(m_Socket->GetOutputStream(output_stream));
+
+    // send headers
+    NPT_CHECK_WARNING(SendResponseHeaders(response, *output_stream, keep_alive));
+
+    // send the body
+    if (!headers_only) {
+        NPT_CHECK_WARNING(SendResponseBody(response, *output_stream));
+    }
+    
+    // flush
     output_stream->Flush();
 
     return NPT_SUCCESS;
