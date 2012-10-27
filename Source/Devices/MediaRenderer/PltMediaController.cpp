@@ -531,7 +531,7 @@ PLT_MediaController::CanSetNextAVTransportURI(PLT_DeviceDataReference &device)
     PLT_ActionDesc* action_desc;
     NPT_Result result = m_CtrlPoint->FindActionDesc(device,
                                                     "urn:schemas-upnp-org:service:AVTransport:1",
-                                                    "SetAVTransportURI",
+                                                    "SetNextAVTransportURI",
                                                     action_desc);
     return (result == NPT_SUCCESS);
 }
