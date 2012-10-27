@@ -45,10 +45,12 @@
 +---------------------------------------------------------------------*/
 PLT_CtrlPointGetDescriptionTask::PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl& url,
                                                                  PLT_CtrlPoint*     ctrl_point,
-                                                                 NPT_TimeInterval   leasetime) :
+                                                                 NPT_TimeInterval   leasetime,
+                                                                 NPT_String         uuid) :
     PLT_HttpClientSocketTask(new NPT_HttpRequest(url, "GET", NPT_HTTP_PROTOCOL_1_1)), 
     m_CtrlPoint(ctrl_point),
-    m_LeaseTime(leasetime)
+    m_LeaseTime(leasetime),
+    m_UUID(uuid)
 {
 }
 
@@ -74,7 +76,8 @@ PLT_CtrlPointGetDescriptionTask::ProcessResponse(NPT_Result                    r
         request, 
         context, 
         response,
-        m_LeaseTime);
+        m_LeaseTime,
+        m_UUID);
 }
 
 /*----------------------------------------------------------------------

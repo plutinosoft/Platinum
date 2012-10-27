@@ -65,7 +65,8 @@ class PLT_CtrlPointGetDescriptionTask : public PLT_HttpClientSocketTask
 public:
     PLT_CtrlPointGetDescriptionTask(const NPT_HttpUrl& url,
                                     PLT_CtrlPoint*     ctrl_point,
-                                    NPT_TimeInterval   leasetime);
+                                    NPT_TimeInterval   leasetime,
+                                    NPT_String         uuid);
     virtual ~PLT_CtrlPointGetDescriptionTask();
 
 protected:
@@ -78,6 +79,7 @@ protected:
 protected:
     PLT_CtrlPoint*   m_CtrlPoint;
     NPT_TimeInterval m_LeaseTime;
+    NPT_String       m_UUID;
 };
 
 /*----------------------------------------------------------------------

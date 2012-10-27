@@ -818,20 +818,23 @@ failure:
 NPT_Result
 PLT_CtrlPoint::AddPendingEventNotification(PLT_EventNotification *notification)
 {
-    NPT_AutoLock notificationslock(m_PendingNotifications);
-
     // Give a last change to process pending notifications before throwing them out
     ProcessPendingEventNotifications();
 
-    // Only keep a maximum of 20 pending notifications
-    while (m_PendingNotifications.GetItemCount() > 20) {
-        PLT_EventNotification *garbage;
-        m_PendingNotifications.PopHead(garbage);
-        delete garbage;
-    }
+    {
+        NPT_AutoLock notificationslock(m_PendingNotifications);
 
-    m_PendingNotifications.Add(notification);
-    return NPT_SUCCESS;
+
+        // Only keep a maximum of 20 pending notifications
+        while (m_PendingNotifications.GetItemCount() > 20) {
+            PLT_EventNotification *garbage;
+            m_PendingNotifications.PopHead(garbage);
+            delete garbage;
+        }
+
+        m_PendingNotifications.Add(notification);
+        return NPT_SUCCESS;
+    }
 }
 
 /*----------------------------------------------------------------------
@@ -842,12 +845,11 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
 {
     NPT_AutoLock notificationslock(m_PendingNotifications);
     
-    PLT_EventNotification *notification;
-    
     NPT_Cardinal count = m_PendingNotifications.GetItemCount();
     while (count--) {
         NPT_List<PLT_StateVariable*> vars;
         PLT_Service *service = NULL;
+        PLT_EventNotification *notification;
 
         if (NPT_SUCCEEDED(m_PendingNotifications.PopHead(notification))) {
             PLT_EventSubscriberReference sub;
@@ -1276,7 +1278,8 @@ PLT_CtrlPoint::InspectDevice(const NPT_HttpUrl& location,
     PLT_CtrlPointGetDescriptionTask* task = new PLT_CtrlPointGetDescriptionTask(
         location,
         this,
-        leasetime);
+        leasetime,
+        uuid);
 
     // Add a delay to make sure that we received late NOTIFY bye-bye
     NPT_TimeInterval delay(.5f);
@@ -1321,7 +1324,8 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
                                              const NPT_HttpRequest&        request,
                                              const NPT_HttpRequestContext& context,
                                              NPT_HttpResponse*             response,
-                                             NPT_TimeInterval              leasetime)
+                                             NPT_TimeInterval              leasetime,
+                                             NPT_String                    uuid)
 {    
     NPT_COMPILER_UNUSED(request);
 
@@ -1336,25 +1340,25 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
         (const char*)request.GetUrl().ToString(),
         res,
         response?response->GetStatusCode():0);
-
-    // verify response was ok
-    NPT_CHECK_LABEL_FATAL(res, bad_response);
-    NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
-
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
-
-    // get response body
-    res = PLT_HttpHelper::GetBody(*response, desc);
-    NPT_CHECK_LABEL_SEVERE(res, bad_response);
-    
-    // create new root device
-    NPT_CHECK_FATAL(PLT_DeviceData::SetDescription(root_device, leasetime, request.GetUrl(), desc, context));
     
     {
         NPT_AutoLock lock(m_Lock);
 
         // Remove pending inspection
-        m_PendingInspections.Remove(root_device->GetUUID());
+        m_PendingInspections.Remove(uuid);
+
+        // verify response was ok
+        NPT_CHECK_LABEL_FATAL(res, bad_response);
+        NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
+
+        PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
+
+        // get response body
+        res = PLT_HttpHelper::GetBody(*response, desc);
+        NPT_CHECK_LABEL_SEVERE(res, bad_response);
+
+        // create new root device
+        NPT_CHECK_FATAL(PLT_DeviceData::SetDescription(root_device, leasetime, request.GetUrl(), desc, context));
     
         // make sure root device was not previously queried
         PLT_DeviceDataReference device;

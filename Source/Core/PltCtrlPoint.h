@@ -162,7 +162,8 @@ protected:
                                                const NPT_HttpRequest&        request, 
                                                const NPT_HttpRequestContext& context,
                                                NPT_HttpResponse*             response,
-                                               NPT_TimeInterval              leasetime);
+                                               NPT_TimeInterval              leasetime,
+                                               NPT_String                    uuid);
     NPT_Result   ProcessGetSCPDResponse(NPT_Result                    res, 
                                         const NPT_HttpRequest&        request,
                                         const NPT_HttpRequestContext& context,
