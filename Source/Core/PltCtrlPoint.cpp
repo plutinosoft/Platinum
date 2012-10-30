@@ -292,6 +292,18 @@ PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 }
 
 /*----------------------------------------------------------------------
+|   PLT_CtrlPoint::GetPort
++---------------------------------------------------------------------*/
+NPT_Result
+PLT_CtrlPoint::GetPort(NPT_UInt16& port)
+{
+    if (m_Aborted) return NPT_FAILURE;
+    
+    port = m_EventHttpServer->GetPort();
+    return NPT_SUCCESS;
+}
+
+/*----------------------------------------------------------------------
 |   PLT_CtrlPoint::Stop
 +---------------------------------------------------------------------*/
 NPT_Result
@@ -540,8 +552,8 @@ PLT_CtrlPoint::DoHouseKeeping()
             NPT_TimeStamp now;
             NPT_System::GetCurrentTimeStamp(now);
 
-            // time to renew if within 10 secs of expiration
-            if (now > (*sub)->GetExpirationTime() - NPT_TimeStamp(10.)) {
+            // time to renew if within 90 secs of expiration
+            if (now > (*sub)->GetExpirationTime() - NPT_TimeStamp(90.)) {
                 PLT_ThreadTask* task = RenewSubscriber(*sub);
                 if (task) tasks.Add(task);
             }
@@ -651,7 +663,7 @@ PLT_CtrlPoint::SetupResponse(NPT_HttpRequest&              request,
 {
     NPT_COMPILER_UNUSED(context);
     
-    if (!request.GetMethod().Compare("NOTIFY")) {
+    if (request.GetMethod().Compare("NOTIFY") == 0) {
         return ProcessHttpNotify(request, context, response);
     }
 
@@ -818,23 +830,17 @@ failure:
 NPT_Result
 PLT_CtrlPoint::AddPendingEventNotification(PLT_EventNotification *notification)
 {
-    // Give a last change to process pending notifications before throwing them out
-    ProcessPendingEventNotifications();
+    NPT_AutoLock notificationslock(m_PendingNotifications);
 
-    {
-        NPT_AutoLock notificationslock(m_PendingNotifications);
-
-
-        // Only keep a maximum of 20 pending notifications
-        while (m_PendingNotifications.GetItemCount() > 20) {
-            PLT_EventNotification *garbage;
-            m_PendingNotifications.PopHead(garbage);
-            delete garbage;
-        }
-
-        m_PendingNotifications.Add(notification);
-        return NPT_SUCCESS;
+    // Only keep a maximum of 20 pending notifications
+    while (m_PendingNotifications.GetItemCount() > 20) {
+        PLT_EventNotification *garbage = NULL;
+        m_PendingNotifications.PopHead(garbage);
+        delete garbage;
     }
+
+    m_PendingNotifications.Add(notification);
+    return NPT_SUCCESS;
 }
 
 /*----------------------------------------------------------------------
@@ -853,10 +859,10 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
 
         if (NPT_SUCCEEDED(m_PendingNotifications.PopHead(notification))) {
             PLT_EventSubscriberReference sub;
+
+            // look for the subscriber with that sid
             {
                 NPT_AutoLock lock(m_Lock);
-
-                // look for the subscriber with that sid
                 if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
                                                  PLT_EventSubscriberFinderBySID(notification->m_SID),
                                                  sub))) {
@@ -902,6 +908,10 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     NPT_Result result;
 
     PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", request);
+    
+    // Give a last change to process pending notifications before throwing them out
+    // by AddPendingNotification
+    ProcessPendingEventNotifications();
 
     // Create notification from request
     PLT_EventNotification* notification = PLT_EventNotification::Parse(request, context, response);
@@ -1628,7 +1638,7 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
     PLT_EventSubscriberReference sub;
     bool                 subscription = (request.GetMethod().ToUppercase() == "SUBSCRIBE");
 
-    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSubscribeResponse for service \"%s\" (result = %d, status code = %d)", 
+    NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSubscribeResponse %ubscribe for service \"%s\" (result = %d, status code = %d)", 
         (const char*)subscription?"S":"Uns",
         (const char*)service->GetServiceID(),
         res,

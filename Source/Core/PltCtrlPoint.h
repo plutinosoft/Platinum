@@ -93,7 +93,13 @@ class PLT_CtrlPoint : public PLT_SsdpPacketListener,
 public:
     PLT_CtrlPoint(const char* search_criteria = "upnp:rootdevice"); // pass NULL to prevent repeated automatic search
     virtual ~PLT_CtrlPoint();
-
+    
+    /**
+     Returns the port used by the internal HTTP server for all incoming event notifications.
+     @return port
+     */
+    NPT_Result GetPort(NPT_UInt16& port);
+    
     // delegation
     NPT_Result AddListener(PLT_CtrlPointListener* listener);
     NPT_Result RemoveListener(PLT_CtrlPointListener* listener);
@@ -149,6 +155,7 @@ protected:
     virtual NPT_Result DecomposeLastChangeVar(NPT_List<PLT_StateVariable*>& vars);
 
     // methods
+    
     NPT_Result   Start(PLT_SsdpListenTask* task);
     NPT_Result   Stop(PLT_SsdpListenTask* task);
 
