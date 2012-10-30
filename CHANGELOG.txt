@@ -1,3 +1,7 @@
+Platinum 1.0.2.0
+----------------
+- fixed: deadlock in PLT_CtrlPoint
+
 Platinum 1.0.1.0
 ----------------
 - added: GetPort method to PLT_CtrlPoint in case one wants to attach to the event http server for serving static content

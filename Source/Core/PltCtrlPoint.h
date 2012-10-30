@@ -245,7 +245,7 @@ private:
     NPT_List<PLT_EventSubscriberReference>       m_Subscribers;
     NPT_String                                   m_SearchCriteria;
     bool                                         m_Aborted;
-    NPT_Lock<NPT_List<PLT_EventNotification *> > m_PendingNotifications;
+    NPT_List<PLT_EventNotification *>            m_PendingNotifications;
     NPT_List<NPT_String>                         m_PendingInspections;
 };
 

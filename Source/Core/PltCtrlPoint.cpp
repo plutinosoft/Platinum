@@ -830,8 +830,6 @@ failure:
 NPT_Result
 PLT_CtrlPoint::AddPendingEventNotification(PLT_EventNotification *notification)
 {
-    NPT_AutoLock notificationslock(m_PendingNotifications);
-
     // Only keep a maximum of 20 pending notifications
     while (m_PendingNotifications.GetItemCount() > 20) {
         PLT_EventNotification *garbage = NULL;
@@ -849,8 +847,6 @@ PLT_CtrlPoint::AddPendingEventNotification(PLT_EventNotification *notification)
 NPT_Result
 PLT_CtrlPoint::ProcessPendingEventNotifications()
 {
-    NPT_AutoLock notificationslock(m_PendingNotifications);
-    
     NPT_Cardinal count = m_PendingNotifications.GetItemCount();
     while (count--) {
         NPT_List<PLT_StateVariable*> vars;
@@ -861,14 +857,11 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
             PLT_EventSubscriberReference sub;
 
             // look for the subscriber with that sid
-            {
-                NPT_AutoLock lock(m_Lock);
-                if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
-                                                 PLT_EventSubscriberFinderBySID(notification->m_SID),
-                                                 sub))) {
-                    m_PendingNotifications.Add(notification);
-                    continue;
-                }
+            if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
+                                             PLT_EventSubscriberFinderBySID(notification->m_SID),
+                                             sub))) {
+                m_PendingNotifications.Add(notification);
+                continue;
             }
 
             // keep track of service for listeners later
@@ -884,7 +877,7 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
         
         // notify listeners
         if (service && vars.GetItemCount()) {
-            NPT_AutoLock lock(m_ListenerList);
+            NPT_AutoLock listener_lock(m_ListenerList);
             m_ListenerList.Apply(PLT_CtrlPointListenerOnEventNotifyIterator(service, &vars));
         }
     }
@@ -908,10 +901,6 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     NPT_Result result;
 
     PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", request);
-    
-    // Give a last change to process pending notifications before throwing them out
-    // by AddPendingNotification
-    ProcessPendingEventNotifications();
 
     // Create notification from request
     PLT_EventNotification* notification = PLT_EventNotification::Parse(request, context, response);
@@ -919,6 +908,10 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     
     {
         NPT_AutoLock lock(m_Lock);
+        
+        // Give a last change to process pending notifications before throwing them out
+        // by AddPendingNotification
+        ProcessPendingEventNotifications();
 
         // look for the subscriber with that sid
         if (NPT_FAILED(NPT_ContainerFind(m_Subscribers,
@@ -1658,28 +1651,26 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
         }
 
         // Create or Update subscriber timeout
-        {
-            NPT_AutoLock lock(m_Lock);
+        NPT_AutoLock lock(m_Lock);
 
-            NPT_ContainerFind(m_Subscribers, 
-                PLT_EventSubscriberFinderBySID(*sid), 
-                sub);
-            
-            NPT_LOG_INFO_5("%s subscriber \"%s\" for service \"%s\" of device \"%s\" (timeout = %d)",
-                           !sub.IsNull()?"Updating timeout for":"Creating new",
-                           (const char*)*sid,
-                           (const char*)service->GetServiceID(),
-                           (const char*)service->GetDevice()->GetFriendlyName(),
-                           seconds);
+        NPT_ContainerFind(m_Subscribers, 
+            PLT_EventSubscriberFinderBySID(*sid), 
+            sub);
         
-            // create new subscriber if sid never seen before
-            if (sub.IsNull()) {
-                sub = new PLT_EventSubscriber(&m_TaskManager, service, *sid, seconds);
-                m_Subscribers.Add(sub);
-            } else {
-                // simply update subscriber expiration
-                sub->SetTimeout(seconds);
-            }
+        NPT_LOG_INFO_5("%s subscriber \"%s\" for service \"%s\" of device \"%s\" (timeout = %d)",
+                       !sub.IsNull()?"Updating timeout for":"Creating new",
+                       (const char*)*sid,
+                       (const char*)service->GetServiceID(),
+                       (const char*)service->GetDevice()->GetFriendlyName(),
+                       seconds);
+    
+        // create new subscriber if sid never seen before
+        if (sub.IsNull()) {
+            sub = new PLT_EventSubscriber(&m_TaskManager, service, *sid, seconds);
+            m_Subscribers.Add(sub);
+        } else {
+            // simply update subscriber expiration
+            sub->SetTimeout(seconds);
         }
 
         // Process any pending notifcations for that subscriber we got a bit too early
