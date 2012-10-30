@@ -1,3 +1,12 @@
+Platinum 1.0.1.0
+----------------
+- added: GetPort method to PLT_CtrlPoint in case one wants to attach to the event http server for serving static content
+- fixed: deadlocks with new PLT_CtrlPoint pending notifications
+- changed: increased subscriber notification renewal to 90 secs before end of subscription
+- fixed: PLT_CtrlPoint log formatting error
+- fixed: memory leaks in PLT_CtrlPoint
+- fixed: PLT_HttpServer now properly supports chunked-encoding responses.
+
 Platinum 1.0.9.3
 ----------------
 changed: reworked event notifications to be reprocessed if subscriber is not known yet immediately after a subscription.
