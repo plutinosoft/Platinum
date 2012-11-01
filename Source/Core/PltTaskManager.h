@@ -63,10 +63,10 @@ public:
     /**
      Create a new Task Manager.
      @param max_items Maximum number of concurrent tasks that the task manager
-     will allow. When the value is reached, any new task are put on hold until
+     will allow. When the value is reached, a thread calling AddTask will block until
      a task has finished.
      */
-	PLT_TaskManager(NPT_Cardinal max_tasks = 50);
+	PLT_TaskManager(NPT_Cardinal max_tasks = 0);
 	virtual ~PLT_TaskManager();
 
     /**

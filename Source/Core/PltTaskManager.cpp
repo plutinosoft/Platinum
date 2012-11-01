@@ -43,7 +43,7 @@ NPT_SET_LOCAL_LOGGER("platinum.core.taskmanager")
 /*----------------------------------------------------------------------
 |   PLT_TaskManager::PLT_TaskManager
 +---------------------------------------------------------------------*/
-PLT_TaskManager::PLT_TaskManager(NPT_Cardinal max_items /* = 50 */) :
+PLT_TaskManager::PLT_TaskManager(NPT_Cardinal max_items /* = 0 */) :
     m_Queue(NULL),
     m_MaxTasks(max_items),
     m_RunningTasks(0),
