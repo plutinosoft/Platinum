@@ -51,7 +51,7 @@ NPT_SET_LOCAL_LOGGER("platinum.core.http.server")
 PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
                                NPT_IpPort    port,
                                bool          allow_random_port_on_bind_failure,   /* = false */
-                               NPT_Cardinal  max_clients,                         /* = 0 */
+                               NPT_Cardinal  max_clients,                         /* = 50 */
                                bool          reuse_address) :                     /* = false */
     m_TaskManager(new PLT_TaskManager(max_clients)),
     m_Address(address),
