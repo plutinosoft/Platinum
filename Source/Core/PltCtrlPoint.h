@@ -237,7 +237,7 @@ private:
     friend class PLT_CtrlPointSubscribeEventTask;
 
     NPT_List<NPT_String>                         m_UUIDsToIgnore;
-    NPT_Lock<PLT_CtrlPointListenerList>          m_ListenerList;
+    PLT_CtrlPointListenerList                    m_ListenerList;
     PLT_HttpServer*                              m_EventHttpServer;
     PLT_TaskManager                              m_TaskManager;
     NPT_Mutex                                    m_Lock;
