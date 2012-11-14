@@ -72,7 +72,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
     m_Broadcast(false),
     m_Port(port),
     m_PortRebind(port_rebind),
-    m_ByeByeFirst(false)
+    m_ByeByeFirst(true)
 {
     if (show_ip) {
         NPT_List<NPT_IpAddress> ips;

@@ -526,7 +526,7 @@ PLT_MediaController::Seek(PLT_DeviceDataReference& device,
 bool
 PLT_MediaController::CanSetNextAVTransportURI(PLT_DeviceDataReference &device)
 {
-    if (device.IsNull()) return NPT_ERROR_INVALID_PARAMETERS;
+    if (device.IsNull()) return false;
 
     PLT_ActionDesc* action_desc;
     NPT_Result result = m_CtrlPoint->FindActionDesc(device,

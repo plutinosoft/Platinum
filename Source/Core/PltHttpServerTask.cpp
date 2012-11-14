@@ -60,7 +60,7 @@ PLT_HttpServerSocketTask::PLT_HttpServerSocketTask(NPT_Socket* socket,
     // needed for PS3 that is some case will request data every 35 secs and 
     // won't like it if server disconnected too early
     m_Socket->SetReadTimeout(60000);
-    m_Socket->SetWriteTimeout(60000);
+    m_Socket->SetWriteTimeout(600000);
 }
 
 /*----------------------------------------------------------------------
