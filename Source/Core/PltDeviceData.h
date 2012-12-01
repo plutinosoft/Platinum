@@ -144,7 +144,9 @@ protected:
     NPT_Result         SetLeaseTime(NPT_TimeInterval lease_time, NPT_TimeStamp lease_time_last_update = 0.);
 
 private:
-    /* called by PLT_CtrlPoint when new device is discovered */
+    /* called by PLT_CtrlPoint when an existing device location is updated */
+    NPT_Result    SetDescriptionUrl(NPT_HttpUrl& url);
+
     NPT_Result    SetURLBase(NPT_HttpUrl& url_base);
     NPT_TimeStamp GetLeaseTimeLastUpdate();
     

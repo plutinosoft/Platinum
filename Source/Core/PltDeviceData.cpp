@@ -88,13 +88,13 @@ PLT_DeviceData::Cleanup()
 /*----------------------------------------------------------------------
 |   PLT_DeviceData::SetDescriptionUrl
 +---------------------------------------------------------------------*/
-/*NPT_Result
+NPT_Result
 PLT_DeviceData::SetDescriptionUrl(NPT_HttpUrl& url)
 {
     NPT_CHECK_FATAL(SetURLBase(url));
     m_URLDescription = url;
     return NPT_SUCCESS;
-}*/
+}
 
 /*----------------------------------------------------------------------
 |   PLT_DeviceData::GetDescriptionUrl
