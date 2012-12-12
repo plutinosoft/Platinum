@@ -139,8 +139,8 @@ private:
 	PLT_HttpHelper::ToLog((_NPT_LocalLogger), (_level), (_prefix), (_msg))
 
 #else /* NPT_CONFIG_ENABLE_LOGGING */
-#define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _msg)
-#define PLT_LOG_HTTP_MESSAGE(_level, _msg)
+#define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _prefix, _msg)
+#define PLT_LOG_HTTP_MESSAGE(_level, _prefix, _msg)
 #endif /* NPT_CONFIG_ENABLE_LOGGING */
 
 /*----------------------------------------------------------------------

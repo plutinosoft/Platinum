@@ -1,8 +1,17 @@
+Platinum 1.0.3.1
+----------------
+- changed: increased timeout for write io http server tasks to prevent PS3 from disconnecting too early (60 secs is not enough apparently)
+- changed: put back announcing bye-bye first.
+- fixed: http logger defines when not using logging
+- fixed: scons build for macosx
+- fixed: locking for 30 secs when stopping UPnP if sockets are in the middle of a connection than hangs.
+
 Platinum 1.0.3.0
 ----------------
 - fixed: potential deadlock when subscribing to a service from the delegate upon being notified a device is ready
 - fixed: crash when device disappears while processing an event notification
 - changed: made posix mutexes recursive to simplify PLT_CtrlPoint implementation
+- changed: don't update device base url when receiving a SSDP Notify with a different IP as it could be unreachable.
 
 Platinum 1.0.2.1
 ----------------
