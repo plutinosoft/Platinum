@@ -630,11 +630,11 @@ public:
     
     static NPT_Result GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& if_list, 
                                            bool with_localhost = false) {
-        NPT_CHECK(_GetNetworkInterfaces(if_list, false));
+        NPT_CHECK(_GetNetworkInterfaces(if_list, with_localhost, false));
         
         // if no valid interfaces or if requested, add localhost interface
-        if (if_list.GetItemCount() == 0 || with_localhost) {
-            NPT_CHECK(_GetNetworkInterfaces(if_list, true));
+        if (if_list.GetItemCount() == 0) {
+            NPT_CHECK(_GetNetworkInterfaces(if_list, true, true));
         }
         return NPT_SUCCESS;
     }
@@ -675,7 +675,8 @@ public:
     
 private:
     
-    static NPT_Result _GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& if_list, 
+    static NPT_Result _GetNetworkInterfaces(NPT_List<NPT_NetworkInterface*>& if_list,
+                                            bool include_localhost = false,
                                             bool only_localhost = false) {
         NPT_List<NPT_NetworkInterface*> _if_list;
         NPT_CHECK(NPT_NetworkInterface::GetNetworkInterfaces(_if_list));
@@ -683,23 +684,26 @@ private:
         NPT_NetworkInterface* iface;
         while (NPT_SUCCEEDED(_if_list.PopHead(iface))) {
             // only interested in non PTP & multicast capable interfaces
-            if ((iface->GetAddresses().GetItemCount() == 0)||
-                (!(iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST)) ||
-                (iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_POINT_TO_POINT)) {
+            if ((iface->GetAddresses().GetItemCount() == 0) ||
+                !(iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_MULTICAST) ||
+                 (iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_POINT_TO_POINT)) {
                 delete iface;
                 continue;
             }
             
             NPT_String ip = iface->GetAddresses().GetFirstItem()->GetPrimaryAddress().ToString();
             
-            if (only_localhost && (iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_LOOPBACK)) {
+            if (iface->GetFlags() & NPT_NETWORK_INTERFACE_FLAG_LOOPBACK) {
+                if (include_localhost || only_localhost) {
+                    if_list.Add(iface);
+                    continue;
+                }
+            } else if (ip.Compare("0.0.0.0") && !only_localhost) {
                 if_list.Add(iface);
-                break;
-            } else  if (ip.Compare("0.0.0.0")) {
-                if_list.Add(iface);
-            } else {
-                delete iface;
+                continue;
             }
+            
+            delete iface;
         }
         
         // cleanup any remaining items in list if we breaked early
