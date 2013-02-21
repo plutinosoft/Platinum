@@ -562,8 +562,8 @@ PLT_CtrlPoint::DoHouseKeeping()
     // and to avoid a deadlock with tasks trying to acquire the lock in the response
     NPT_List<PLT_ThreadTask*>::Iterator task = tasks.GetFirstItem();
     while (task) {
-        m_TaskManager.StartTask(*task);
-        task++;
+        PLT_ThreadTask* _task = *task++;
+        m_TaskManager.StartTask(_task);
     }
     
     return NPT_SUCCESS;

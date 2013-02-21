@@ -434,10 +434,7 @@ PLT_HttpListenTask::DoRun()
             break;
         } else {
             PLT_ThreadTask* task = new PLT_HttpServerTask(m_Handler, client);
-            if (NPT_FAILED(m_TaskManager->StartTask(task))) {
-                task->Kill();
-                delete client;
-            }
+            m_TaskManager->StartTask(task);
         }
     }
 }
