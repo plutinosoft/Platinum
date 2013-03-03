@@ -1,3 +1,17 @@
+Platinum 1.0.4.2
+----------------
+- fixed: Potential leaks and crash when tasks failed to start due to UPnP entire stack shutting down.
+
+Platinum 1.0.4.1
+----------------
+- fixed: Slow shutting down.
+
+Platinum 1.0.4.0
+----------------
+- changed: Windows sockets are now fully cancellable.
+- fixed: crash when closing due to static cleanup orders when using TLS, possible leak instead. Proper fix in the works
+- fixed: potential cause for crash during socket cancellation due to references not carrying over thread safety
+
 Platinum 1.0.3.1
 ----------------
 - changed: increased timeout for write io http server tasks to prevent PS3 from disconnecting too early (60 secs is not enough apparently)

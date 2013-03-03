@@ -421,7 +421,7 @@ PLT_HttpListenTask::DoRun()
 {
     while (!IsAborting(0)) {
         NPT_Socket* client = NULL;
-        NPT_Result  result = m_Socket->WaitForNewClient(client, 5000);
+        NPT_Result  result = m_Socket->WaitForNewClient(client, 5000, NPT_SOCKET_FLAG_CANCELLABLE);
         if (NPT_FAILED(result)) {
             // cleanup just in case
             if (client) delete client;
@@ -434,10 +434,7 @@ PLT_HttpListenTask::DoRun()
             break;
         } else {
             PLT_ThreadTask* task = new PLT_HttpServerTask(m_Handler, client);
-            if (NPT_FAILED(m_TaskManager->StartTask(task))) {
-                task->Kill();
-                delete client;
-            }
+            m_TaskManager->StartTask(task);
         }
     }
 }

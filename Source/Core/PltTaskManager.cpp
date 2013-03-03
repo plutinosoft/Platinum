@@ -142,7 +142,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
             if (!m_Queue) m_Queue = new NPT_Queue<int>(m_MaxTasks);
 
             // try to add to queue but don't block forever if queue is full
-            result = m_Queue->Push(new int, 100);
+            result = m_Queue->Push(new int, 20);
             if (NPT_SUCCEEDED(result)) break;
 
             // release lock if it's a failure
@@ -161,7 +161,11 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
     // start task now
     if (NPT_FAILED(result = task->StartThread())) {
         m_TasksLock.Unlock();
-        NPT_CHECK_WARNING(result);
+        
+        // Remove task from queue and delete task if autodestroy is set
+        RemoveTask(task);
+
+        return result;
     }
 
     NPT_LOG_FINER_3("[TaskManager 0x%08x] %d/%d running tasks", this, ++m_RunningTasks, m_MaxTasks);
