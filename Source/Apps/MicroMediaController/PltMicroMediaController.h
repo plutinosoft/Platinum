@@ -90,7 +90,7 @@ public:
     bool OnMRAdded(PLT_DeviceDataReference& device);
     void OnMRRemoved(PLT_DeviceDataReference& device);
     void OnMRStateVariablesChanged(PLT_Service* /* service */, 
-                                   NPT_List<PLT_StateVariable*>* /* vars */) {};
+                                   NPT_List<PLT_StateVariable*>* /* vars */);
 
 private:
     const char* ChooseIDFromTable(PLT_StringMap& table);

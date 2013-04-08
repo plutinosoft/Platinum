@@ -232,6 +232,25 @@ PLT_MicroMediaController::OnMRRemoved(PLT_DeviceDataReference& device)
 }
 
 /*----------------------------------------------------------------------
+|   PLT_MicroMediaController::OnMRStateVariablesChanged
++---------------------------------------------------------------------*/
+void
+PLT_MicroMediaController::OnMRStateVariablesChanged(PLT_Service*                  service,
+                                                    NPT_List<PLT_StateVariable*>* vars)
+{
+    NPT_String uuid = service->GetDevice()->GetUUID();
+    NPT_List<PLT_StateVariable*>::Iterator var = vars->GetFirstItem();
+    while (var) {
+        printf("Received state var \"%s:%s:%s\" changes: \"%s\"\n",
+               (const char*)uuid,
+               (const char*)service->GetServiceID(),
+               (const char*)(*var)->GetName(),
+               (const char*)(*var)->GetValue());
+        ++var;
+    }
+}
+
+/*----------------------------------------------------------------------
 |   PLT_MicroMediaController::ChooseIDGetCurMediaServerFromTable
 +---------------------------------------------------------------------*/
 void
