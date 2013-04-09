@@ -811,6 +811,7 @@ PLT_CtrlPoint::ProcessEventNotification(PLT_EventSubscriberReference subscriber,
     // independent state variable updates
     DecomposeLastChangeVar(vars);
     
+    delete xml;
     return NPT_SUCCESS;
 
 failure:

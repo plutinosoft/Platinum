@@ -126,6 +126,7 @@ NPT_Result
 PLT_TaskManager::AddTask(PLT_ThreadTask* task) 
 {
     NPT_Result result = NPT_SUCCESS;
+    int *val = new int;
 
     // verify we're not stopping or maxed out number of running tasks
     do {
@@ -142,7 +143,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
             if (!m_Queue) m_Queue = new NPT_Queue<int>(m_MaxTasks);
 
             // try to add to queue but don't block forever if queue is full
-            result = m_Queue->Push(new int, 20);
+            result = m_Queue->Push(val, 20);
             if (NPT_SUCCEEDED(result)) break;
 
             // release lock if it's a failure
@@ -153,6 +154,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
             // if it failed due to something other than a timeout
             // it probably means the queue is aborting
             if (result != NPT_ERROR_TIMEOUT) {
+                delete val;
                 NPT_CHECK_WARNING(result);
             }
         }
