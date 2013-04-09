@@ -126,7 +126,7 @@ NPT_Result
 PLT_TaskManager::AddTask(PLT_ThreadTask* task) 
 {
     NPT_Result result = NPT_SUCCESS;
-    int *val = new int;
+    int *val = NULL;
 
     // verify we're not stopping or maxed out number of running tasks
     do {
@@ -140,7 +140,12 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
         }
         
         if (m_MaxTasks) {
-            if (!m_Queue) m_Queue = new NPT_Queue<int>(m_MaxTasks);
+            val = val?val:new int;
+            
+            if (!m_Queue) {
+                m_Queue = new NPT_Queue<int>(m_MaxTasks);
+            }
+        
 
             // try to add to queue but don't block forever if queue is full
             result = m_Queue->Push(val, 20);
