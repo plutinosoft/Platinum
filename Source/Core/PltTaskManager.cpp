@@ -136,6 +136,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
         // NOTE: this could leak the task if not handled by caller properly
         if (m_Stopping) {
             m_TasksLock.Unlock();
+            if (task->m_AutoDestroy) delete task;
             NPT_CHECK_WARNING(NPT_ERROR_INTERRUPTED);
         }
         
@@ -160,6 +161,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
             // it probably means the queue is aborting
             if (result != NPT_ERROR_TIMEOUT) {
                 delete val;
+                if (task->m_AutoDestroy) delete task;
                 NPT_CHECK_WARNING(result);
             }
         }
