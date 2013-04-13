@@ -61,17 +61,6 @@ int main(void)
 
     // Create upnp engine
     PLT_UPnP upnp;
-    
-#ifdef SIMULATE_XBOX_360
-    // override default headers
-    NPT_HttpClient::m_UserAgentHeader = "Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0";
-    NPT_HttpServer::m_ServerHeader    = "Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0";
-#endif
-
-#ifdef SIMULATE_PS3
-    // TODO: We need a way to add an extra header to all HTTP requests
-    //X-AV-Client-Info: av=5.0; cn="Sony Computer Entertainment Inc."; mn="PLAYSTATION 3"; mv="1.0";
-#endif
 
     // Create control point
     PLT_CtrlPointReference ctrlPoint(new PLT_CtrlPoint());
@@ -111,6 +100,10 @@ int main(void)
 #endif
 
 #ifdef SIMULATE_XBOX_360
+    // override default headers
+    NPT_HttpClient::m_UserAgentHeader = "Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0";
+    NPT_HttpServer::m_ServerHeader    = "Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0";
+    
     // create device
     PLT_DeviceHostReference xbox(new PLT_Xbox360("30848576-1775-2000-0000-00125a8fefad"));
     xbox->SetByeByeFirst(false);
