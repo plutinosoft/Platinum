@@ -133,7 +133,6 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
         m_TasksLock.Lock();
         
         // returning an error if we're stopping
-        // NOTE: this could leak the task if not handled by caller properly
         if (m_Stopping) {
             m_TasksLock.Unlock();
             if (task->m_AutoDestroy) delete task;
