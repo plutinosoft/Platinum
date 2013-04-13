@@ -90,7 +90,6 @@ private:
     NPT_IpPort          m_Port;
     bool                m_AllowRandomPortOnBindFailure;
     bool                m_ReuseAddress;
-    PLT_HttpListenTask* m_HttpListenTask;
     bool                m_Aborted;
 };
 

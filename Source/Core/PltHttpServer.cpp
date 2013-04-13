@@ -58,7 +58,6 @@ PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
     m_Port(port),
     m_AllowRandomPortOnBindFailure(allow_random_port_on_bind_failure),
     m_ReuseAddress(reuse_address),
-    m_HttpListenTask(NULL),
     m_Aborted(false)
 {
 }
@@ -116,9 +115,8 @@ PLT_HttpServer::Start()
     }
     
     // start a task to listen for incoming connections
-    // and keep it around so we can abort the server
-    m_HttpListenTask = new PLT_HttpListenTask(this, &m_Socket, false);
-    m_TaskManager->StartTask(m_HttpListenTask, NULL, false);
+    PLT_HttpListenTask *task = new PLT_HttpListenTask(this, &m_Socket, false);
+    NPT_CHECK_SEVERE(m_TaskManager->StartTask(task));
 
     NPT_SocketInfo info;
     m_Socket.GetInfo(info);
@@ -135,11 +133,6 @@ NPT_Result
 PLT_HttpServer::Stop()
 {
     m_Aborted = true;
-    
-    if (m_HttpListenTask) {
-        m_HttpListenTask->Kill();
-        m_HttpListenTask = NULL;
-    }
 
     // stop all other pending tasks 
     m_TaskManager->StopAllTasks();
