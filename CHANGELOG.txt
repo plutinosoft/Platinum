@@ -1,3 +1,7 @@
+Platinum 1.0.4.3
+----------------
+- fixed: leaks during event processing.
+
 Platinum 1.0.4.2
 ----------------
 - fixed: Potential leaks and crash when tasks failed to start due to UPnP entire stack shutting down.
