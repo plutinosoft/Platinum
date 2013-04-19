@@ -38,7 +38,7 @@
 /*----------------------------------------------------------------------
 |   constants
 +---------------------------------------------------------------------*/
-#define PLT_PLATINUM_SDK_VERSION            0x00010403
-#define PLT_PLATINUM_SDK_VERSION_STRING     "1.0.4.3"
+#define PLT_PLATINUM_SDK_VERSION            0x00010404
+#define PLT_PLATINUM_SDK_VERSION_STRING     "1.0.4.4"
 
 #endif // _PLT_VERSION_H_
