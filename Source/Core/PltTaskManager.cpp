@@ -135,6 +135,7 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
         // returning an error if we're stopping
         if (m_Stopping) {
             m_TasksLock.Unlock();
+            delete val;
             if (task->m_AutoDestroy) delete task;
             NPT_CHECK_WARNING(NPT_ERROR_INTERRUPTED);
         }
