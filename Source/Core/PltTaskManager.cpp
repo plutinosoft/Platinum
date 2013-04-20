@@ -87,9 +87,11 @@ PLT_TaskManager::StopAllTasks()
             
             // unblock the queue if any by deleting it
             if (m_Queue) {
-                NPT_Queue<int>* queue = m_Queue;
+                int* val = NULL;
+                while(NPT_SUCCEEDED(m_Queue->Pop(val, 0))) delete val;
+                
+                delete m_Queue;
                 m_Queue = NULL;
-                delete queue;
             }
         }
 
