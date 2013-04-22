@@ -46,7 +46,7 @@
 #include <stdlib.h>
 
 //#define HAS_RENDERER 1
-//#define HAS_SERVER 1
+#define HAS_SERVER 1
 //#define SIMULATE_XBOX_360 1
 //#define SIMULATE_PS3 1
 //#define BROADCAST_EXTRA 1
@@ -71,7 +71,7 @@ int main(void)
 #ifdef HAS_SERVER
     // create device
     PLT_DeviceHostReference server(
-        new PLT_FileMediaServer("C:\\Music", 
+        new PLT_FileMediaServer("/Users/sylvain/Documents/AudioFileTests", 
                                 "Platinum UPnP Media Server"));
 
     server->m_ModelDescription = "Platinum File Media Server";
