@@ -62,7 +62,7 @@ class PLT_TaskManager
 public:
     /**
      Create a new Task Manager.
-     @param max_items Maximum number of concurrent tasks that the task manager
+     @param max_tasks Maximum number of concurrent tasks that the task manager
      will allow. When the value is reached, a thread calling AddTask will block until
      a task has finished.
      */
