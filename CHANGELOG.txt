@@ -1,3 +1,15 @@
+Platinum 1.0.4.8
+----------------
+- fixed: leaks during exit by reworking the sequence of singletons automatic destruction.
+- added: now extracts presentationURL from device description.
+- added: can now opt in to use media cache in FileMediaServerTest.
+- fixed: 2008 VS project
+- added: 'down' command to MicroMediaController to download a media locally
+
+Platinum 1.0.4.3
+----------------
+- fixed: leaks during event processing.
+
 Platinum 1.0.4.2
 ----------------
 - fixed: Potential leaks and crash when tasks failed to start due to UPnP entire stack shutting down.

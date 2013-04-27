@@ -87,9 +87,11 @@ PLT_TaskManager::StopAllTasks()
             
             // unblock the queue if any by deleting it
             if (m_Queue) {
-                NPT_Queue<int>* queue = m_Queue;
+                int* val = NULL;
+                while(NPT_SUCCEEDED(m_Queue->Pop(val, 0))) delete val;
+                
+                delete m_Queue;
                 m_Queue = NULL;
-                delete queue;
             }
         }
 
@@ -126,23 +128,30 @@ NPT_Result
 PLT_TaskManager::AddTask(PLT_ThreadTask* task) 
 {
     NPT_Result result = NPT_SUCCESS;
+    int *val = NULL;
 
     // verify we're not stopping or maxed out number of running tasks
     do {
         m_TasksLock.Lock();
         
         // returning an error if we're stopping
-        // NOTE: this could leak the task if not handled by caller properly
         if (m_Stopping) {
             m_TasksLock.Unlock();
+            delete val;
+            if (task->m_AutoDestroy) delete task;
             NPT_CHECK_WARNING(NPT_ERROR_INTERRUPTED);
         }
         
         if (m_MaxTasks) {
-            if (!m_Queue) m_Queue = new NPT_Queue<int>(m_MaxTasks);
+            val = val?val:new int;
+            
+            if (!m_Queue) {
+                m_Queue = new NPT_Queue<int>(m_MaxTasks);
+            }
+        
 
             // try to add to queue but don't block forever if queue is full
-            result = m_Queue->Push(new int, 20);
+            result = m_Queue->Push(val, 20);
             if (NPT_SUCCEEDED(result)) break;
 
             // release lock if it's a failure
@@ -153,6 +162,8 @@ PLT_TaskManager::AddTask(PLT_ThreadTask* task)
             // if it failed due to something other than a timeout
             // it probably means the queue is aborting
             if (result != NPT_ERROR_TIMEOUT) {
+                delete val;
+                if (task->m_AutoDestroy) delete task;
                 NPT_CHECK_WARNING(result);
             }
         }

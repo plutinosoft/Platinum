@@ -94,7 +94,7 @@ class PLT_DeviceData
 {
 public:
     PLT_DeviceData(
-        NPT_HttpUrl      description_url = NPT_HttpUrl(NULL, 0, "/"), 
+        NPT_HttpUrl      description_url = NPT_HttpUrl(NULL, 0, "/description.xml"), 
         const char*      uuid = "",
         NPT_TimeInterval lease_time = *PLT_Constants::GetInstance().GetDefaultDeviceLease(),
         const char*      device_type = "",

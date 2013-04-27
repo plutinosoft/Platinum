@@ -115,8 +115,8 @@ PLT_HttpServer::Start()
     }
     
     // start a task to listen for incoming connections
-    PLT_HttpListenTask *httpListenTask = new PLT_HttpListenTask(this, &m_Socket, false);
-    m_TaskManager->StartTask(httpListenTask);
+    PLT_HttpListenTask *task = new PLT_HttpListenTask(this, &m_Socket, false);
+    NPT_CHECK_SEVERE(m_TaskManager->StartTask(task));
 
     NPT_SocketInfo info;
     m_Socket.GetInfo(info);

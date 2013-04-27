@@ -811,6 +811,7 @@ PLT_CtrlPoint::ProcessEventNotification(PLT_EventSubscriberReference subscriber,
     // independent state variable updates
     DecomposeLastChangeVar(vars);
     
+    delete xml;
     return NPT_SUCCESS;
 
 failure:
@@ -1342,34 +1343,39 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
     NPT_CHECK_LABEL_FATAL(res, bad_response);
     NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
 
+    // log response
     PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // get response body
     res = PLT_HttpHelper::GetBody(*response, desc);
-    NPT_CHECK_LABEL_SEVERE(res, bad_response);
+    NPT_CHECK_SEVERE(res);
 
     // create new root device
-    NPT_CHECK_FATAL(PLT_DeviceData::SetDescription(root_device, leasetime, request.GetUrl(), desc, context));
+    NPT_CHECK_SEVERE(PLT_DeviceData::SetDescription(root_device, leasetime, request.GetUrl(), desc, context));
 
     // make sure root device was not previously queried
     if (NPT_FAILED(FindDevice(root_device->GetUUID(), device))) {
         m_RootDevices.Add(root_device);
             
-        NPT_LOG_INFO_2("Device \"%s\" is now known as \"%s\"", 
+        NPT_LOG_INFO_3("Device \"%s\" is now known as \"%s\" (%s)",
             (const char*)root_device->GetUUID(), 
-            (const char*)root_device->GetFriendlyName());
+            (const char*)root_device->GetFriendlyName(),
+            (const char*)root_device->GetDescriptionUrl(NULL));
 
         // create one single task to fetch all scpds one after the other
         task = new PLT_CtrlPointGetSCPDsTask(this, root_device);
         NPT_CHECK_LABEL_SEVERE(FetchDeviceSCPDs(task, root_device, 0),
-                               bad_response);
+                               cleanup);
 
         // if device has embedded devices, we want to delay fetching scpds
         // just in case there's a chance all the initial NOTIFY bye-bye have
         // not all been received yet which would cause to remove the devices
         // as we're adding them
-        if (root_device->m_EmbeddedDevices.GetItemCount() > 0) delay = 1.f;
-        m_TaskManager.StartTask(task, &delay);
+        if (root_device->m_EmbeddedDevices.GetItemCount() > 0) {
+            delay = 1.f;
+        }
+        NPT_CHECK_LABEL_SEVERE(m_TaskManager.StartTask(task, &delay),
+                               cleanup);
     }
 
     return NPT_SUCCESS;
@@ -1379,6 +1385,7 @@ bad_response:
         (const char*)request.GetUrl().ToString(),
         (const char*)desc);
 
+cleanup:
     if (task) delete task;
     return res;
 }

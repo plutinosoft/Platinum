@@ -92,13 +92,6 @@ PLT_CtrlPointGetSCPDsTask::PLT_CtrlPointGetSCPDsTask(PLT_CtrlPoint*           ct
 }
 
 /*----------------------------------------------------------------------
-|    PLT_CtrlPointGetSCPDsTask::~PLT_CtrlPointGetSCPDsTask
-+---------------------------------------------------------------------*/
-PLT_CtrlPointGetSCPDsTask::~PLT_CtrlPointGetSCPDsTask() 
-{
-}
-
-/*----------------------------------------------------------------------
 |    PLT_CtrlPointGetSCPDsTask::ProcessResponse
 +---------------------------------------------------------------------*/
 NPT_Result 
