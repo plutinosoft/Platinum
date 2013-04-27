@@ -114,7 +114,7 @@ class PLT_CtrlPointGetSCPDsTask : public PLT_HttpClientSocketTask
 {
 public:
     PLT_CtrlPointGetSCPDsTask(PLT_CtrlPoint* ctrl_point, PLT_DeviceDataReference& root_device);
-    virtual ~PLT_CtrlPointGetSCPDsTask();
+    virtual ~PLT_CtrlPointGetSCPDsTask() {}
 
     NPT_Result AddSCPDRequest(PLT_CtrlPointGetSCPDRequest* request) {
         return PLT_HttpClientSocketTask::AddRequest((NPT_HttpRequest*)request);

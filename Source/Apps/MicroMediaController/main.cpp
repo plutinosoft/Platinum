@@ -46,7 +46,7 @@
 #include <stdlib.h>
 
 //#define HAS_RENDERER 1
-#define HAS_SERVER 1
+//#define HAS_SERVER 1
 //#define SIMULATE_XBOX_360 1
 //#define SIMULATE_PS3 1
 //#define BROADCAST_EXTRA 1
@@ -57,7 +57,7 @@
 int main(void)
 {
     // setup Neptune logging
-    NPT_LogManager::GetDefault().Configure("plist:.level=INFO;.handlers=ConsoleHandler;.ConsoleHandler.colors=off;.ConsoleHandler.filter=24");
+    NPT_LogManager::GetDefault().Configure("plist:.level=FINE;.handlers=ConsoleHandler;.ConsoleHandler.colors=off;.ConsoleHandler.filter=24");
 
     // Create upnp engine
     PLT_UPnP upnp;
