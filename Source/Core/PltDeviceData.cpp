@@ -196,6 +196,7 @@ PLT_DeviceData::GetIconUrl(const char* mimetype,
 
     return NormalizeURL(icon.m_UrlPath).ToString();
 }
+
 /*----------------------------------------------------------------------
 |   PLT_DeviceData::SetLeaseTime
 +---------------------------------------------------------------------*/
@@ -526,6 +527,7 @@ PLT_DeviceData::SetDescriptionDevice(PLT_DeviceDataReference&      device,
     PLT_XmlHelper::GetChildText(device_node, "modelURL", device->m_ModelURL);
     PLT_XmlHelper::GetChildText(device_node, "modelNumber", device->m_ModelNumber);
     PLT_XmlHelper::GetChildText(device_node, "serialNumber", device->m_SerialNumber);
+    PLT_XmlHelper::GetChildText(device_node, "presentationURL", device->m_PresentationURL);
 
     // enumerate icons
     NPT_XmlElementNode* iconList = PLT_XmlHelper::GetChild(device_node, "iconList");
