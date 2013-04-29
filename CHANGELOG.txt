@@ -1,3 +1,7 @@
+Platinum 1.0.4.9
+----------------
+- fixed: crash due to uninitialized variables
+
 Platinum 1.0.4.8
 ----------------
 - fixed: leaks during exit by reworking the sequence of singletons automatic destruction.
