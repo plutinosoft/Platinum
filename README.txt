@@ -107,7 +107,7 @@ To build the JNI shared library, you will need to have installed the Android NDK
 > cd <PlatinumKit>/Platinum
 > scons target=arm-android-linux build_config=Release
 
-> cd <PlatinumKit>/Platinum/Source/Platform/Android/modules/platinum/jni
+> cd <PlatinumKit>/Platinum/Source/Platform/Android/module/platinum
 > ndk-build NDK_DEBUG=0
 
 > import eclipse Android .project located @ <PlatinumKit>/Platinum/Source/Platform/Android/modules/platinum/
