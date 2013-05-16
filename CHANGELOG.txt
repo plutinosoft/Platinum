@@ -1,3 +1,7 @@
+Platinum 1.0.4.9
+----------------
+- fixed: crash due to uninitialized variables
+
 Platinum 1.0.4.8
 ----------------
 - fixed: leaks during exit by reworking the sequence of singletons automatic destruction.
@@ -5,6 +9,7 @@ Platinum 1.0.4.8
 - added: can now opt in to use media cache in FileMediaServerTest.
 - fixed: 2008 VS project
 - added: 'down' command to MicroMediaController to download a media locally
+- fixed: interruption during download could happen if non blocking socket was full and returned NPT_ERROR_WOULD_BLOCK. Now retries.
 
 Platinum 1.0.4.3
 ----------------
