@@ -178,14 +178,20 @@ PLT_MicroMediaController::OnMSAdded(PLT_DeviceDataReference& device)
             "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1", 
             "IsAuthorized", 
             action);
-        if (!action.IsNull()) PLT_SyncMediaBrowser::m_CtrlPoint->InvokeAction(action, 0);
+        if (!action.IsNull()) {
+            action->SetArgumentValue("DeviceID", "");
+            PLT_SyncMediaBrowser::m_CtrlPoint->InvokeAction(action, 0);
+        }
 
         PLT_SyncMediaBrowser::m_CtrlPoint->CreateAction(
             device, 
             "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1", 
             "IsValidated", 
             action);
-        if (!action.IsNull()) PLT_SyncMediaBrowser::m_CtrlPoint->InvokeAction(action, 0);
+        if (!action.IsNull()) {
+            action->SetArgumentValue("DeviceID", "");
+            PLT_SyncMediaBrowser::m_CtrlPoint->InvokeAction(action, 0);
+        }
     }
 
     return true; 
