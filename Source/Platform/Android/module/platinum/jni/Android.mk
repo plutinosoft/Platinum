@@ -21,10 +21,10 @@ LOCAL_CFLAGS += -DNPT_CONFIG_ENABLE_LOGGING
 
 LOCAL_LDLIBS += -lPlatinum
 LOCAL_LDLIBS += -lNeptune
-LOCAL_LDLIBS += -laxTls
+LOCAL_LDLIBS += -laxTLS
 
 
-ifeq ($(NDK_DEBUG),1) 
+ifeq ($(NDK_DEBUG),1)
 LOCAL_LDLIBS += -L$(PLT_ROOT)/Build/Targets/arm-android-linux/Debug
 else
 LOCAL_LDLIBS += -L$(PLT_ROOT)/Build/Targets/arm-android-linux/Release
