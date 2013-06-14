@@ -186,6 +186,8 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_TimeInterval delay(((NPT_Int64)NPT_System::GetRandomInteger()%100)*1000000);
 
     // calculate when we should send another announcement
+    // we announce a bit before half way through leasetime to make sure
+    // clients don't expire us.
     NPT_Size leaseTime = (NPT_Size)GetLeaseTime().ToSeconds();
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - 10):30);
