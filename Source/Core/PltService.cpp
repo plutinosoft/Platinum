@@ -414,7 +414,7 @@ PLT_ActionDesc*
 PLT_Service::FindActionDesc(const char* name)
 {
     PLT_ActionDesc* action = NULL;
-    NPT_ContainerFind(m_ActionDescs, PLT_ActionDescNameFinder(this, name), action);
+    NPT_ContainerFind(m_ActionDescs, PLT_ActionDescNameFinder(name), action);
     return action;
 }
 
