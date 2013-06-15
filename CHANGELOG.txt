@@ -1,3 +1,10 @@
+Platinum 1.0.4.10
+-----------------
+- fixed: simplified connection management fixing a potential crash on shutdown
+- fixed: Platinum.framework now contains fat library instead of Mach-o objects.
+- added: HTML help is now part of SDK (instead of zip)
+- fixed: android build was looking for axTls instead axTLS library.
+
 Platinum 1.0.4.9
 ----------------
 - fixed: crash due to uninitialized variables
