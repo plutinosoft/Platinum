@@ -1364,7 +1364,7 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
 
         // create one single task to fetch all scpds one after the other
         task = new PLT_CtrlPointGetSCPDsTask(this, root_device);
-        NPT_CHECK_LABEL_SEVERE(FetchDeviceSCPDs(task, root_device, 0),
+        NPT_CHECK_LABEL_SEVERE(res = FetchDeviceSCPDs(task, root_device, 0),
                                cleanup);
 
         // if device has embedded devices, we want to delay fetching scpds
@@ -1374,8 +1374,8 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
         if (root_device->m_EmbeddedDevices.GetItemCount() > 0) {
             delay = 1.f;
         }
-        NPT_CHECK_LABEL_SEVERE(m_TaskManager.StartTask(task, &delay),
-                               cleanup);
+        NPT_CHECK_LABEL_SEVERE(res = m_TaskManager.StartTask(task, &delay),
+                               failure);
     }
 
     return NPT_SUCCESS;
@@ -1387,6 +1387,8 @@ bad_response:
 
 cleanup:
     if (task) delete task;
+    
+failure:
     return res;
 }
 
