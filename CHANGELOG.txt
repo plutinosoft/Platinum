@@ -1,3 +1,8 @@
+Platinum 1.0.4.11
+-----------------
+- fixed: crash when stopping UPnP while scheduling for scpd retrieval
+- fixed: rare crash when stopping UPnP while connections are opened.
+
 Platinum 1.0.4.10
 -----------------
 - fixed: simplified connection management fixing a potential crash on shutdown
