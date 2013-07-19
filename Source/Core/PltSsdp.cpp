@@ -482,7 +482,10 @@ PLT_SsdpSearchTask::DoRun()
                 response = NULL;
             } else if (res != NPT_ERROR_TIMEOUT) {
                 NPT_LOG_WARNING_1("PLT_SsdpSearchTask got an error (%d) waiting for response", res);
-                NPT_System::Sleep(NPT_TimeInterval(.5f));
+                if (IsAborting(0))
+                    break;
+                
+                NPT_System::Sleep(NPT_TimeInterval(.15f));
             }
 
             input_stream = NULL;
