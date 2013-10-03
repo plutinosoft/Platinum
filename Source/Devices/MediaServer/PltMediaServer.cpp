@@ -92,7 +92,8 @@ PLT_MediaServer::~PLT_MediaServer()
 NPT_Result
 PLT_MediaServer::SetupServices()
 {
-    PLT_Service* service;
+    PLT_Service* service = NULL;
+    NPT_Result res;
 
     {
         service = new PLT_Service(
@@ -100,8 +101,8 @@ PLT_MediaServer::SetupServices()
             "urn:schemas-upnp-org:service:ContentDirectory:1", 
             "urn:upnp-org:serviceId:ContentDirectory",
             "ContentDirectory");
-        NPT_CHECK_FATAL(service->SetSCPDXML((const char*) MS_ContentDirectorywSearchSCPD));
-        NPT_CHECK_FATAL(AddService(service));
+        NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) MS_ContentDirectorywSearchSCPD), failure);
+        NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
         
         service->SetStateVariable("ContainerUpdateIDs", "");
         service->SetStateVariableRate("ContainerUpdateIDs", NPT_TimeInterval(2.));
@@ -117,8 +118,8 @@ PLT_MediaServer::SetupServices()
             "urn:schemas-upnp-org:service:ConnectionManager:1", 
             "urn:upnp-org:serviceId:ConnectionManager",
             "ConnectionManager");
-        NPT_CHECK_FATAL(service->SetSCPDXML((const char*) MS_ConnectionManagerSCPD));
-        NPT_CHECK_FATAL(AddService(service));
+        NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) MS_ConnectionManagerSCPD), failure);
+        NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
         
         service->SetStateVariable("CurrentConnectionIDs", "0");
         service->SetStateVariable("SinkProtocolInfo", "");
@@ -126,6 +127,10 @@ PLT_MediaServer::SetupServices()
     }
 
     return NPT_SUCCESS;
+    
+failure:
+    delete service;
+    return res;
 }
 
 /*----------------------------------------------------------------------
