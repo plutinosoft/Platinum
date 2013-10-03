@@ -73,14 +73,15 @@ PLT_MediaConnect::~PLT_MediaConnect()
 NPT_Result
 PLT_MediaConnect::SetupServices()
 {
+    NPT_Result res;
 	PLT_Service *service = new PLT_Service(
         this,
         "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1", 
         "urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar",
         "X_MS_MediaReceiverRegistrar");
 
-    NPT_CHECK_FATAL(service->SetSCPDXML((const char*) X_MS_MediaReceiverRegistrarSCPD));
-    NPT_CHECK_FATAL(AddService(service));
+    NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) X_MS_MediaReceiverRegistrarSCPD), failure);
+    NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
 
     service->SetStateVariable("AuthorizationGrantedUpdateID", "1");
     service->SetStateVariable("AuthorizationDeniedUpdateID", "1");
@@ -88,6 +89,10 @@ PLT_MediaConnect::SetupServices()
     service->SetStateVariable("ValidationRevokedUpdateID", "0");
 
     return PLT_MediaServer::SetupServices();
+    
+failure:
+    delete service;
+    return res;
 }
 
 /*----------------------------------------------------------------------

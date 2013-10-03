@@ -84,7 +84,8 @@ PLT_MediaRenderer::~PLT_MediaRenderer()
 NPT_Result
 PLT_MediaRenderer::SetupServices()
 {
-    PLT_Service* service;
+    PLT_Service* service = NULL;
+    NPT_Result res;
 
     {
         /* AVTransport */
@@ -94,8 +95,8 @@ PLT_MediaRenderer::SetupServices()
             "urn:upnp-org:serviceId:AVTransport",
             "AVTransport",
             "urn:schemas-upnp-org:metadata-1-0/AVT/");
-        NPT_CHECK_FATAL(service->SetSCPDXML((const char*) RDR_AVTransportSCPD));
-        NPT_CHECK_FATAL(AddService(service));
+        NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) RDR_AVTransportSCPD), failure);
+        NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
 
         service->SetStateVariableRate("LastChange", NPT_TimeInterval(0.2f));
         service->SetStateVariable("A_ARG_TYPE_InstanceID", "0"); 
@@ -157,8 +158,8 @@ PLT_MediaRenderer::SetupServices()
             "urn:schemas-upnp-org:service:ConnectionManager:1", 
             "urn:upnp-org:serviceId:ConnectionManager",
             "ConnectionManager");
-        NPT_CHECK_FATAL(service->SetSCPDXML((const char*) RDR_ConnectionManagerSCPD));
-        NPT_CHECK_FATAL(AddService(service));
+        NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) RDR_ConnectionManagerSCPD), failure);
+        NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
 
         service->SetStateVariable("CurrentConnectionIDs", "0");
 
@@ -175,8 +176,8 @@ PLT_MediaRenderer::SetupServices()
             "urn:upnp-org:serviceId:RenderingControl",
             "RenderingControl",
             "urn:schemas-upnp-org:metadata-1-0/RCS/");
-        NPT_CHECK_FATAL(service->SetSCPDXML((const char*) RDR_RenderingControlSCPD));
-        NPT_CHECK_FATAL(AddService(service));
+        NPT_CHECK_LABEL_FATAL(res = service->SetSCPDXML((const char*) RDR_RenderingControlSCPD), failure);
+        NPT_CHECK_LABEL_FATAL(res = AddService(service), failure);
 
         service->SetStateVariableRate("LastChange", NPT_TimeInterval(0.2f));
 
@@ -191,6 +192,10 @@ PLT_MediaRenderer::SetupServices()
     }
 
     return NPT_SUCCESS;
+    
+failure:
+    delete service;
+    return res;
 }
 
 /*----------------------------------------------------------------------
