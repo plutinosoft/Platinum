@@ -53,7 +53,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a4451baa8e5e7666aa486c03c3baf211a</Anchor>
-    <Abstract>Constructor.</Abstract>
+    <Abstract>Constructor. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -65,7 +65,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a14c3570a7bf2bd659811f433a634afdd</Anchor>
-    <Abstract>Constructor.</Abstract>
+    <Abstract>Constructor. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -77,7 +77,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a80c5ce730ddc67d59e4f6e697e0f5ca2</Anchor>
-    <Abstract>Called by a control point when serializing an action.</Abstract>
+    <Abstract>Called by a control point when serializing an action. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -89,7 +89,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>aac7687204c5eb527a2ad5d32d63a7802</Anchor>
-    <Abstract>Called by a device when serializing a response to an action.</Abstract>
+    <Abstract>Called by a device when serializing a response to an action. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -101,7 +101,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a896f75aedd80676182becc7760451bb9</Anchor>
-    <Abstract>Return the action description.</Abstract>
+    <Abstract>Return the action description. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -113,7 +113,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>ae9257a72ae5dd3c7e69e607582be6d18</Anchor>
-    <Abstract>Retrieve the string value of an argument given an argument name.</Abstract>
+    <Abstract>Retrieve the string value of an argument given an argument name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -125,7 +125,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a99f233815a45a82119197ae7aa06ff1e</Anchor>
-    <Abstract>Retrieve the value of an argument given an argument name.</Abstract>
+    <Abstract>Retrieve the value of an argument given an argument name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -137,7 +137,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a1e2ac290674064fcdf41fff3c1c6cd34</Anchor>
-    <Abstract>Retrieve the value of an argument given an argument name.</Abstract>
+    <Abstract>Retrieve the value of an argument given an argument name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -149,7 +149,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a8a30f97ece6feeaaf3ee74e237002dd4</Anchor>
-    <Abstract>Retrieve the value of an argument given an argument name.</Abstract>
+    <Abstract>Retrieve the value of an argument given an argument name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -161,7 +161,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>aa019d123a443906ee3338c9744f90d40</Anchor>
-    <Abstract>Return the error description and code for the failed action.</Abstract>
+    <Abstract>Return the error description and code for the failed action. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -173,7 +173,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>ad3dd41b89136cee1ee4e0753b32b2540</Anchor>
-    <Abstract>Return the error code for the failed action.</Abstract>
+    <Abstract>Return the error code for the failed action. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -185,7 +185,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a570d075a36452d6dd6ca618389f722df</Anchor>
-    <Abstract>Set the output argument value from the associated current state variable value.</Abstract>
+    <Abstract>Set the output argument value from the associated current state variable value. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -197,7 +197,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a0fdbbc24df47bcd2243412812c948533</Anchor>
-    <Abstract>Set all the output argument values associated with state variables.</Abstract>
+    <Abstract>Set all the output argument values associated with state variables. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -209,7 +209,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a5bdaaa01987f7bc2eaea1718a812703f</Anchor>
-    <Abstract>Set an argument value.</Abstract>
+    <Abstract>Set an argument value. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -221,7 +221,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a840deef20e0d94956255df9e16f65617</Anchor>
-    <Abstract>Set the error code and description in case of failure.</Abstract>
+    <Abstract>Set the error code and description in case of failure. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -233,7 +233,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>ad46c47961a64e3b37ad48be3fa45a27a</Anchor>
-    <Abstract>Verify that all required arguments are set.</Abstract>
+    <Abstract>Verify that all required arguments are set. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -245,7 +245,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>a5bde53dc7977cf0d7814cfb144e04680</Anchor>
-    <Abstract>Verify a value is valid for a given argument.</Abstract>
+    <Abstract>Verify a value is valid for a given argument. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -257,7 +257,7 @@
     </TokenIdentifier>
     <Path>classPLT__Action.html</Path>
     <Anchor>aaf724c7f6383f3894380e36a14e405d0</Anchor>
-    <Abstract>Helper method for a device to serialize an action invocation error.</Abstract>
+    <Abstract>Helper method for a device to serialize an action invocation error. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -268,7 +268,7 @@
       <Scope>PLT_ActionDesc</Scope>
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
-    <Abstract>The PLT_ActionDesc class provides information about a UPnP Service given action.</Abstract>
+    <Abstract>The PLT_ActionDesc class provides information about a UPnP Service given action. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -280,7 +280,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>a7a84f40735417810bdf4d15a7fc1658b</Anchor>
-    <Abstract>Constructor.</Abstract>
+    <Abstract>Constructor. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -292,7 +292,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>ae47fd728704534371b0d6944dd7743ff</Anchor>
-    <Abstract>Look for an argument given a name.</Abstract>
+    <Abstract>Look for an argument given a name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -304,7 +304,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>a0148967346dd2bd4b23d3218730526a2</Anchor>
-    <Abstract>Return an array of arguments.</Abstract>
+    <Abstract>Return an array of arguments. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -316,7 +316,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>af3bc5ebb6539e91632c8f033713c74bc</Anchor>
-    <Abstract>Return the action name.</Abstract>
+    <Abstract>Return the action name. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -328,7 +328,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>a1b5032f9ea8883aaf1e9d5e5cb42b7be</Anchor>
-    <Abstract>Serialize action information to xml into an existing xml tree.</Abstract>
+    <Abstract>Serialize action information to xml into an existing xml tree. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -340,7 +340,7 @@
     </TokenIdentifier>
     <Path>classPLT__ActionDesc.html</Path>
     <Anchor>a113915ac135333c800b8f5f8ca75c3d3</Anchor>
-    <Abstract>Return the service the action is associated with.</Abstract>
+    <Abstract>Return the service the action is associated with. </Abstract>
     <DeclaredIn>PltAction.h</DeclaredIn>
   </Token>
   <Token>
@@ -417,7 +417,7 @@
       <Scope>PLT_Constants</Scope>
     </TokenIdentifier>
     <Path>classPLT__Constants.html</Path>
-    <Abstract>The PLT_Constants class provides a way to globally set or get certain UPnP constants.</Abstract>
+    <Abstract>The PLT_Constants class provides a way to globally set or get certain UPnP constants. </Abstract>
     <DeclaredIn>PltConstants.h</DeclaredIn>
   </Token>
   <Token>
@@ -428,7 +428,7 @@
       <Scope>PLT_CtrlPoint</Scope>
     </TokenIdentifier>
     <Path>classPLT__CtrlPoint.html</Path>
-    <Abstract>The PLT_CtrlPoint class implements the base functionality of a UPnP ControlPoint.</Abstract>
+    <Abstract>The PLT_CtrlPoint class implements the base functionality of a UPnP ControlPoint. ...</Abstract>
     <DeclaredIn>PltCtrlPoint.h</DeclaredIn>
   </Token>
   <Token>
@@ -440,7 +440,7 @@
     </TokenIdentifier>
     <Path>classPLT__CtrlPoint.html</Path>
     <Anchor>a7cca149a94adb33c75fecee9ddc17274</Anchor>
-    <Abstract>Returns the port used by the internal HTTP server for all incoming event notifications.</Abstract>
+    <Abstract>Returns the port used by the internal HTTP server for all incoming event notifications. </Abstract>
     <DeclaredIn>PltCtrlPoint.h</DeclaredIn>
   </Token>
   <Token>
@@ -475,7 +475,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -487,7 +487,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -533,7 +533,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -545,7 +545,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -568,7 +568,7 @@
     </TokenIdentifier>
     <Path>classPLT__CtrlPointHouseKeepingTask.html</Path>
     <Anchor>a89786671ff392006a9665b15128fb19b</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltCtrlPointTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -580,7 +580,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -604,7 +604,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a9b15125495aafb15fdb3c5fe5c7aa7d6</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -616,7 +616,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -628,7 +628,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -640,7 +640,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -652,7 +652,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -699,7 +699,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -711,7 +711,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -757,7 +757,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -769,7 +769,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -791,7 +791,7 @@
       <Scope>PLT_DeviceDataFinder</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceDataFinder.html</Path>
-    <Abstract>The PLT_DeviceDataFinder class returns a PLT_DeviceData instance given a device UUID.</Abstract>
+    <Abstract>The PLT_DeviceDataFinder class returns a PLT_DeviceData instance given a device UUID. </Abstract>
     <DeclaredIn>PltDeviceData.h</DeclaredIn>
   </Token>
   <Token>
@@ -813,7 +813,7 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Abstract>UPnP Device Host.</Abstract>
+    <Abstract>UPnP Device Host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -825,7 +825,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a591b65703479cd7c013da6eca7d1c249</Anchor>
-    <Abstract>Creates a new instance of UPnP Device Host.</Abstract>
+    <Abstract>Creates a new instance of UPnP Device Host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -837,7 +837,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a915dd042e351e9ea7909ec5fb7c1d457</Anchor>
-    <Abstract>Add UPnP icon information to serve from file system.</Abstract>
+    <Abstract>Add UPnP icon information to serve from file system. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -849,7 +849,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a06b7401e72ecdde48d6f1214be2cc269</Anchor>
-    <Abstract>Add UPnP icon information to serve using static image.</Abstract>
+    <Abstract>Add UPnP icon information to serve using static image. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -861,7 +861,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a311cf4f392f1360386dc54eac8cda6f7</Anchor>
-    <Abstract>Returns the port used by the internal HTTP server for all incoming requests.</Abstract>
+    <Abstract>Returns the port used by the internal HTTP server for all incoming requests. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -885,7 +885,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a698419ac072a2556b8bfc798aaa8457a</Anchor>
-    <Abstract>Sets the lease time.</Abstract>
+    <Abstract>Sets the lease time. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -896,8 +896,8 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Anchor>aa4c742cefc8870b1bf64a9ac1e2ba670</Anchor>
-    <Abstract>Called during SSDP announce.</Abstract>
+    <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
+    <Abstract>Called during SSDP announce. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -921,7 +921,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a7ded32b87840ed8c1bc82856e2457926</Anchor>
-    <Abstract>PLT_SsdpPacketListener method called when a M-SEARCH SSDP packet is received.</Abstract>
+    <Abstract>PLT_SsdpPacketListener method called when a M-SEARCH SSDP packet is received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -933,7 +933,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a6d19198be6e04145d347091c22e74a83</Anchor>
-    <Abstract>This method is called when a control point is requesting the device description.</Abstract>
+    <Abstract>This method is called when a control point is requesting the device description. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -945,7 +945,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a4fd96bc569d9d5abec21c04d91ab4b6a</Anchor>
-    <Abstract>This method is called when a control point is requesting a service SCPD.</Abstract>
+    <Abstract>This method is called when a control point is requesting a service SCPD. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -957,7 +957,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a4430bb0cff4d99f1baeaf875e767e937</Anchor>
-    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received.</Abstract>
+    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -969,7 +969,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>aab39d95992b0238d8078ff1af3056110</Anchor>
-    <Abstract>This method is called when a &amp;quot;POST&amp;quot; request has been received.</Abstract>
+    <Abstract>This method is called when a &amp;quot;POST&amp;quot; request has been received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -981,7 +981,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a462ec402b8a616bf0222ad4d124e5a0f</Anchor>
-    <Abstract>This method is called when a request from a subscriber has been received.</Abstract>
+    <Abstract>This method is called when a request from a subscriber has been received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -993,7 +993,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
-    <Abstract>Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH SSDP request.</Abstract>
+    <Abstract>Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH SSDP request. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1005,7 +1005,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a68b6fcb77b9d4e552014db3c82708354</Anchor>
-    <Abstract>Default implementation for setting up device host.</Abstract>
+    <Abstract>Default implementation for setting up device host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1017,7 +1017,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>aef1285456b0ca57ae1957a1b87af3605</Anchor>
-    <Abstract>Default implementation for registering device icon resources.</Abstract>
+    <Abstract>Default implementation for registering device icon resources. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1029,7 +1029,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>ac051616deee99d5db86d25ca6023a950</Anchor>
-    <Abstract>NPT_HttpRequestHandler method for setting up the response of an incoming HTTP request.</Abstract>
+    <Abstract>NPT_HttpRequestHandler method for setting up the response of an incoming HTTP request. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1041,7 +1041,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a771c8bd5fe317db6699be4dff621fb70</Anchor>
-    <Abstract>Required method for setting up UPnP services of device host (and any embedded).</Abstract>
+    <Abstract>Required method for setting up UPnP services of device host (and any embedded). </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1053,7 +1053,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a07e8a7b833c53f78bec2a037ee45de24</Anchor>
-    <Abstract>Called by PLT_TaskManager when the device is started.</Abstract>
+    <Abstract>Called by PLT_TaskManager when the device is started. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1065,7 +1065,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>add842d9fb2313b16a216e395acae1412</Anchor>
-    <Abstract>Called by PLT_TaskManager when the device is stoped.</Abstract>
+    <Abstract>Called by PLT_TaskManager when the device is stoped. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1076,8 +1076,8 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Anchor>aa6fd84f6b1896a36437895e47aaff018</Anchor>
-    <Abstract>Static method similar to Announce.</Abstract>
+    <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
+    <Abstract>Static method similar to Announce. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1089,7 +1089,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
-    <Abstract>Static method similar to SendSsdpSearchResponse.</Abstract>
+    <Abstract>Static method similar to SendSsdpSearchResponse. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1100,7 +1100,7 @@
       <Scope>PLT_DeviceIcon</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceIcon.html</Path>
-    <Abstract>The PLT_DeviceIcon class represents a given instance of a UPnP device icon.</Abstract>
+    <Abstract>The PLT_DeviceIcon class represents a given instance of a UPnP device icon. </Abstract>
     <DeclaredIn>PltDeviceData.h</DeclaredIn>
   </Token>
   <Token>
@@ -1111,7 +1111,7 @@
       <Scope>PLT_Didl</Scope>
     </TokenIdentifier>
     <Path>classPLT__Didl.html</Path>
-    <Abstract>DIDL manipulation.</Abstract>
+    <Abstract>DIDL manipulation. </Abstract>
     <DeclaredIn>PltDidl.h</DeclaredIn>
   </Token>
   <Token>
@@ -1177,7 +1177,7 @@
       <Scope>PLT_FileMediaServer</Scope>
     </TokenIdentifier>
     <Path>classPLT__FileMediaServer.html</Path>
-    <Abstract>File Media Server.</Abstract>
+    <Abstract>File Media Server. </Abstract>
     <DeclaredIn>PltFileMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1189,7 +1189,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a591b65703479cd7c013da6eca7d1c249</Anchor>
-    <Abstract>Creates a new instance of UPnP Device Host.</Abstract>
+    <Abstract>Creates a new instance of UPnP Device Host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1201,7 +1201,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a915dd042e351e9ea7909ec5fb7c1d457</Anchor>
-    <Abstract>Add UPnP icon information to serve from file system.</Abstract>
+    <Abstract>Add UPnP icon information to serve from file system. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1213,7 +1213,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a06b7401e72ecdde48d6f1214be2cc269</Anchor>
-    <Abstract>Add UPnP icon information to serve using static image.</Abstract>
+    <Abstract>Add UPnP icon information to serve using static image. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1225,7 +1225,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a311cf4f392f1360386dc54eac8cda6f7</Anchor>
-    <Abstract>Returns the port used by the internal HTTP server for all incoming requests.</Abstract>
+    <Abstract>Returns the port used by the internal HTTP server for all incoming requests. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1249,7 +1249,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a698419ac072a2556b8bfc798aaa8457a</Anchor>
-    <Abstract>Sets the lease time.</Abstract>
+    <Abstract>Sets the lease time. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1273,7 +1273,7 @@
     </TokenIdentifier>
     <Path>classPLT__MediaServer.html</Path>
     <Anchor>a5b334b86c2666dfa0b53d8604d87eb41</Anchor>
-    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received.</Abstract>
+    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received. </Abstract>
     <DeclaredIn>PltMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1285,7 +1285,7 @@
     </TokenIdentifier>
     <Path>classPLT__MediaServer.html</Path>
     <Anchor>af1a897792de773486eaed2caf51d4233</Anchor>
-    <Abstract>Required method for setting up UPnP services of device host (and any embedded).</Abstract>
+    <Abstract>Required method for setting up UPnP services of device host (and any embedded). </Abstract>
     <DeclaredIn>PltMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1296,8 +1296,8 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Anchor>aa6fd84f6b1896a36437895e47aaff018</Anchor>
-    <Abstract>Static method similar to Announce.</Abstract>
+    <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
+    <Abstract>Static method similar to Announce. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1309,7 +1309,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
-    <Abstract>Static method similar to SendSsdpSearchResponse.</Abstract>
+    <Abstract>Static method similar to SendSsdpSearchResponse. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1320,7 +1320,7 @@
       <Scope>PLT_FileMediaServerDelegate</Scope>
     </TokenIdentifier>
     <Path>classPLT__FileMediaServerDelegate.html</Path>
-    <Abstract>File Media Server Delegate.</Abstract>
+    <Abstract>File Media Server Delegate. </Abstract>
     <DeclaredIn>PltFileMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1354,7 +1354,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1366,7 +1366,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1378,7 +1378,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1402,7 +1402,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1414,7 +1414,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1426,7 +1426,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1438,7 +1438,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1485,7 +1485,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a831407ed45c6b724d7d1fb3f5c110e89</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1497,7 +1497,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpClientSocketTask.html</Path>
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1508,7 +1508,7 @@
       <Scope>PLT_HttpHelper</Scope>
     </TokenIdentifier>
     <Path>classPLT__HttpHelper.html</Path>
-    <Abstract>The PLT_HttpHelper class is a set of utility functions for manipulating HTTP headers, entities and messages.</Abstract>
+    <Abstract>The PLT_HttpHelper class is a set of utility functions for manipulating HTTP headers, entities and messages. </Abstract>
     <DeclaredIn>PltHttp.h</DeclaredIn>
   </Token>
   <Token>
@@ -1531,7 +1531,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpListenTask.html</Path>
     <Anchor>a69a50b3dca26b0b8946635c931030105</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1543,7 +1543,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpListenTask.html</Path>
     <Anchor>a1b8ba6637c1ce49772ecbf0da72ab8bc</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1555,7 +1555,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1579,7 +1579,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1591,7 +1591,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1603,7 +1603,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1615,7 +1615,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1683,7 +1683,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpServerSocketTask.html</Path>
     <Anchor>ad033c557c409219803476a3517ce290f</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1695,7 +1695,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpServerSocketTask.html</Path>
     <Anchor>add152a624b609a0d14dfd1c6f0e91656</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1707,7 +1707,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1731,7 +1731,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1743,7 +1743,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1755,7 +1755,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1767,7 +1767,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1814,7 +1814,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpServerSocketTask.html</Path>
     <Anchor>ad033c557c409219803476a3517ce290f</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1826,7 +1826,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpServerSocketTask.html</Path>
     <Anchor>add152a624b609a0d14dfd1c6f0e91656</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -1859,7 +1859,7 @@
       <Scope>PLT_MediaBrowser</Scope>
     </TokenIdentifier>
     <Path>classPLT__MediaBrowser.html</Path>
-    <Abstract>The PLT_MediaBrowser class implements a UPnP AV Media Server control point.</Abstract>
+    <Abstract>The PLT_MediaBrowser class implements a UPnP AV Media Server control point. </Abstract>
     <DeclaredIn>PltMediaBrowser.h</DeclaredIn>
   </Token>
   <Token>
@@ -1881,7 +1881,7 @@
       <Scope>PLT_MediaCache</Scope>
     </TokenIdentifier>
     <Path>classPLT__MediaCache.html</Path>
-    <Abstract>The PLT_MediaCache template provides a way to hold references to object in memory.</Abstract>
+    <Abstract>The PLT_MediaCache template provides a way to hold references to object in memory. </Abstract>
     <DeclaredIn>PltMediaCache.h</DeclaredIn>
   </Token>
   <Token>
@@ -1903,7 +1903,7 @@
       <Scope>PLT_MediaItem</Scope>
     </TokenIdentifier>
     <Path>classPLT__MediaItem.html</Path>
-    <Abstract>The PLT_MediaItem class represents a first-level class derived directly from PLT_MediaObject.</Abstract>
+    <Abstract>The PLT_MediaItem class represents a first-level class derived directly from PLT_MediaObject. </Abstract>
     <DeclaredIn>PltMediaItem.h</DeclaredIn>
   </Token>
   <Token>
@@ -1925,7 +1925,7 @@
       <Scope>PLT_MediaObjectList</Scope>
     </TokenIdentifier>
     <Path>classPLT__MediaObjectList.html</Path>
-    <Abstract>The PLT_MediaObjectList class is a list of PLT_MediaObject instances.</Abstract>
+    <Abstract>The PLT_MediaObjectList class is a list of PLT_MediaObject instances. </Abstract>
     <DeclaredIn>PltMediaItem.h</DeclaredIn>
   </Token>
   <Token>
@@ -1936,7 +1936,7 @@
       <Scope>PLT_MediaServer</Scope>
     </TokenIdentifier>
     <Path>classPLT__MediaServer.html</Path>
-    <Abstract>The PLT_MediaServer class implements the base class for a UPnP AV Media Server device.</Abstract>
+    <Abstract>The PLT_MediaServer class implements the base class for a UPnP AV Media Server device. </Abstract>
     <DeclaredIn>PltMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1960,7 +1960,7 @@
     </TokenIdentifier>
     <Path>classPLT__MediaServer.html</Path>
     <Anchor>a5b334b86c2666dfa0b53d8604d87eb41</Anchor>
-    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received.</Abstract>
+    <Abstract>This method is called when a &amp;quot;GET&amp;quot; request for a resource other than the device description, SCPD, or icons has been received. </Abstract>
     <DeclaredIn>PltMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1972,7 +1972,7 @@
     </TokenIdentifier>
     <Path>classPLT__MediaServer.html</Path>
     <Anchor>af1a897792de773486eaed2caf51d4233</Anchor>
-    <Abstract>Required method for setting up UPnP services of device host (and any embedded).</Abstract>
+    <Abstract>Required method for setting up UPnP services of device host (and any embedded). </Abstract>
     <DeclaredIn>PltMediaServer.h</DeclaredIn>
   </Token>
   <Token>
@@ -1983,8 +1983,8 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Anchor>aa4c742cefc8870b1bf64a9ac1e2ba670</Anchor>
-    <Abstract>Called during SSDP announce.</Abstract>
+    <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
+    <Abstract>Called during SSDP announce. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -1996,7 +1996,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a7ded32b87840ed8c1bc82856e2457926</Anchor>
-    <Abstract>PLT_SsdpPacketListener method called when a M-SEARCH SSDP packet is received.</Abstract>
+    <Abstract>PLT_SsdpPacketListener method called when a M-SEARCH SSDP packet is received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2008,7 +2008,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a6d19198be6e04145d347091c22e74a83</Anchor>
-    <Abstract>This method is called when a control point is requesting the device description.</Abstract>
+    <Abstract>This method is called when a control point is requesting the device description. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2020,7 +2020,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a4fd96bc569d9d5abec21c04d91ab4b6a</Anchor>
-    <Abstract>This method is called when a control point is requesting a service SCPD.</Abstract>
+    <Abstract>This method is called when a control point is requesting a service SCPD. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2032,7 +2032,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>aab39d95992b0238d8078ff1af3056110</Anchor>
-    <Abstract>This method is called when a &amp;quot;POST&amp;quot; request has been received.</Abstract>
+    <Abstract>This method is called when a &amp;quot;POST&amp;quot; request has been received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2044,7 +2044,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a462ec402b8a616bf0222ad4d124e5a0f</Anchor>
-    <Abstract>This method is called when a request from a subscriber has been received.</Abstract>
+    <Abstract>This method is called when a request from a subscriber has been received. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2056,7 +2056,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
-    <Abstract>Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH SSDP request.</Abstract>
+    <Abstract>Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH SSDP request. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2068,7 +2068,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a68b6fcb77b9d4e552014db3c82708354</Anchor>
-    <Abstract>Default implementation for setting up device host.</Abstract>
+    <Abstract>Default implementation for setting up device host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2080,7 +2080,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>aef1285456b0ca57ae1957a1b87af3605</Anchor>
-    <Abstract>Default implementation for registering device icon resources.</Abstract>
+    <Abstract>Default implementation for registering device icon resources. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2092,7 +2092,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>ac051616deee99d5db86d25ca6023a950</Anchor>
-    <Abstract>NPT_HttpRequestHandler method for setting up the response of an incoming HTTP request.</Abstract>
+    <Abstract>NPT_HttpRequestHandler method for setting up the response of an incoming HTTP request. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2104,7 +2104,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a07e8a7b833c53f78bec2a037ee45de24</Anchor>
-    <Abstract>Called by PLT_TaskManager when the device is started.</Abstract>
+    <Abstract>Called by PLT_TaskManager when the device is started. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2116,7 +2116,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>add842d9fb2313b16a216e395acae1412</Anchor>
-    <Abstract>Called by PLT_TaskManager when the device is stoped.</Abstract>
+    <Abstract>Called by PLT_TaskManager when the device is stoped. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2128,7 +2128,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a591b65703479cd7c013da6eca7d1c249</Anchor>
-    <Abstract>Creates a new instance of UPnP Device Host.</Abstract>
+    <Abstract>Creates a new instance of UPnP Device Host. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2140,7 +2140,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a915dd042e351e9ea7909ec5fb7c1d457</Anchor>
-    <Abstract>Add UPnP icon information to serve from file system.</Abstract>
+    <Abstract>Add UPnP icon information to serve from file system. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2152,7 +2152,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a06b7401e72ecdde48d6f1214be2cc269</Anchor>
-    <Abstract>Add UPnP icon information to serve using static image.</Abstract>
+    <Abstract>Add UPnP icon information to serve using static image. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2164,7 +2164,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a311cf4f392f1360386dc54eac8cda6f7</Anchor>
-    <Abstract>Returns the port used by the internal HTTP server for all incoming requests.</Abstract>
+    <Abstract>Returns the port used by the internal HTTP server for all incoming requests. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2188,7 +2188,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>a698419ac072a2556b8bfc798aaa8457a</Anchor>
-    <Abstract>Sets the lease time.</Abstract>
+    <Abstract>Sets the lease time. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2199,8 +2199,8 @@
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
-    <Anchor>aa6fd84f6b1896a36437895e47aaff018</Anchor>
-    <Abstract>Static method similar to Announce.</Abstract>
+    <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
+    <Abstract>Static method similar to Announce. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2212,7 +2212,7 @@
     </TokenIdentifier>
     <Path>classPLT__DeviceHost.html</Path>
     <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
-    <Abstract>Static method similar to SendSsdpSearchResponse.</Abstract>
+    <Abstract>Static method similar to SendSsdpSearchResponse. </Abstract>
     <DeclaredIn>PltDeviceHost.h</DeclaredIn>
   </Token>
   <Token>
@@ -2245,7 +2245,7 @@
       <Scope>PLT_ObjectClass</Scope>
     </TokenIdentifier>
     <Path>structPLT__ObjectClass.html</Path>
-    <Abstract>The PLT_ObjectClass struct is used to assign a type to a PLT_MediaObject.</Abstract>
+    <Abstract>The PLT_ObjectClass struct is used to assign a type to a PLT_MediaObject. </Abstract>
     <DeclaredIn>PltMediaItem.h</DeclaredIn>
   </Token>
   <Token>
@@ -2278,7 +2278,7 @@
       <Scope>PLT_Service</Scope>
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
-    <Abstract>UPnP Service.</Abstract>
+    <Abstract>UPnP Service. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2290,7 +2290,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>aba52272bc129a953e3b6f82343efe117</Anchor>
-    <Abstract>Create an instance of a UPnP Service either hosted or discovered.</Abstract>
+    <Abstract>Create an instance of a UPnP Service either hosted or discovered. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2302,7 +2302,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>aad94aa1f6730fa87d7c9c50b273c4b7a</Anchor>
-    <Abstract>Return the PLT_ActionDesc given an action name.</Abstract>
+    <Abstract>Return the PLT_ActionDesc given an action name. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2314,7 +2314,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>ad40fe78b581d19dc61f844df94a0e3bc</Anchor>
-    <Abstract>Return the PLT_StateVariable pointer given a state variable name.</Abstract>
+    <Abstract>Return the PLT_StateVariable pointer given a state variable name. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2338,7 +2338,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a86045000e08335d7f403bdd82bc8d5df</Anchor>
-    <Abstract>Return an array of actions descriptions PLT_ActionDesc.</Abstract>
+    <Abstract>Return an array of actions descriptions PLT_ActionDesc. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2350,7 +2350,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a0a309c882887a29f85d76de6783bec14</Anchor>
-    <Abstract>Return the Control url associated with this service.</Abstract>
+    <Abstract>Return the Control url associated with this service. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2362,7 +2362,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a9caaaff70206431d059311f7d5e5921e</Anchor>
-    <Abstract>Populate the UPnP Device description document with service information.</Abstract>
+    <Abstract>Populate the UPnP Device description document with service information. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2374,7 +2374,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a9015a39bcc6c1e18e2b7b44a3e13dea8</Anchor>
-    <Abstract>Return the PLT_DeviceData* the service is associated with.</Abstract>
+    <Abstract>Return the PLT_DeviceData* the service is associated with. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2386,7 +2386,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a5f5429286478d899fce77e66737479a2</Anchor>
-    <Abstract>Return the Event subscription url associated with this service.</Abstract>
+    <Abstract>Return the Event subscription url associated with this service. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2398,7 +2398,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a5874cdf710621cc059f4f5de1d97ee31</Anchor>
-    <Abstract>Return the SCPD url associated with this service.</Abstract>
+    <Abstract>Return the SCPD url associated with this service. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2410,7 +2410,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a4d35ef34e3e240b7a89d55e1f827d3ca</Anchor>
-    <Abstract>Return the service SCPD xml document.</Abstract>
+    <Abstract>Return the service SCPD xml document. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2422,7 +2422,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a4b1050ca90463dbc64ca362346b2957b</Anchor>
-    <Abstract>Return the service id.</Abstract>
+    <Abstract>Return the service id. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2434,7 +2434,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a615554808c3b06598038c1e9658e1fd9</Anchor>
-    <Abstract>Return the service friendly name.</Abstract>
+    <Abstract>Return the service friendly name. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2446,7 +2446,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>aa9a2af0550c50e34a7e826b775fc66e4</Anchor>
-    <Abstract>Return the service type.</Abstract>
+    <Abstract>Return the service type. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2458,7 +2458,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a294f32359568874d9d8a0e4d0994517b</Anchor>
-    <Abstract>Return the list of state variables.</Abstract>
+    <Abstract>Return the list of state variables. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2470,7 +2470,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a9961f9bef1be4a70fb1aa113a71b6c59</Anchor>
-    <Abstract>Return the state variable value given a state variable name.</Abstract>
+    <Abstract>Return the state variable value given a state variable name. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2482,7 +2482,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a33efcee89b6b58a67759fb8281177f09</Anchor>
-    <Abstract>Helper function to increment a state variable representing a number.</Abstract>
+    <Abstract>Helper function to increment a state variable representing a number. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2506,7 +2506,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>ac4f38b21bfb5dee3558679d11ad6cf43</Anchor>
-    <Abstract>Return whether a service is capable of sending events.</Abstract>
+    <Abstract>Return whether a service is capable of sending events. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2518,7 +2518,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a1170a00ab4f6babcae36a4d09d4cb6fe</Anchor>
-    <Abstract>Verify the service has been properly initialized or is a valid discovered service.</Abstract>
+    <Abstract>Verify the service has been properly initialized or is a valid discovered service. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2554,7 +2554,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>ae3fe41adf051ffee6bbe50ab36f83d7f</Anchor>
-    <Abstract>Set the SCPD url for control points to be able to fetch the SCPD xml document.</Abstract>
+    <Abstract>Set the SCPD url for control points to be able to fetch the SCPD xml document. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2566,7 +2566,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a112845eef4824867a312651d38b2fa6a</Anchor>
-    <Abstract>Set the service SCPD xml document.</Abstract>
+    <Abstract>Set the service SCPD xml document. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2578,7 +2578,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a24d88544d586588c287989d3f0d6c779</Anchor>
-    <Abstract>Set a new value for a given state variable.</Abstract>
+    <Abstract>Set a new value for a given state variable. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2590,7 +2590,7 @@
     </TokenIdentifier>
     <Path>classPLT__Service.html</Path>
     <Anchor>a709d12a79a4684b832e20f7348b8fd8c</Anchor>
-    <Abstract>Certain state variables require extra xml attributes when serialized.</Abstract>
+    <Abstract>Certain state variables require extra xml attributes when serialized. </Abstract>
     <DeclaredIn>PltService.h</DeclaredIn>
   </Token>
   <Token>
@@ -2702,7 +2702,7 @@
     </TokenIdentifier>
     <Path>classPLT__SsdpDeviceAnnounceTask.html</Path>
     <Anchor>a23a59359b24863c47ccc331549dcbf9d</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -2714,7 +2714,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2738,7 +2738,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a9b15125495aafb15fdb3c5fe5c7aa7d6</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2750,7 +2750,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2762,7 +2762,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2774,7 +2774,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2786,7 +2786,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2832,7 +2832,7 @@
     </TokenIdentifier>
     <Path>classPLT__SsdpDeviceSearchResponseTask.html</Path>
     <Anchor>a6d1b391fb2c2a4f23009c743470343b1</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -2844,7 +2844,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2868,7 +2868,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a9b15125495aafb15fdb3c5fe5c7aa7d6</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2880,7 +2880,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2892,7 +2892,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2904,7 +2904,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2916,7 +2916,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -2962,7 +2962,7 @@
     </TokenIdentifier>
     <Path>classPLT__SsdpListenTask.html</Path>
     <Anchor>aaa4a82354a183ba2e87f6621245acd9e</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -2974,7 +2974,7 @@
     </TokenIdentifier>
     <Path>classPLT__HttpServerSocketTask.html</Path>
     <Anchor>add152a624b609a0d14dfd1c6f0e91656</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3030,7 +3030,7 @@
     </TokenIdentifier>
     <Path>classPLT__SsdpSearchTask.html</Path>
     <Anchor>a7dae0209469a807970fa967340cbb0f1</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -3042,7 +3042,7 @@
     </TokenIdentifier>
     <Path>classPLT__SsdpSearchTask.html</Path>
     <Anchor>a2a597f6571227184d426e137f5e94295</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -3054,7 +3054,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3078,7 +3078,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3090,7 +3090,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3102,7 +3102,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3114,7 +3114,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3137,7 +3137,7 @@
       <Scope>PLT_SsdpSender</Scope>
     </TokenIdentifier>
     <Path>classPLT__SsdpSender.html</Path>
-    <Abstract>The PLT_SsdpSender class provides a mechanism to format and send SSDP packets.</Abstract>
+    <Abstract>The PLT_SsdpSender class provides a mechanism to format and send SSDP packets. </Abstract>
     <DeclaredIn>PltSsdp.h</DeclaredIn>
   </Token>
   <Token>
@@ -3148,7 +3148,7 @@
       <Scope>PLT_StateVariable</Scope>
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
-    <Abstract>The PLT_StateVariable class maintains the state of a UPnP Service state variable.</Abstract>
+    <Abstract>The PLT_StateVariable class maintains the state of a UPnP Service state variable. ...</Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3160,7 +3160,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a0682faf03a432281b976323e7f1e4765</Anchor>
-    <Abstract>Force the state variable to send events directly.</Abstract>
+    <Abstract>Force the state variable to send events directly. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3172,7 +3172,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a2b37176000fbbe8a93505a4aaee38fb1</Anchor>
-    <Abstract>Return the state variable allowed value range if any.</Abstract>
+    <Abstract>Return the state variable allowed value range if any. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3184,7 +3184,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a10eb75fa50927c3f359be8a50d615a23</Anchor>
-    <Abstract>Return the state variable data type.</Abstract>
+    <Abstract>Return the state variable data type. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3196,7 +3196,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a3912a728c58b7a0809570e7355695217</Anchor>
-    <Abstract>Return the state variable name.</Abstract>
+    <Abstract>Return the state variable name. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3208,7 +3208,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a4359ad0b9a057a40a204dc52d08e7010</Anchor>
-    <Abstract>Populate the SCPD xml document with state variable information.</Abstract>
+    <Abstract>Populate the SCPD xml document with state variable information. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3220,7 +3220,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>afbe75f546c27a9de4240e216a79323dc</Anchor>
-    <Abstract>Return the PLT_Service that this state variable is associated with.</Abstract>
+    <Abstract>Return the PLT_Service that this state variable is associated with. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3232,7 +3232,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a1d68497e653407d7ea4049afa2299f1e</Anchor>
-    <Abstract>Return the current state variable value.</Abstract>
+    <Abstract>Return the current state variable value. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3244,7 +3244,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a6c8e32303115fd4261b67e848707d1cc</Anchor>
-    <Abstract>Return whether the state variable is eventable directly or indirectly.</Abstract>
+    <Abstract>Return whether the state variable is eventable directly or indirectly. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3256,7 +3256,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>ae3ff2a61490a8c9e17cf4b4b4e4f60fd</Anchor>
-    <Abstract>Certain state variables require extra xml attributes when serialized.</Abstract>
+    <Abstract>Certain state variables require extra xml attributes when serialized. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3280,7 +3280,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>adb4006117f8c8f6000188931146ddbe2</Anchor>
-    <Abstract>Set the state variable value.</Abstract>
+    <Abstract>Set the state variable value. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3292,7 +3292,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a8fc1403b20781918a8cce3b26d369e19</Anchor>
-    <Abstract>Validate the new value of the state variable.</Abstract>
+    <Abstract>Validate the new value of the state variable. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3316,7 +3316,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>adf6f12ba177ac8db0d412dfa2569578b</Anchor>
-    <Abstract>Return whether the state variable value changed and subscribers need to be notified.</Abstract>
+    <Abstract>Return whether the state variable value changed and subscribers need to be notified. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3328,7 +3328,7 @@
     </TokenIdentifier>
     <Path>classPLT__StateVariable.html</Path>
     <Anchor>a63b506b43ad1aa0ee77ab82638e02725</Anchor>
-    <Abstract>Serialize the state variable into xml.</Abstract>
+    <Abstract>Serialize the state variable into xml. </Abstract>
     <DeclaredIn>PltStateVariable.h</DeclaredIn>
   </Token>
   <Token>
@@ -3350,7 +3350,7 @@
       <Scope>PLT_TaskManager</Scope>
     </TokenIdentifier>
     <Path>classPLT__TaskManager.html</Path>
-    <Abstract>The PLT_TaskManager class maintains a list of runnable tasks.</Abstract>
+    <Abstract>The PLT_TaskManager class maintains a list of runnable tasks. </Abstract>
     <DeclaredIn>PltTaskManager.h</DeclaredIn>
   </Token>
   <Token>
@@ -3362,7 +3362,19 @@
     </TokenIdentifier>
     <Path>classPLT__TaskManager.html</Path>
     <Anchor>a6f4dbfbbdf1c4feeaf57b6ee45dbcb95</Anchor>
-    <Abstract>Create a new Task Manager.</Abstract>
+    <Abstract>Create a new Task Manager. </Abstract>
+    <DeclaredIn>PltTaskManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Abort</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_TaskManager</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__TaskManager.html</Path>
+    <Anchor>a4b8d656e9b2025b22c9c25a0856cac3a</Anchor>
+    <Abstract>Stop all tasks associated with this task manager. </Abstract>
     <DeclaredIn>PltTaskManager.h</DeclaredIn>
   </Token>
   <Token>
@@ -3374,7 +3386,19 @@
     </TokenIdentifier>
     <Path>classPLT__TaskManager.html</Path>
     <Anchor>ad030ce70cd9ce09f719f4d5d97497bee</Anchor>
-    <Abstract>Returns the max number of concurrent tasks allowed.</Abstract>
+    <Abstract>Returns the max number of concurrent tasks allowed. </Abstract>
+    <DeclaredIn>PltTaskManager.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Reset</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_TaskManager</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__TaskManager.html</Path>
+    <Anchor>a9c4091ceb8b4590c0088e7e1f3c1881d</Anchor>
+    <Abstract>Reset task manager after an Abort so new tasks can be queued. </Abstract>
     <DeclaredIn>PltTaskManager.h</DeclaredIn>
   </Token>
   <Token>
@@ -3386,19 +3410,7 @@
     </TokenIdentifier>
     <Path>classPLT__TaskManager.html</Path>
     <Anchor>af3ecf99e794153c906f1f299cdd383e3</Anchor>
-    <Abstract>Start a new new task and associates it with this task manager.</Abstract>
-    <DeclaredIn>PltTaskManager.h</DeclaredIn>
-  </Token>
-  <Token>
-    <TokenIdentifier>
-      <Name>StopAllTasks</Name>
-      <APILanguage>cpp</APILanguage>
-      <Type>instm</Type>
-      <Scope>PLT_TaskManager</Scope>
-    </TokenIdentifier>
-    <Path>classPLT__TaskManager.html</Path>
-    <Anchor>a072688b8cf6902b0060f96fc6d04f509</Anchor>
-    <Abstract>Stop all tasks associated with this task manager.</Abstract>
+    <Abstract>Start a new new task and associates it with this task manager. </Abstract>
     <DeclaredIn>PltTaskManager.h</DeclaredIn>
   </Token>
   <Token>
@@ -3409,7 +3421,7 @@
       <Scope>PLT_ThreadTask</Scope>
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
-    <Abstract>The PLT_ThreadTask class is a base class for executing a given task in a worker thread.</Abstract>
+    <Abstract>The PLT_ThreadTask class is a base class for executing a given task in a worker thread. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3433,7 +3445,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
-    <Abstract>A PLT_ThreadTask base class is never instantiated directly.</Abstract>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3457,7 +3469,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a9b15125495aafb15fdb3c5fe5c7aa7d6</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to stop.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to stop. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3469,7 +3481,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
-    <Abstract>This method to override in derived classes is called when the task is about to start.</Abstract>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3481,7 +3493,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>ae31bd56f3a32c60f4c49109a480a48b9</Anchor>
-    <Abstract>This method to override in derived classes is the main task loop.</Abstract>
+    <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3493,7 +3505,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
-    <Abstract>Return whether this task is in the process of stopping.</Abstract>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3505,7 +3517,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
-    <Abstract>Start a task by associating it with a task manager.</Abstract>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3517,7 +3529,7 @@
     </TokenIdentifier>
     <Path>classPLT__ThreadTask.html</Path>
     <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
-    <Abstract>Stop the task.</Abstract>
+    <Abstract>Stop the task. </Abstract>
     <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
@@ -3540,7 +3552,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>a77f3ae1e4fb862c1655e74fb14226ee2</Anchor>
-    <Abstract>Create a UPnP instance.</Abstract>
+    <Abstract>Create a UPnP instance. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>
@@ -3552,7 +3564,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>af1df86cec9b28e9d7dc85d286e13b310</Anchor>
-    <Abstract>Add and start a control point inside this UPnP context.</Abstract>
+    <Abstract>Add and start a control point inside this UPnP context. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>
@@ -3564,7 +3576,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>ae27912d0071ef3448e1d5b2d7be29656</Anchor>
-    <Abstract>Add and start a device inside this UPnP context.</Abstract>
+    <Abstract>Add and start a device inside this UPnP context. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>
@@ -3576,7 +3588,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>a9dfcce34ad744c4ac76951b35db6fd8d</Anchor>
-    <Abstract>Return the UPnP Engine state.</Abstract>
+    <Abstract>Return the UPnP Engine state. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>
@@ -3588,7 +3600,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>a7b0b45f21ef87c3d801f6641a280486a</Anchor>
-    <Abstract>Remove an existing control point from this UPnP context.</Abstract>
+    <Abstract>Remove an existing control point from this UPnP context. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>
@@ -3600,7 +3612,7 @@
     </TokenIdentifier>
     <Path>classPLT__UPnP.html</Path>
     <Anchor>abe464759caa7dddb98eca689c785d100</Anchor>
-    <Abstract>Remove an existing device from this UPnP context.</Abstract>
+    <Abstract>Remove an existing device from this UPnP context. </Abstract>
     <DeclaredIn>PltUPnP.h</DeclaredIn>
   </Token>
   <Token>

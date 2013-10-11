@@ -15,5 +15,9 @@
      <string>com.plutinosoft.plutinosoft</string>
      <key>DocSetPublisherName</key>
      <string>Plutinosoft</string>
+     <key>DashDocSetFamily</key>
+     <string>doxy</string>
+     <key>DocSetPlatformFamily</key>
+     <string>doxygen</string>
 </dict>
 </plist>

@@ -52,6 +52,15 @@
 class PLT_DeviceHost;
 
 /*----------------------------------------------------------------------
+|   PLT_SsdpAnnounceType
++---------------------------------------------------------------------*/
+typedef enum {
+    PLT_ANNOUNCETYPE_BYEBYE,
+    PLT_ANNOUNCETYPE_ALIVE,
+    PLT_ANNOUNCETYPE_UPDATE
+} PLT_SsdpAnnounceType;
+
+/*----------------------------------------------------------------------
 |   PLT_SsdpPacketListener class
 +---------------------------------------------------------------------*/
 /**
@@ -174,15 +183,15 @@ protected:
 class PLT_SsdpAnnounceInterfaceIterator
 {
 public:
-    PLT_SsdpAnnounceInterfaceIterator(PLT_DeviceHost* device, bool is_byebye = false, bool broadcast = false) :
-        m_Device(device), m_IsByeBye(is_byebye), m_Broadcast(broadcast) {}
+    PLT_SsdpAnnounceInterfaceIterator(PLT_DeviceHost* device, PLT_SsdpAnnounceType type, bool broadcast = false) :
+        m_Device(device), m_Type(type), m_Broadcast(broadcast) {}
       
     NPT_Result operator()(NPT_NetworkInterface*& if_addr) const;
-    
+
 private:
-    PLT_DeviceHost* m_Device;
-    bool            m_IsByeBye;
-    bool            m_Broadcast;
+    PLT_DeviceHost*         m_Device;
+    PLT_SsdpAnnounceType    m_Type;
+    bool                    m_Broadcast;
 };
 
 /*----------------------------------------------------------------------

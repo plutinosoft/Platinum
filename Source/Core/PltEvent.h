@@ -78,7 +78,7 @@ public:
     NPT_String                    m_XmlBody;
     
 protected:
-    PLT_EventNotification() {}
+    PLT_EventNotification() : m_EventKey(0) {}
 };
 
 /*----------------------------------------------------------------------

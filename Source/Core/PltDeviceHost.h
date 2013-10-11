@@ -132,23 +132,23 @@ protected:
      @param device the device to announce
      @param request the SSDP pre formatted request
      @param socket the network socket to use to send the request
-     @param byebye boolean indicating if the announce is a SSDP bye-bye or alive.
+     @param type PLT_SsdpAnnounceType enum if the announce is a SSDP bye-bye, update or alive.
      */
-    static NPT_Result Announce(PLT_DeviceData*  device, 
-                                NPT_HttpRequest& request, 
-                                NPT_UdpSocket&   socket, 
-                                bool             byebye);
+    static NPT_Result Announce(PLT_DeviceData*      device,
+                               NPT_HttpRequest&     request,
+                               NPT_UdpSocket&       socket,
+                               PLT_SsdpAnnounceType type);
     /**
      Called during SSDP announce. The HTTP request is already configured with
      the right method and host.
      @param request the SSDP pre formatted request
      @param socket the network socket to use to send the request
-     @param byebye boolean indicating if the announce is a SSDP bye-bye or alive.
+     @param type PLT_SsdpAnnounceType enum if the announce is a SSDP bye-bye, update or alive.
      */
-    NPT_Result Announce(NPT_HttpRequest& request, 
-                        NPT_UdpSocket&   socket, 
-                        bool             byebye) {
-        return Announce(this, request, socket, byebye);
+    NPT_Result Announce(NPT_HttpRequest&     request,
+                        NPT_UdpSocket&       socket,
+                        PLT_SsdpAnnounceType type) {
+        return Announce(this, request, socket, type);
     }
 
     /**
@@ -172,7 +172,7 @@ protected:
                                              NPT_HttpResponse&        response, 
                                              NPT_UdpSocket&           socket, 
                                              const char*              st,
-                                             const NPT_SocketAddress* addr  = NULL);
+                                             const NPT_SocketAddress* addr = NULL);
     /**
      Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH
      SSDP request.
