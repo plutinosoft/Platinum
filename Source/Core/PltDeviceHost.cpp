@@ -67,7 +67,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                    uuid, 
                    *PLT_Constants::GetInstance().GetDefaultDeviceLease(), 
                    device_type, 
-                   friendly_name),
+                   friendly_name), 
     m_TaskManager(NULL),
     m_HttpServer(NULL),
     m_Broadcast(false),
@@ -173,7 +173,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     
     // setup
     m_TaskManager = new PLT_TaskManager();
-    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max
+    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max  
     if (NPT_FAILED(result = m_HttpServer->Start())) {
         m_TaskManager = NULL;
         m_HttpServer = NULL;
@@ -225,7 +225,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
-{
+{    
     if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
     
     // mark immediately we're stopping
@@ -233,17 +233,17 @@ PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
     
     // unregister ourselves as a listener for ssdp requests
     task->RemoveListener(this);
-    
+
     // remove all our running tasks
     m_TaskManager->Abort();
-    
+
     // stop our internal http server
     m_HttpServer->Stop();
 
     // announce we're leaving
     NPT_List<NPT_NetworkInterface*> if_list;
     PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
-    if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true, m_Broadcast));
+    if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, PLT_ANNOUNCETYPE_BYEBYE, m_Broadcast));
     if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
     
     // Cleanup all services and embedded devices
@@ -259,33 +259,57 @@ PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
 |   PLT_DeviceHost::Announce
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_DeviceHost::Announce(PLT_DeviceData*  device, 
-                         NPT_HttpRequest& req, 
-                         NPT_UdpSocket&   socket, 
-                         bool             byebye)
+PLT_DeviceHost::Announce(PLT_DeviceData*      device,
+                         NPT_HttpRequest&     req,
+                         NPT_UdpSocket&       socket,
+                         PLT_SsdpAnnounceType type)
 {
     NPT_Result res = NPT_SUCCESS;
 
-    NPT_LOG_FINER_3("Sending SSDP NOTIFY (%s) Request to %s with location:%s", 
-        byebye?"ssdp:byebye":"ssdp:alive",
-        (const char*)req.GetUrl().ToString(),
-        (const char*)(PLT_UPnPMessageHelper::GetLocation(req)?*PLT_UPnPMessageHelper::GetLocation(req):""));
-        
-    if (byebye == false) {
-        // get location URL based on ip address of interface
-        PLT_UPnPMessageHelper::SetNTS(req, "ssdp:alive");
-        PLT_UPnPMessageHelper::SetLeaseTime(req, device->GetLeaseTime());
-        PLT_UPnPMessageHelper::SetServer(req, PLT_HTTP_DEFAULT_SERVER, false);
-    } else {
-        PLT_UPnPMessageHelper::SetNTS(req, "ssdp:byebye");
-    }
-
     // target address
     NPT_IpAddress ip;
-    if (NPT_FAILED(res = ip.ResolveName(req.GetUrl().GetHost()))) {
-        return res;
-    }
+    NPT_CHECK_FATAL(ip.ResolveName(req.GetUrl().GetHost()));
     NPT_SocketAddress addr(ip, req.GetUrl().GetPort());
+
+    // UPnP 1.1 BOOTID.UPNP.ORG header
+    PLT_UPnPMessageHelper::SetBootId(req, device->m_BootId);
+    
+    // UPnP 1.1 CONFIGID.UPNP.ORG header
+    if (device->m_ConfigId > 0) {
+        PLT_UPnPMessageHelper::SetConfigId(req, device->m_ConfigId);
+    }
+        
+    // NTS header
+    NPT_String nts;
+    switch (type) {
+        case PLT_ANNOUNCETYPE_ALIVE:
+            nts = "ssdp:alive";
+        PLT_UPnPMessageHelper::SetLeaseTime(req, device->GetLeaseTime());
+        PLT_UPnPMessageHelper::SetServer(req, PLT_HTTP_DEFAULT_SERVER, false);
+            break;
+            
+        case PLT_ANNOUNCETYPE_BYEBYE:
+            nts = "ssdp:byebye";
+            break;
+            
+        case PLT_ANNOUNCETYPE_UPDATE:
+            nts = "ssdp:update";
+            // update requires valid UPNP 1.1 NEXTBOOTID.UPNP.ORG Header
+            if (device->m_NextBootId == 0) {
+                NPT_CHECK_FATAL(NPT_ERROR_INTERNAL);
+            }
+            PLT_UPnPMessageHelper::SetNextBootId(req, device->m_NextBootId);
+            break;
+
+        default:
+            break;
+    }
+    PLT_UPnPMessageHelper::SetNTS(req, nts);
+    
+    NPT_LOG_FINER_3("Sending SSDP NOTIFY (%s) Request to %s (%s)",
+                    nts.GetChars(),
+                    (const char*)req.GetUrl().ToString(),
+                    (const char*)(PLT_UPnPMessageHelper::GetLocation(req)?*PLT_UPnPMessageHelper::GetLocation(req):""));
 
     // upnp:rootdevice
     if (device->m_ParentUUID.IsEmpty()) {
@@ -298,7 +322,9 @@ PLT_DeviceHost::Announce(PLT_DeviceData*  device,
     }
     
     // on byebye, don't sleep otherwise it hangs when we stop upnp
-    if (!byebye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    if (type != PLT_ANNOUNCETYPE_BYEBYE) {
+        NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    }
 
     // uuid:device-UUID
     PLT_SsdpSender::SendSsdp(req,
@@ -309,7 +335,9 @@ PLT_DeviceHost::Announce(PLT_DeviceData*  device,
         &addr);
 
     // on byebye, don't sleep otherwise it hangs when we stop upnp
-    if (!byebye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    if (type != PLT_ANNOUNCETYPE_BYEBYE) {
+        NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    }
 
     // uuid:device-UUID::urn:schemas-upnp-org:device:deviceType:ver
     PLT_SsdpSender::SendSsdp(req,
@@ -320,7 +348,9 @@ PLT_DeviceHost::Announce(PLT_DeviceData*  device,
         &addr);
     
     // on byebye, don't sleep otherwise it hangs when we stop upnp
-    if (!byebye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    if (type != PLT_ANNOUNCETYPE_BYEBYE) {
+        NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+    }
 
     // services
     for (int i=0; i < (int)device->m_Services.GetItemCount(); i++) {
@@ -333,7 +363,9 @@ PLT_DeviceHost::Announce(PLT_DeviceData*  device,
             &addr); 
         
         // on byebye, don't sleep otherwise it hangs when we stop upnp
-        if (!byebye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));       
+        if (type != PLT_ANNOUNCETYPE_BYEBYE) {
+            NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY));
+        }
     }
 
     // embedded devices
@@ -341,7 +373,7 @@ PLT_DeviceHost::Announce(PLT_DeviceData*  device,
         Announce(device->m_EmbeddedDevices[j].AsPointer(), 
             req, 
             socket, 
-            byebye);
+            type);
     }
 
     return res;
@@ -770,6 +802,14 @@ PLT_DeviceHost::SendSsdpSearchResponse(PLT_DeviceData*    device,
                                        const char*        st,
                                        const NPT_SocketAddress* addr /* = NULL */)
 {    
+    // UPnP 1.1 BOOTID.UPNP.ORG header
+    PLT_UPnPMessageHelper::SetBootId(response, device->m_BootId);
+    
+    // UPnP 1.1 CONFIGID.UPNP.ORG header
+    if (device->m_ConfigId > 0) {
+        PLT_UPnPMessageHelper::SetConfigId(response, device->m_ConfigId);
+    }
+    
     // ssdp:all or upnp:rootdevice
     if (NPT_String::Compare(st, "ssdp:all") == 0 || 
         NPT_String::Compare(st, "upnp:rootdevice") == 0) {

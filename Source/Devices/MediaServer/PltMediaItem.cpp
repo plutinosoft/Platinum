@@ -337,7 +337,7 @@ PLT_MediaObject::ToDidl(NPT_UInt32 mask, NPT_String& didl)
         didl += "</upnp:episodeNumber>";
     }
 
-	if ((mask & PLT_FILTER_MASK_TOC) & !m_MiscInfo.toc.IsEmpty()) {
+	if ((mask & PLT_FILTER_MASK_TOC) && !m_MiscInfo.toc.IsEmpty()) {
         didl += "<upnp:toc>";
 		PLT_Didl::AppendXmlEscape(didl, m_MiscInfo.toc);
         didl += "</upnp:toc>";

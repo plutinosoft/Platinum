@@ -371,7 +371,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     if (mx<1) mx=1;
 
     // create socket
-    NPT_UdpMulticastSocket* socket = new NPT_UdpMulticastSocket();
+    NPT_Reference<NPT_UdpMulticastSocket> socket(new NPT_UdpMulticastSocket());
     socket->SetInterface(address);
     socket->SetTimeToLive(PLT_Constants::GetInstance().GetSearchMulticastTimeToLive());
 
@@ -403,10 +403,12 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
 
     // create task
     PLT_SsdpSearchTask* task = new PLT_SsdpSearchTask(
-        socket,
+        socket.AsPointer(),
         this, 
         request,
         (frequency.ToMillis()>0 && frequency.ToMillis()<5000)?NPT_TimeInterval(5.):frequency);  /* repeat no less than every 5 secs */
+    socket.Detach();
+    
     return task;
 }
 

@@ -261,17 +261,20 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     NPT_HttpRequest req(url, "NOTIFY", NPT_HTTP_PROTOCOL_1_1);
     PLT_HttpHelper::SetHost(req, "239.255.255.250:1900");
     
-    // put a location only if alive message
-    if (!m_IsByeBye) {
+    // Location header valid only for ssdp:alive or ssdp:update messages
+    if (m_Type != PLT_ANNOUNCETYPE_BYEBYE) {
         PLT_UPnPMessageHelper::SetLocation(req, m_Device->GetDescriptionUrl(addr.ToString()));
     }
 
-    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_Type));
 
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
     // delay alive only as we don't want to delay when stopping
-    if (!m_IsByeBye) NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
-    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_IsByeBye));
+    if (m_Type != PLT_ANNOUNCETYPE_BYEBYE) {
+        NPT_System::Sleep(NPT_TimeInterval(PLT_DLNA_SSDP_DELAY_GROUP));
+    }
+    
+    NPT_CHECK_SEVERE(m_Device->Announce(req, *socket, m_Type));
 #endif
 
     return NPT_SUCCESS;
@@ -294,22 +297,22 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
             m_IsByeByeFirst = false;
             
             if (m_ExtraBroadcast) {
-                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, m_ExtraBroadcast));
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_BYEBYE, m_ExtraBroadcast));
             }
             
             // multicast now
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, true, false));
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_BYEBYE, false));
             
             // schedule to announce alive in 200 ms
             if (IsAborting(200)) break;
         }
         
         if (m_ExtraBroadcast) {
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, m_ExtraBroadcast));
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_ALIVE, m_ExtraBroadcast));
         }
         
         // multicast now
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, false, false));
+        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_ALIVE, false));
         
         
 cleanup:

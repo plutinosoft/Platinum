@@ -93,6 +93,12 @@ public:
     virtual ~PLT_UPnP_DeviceStartIterator() {}
 
     NPT_Result operator()(PLT_DeviceHostReference& device_host) const {
+        
+        // We should always increment the boot id on restart
+        // so it is used in place of boot id during initial announcement
+        device_host->SetBootId(device_host->GenerateNextBootId());
+        device_host->SetNextBootId(0);
+        
         NPT_CHECK_SEVERE(device_host->Start(m_ListenTask));
         return NPT_SUCCESS;
     }
@@ -173,10 +179,9 @@ PLT_UPnP::Start()
     NPT_CHECK_SEVERE(taskManager->StartTask(m_SsdpListenTask));
 
     /* start devices & ctrlpoints */
-    // TODO: Starting devices and ctrlpoints could fail?
     m_CtrlPoints.Apply(PLT_UPnP_CtrlPointStartIterator(m_SsdpListenTask));
     m_Devices.Apply(PLT_UPnP_DeviceStartIterator(m_SsdpListenTask));
-    
+
     m_TaskManager = taskManager;
     m_Started = true;
     return NPT_SUCCESS;
