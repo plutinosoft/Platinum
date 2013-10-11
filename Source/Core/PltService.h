@@ -328,7 +328,7 @@ private:
      Called by PLT_DeviceHost when it receives a request for a new subscription.
      */
     NPT_Result ProcessNewSubscription(
-        PLT_TaskManager*         task_manager,
+        PLT_TaskManagerReference task_manager,
         const NPT_SocketAddress& addr, 
         const NPT_String&        callback_urls, 
         int                      timeout, 

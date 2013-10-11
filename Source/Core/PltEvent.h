@@ -91,10 +91,10 @@ protected:
 class PLT_EventSubscriber
 {
 public:
-    PLT_EventSubscriber(PLT_TaskManager* task_manager, 
-                        PLT_Service*     service,
-                        const char*      sid,
-                        NPT_Timeout      timeout_secs = -1);
+    PLT_EventSubscriber(PLT_TaskManagerReference task_manager,
+                        PLT_Service*             service,
+                        const char*              sid,
+                        NPT_Timeout              timeout_secs = -1);
     ~PLT_EventSubscriber();
 
     PLT_Service*      GetService();
@@ -111,7 +111,7 @@ public:
     
 protected:
     //members
-    PLT_TaskManager*          m_TaskManager;
+    PLT_TaskManagerReference  m_TaskManager;
     PLT_Service*              m_Service;
     NPT_Ordinal               m_EventKey;
     PLT_HttpClientSocketTask* m_SubscriberTask;

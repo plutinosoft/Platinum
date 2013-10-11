@@ -58,6 +58,7 @@ PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
     m_Port(port),
     m_AllowRandomPortOnBindFailure(allow_random_port_on_bind_failure),
     m_ReuseAddress(reuse_address),
+    m_Running(false),
     m_Aborted(false)
 {
 }
@@ -68,7 +69,6 @@ PLT_HttpServer::PLT_HttpServer(NPT_IpAddress address,
 PLT_HttpServer::~PLT_HttpServer()
 { 
     Stop();
-    delete m_TaskManager;
 }
 
 /*----------------------------------------------------------------------
@@ -79,8 +79,9 @@ PLT_HttpServer::Start()
 {
     NPT_Result res = NPT_FAILURE;
     
-    // we can't restart an aborted server
-    if (m_Aborted) return NPT_ERROR_INVALID_STATE;
+    // we can't start an already running server or restart an aborted server
+    // because the socket is shared create a new instance
+    if (m_Running || m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
     
     // if we're given a port for our http server, try it
     if (m_Port) {
@@ -123,6 +124,8 @@ PLT_HttpServer::Start()
     NPT_LOG_INFO_2("HttpServer listening on %s:%d", 
         (const char*)info.local_address.GetIpAddress().ToString(), 
         m_Port);
+    
+    m_Running = true;
     return NPT_SUCCESS;
 }
 
@@ -132,10 +135,15 @@ PLT_HttpServer::Start()
 NPT_Result
 PLT_HttpServer::Stop()
 {
-    m_Aborted = true;
-
+    // we can't restart an aborted server
+    if (m_Aborted || !m_Running) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
     // stop all other pending tasks 
-    m_TaskManager->StopAllTasks();
+    m_TaskManager->Abort();
+    
+    m_Running = false;
+    m_Aborted = true;
+    
     return NPT_SUCCESS;
 }
 

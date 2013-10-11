@@ -46,11 +46,11 @@
 #include "PltService.h"
 #include "PltSsdp.h"
 #include "PltDeviceData.h"
+#include "PltHttpServer.h"
 
 /*----------------------------------------------------------------------
 |   forward declarations
 +---------------------------------------------------------------------*/
-class PLT_HttpServer;
 class PLT_CtrlPointHouseKeepingTask;
 class PLT_SsdpSearchTask;
 class PLT_SsdpListenTask;
@@ -239,13 +239,13 @@ private:
 
     NPT_List<NPT_String>                         m_UUIDsToIgnore;
     PLT_CtrlPointListenerList                    m_ListenerList;
-    PLT_HttpServer*                              m_EventHttpServer;
-    PLT_TaskManager                              m_TaskManager;
+    PLT_HttpServerReference                      m_EventHttpServer;
+    PLT_TaskManagerReference                     m_TaskManager;
     NPT_Mutex                                    m_Lock;
     NPT_List<PLT_DeviceDataReference>            m_RootDevices;
     NPT_List<PLT_EventSubscriberReference>       m_Subscribers;
     NPT_String                                   m_SearchCriteria;
-    bool                                         m_Aborted;
+    bool                                         m_Started;
     NPT_List<PLT_EventNotification *>            m_PendingNotifications;
     NPT_List<NPT_String>                         m_PendingInspections;
 };
