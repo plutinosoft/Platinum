@@ -56,7 +56,7 @@ PLT_TaskManager::PLT_TaskManager(NPT_Cardinal max_items /* = 0 */) :
 +---------------------------------------------------------------------*/
 PLT_TaskManager::~PLT_TaskManager()
 {    
-    StopAllTasks();
+    Abort();
 }
 
 /*----------------------------------------------------------------------
@@ -72,10 +72,22 @@ PLT_TaskManager::StartTask(PLT_ThreadTask*   task,
 }
 
 /*----------------------------------------------------------------------
-|   PLT_TaskManager::StopAllTasks
+|   PLT_TaskManager::Reset
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_TaskManager::StopAllTasks()
+PLT_TaskManager::Reset()
+{
+    NPT_AutoLock lock(m_TasksLock);
+    m_Stopping = false;
+    
+    return NPT_SUCCESS;
+}
+
+/*----------------------------------------------------------------------
+|   PLT_TaskManager::Abort
++---------------------------------------------------------------------*/
+NPT_Result
+PLT_TaskManager::Abort()
 {
     NPT_Cardinal num_running_tasks;
     
@@ -117,7 +129,6 @@ PLT_TaskManager::StopAllTasks()
         NPT_System::Sleep(NPT_TimeInterval(0.05));
     } while (1);
     
-    m_Stopping = false;
     return NPT_SUCCESS;
 }
 

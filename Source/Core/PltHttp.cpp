@@ -389,7 +389,7 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
     } else if (agent && (agent->Find("VLC", 0, true) >= 0 || agent->Find("VideoLan", 0, true) >= 0)) {
         return PLT_DEVICE_VLC;
     } else {
-        NPT_LOG_FINE_1("Unknown device signature (ua=%s)", agent?agent->GetChars():"none");
+        NPT_LOG_FINER_1("Unknown device signature (ua=%s)", agent?agent->GetChars():"none");
     }
 
 	return PLT_DEVICE_UNKNOWN;
