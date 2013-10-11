@@ -48,12 +48,11 @@
 #include "PltTaskManager.h"
 #include "PltAction.h"
 #include "PltHttp.h"
+#include "PltHttpServer.h"
 
 /*----------------------------------------------------------------------
 |   forward declarations
 +---------------------------------------------------------------------*/
-class PLT_HttpServer;
-class PLT_HttpServerHandler;
 class PLT_SsdpDeviceAnnounceTask;
 class PLT_SsdpListenTask;
 
@@ -328,12 +327,13 @@ protected:
     friend class PLT_SsdpDeviceSearchResponseTask;
     friend class PLT_SsdpAnnounceInterfaceIterator;
 
-    PLT_TaskManager m_TaskManager;
-    PLT_HttpServer* m_HttpServer;
-    bool            m_Broadcast;
-    NPT_UInt16      m_Port;
-    bool            m_PortRebind;
-    bool            m_ByeByeFirst;
+    PLT_TaskManagerReference m_TaskManager;
+    PLT_HttpServerReference  m_HttpServer;
+    bool                     m_Broadcast;
+    NPT_UInt16               m_Port;
+    bool                     m_PortRebind;
+    bool                     m_ByeByeFirst;
+    bool                     m_Started;
 };
 
 typedef NPT_Reference<PLT_DeviceHost> PLT_DeviceHostReference;

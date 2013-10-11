@@ -234,8 +234,9 @@ public:
 +---------------------------------------------------------------------*/
 PLT_CtrlPoint::PLT_CtrlPoint(const char* search_criteria /* = "upnp:rootdevice" */) :
     m_EventHttpServer(NULL),
+    m_TaskManager(NULL),
     m_SearchCriteria(search_criteria),
-    m_Aborted(false)
+    m_Started(false)
 {
 }
 
@@ -244,7 +245,6 @@ PLT_CtrlPoint::PLT_CtrlPoint(const char* search_criteria /* = "upnp:rootdevice" 
 +---------------------------------------------------------------------*/
 PLT_CtrlPoint::~PLT_CtrlPoint()
 {
-    delete m_EventHttpServer;
 }
 
 /*----------------------------------------------------------------------
@@ -264,14 +264,16 @@ PLT_CtrlPoint::IgnoreUUID(const char* uuid)
 NPT_Result
 PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 {
-    m_Aborted = false;
+    if (m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
+    m_TaskManager = new PLT_TaskManager();
     
     m_EventHttpServer = new PLT_HttpServer();
     m_EventHttpServer->AddRequestHandler(new PLT_HttpRequestHandler(this), "/", true, true);
     m_EventHttpServer->Start();
 
     // house keeping task
-    m_TaskManager.StartTask(new PLT_CtrlPointHouseKeepingTask(this));
+    m_TaskManager->StartTask(new PLT_CtrlPointHouseKeepingTask(this));
 
     // add ourselves as an listener to SSDP multicast advertisements
     task->AddListener(this);
@@ -280,6 +282,8 @@ PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
     // use next line instead for DLNA testing, faster frequency for M-SEARCH
     //return m_SearchCriteria.GetLength()?Search(NPT_HttpUrl("239.255.255.250", 1900, "*"), m_SearchCriteria, 1, 5000):NPT_SUCCESS;
     // 
+    
+    m_Started = true;
     
     return m_SearchCriteria.GetLength()?Search(NPT_HttpUrl("239.255.255.250", 1900, "*"), m_SearchCriteria):NPT_SUCCESS;
 }
@@ -290,7 +294,7 @@ PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
 NPT_Result
 PLT_CtrlPoint::GetPort(NPT_UInt16& port)
 {
-    if (m_Aborted) return NPT_FAILURE;
+    if (!m_Started) return NPT_ERROR_INVALID_STATE;
     
     port = m_EventHttpServer->GetPort();
     return NPT_SUCCESS;
@@ -302,10 +306,14 @@ PLT_CtrlPoint::GetPort(NPT_UInt16& port)
 NPT_Result
 PLT_CtrlPoint::Stop(PLT_SsdpListenTask* task)
 {
-    m_Aborted = true;
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
+    m_Started = false;
+    
     task->RemoveListener(this);
 
-    m_TaskManager.StopAllTasks();
+    m_EventHttpServer->Stop();
+    m_TaskManager->Abort();
 
     // force remove all devices
     NPT_List<PLT_DeviceDataReference>::Iterator iter = m_RootDevices.GetFirstItem();
@@ -314,16 +322,13 @@ PLT_CtrlPoint::Stop(PLT_SsdpListenTask* task)
         ++iter;
     }
     
-    if (m_EventHttpServer) {
-        m_EventHttpServer->Stop();
-        delete m_EventHttpServer;
-        m_EventHttpServer = NULL;
-    }
-    
     // we can safely clear everything without a lock
     // as there are no more tasks pending
     m_RootDevices.Clear();
     m_Subscribers.Clear();
+
+    m_EventHttpServer = NULL;
+    m_TaskManager = NULL;
 
     return NPT_SUCCESS;
 }
@@ -415,7 +420,7 @@ PLT_CtrlPoint::Search(const NPT_HttpUrl& url,
                       NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */,
                       NPT_TimeInterval   initial_delay /* = NPT_TimeInterval(0.) */)
 {
-    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
     
     NPT_List<NPT_NetworkInterface*> if_list;
     NPT_List<NPT_NetworkInterface*>::Iterator net_if;
@@ -441,7 +446,7 @@ PLT_CtrlPoint::Search(const NPT_HttpUrl& url,
                 mx, 
                 frequency,
                 (*net_if_addr).GetPrimaryAddress());
-            m_TaskManager.StartTask(task, &initial_delay);
+            m_TaskManager->StartTask(task, &initial_delay);
         }
     }
 
@@ -459,7 +464,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
                         NPT_TimeInterval   frequency /* = NPT_TimeInterval(50.) */,
                         NPT_TimeInterval   initial_delay /* = NPT_TimeInterval(0.) */)
 {
-    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
 
     // make sure mx is at least 1
     if (mx<1) mx = 1;
@@ -484,7 +489,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
         this, 
         request,
         (frequency.ToMillis()>0 && frequency.ToMillis()<5000)?NPT_TimeInterval(5.):frequency);  /* repeat no less than every 5 secs */
-    return m_TaskManager.StartTask(task, &initial_delay);
+    return m_TaskManager->StartTask(task, &initial_delay);
 }
 
 /*----------------------------------------------------------------------
@@ -563,7 +568,7 @@ PLT_CtrlPoint::DoHouseKeeping()
     NPT_List<PLT_ThreadTask*>::Iterator task = tasks.GetFirstItem();
     while (task) {
         PLT_ThreadTask* _task = *task++;
-        m_TaskManager.StartTask(_task);
+        m_TaskManager->StartTask(_task);
     }
     
     return NPT_SUCCESS;
@@ -1275,7 +1280,7 @@ PLT_CtrlPoint::InspectDevice(const NPT_HttpUrl& location,
 
     // Add a delay to make sure that we received late NOTIFY bye-bye
     NPT_TimeInterval delay(.5f);
-    m_TaskManager.StartTask(task, &delay);
+    m_TaskManager->StartTask(task, &delay);
 
     return NPT_SUCCESS;
 }
@@ -1374,7 +1379,7 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
         if (root_device->m_EmbeddedDevices.GetItemCount() > 0) {
             delay = 1.f;
         }
-        NPT_CHECK_LABEL_SEVERE(res = m_TaskManager.StartTask(task, &delay),
+        NPT_CHECK_LABEL_SEVERE(res = m_TaskManager->StartTask(task, &delay),
                                failure);
     }
 
@@ -1503,7 +1508,7 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
 {
     NPT_AutoLock lock(m_Lock);
     
-    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
 
     NPT_HttpRequest* request = NULL;
 
@@ -1529,7 +1534,7 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
         // renewal?
         if (!sub.IsNull()) {
             PLT_ThreadTask* task = RenewSubscriber(sub);
-            return m_TaskManager.StartTask(task);
+            return m_TaskManager->StartTask(task);
         }
 
         NPT_LOG_INFO_2("Subscribing to service \"%s\" of device \"%s\"",
@@ -1584,7 +1589,7 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
 		root_device,
         service, 
         userdata);
-    m_TaskManager.StartTask(task);
+    m_TaskManager->StartTask(task);
 
     return NPT_SUCCESS;
 }
@@ -1643,7 +1648,7 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
         // create new subscriber if sid never seen before
         // or update subscriber expiration otherwise
         if (sub.IsNull()) {
-            sub = new PLT_EventSubscriber(&m_TaskManager, service, *sid, seconds);
+            sub = new PLT_EventSubscriber(m_TaskManager, service, *sid, seconds);
             m_Subscribers.Add(sub);
         } else {
             sub->SetTimeout(seconds);
@@ -1683,7 +1688,7 @@ NPT_Result
 PLT_CtrlPoint::InvokeAction(PLT_ActionReference& action, 
                             void*                userdata)
 {
-    if (m_Aborted) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
     
     PLT_Service* service = action->GetActionDesc().GetService();
     
@@ -1712,7 +1717,7 @@ PLT_CtrlPoint::InvokeAction(PLT_ActionReference& action,
         userdata);
 
     // queue the request
-    m_TaskManager.StartTask(task);
+    m_TaskManager->StartTask(task);
 
     return NPT_SUCCESS;
 }

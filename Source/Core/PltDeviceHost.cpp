@@ -67,12 +67,14 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                    uuid, 
                    *PLT_Constants::GetInstance().GetDefaultDeviceLease(), 
                    device_type, 
-                   friendly_name), 
+                   friendly_name),
+    m_TaskManager(NULL),
     m_HttpServer(NULL),
     m_Broadcast(false),
     m_Port(port),
     m_PortRebind(port_rebind),
-    m_ByeByeFirst(true)
+    m_ByeByeFirst(true),
+    m_Started(false)
 {
     if (show_ip) {
         NPT_List<NPT_IpAddress> ips;
@@ -165,17 +167,29 @@ PLT_DeviceHost::SetupDevice()
 NPT_Result
 PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 {
-    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max  
-
-    // start the server
-    NPT_CHECK_SEVERE(m_HttpServer->Start());
+    NPT_Result result;
+    
+    if (m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
+    // setup
+    m_TaskManager = new PLT_TaskManager();
+    m_HttpServer = new PLT_HttpServer(NPT_IpAddress::Any, m_Port, m_PortRebind, 100); // limit to 100 clients max
+    if (NPT_FAILED(result = m_HttpServer->Start())) {
+        m_TaskManager = NULL;
+        m_HttpServer = NULL;
+        NPT_CHECK_FATAL(result);
+    }
 
     // read back assigned port in case we passed 0 to randomly select one
     m_Port = m_HttpServer->GetPort();
     m_URLDescription.SetPort(m_Port);
 
     // callback to initialize the device
-    NPT_CHECK_FATAL(SetupDevice());
+    if (NPT_FAILED(result = SetupDevice())) {
+        m_TaskManager = NULL;
+        m_HttpServer = NULL;
+        NPT_CHECK_FATAL(result);
+    }
 
     // all other requests including description document
     // and service control are dynamically handled
@@ -197,10 +211,12 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
         repeat, 
         m_ByeByeFirst, 
         m_Broadcast);
-    m_TaskManager.StartTask(announce_task, &delay);
+    m_TaskManager->StartTask(announce_task, &delay);
 
     // register ourselves as a listener for SSDP search requests
     task->AddListener(this);
+    
+    m_Started = true;
     return NPT_SUCCESS;
 }
 
@@ -209,27 +225,33 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
-{    
+{
+    if (!m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
+    
+    // mark immediately we're stopping
+    m_Started = false;
+    
     // unregister ourselves as a listener for ssdp requests
     task->RemoveListener(this);
-
-    // remove all our running tasks
-    m_TaskManager.StopAllTasks();
-
-    if (m_HttpServer) {
-        // stop our internal http server
-        m_HttpServer->Stop();
-        delete m_HttpServer;
-        m_HttpServer = NULL;
-
-        // notify we're gone
-        NPT_List<NPT_NetworkInterface*> if_list;
-        PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
-        if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true, m_Broadcast));
-        if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
-    }
     
+    // remove all our running tasks
+    m_TaskManager->Abort();
+    
+    // stop our internal http server
+    m_HttpServer->Stop();
+
+    // announce we're leaving
+    NPT_List<NPT_NetworkInterface*> if_list;
+    PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
+    if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, true, m_Broadcast));
+    if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
+    
+    // Cleanup all services and embedded devices
     PLT_DeviceData::Cleanup();
+    
+    m_HttpServer = NULL;
+    m_TaskManager = NULL;
+    
     return NPT_SUCCESS;
 }
 
@@ -653,7 +675,7 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
             NPT_Int32 timeout = *PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
 
             // send the info to the service
-            service->ProcessNewSubscription(&m_TaskManager,
+            service->ProcessNewSubscription(m_TaskManager,
                                             context.GetLocalAddress(), 
                                             *callback_urls, 
                                             timeout, 
@@ -731,7 +753,7 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
         // create a task to respond to the request
         NPT_TimeInterval timer((mx==0)?0.:(double)(NPT_System::GetRandomInteger()%(mx>5?5:mx)));
         PLT_SsdpDeviceSearchResponseTask* task = new PLT_SsdpDeviceSearchResponseTask(this, context.GetRemoteAddress(), *st);
-        m_TaskManager.StartTask(task, &timer);
+        m_TaskManager->StartTask(task, &timer);
         return NPT_SUCCESS;
     }
 
