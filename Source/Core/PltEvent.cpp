@@ -101,10 +101,10 @@ bad_request:
 /*----------------------------------------------------------------------
 |   PLT_EventSubscriber::PLT_EventSubscriber
 +---------------------------------------------------------------------*/
-PLT_EventSubscriber::PLT_EventSubscriber(PLT_TaskManager* task_manager, 
-                                         PLT_Service*     service,
-                                         const char*      sid,
-                                         NPT_Timeout      timeout_secs /* = -1 */) : 
+PLT_EventSubscriber::PLT_EventSubscriber(PLT_TaskManagerReference task_manager,
+                                         PLT_Service*             service,
+                                         const char*              sid,
+                                         NPT_Timeout              timeout_secs /* = -1 */) :
     m_TaskManager(task_manager), 
     m_Service(service), 
     m_EventKey(0),

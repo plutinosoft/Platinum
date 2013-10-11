@@ -524,7 +524,7 @@ PLT_Service::IncStateVariable(const char* name)
 |   PLT_Service::ProcessNewSubscription
 +---------------------------------------------------------------------*/
 NPT_Result
-PLT_Service::ProcessNewSubscription(PLT_TaskManager*         task_manager,
+PLT_Service::ProcessNewSubscription(PLT_TaskManagerReference task_manager,
                                     const NPT_SocketAddress& addr, 
                                     const NPT_String&        callback_urls, 
                                     int                      timeout, 
