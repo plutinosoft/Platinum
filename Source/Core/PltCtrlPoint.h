@@ -198,7 +198,6 @@ protected:
     
 private:
     // methods
-    NPT_Result      RenewSubscribers();
     PLT_ThreadTask* RenewSubscriber(PLT_EventSubscriberReference subscriber);
     
     NPT_Result AddPendingEventNotification(PLT_EventNotification *notification);
