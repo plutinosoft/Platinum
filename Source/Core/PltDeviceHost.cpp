@@ -502,6 +502,8 @@ PLT_DeviceHost::ProcessHttpPostRequest(NPT_HttpRequest&              request,
     NPT_String                method      = request.GetMethod();
     NPT_String                url         = request.GetUrl().ToRequestString();
     NPT_String                protocol    = request.GetProtocol();
+    NPT_List<NPT_String>      components;
+    NPT_String                soap_action_name;
 
 #if defined(PLATINUM_UPNP_SPECS_STRICT)
     const NPT_String*         attr;
@@ -517,16 +519,13 @@ PLT_DeviceHost::ProcessHttpPostRequest(NPT_HttpRequest&              request,
     soap_action_header = *request.GetHeaders().GetHeaderValue("SOAPAction");
     soap_action_header.TrimLeft('"');
     soap_action_header.TrimRight('"');
-    char prefix[200];
-    char soap_action_name[100];
-    int  ret;
-    //FIXME: no sscanf
-    ret = sscanf(soap_action_header, "%199[^#]#%99s",
-                 prefix, 
-                 soap_action_name);
-    if (ret != 2)
+    
+    components = soap_action_header.Split("#");
+    if (components.GetItemCount() != 2)
         goto bad_request;
-
+    
+    soap_action_name = *components.GetItem(1);
+    
     // read the xml body and parse it
     if (NPT_FAILED(PLT_HttpHelper::ParseBody(request, xml)))
         goto bad_request;
