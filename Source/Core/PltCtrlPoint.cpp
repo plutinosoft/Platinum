@@ -972,25 +972,20 @@ PLT_CtrlPoint::ProcessSsdpSearchResponse(NPT_Result                    res,
         NPT_CHECK_POINTER_SEVERE(ext);
         
         NPT_String uuid;
+        
         // if we get an advertisement other than uuid
         // verify it's formatted properly
         if (usn != st) {
-            char tmp_uuid[200];
-            char tmp_st[200];
-            int  ret;
-            // FIXME: We can't use sscanf directly!
-            ret = sscanf(((const char*)*usn)+5, "%199[^::]::%199s",
-                tmp_uuid, 
-                tmp_st);
-            if (ret != 2)
+            NPT_List<NPT_String> components = usn->Split("::");
+            if (components.GetItemCount() != 2)
                 return NPT_FAILURE;
             
-            if (st->Compare(tmp_st, true))
+            if (st->Compare(*components.GetItem(1), true))
                 return NPT_FAILURE;
             
-            uuid = tmp_uuid;
+            uuid = components.GetItem(0)->SubString(5);
         } else {
-            uuid = ((const char*)*usn)+5;
+            uuid = usn->SubString(5);
         }
         
         if (m_UUIDsToIgnore.Find(NPT_StringFinder(uuid))) {
@@ -1046,25 +1041,20 @@ PLT_CtrlPoint::ProcessSsdpNotify(const NPT_HttpRequest&        request,
         NPT_CHECK_POINTER_SEVERE(usn);
 
         NPT_String uuid;
+        
         // if we get an advertisement other than uuid
         // verify it's formatted properly
         if (*usn != *nt) {
-            char tmp_uuid[200];
-            char tmp_nt[200];
-            int  ret;
-            //FIXME: no sscanf!
-            ret = sscanf(((const char*)*usn)+5, "%199[^::]::%199s",
-                tmp_uuid, 
-                tmp_nt);
-            if (ret != 2)
+            NPT_List<NPT_String> components = usn->Split("::");
+            if (components.GetItemCount() != 2)
                 return NPT_FAILURE;
             
-            if (nt->Compare(tmp_nt, true))
+            if (nt->Compare(*components.GetItem(1), true))
                 return NPT_FAILURE;
             
-            uuid = tmp_uuid;
+            uuid = components.GetItem(0)->SubString(5);
         } else {
-            uuid = ((const char*)*usn)+5;
+            uuid = usn->SubString(5);
         }
 
         if (m_UUIDsToIgnore.Find(NPT_StringFinder(uuid))) {
