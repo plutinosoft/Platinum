@@ -267,7 +267,7 @@ PLT_CtrlPoint::Start(PLT_SsdpListenTask* task)
     if (m_Started) NPT_CHECK_WARNING(NPT_ERROR_INVALID_STATE);
     
     m_TaskManager = new PLT_TaskManager();
-
+    
     m_EventHttpServer = new PLT_HttpServer();
     m_EventHttpServer->AddRequestHandler(new PLT_HttpRequestHandler(this), "/", true, true);
     m_EventHttpServer->Start();
@@ -311,7 +311,7 @@ PLT_CtrlPoint::Stop(PLT_SsdpListenTask* task)
     m_Started = false;
     
     task->RemoveListener(this);
-    
+
     m_EventHttpServer->Stop();
     m_TaskManager->Abort();
 
@@ -326,7 +326,7 @@ PLT_CtrlPoint::Stop(PLT_SsdpListenTask* task)
     // as there are no more tasks pending
     m_RootDevices.Clear();
     m_Subscribers.Clear();
-    
+
     m_EventHttpServer = NULL;
     m_TaskManager = NULL;
 
@@ -371,7 +371,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     if (mx<1) mx=1;
 
     // create socket
-    NPT_UdpMulticastSocket* socket = new NPT_UdpMulticastSocket();
+    NPT_Reference<NPT_UdpMulticastSocket> socket(new NPT_UdpMulticastSocket());
     socket->SetInterface(address);
     socket->SetTimeToLive(PLT_Constants::GetInstance().GetSearchMulticastTimeToLive());
 
@@ -403,10 +403,12 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
 
     // create task
     PLT_SsdpSearchTask* task = new PLT_SsdpSearchTask(
-        socket,
+        socket.AsPointer(),
         this, 
         request,
         (frequency.ToMillis()>0 && frequency.ToMillis()<5000)?NPT_TimeInterval(5.):frequency);  /* repeat no less than every 5 secs */
+    socket.Detach();
+    
     return task;
 }
 
