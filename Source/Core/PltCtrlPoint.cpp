@@ -214,7 +214,7 @@ public:
         if (NPT_FAILED(res)) return res;
 
         res = device->m_EmbeddedDevices.ApplyUntil(
-            PLT_DeviceReadyIterator(), 
+            PLT_DeviceReadyIterator(),
             NPT_UntilResultNotEquals(NPT_SUCCESS));
         if (NPT_FAILED(res)) return res;
 
@@ -1428,11 +1428,17 @@ PLT_CtrlPoint::ProcessGetSCPDResponse(NPT_Result                    res,
     // get response body
     res = PLT_HttpHelper::GetBody(*response, scpd);
     NPT_CHECK_LABEL_FATAL(res, bad_response);
-        
+    
+    // DIAL support
+    if (root_device->GetType().Compare("urn:dial-multiscreen-org:device:dial:1") == 0) {
+        AddDevice(root_device);
+        return NPT_SUCCESS;
+    }
+
     // set the service scpd
     res = service->SetSCPDXML(scpd);
     NPT_CHECK_LABEL_SEVERE(res, bad_response);
-
+    
     // if root device is ready, notify listeners about it and embedded devices
     if (NPT_SUCCEEDED(device_tester(root_device))) {
         AddDevice(root_device);
