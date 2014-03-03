@@ -470,7 +470,7 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
     PLT_XmlHelper::GetChildren(entry, children, "author", didl_namespace_upnp);
     m_People.authors.FromDidl(children);
     
-    PLT_XmlHelper::GetChildren(entry, children, "actors", didl_namespace_upnp);
+    PLT_XmlHelper::GetChildren(entry, children, "actor", didl_namespace_upnp);
     m_People.actors.FromDidl(children);
 
     PLT_XmlHelper::GetChildText(entry, "album", m_Affiliation.album, didl_namespace_upnp, 256);

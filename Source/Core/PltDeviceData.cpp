@@ -395,9 +395,9 @@ PLT_DeviceData::GetDescription(NPT_XmlElementNode* root, NPT_XmlElementNode** de
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "manufacturerURL", m_ManufacturerURL));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelDescription", m_ModelDescription));
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelName", m_ModelName));
-    NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelURL", m_ModelURL));
     if (!m_ModelNumber.IsEmpty()) NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelNumber", m_ModelNumber));
     if (!m_SerialNumber.IsEmpty()) NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "serialNumber", m_SerialNumber));
+    NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "modelURL", m_ModelURL)); // moved after modelNumber to go around a bug in UCTT 
     NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(device, "UDN", "uuid:" + m_UUID));
     
     if (!m_PresentationURL.IsEmpty()) {
