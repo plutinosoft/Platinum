@@ -241,7 +241,7 @@ PLT_DeviceData::GenerateNextBootId()
 {
     NPT_TimeStamp now;
     NPT_System::GetCurrentTimeStamp(now);
-    NPT_UInt32 value = now.ToSeconds();
+    NPT_UInt32 value = (NPT_UInt32)now.ToSeconds();
     if (value == m_BootId) ++value;
     return value;
 }

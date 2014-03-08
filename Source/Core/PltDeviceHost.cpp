@@ -271,21 +271,21 @@ PLT_DeviceHost::Announce(PLT_DeviceData*      device,
     NPT_CHECK_FATAL(ip.ResolveName(req.GetUrl().GetHost()));
     NPT_SocketAddress addr(ip, req.GetUrl().GetPort());
 
-    // UPnP 1.1 BOOTID.UPNP.ORG header
-    PLT_UPnPMessageHelper::SetBootId(req, device->m_BootId);
+//    // UPnP 1.1 BOOTID.UPNP.ORG header
+//    PLT_UPnPMessageHelper::SetBootId(req, device->m_BootId);
+//    
+//    // UPnP 1.1 CONFIGID.UPNP.ORG header
+//    if (device->m_ConfigId > 0) {
+//        PLT_UPnPMessageHelper::SetConfigId(req, device->m_ConfigId);
+//    }
     
-    // UPnP 1.1 CONFIGID.UPNP.ORG header
-    if (device->m_ConfigId > 0) {
-        PLT_UPnPMessageHelper::SetConfigId(req, device->m_ConfigId);
-    }
-        
     // NTS header
     NPT_String nts;
     switch (type) {
         case PLT_ANNOUNCETYPE_ALIVE:
             nts = "ssdp:alive";
-        PLT_UPnPMessageHelper::SetLeaseTime(req, device->GetLeaseTime());
-        PLT_UPnPMessageHelper::SetServer(req, PLT_HTTP_DEFAULT_SERVER, false);
+            PLT_UPnPMessageHelper::SetLeaseTime(req, device->GetLeaseTime());
+            PLT_UPnPMessageHelper::SetServer(req, PLT_HTTP_DEFAULT_SERVER, false);
             break;
             
         case PLT_ANNOUNCETYPE_BYEBYE:

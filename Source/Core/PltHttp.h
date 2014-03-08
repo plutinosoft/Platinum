@@ -49,11 +49,11 @@
 |   constants
 +---------------------------------------------------------------------*/
 #if !defined(PLT_HTTP_DEFAULT_USER_AGENT)
-#define PLT_HTTP_DEFAULT_USER_AGENT "UPnP/1.1 DLNADOC/1.50 Platinum/" PLT_PLATINUM_SDK_VERSION_STRING
+#define PLT_HTTP_DEFAULT_USER_AGENT "UPnP/1.0 DLNADOC/1.50 Platinum/" PLT_PLATINUM_SDK_VERSION_STRING
 #endif
 
 #if !defined(PLT_HTTP_DEFAULT_SERVER)
-#define PLT_HTTP_DEFAULT_SERVER "UPnP/1.1 DLNADOC/1.50 Platinum/" PLT_PLATINUM_SDK_VERSION_STRING
+#define PLT_HTTP_DEFAULT_SERVER "UPnP/1.0 DLNADOC/1.50 Platinum/" PLT_PLATINUM_SDK_VERSION_STRING
 #endif
 
 /*----------------------------------------------------------------------

@@ -492,6 +492,78 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>PLT_CtrlPointGetSCPDRequest</Name>
       <APILanguage>c</APILanguage>
       <Type>cl</Type>
@@ -547,6 +619,78 @@
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
     <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -716,6 +860,78 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>PLT_CtrlPointListener</Name>
       <APILanguage>c</APILanguage>
       <Type>cl</Type>
@@ -771,6 +987,78 @@
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
     <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -1292,6 +1580,150 @@
     <TokenIdentifier>
       <Name>Announce</Name>
       <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
+    <Abstract>Called during SSDP announce. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>OnSsdpPacket</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a7ded32b87840ed8c1bc82856e2457926</Anchor>
+    <Abstract>PLT_SsdpPacketListener method called when a M-SEARCH SSDP packet is received. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ProcessGetDescription</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a6d19198be6e04145d347091c22e74a83</Anchor>
+    <Abstract>This method is called when a control point is requesting the device description. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ProcessGetSCPD</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a4fd96bc569d9d5abec21c04d91ab4b6a</Anchor>
+    <Abstract>This method is called when a control point is requesting a service SCPD. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ProcessHttpPostRequest</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>aab39d95992b0238d8078ff1af3056110</Anchor>
+    <Abstract>This method is called when a &amp;quot;POST&amp;quot; request has been received. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>ProcessHttpSubscriberRequest</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a462ec402b8a616bf0222ad4d124e5a0f</Anchor>
+    <Abstract>This method is called when a request from a subscriber has been received. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>SendSsdpSearchResponse</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
+    <Abstract>Called by PLT_SsdpDeviceSearchResponseTask when responding to a M-SEARCH SSDP request. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>SetupDevice</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a68b6fcb77b9d4e552014db3c82708354</Anchor>
+    <Abstract>Default implementation for setting up device host. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>SetupIcons</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>aef1285456b0ca57ae1957a1b87af3605</Anchor>
+    <Abstract>Default implementation for registering device icon resources. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>SetupResponse</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>ac051616deee99d5db86d25ca6023a950</Anchor>
+    <Abstract>NPT_HttpRequestHandler method for setting up the response of an incoming HTTP request. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>a07e8a7b833c53f78bec2a037ee45de24</Anchor>
+    <Abstract>Called by PLT_TaskManager when the device is started. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_DeviceHost</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__DeviceHost.html</Path>
+    <Anchor>add842d9fb2313b16a216e395acae1412</Anchor>
+    <Abstract>Called by PLT_TaskManager when the device is stoped. </Abstract>
+    <DeclaredIn>PltDeviceHost.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Announce</Name>
+      <APILanguage>cpp</APILanguage>
       <Type>clm</Type>
       <Scope>PLT_DeviceHost</Scope>
     </TokenIdentifier>
@@ -1499,6 +1931,78 @@
     <Anchor>a1bbb059e21ed35b90c299948d7a10fa3</Anchor>
     <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpClientTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -1828,6 +2332,78 @@
     <Anchor>add152a624b609a0d14dfd1c6f0e91656</Anchor>
     <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
@@ -2967,6 +3543,18 @@
   </Token>
   <Token>
     <TokenIdentifier>
+      <Name>Kill</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>abe8825cdc9331213ae61102fbd146bc2</Anchor>
+    <Abstract>When a task is not managed by a PLT_TaskManager, the owner must call this to stop and destroy it...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
       <Name>DoRun</Name>
       <APILanguage>cpp</APILanguage>
       <Type>instm</Type>
@@ -2976,6 +3564,78 @@
     <Anchor>add152a624b609a0d14dfd1c6f0e91656</Anchor>
     <Abstract>This method to override in derived classes is the main task loop. </Abstract>
     <DeclaredIn>PltHttpServerTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>aeb1f0bedc10ef3e4c19ea457b7b42356</Anchor>
+    <Abstract>A PLT_ThreadTask base class is never instantiated directly. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>~PLT_ThreadTask</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a5c8032dfba6d752c5a7533e505b5baa3</Anchor>
+    <Abstract>The task manager will destroy the task when finished if m_AutoDestroy is true otherwise the owner of ...</Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>DoInit</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>af42b0eea9045f05a8bf15c77cf8b5e23</Anchor>
+    <Abstract>This method to override in derived classes is called when the task is about to start. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>IsAborting</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>afe0dececd9d1452527d7cf27bc668d3c</Anchor>
+    <Abstract>Return whether this task is in the process of stopping. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Start</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a38108bb0abd7164e5b0aa2658b2c55f4</Anchor>
+    <Abstract>Start a task by associating it with a task manager. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
+  </Token>
+  <Token>
+    <TokenIdentifier>
+      <Name>Stop</Name>
+      <APILanguage>cpp</APILanguage>
+      <Type>instm</Type>
+      <Scope>PLT_ThreadTask</Scope>
+    </TokenIdentifier>
+    <Path>classPLT__ThreadTask.html</Path>
+    <Anchor>a82f105dd8e125383d7c3274fb7d86e9d</Anchor>
+    <Abstract>Stop the task. </Abstract>
+    <DeclaredIn>PltThreadTask.h</DeclaredIn>
   </Token>
   <Token>
     <TokenIdentifier>
