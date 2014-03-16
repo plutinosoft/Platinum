@@ -68,7 +68,10 @@ PLT_HttpServerSocketTask::PLT_HttpServerSocketTask(NPT_Socket* socket,
 +---------------------------------------------------------------------*/
 PLT_HttpServerSocketTask::~PLT_HttpServerSocketTask() 
 {
-    if (m_Socket) delete m_Socket;
+    if (m_Socket) {
+        m_Socket->Cancel();
+        delete m_Socket;
+    }
 }
 
 /*----------------------------------------------------------------------
