@@ -117,15 +117,11 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
     
     PLT_DeviceSignature signature = PLT_HttpHelper::GetDeviceSignature(request);
 
-    if (signature == PLT_DEVICE_XBOX /*|| signature == PLT_SONOS*/) {
-        // XBox needs to see something behind a ':'
-        if (m_AddHostname && hostname.GetLength() > 0) {
-            m_FriendlyName += ": " + hostname;
-        } else if (m_FriendlyName.Find(":") == -1) {
-            m_FriendlyName += ": 1";
-        }
-    } else if (m_AddHostname && hostname.GetLength() > 0) {
-        m_FriendlyName += " (" + hostname + ")";
+    // XBox needs to see something behind a ':' to even show it
+    if (m_AddHostname && hostname.GetLength() > 0) {
+        m_FriendlyName += ": " + hostname;
+    } else if (m_FriendlyName.Find(":") == -1) {
+        m_FriendlyName += ": 1";
     }
 
     // change some things based on device signature from request
@@ -148,7 +144,7 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
         m_ModelNumber = "3.0";
     } else if (signature == PLT_DEVICE_PS3) {
        m_DlnaDoc = "DMS-1.50";
-       m_DlnaCap = "";//"av-upload,image-upload,audio-upload";
+       m_DlnaCap = "";
        m_AggregationFlags = "10";
     }
 
