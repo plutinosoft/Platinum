@@ -70,7 +70,7 @@ PLT_DeviceHost::PLT_DeviceHost(const char*  description_path /* = "/" */,
                    friendly_name), 
     m_TaskManager(NULL),
     m_HttpServer(NULL),
-    m_Broadcast(false),
+    m_ExtraBroascast(false),
     m_Port(port),
     m_PortRebind(port_rebind),
     m_ByeByeFirst(true),
@@ -210,7 +210,7 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
         this, 
         repeat, 
         m_ByeByeFirst, 
-        m_Broadcast);
+        m_ExtraBroascast);
     m_TaskManager->StartTask(announce_task, &delay);
 
     // register ourselves as a listener for SSDP search requests
@@ -243,7 +243,7 @@ PLT_DeviceHost::Stop(PLT_SsdpListenTask* task)
     // announce we're leaving
     NPT_List<NPT_NetworkInterface*> if_list;
     PLT_UPnPMessageHelper::GetNetworkInterfaces(if_list, true);
-    if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, PLT_ANNOUNCETYPE_BYEBYE, m_Broadcast));
+    if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(this, PLT_ANNOUNCETYPE_BYEBYE, m_ExtraBroascast));
     if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
     
     // Cleanup all services and embedded devices

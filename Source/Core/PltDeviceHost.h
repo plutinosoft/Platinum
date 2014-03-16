@@ -92,7 +92,7 @@ public:
                    bool         port_rebind = false);
     virtual ~PLT_DeviceHost();
     
-    virtual void SetBroadcast(bool broadcast) { m_Broadcast = broadcast; }
+    virtual void SetExtraBroadcast(bool broadcast) { m_ExtraBroascast = broadcast; }
      
     /**
      When a UPnP device comes up, the specifications require that a SSDP bye-bye
@@ -329,7 +329,7 @@ protected:
 
     PLT_TaskManagerReference m_TaskManager;
     PLT_HttpServerReference  m_HttpServer;
-    bool                     m_Broadcast;
+    bool                     m_ExtraBroascast;
     NPT_UInt16               m_Port;
     bool                     m_PortRebind;
     bool                     m_ByeByeFirst;

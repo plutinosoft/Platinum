@@ -235,7 +235,8 @@ public:
                                bool             is_byebye_first = false,
                                bool             extra_broadcast = false) : 
         m_Device(device), 
-        m_Repeat(repeat), m_IsByeByeFirst(is_byebye_first), 
+        m_Repeat(repeat),
+        m_IsByeByeFirst(is_byebye_first),
         m_ExtraBroadcast(extra_broadcast) {}
 
 protected:

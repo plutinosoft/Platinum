@@ -291,7 +291,7 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
             m_IsByeByeFirst = false;
             
             if (m_ExtraBroadcast) {
-                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_BYEBYE, m_ExtraBroadcast));
+                if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_BYEBYE, true));
             }
             
             // multicast now
@@ -302,7 +302,7 @@ PLT_SsdpDeviceAnnounceTask::DoRun()
         }
         
         if (m_ExtraBroadcast) {
-            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_ALIVE, m_ExtraBroadcast));
+            if_list.Apply(PLT_SsdpAnnounceInterfaceIterator(m_Device, PLT_ANNOUNCETYPE_ALIVE, true));
         }
         
         // multicast now
