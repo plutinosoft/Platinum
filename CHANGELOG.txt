@@ -1,3 +1,14 @@
+Platinum 1.0.5.13
+-----------------
+- fixed: didl used "actors" instead of "actor"
+- changed: moved modelURL after serialNumber to please UCTT
+- added: relax exception to identify DIAL devices which are not UPnP compliant since they don't expose valid services.
+- changed: no more sscanf dependency
+- added: Android NDK r9b support
+- added: UDA 1.1 initial support
+- fixed: Crash fix when stopping device while a subscription request is received. The HttpServer uses its own task manager which could end up queuing a new task into the DeviceHost task manager after it had been stopped and this task would never be stopped. The ServiceEvent task would then try to access a service that had then be destroyed when DeviceHost:Stop returned. A TaskManager cannot be restarted now once Abort has been called.
+- fixed: memory leaks
+
 Platinum 1.0.4.11
 -----------------
 - fixed: crash when stopping UPnP while scheduling for scpd retrieval
@@ -86,7 +97,7 @@ Platinum 0.6.9.3
 ----------------
 fixed: passing 0 for frequency to Search/Discover now disables repeat
 added: support for Scons 2.1
-changed: improved UPnP stopping process 
+changed: improved UPnP stopping process
 changed: limit max number of tasks per task manager to 50 by default
 changed: limit max number of HTTP clients handled by HTTP server to 50 by default
 changed: made PltCtrlPoint AddDevice & RemoveDevice protected so they can be called by custom implementations to manually remove expired devices
@@ -145,7 +156,7 @@ Platinum 0.6.7
 --------------
 fixed: request would fail when retrying on a new connection after the previous one failed because server closed it without using a Connection:close header. Only happens with requests containing a body.
 fixed: always adding Connection:close in HTTP 1.1 responses due to checking content-length prior to setting it.
-changed: allow DLNA interactive request. 
+changed: allow DLNA interactive request.
 changed: Don't override accept-range header if already set.
 changed: more DLNA compliance for DMC
 changed: better handling of path extraction. Now url encodes url root as well
@@ -311,12 +322,12 @@ changed: be more relaxed about invalid  or missing resource uri and invalid prot
 
 Platinum 0.5.3
 --------------
-fixed: MediaCrawler app updated 
+fixed: MediaCrawler app updated
 fixed: crash on exit while Browse action is requested
 fixed: bug in ChunkDecoder
 changed: better support for HTTP 100 continue
 changed: DLNA compliance (handle 1xx responses, shutdown sockets better)
-added: code to check if ip or interface is within same network 
+added: code to check if ip or interface is within same network
 changed: increased stream copy buffer to 16k for better streaming performance
 fixed: crash on exit due to logging in PosixThread wait function
 changed: FileMediaServer now serves files at the root url and not "/content" anymore so that it can serve "/crossdomain.xml" url for Flash if needed.
@@ -361,7 +372,7 @@ changed: Didl adding .000 for frame in timestamp otherwise 360 won't play tracks
 improved: Didl parsing if invalid xml node found
 fixed: Filter criteria was missing in Search function prototype
 added: Can now decide if protocol info should contain DLNA info or not
-added: MediaBrowser added search 
+added: MediaBrowser added search
 fixed: When receiving didl for item, don't try to validate resource url protocol and ip as it could be rtsp:// or FQDN addresses
 fixed: SetVariableValue can pass csvs and each value will be indepedently validated
 added: Can now set extra attributes to a state variables (for Volume that has a Channel)
@@ -552,7 +563,7 @@ added: can now pass a port for the file server of PLT_FileMediaServer
 changed: Device host and ctrl points now get their own task manager so that when they stop, all tasks stop so there's no need to keep track of running tasks
 changed: ctrl point now issue a search at least on localhost if no interfaces were found
 fixed: UPnP devices and ctrl points are now freed when stopped (removed)
-fixed: UPnP devices and ctrl points can be restarted (reused) now 
+fixed: UPnP devices and ctrl points can be restarted (reused) now
 added: better support for icons
 fixed: EventSubscribers now have their own task and try to reuse the socket (Connection Keep-Alive) when possible
 changed: Service uses NPT_List instead of NPT_Arrays to improve manipulation of state vars
@@ -683,14 +694,14 @@ Fixes/Changes:
 - Some progress in regards to DLNA validation. HTTP Server is 1.0 only (connections are closed immediately once all data has been sent. No more keep-alive support).
 - Started working on Ozone (Sqlite3 abstraction layer)
 
-Platinum 0.3.1 
+Platinum 0.3.1
 ---------------
 Fixes/Changes:
 - Fixed LightSample Test
 - Fixed MediaRenderer Test
 - Removed old source and project files to avoid confusion
 
-Platinum 0.3.00 
+Platinum 0.3.00
 ---------------
 Fixes/Changes:
 - Added MacOSX support.
@@ -704,7 +715,7 @@ Known issues:
 - AV MediaServer Search not implemented yet.
 - Http server does not use a thread pool. This can be a problem with hungry ControlPoints like the Intel Tools AV MediaController.
 
-Platinum 0.2.00 
+Platinum 0.2.00
 ---------------
 Fixes/Changes:
 - Added support for Linux, Xbox, cygwin platforms (using Scons http://scons.org)
@@ -714,6 +725,6 @@ Fixes/Changes:
 Known issues:
 - Aborting on some platforms (linux/xbox) is not immediate. Sockets cannot be easily aborted by simply calling closesocket.
 
-Platinum 0.1.00 
+Platinum 0.1.00
 ---------------
 Initial Release

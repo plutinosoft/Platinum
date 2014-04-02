@@ -18,6 +18,7 @@
  <tr style="height: 56px;">
   <td style="padding-left: 0.5em;">
    <div id="projectname">Platinum UPnP SDK
+   &#160;<span id="projectnumber">1.0.5.13</span>
    </div>
   </td>
  </tr>
@@ -119,7 +120,7 @@
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;                   <span class="keywordtype">bool</span>         port_rebind = <span class="keyword">false</span>);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;    <span class="keyword">virtual</span> ~<a class="code" href="classPLT__DeviceHost.html">PLT_DeviceHost</a>();</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    </div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetBroadcast(<span class="keywordtype">bool</span> broadcast) { m_Broadcast = broadcast; }</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> SetExtraBroadcast(<span class="keywordtype">bool</span> broadcast) { m_ExtraBroascast = broadcast; }</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     </div>
 <div class="line"><a name="l00104"></a><span class="lineno"><a class="line" href="classPLT__DeviceHost.html#a1521707cbfd3a4a5bd5e8a5492e0f32c">  104</a></span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classPLT__DeviceHost.html#a1521707cbfd3a4a5bd5e8a5492e0f32c">SetByeByeFirst</a>(<span class="keywordtype">bool</span> bye_bye_first) { m_ByeByeFirst = bye_bye_first; }</div>
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;    </div>
@@ -214,7 +215,7 @@
 <div class="line"><a name="l00329"></a><span class="lineno">  329</span>&#160;</div>
 <div class="line"><a name="l00330"></a><span class="lineno">  330</span>&#160;    PLT_TaskManagerReference m_TaskManager;</div>
 <div class="line"><a name="l00331"></a><span class="lineno">  331</span>&#160;    PLT_HttpServerReference  m_HttpServer;</div>
-<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">bool</span>                     m_Broadcast;</div>
+<div class="line"><a name="l00332"></a><span class="lineno">  332</span>&#160;    <span class="keywordtype">bool</span>                     m_ExtraBroascast;</div>
 <div class="line"><a name="l00333"></a><span class="lineno">  333</span>&#160;    NPT_UInt16               m_Port;</div>
 <div class="line"><a name="l00334"></a><span class="lineno">  334</span>&#160;    <span class="keywordtype">bool</span>                     m_PortRebind;</div>
 <div class="line"><a name="l00335"></a><span class="lineno">  335</span>&#160;    <span class="keywordtype">bool</span>                     m_ByeByeFirst;</div>
@@ -235,7 +236,7 @@
 <div class="ttc" id="classPLT__DeviceHost_html_ab7273043b1478ac9a25e487a9a680436"><div class="ttname"><a href="classPLT__DeviceHost.html#ab7273043b1478ac9a25e487a9a680436">PLT_DeviceHost::OnAction</a></div><div class="ttdeci">virtual NPT_Result OnAction(PLT_ActionReference &amp;action, const PLT_HttpRequestContext &amp;context)</div><div class="ttdoc">This mehod is called when an action performed by a control point has been received and needs to be an...</div></div>
 <div class="ttc" id="classPLT__UPnP_html"><div class="ttname"><a href="classPLT__UPnP.html">PLT_UPnP</a></div><div class="ttdoc">The PLT_UPnP class maintains a list of devices (PLT_DeviceHost) to advertise and/or control points (P...</div><div class="ttdef"><b>Definition:</b> PltUPnP.h:68</div></div>
 <div class="ttc" id="classPLT__SsdpDeviceSearchResponseInterfaceIterator_html"><div class="ttname"><a href="classPLT__SsdpDeviceSearchResponseInterfaceIterator.html">PLT_SsdpDeviceSearchResponseInterfaceIterator</a></div><div class="ttdoc">The PLT_SsdpDeviceSearchResponseInterfaceIterator class looks for the best network interface to use t...</div><div class="ttdef"><b>Definition:</b> PltSsdp.h:132</div></div>
-<div class="ttc" id="classPLT__SsdpListenTask_html"><div class="ttname"><a href="classPLT__SsdpListenTask.html">PLT_SsdpListenTask</a></div><div class="ttdoc">The PLT_SsdpListenTask class is used to listen for incoming SSDP packets and keep track of a list of ...</div><div class="ttdef"><b>Definition:</b> PltSsdp.h:309</div></div>
+<div class="ttc" id="classPLT__SsdpListenTask_html"><div class="ttname"><a href="classPLT__SsdpListenTask.html">PLT_SsdpListenTask</a></div><div class="ttdoc">The PLT_SsdpListenTask class is used to listen for incoming SSDP packets and keep track of a list of ...</div><div class="ttdef"><b>Definition:</b> PltSsdp.h:310</div></div>
 <div class="ttc" id="classPLT__DeviceIcon_html"><div class="ttname"><a href="classPLT__DeviceIcon.html">PLT_DeviceIcon</a></div><div class="ttdoc">The PLT_DeviceIcon class represents a given instance of a UPnP device icon. </div><div class="ttdef"><b>Definition:</b> PltDeviceData.h:63</div></div>
 <div class="ttc" id="classPLT__Service_html"><div class="ttname"><a href="classPLT__Service.html">PLT_Service</a></div><div class="ttdoc">UPnP Service. </div><div class="ttdef"><b>Definition:</b> PltService.h:67</div></div>
 <div class="ttc" id="PltSsdp_8h_html"><div class="ttname"><a href="PltSsdp_8h.html">PltSsdp.h</a></div><div class="ttdoc">UPnP SSDP. </div></div>
