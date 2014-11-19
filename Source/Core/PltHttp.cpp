@@ -371,10 +371,14 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
 	const NPT_String* agent  = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_USER_AGENT);
 	const NPT_String* hdr    = request.GetHeaders().GetHeaderValue("X-AV-Client-Info");
     const NPT_String* server = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_SERVER);
+	const NPT_String* dlna_friendly_name = request.GetHeaders().GetHeaderValue("FriendlyName.DLNA.ORG");
+	NPT_LOG_FINEST_2("agent: %s, server: %s", agent?agent->GetChars():"none", server?server->GetChars():"none");
 
 	if ((agent && (agent->Find("XBox", 0, true) >= 0 || agent->Find("Xenon", 0, true) >= 0)) ||
         (server && server->Find("Xbox", 0, true) >= 0)) {
-		return PLT_DEVICE_XBOX;
+		return PLT_DEVICE_XBOX_360;
+	} else if(dlna_friendly_name && (dlna_friendly_name->Find("XBOX-ONE", 0, true) >= 0)) {
+		return PLT_DEVICE_XBOX_ONE;
 	} else if (agent && (agent->Find("Windows Media Player", 0, true) >= 0 || agent->Find("Windows-Media-Player", 0, true) >= 0 || agent->Find("Mozilla/4.0", 0, true) >= 0 || agent->Find("WMFSDK", 0, true) >= 0)) {
 		return PLT_DEVICE_WMP;
 	} else if (agent && (agent->Find("Sonos", 0, true) >= 0)) {
@@ -389,7 +393,7 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
     } else if (agent && (agent->Find("VLC", 0, true) >= 0 || agent->Find("VideoLan", 0, true) >= 0)) {
         return PLT_DEVICE_VLC;
     } else {
-        NPT_LOG_FINER_1("Unknown device signature (ua=%s)", agent?agent->GetChars():"none");
+        NPT_LOG_FINER_2("Unknown device signature (ua=%s, server=%s)", agent?agent->GetChars():"none", server?server->GetChars():"none");
     }
 
 	return PLT_DEVICE_UNKNOWN;
