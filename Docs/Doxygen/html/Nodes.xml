@@ -2132,9 +2132,14 @@
                 <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba76aa82dadbfe02a8053f5c97dd85bd25</Anchor>
                </Node>
                <Node>
-                <Name>PLT_DEVICE_XBOX</Name>
+                <Name>PLT_DEVICE_XBOX_360</Name>
                 <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3babced8f55b9189d5542b6dcbd10f60c46</Anchor>
+                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3bab2af6db54e52e868050d68a264e0f0b5</Anchor>
+               </Node>
+               <Node>
+                <Name>PLT_DEVICE_XBOX_ONE</Name>
+                <Path>PltHttp_8h.html</Path>
+                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba18d833ba49b9fe2fa9a8acef5991fc2a</Anchor>
                </Node>
                <Node>
                 <Name>PLT_DEVICE_PS3</Name>
