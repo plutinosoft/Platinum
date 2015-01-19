@@ -61,7 +61,8 @@
 +---------------------------------------------------------------------*/
 typedef enum {
 	PLT_DEVICE_UNKNOWN,
-	PLT_DEVICE_XBOX,
+	PLT_DEVICE_XBOX_360,
+	PLT_DEVICE_XBOX_ONE,
 	PLT_DEVICE_PS3,
 	PLT_DEVICE_WMP,
     PLT_DEVICE_SONOS,
