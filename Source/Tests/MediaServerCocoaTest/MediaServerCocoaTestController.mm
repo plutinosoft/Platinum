@@ -39,12 +39,8 @@
     }
 }
 
-- (void)dealloc {
-    [upnp release];
-    [super dealloc];
-}
+#pragma mark - PLT_MediaServerDelegateObject
 
-#pragma mark PLT_MediaServerDelegateObject
 - (NPT_Result)onBrowseMetadata:(PLT_MediaServerBrowseCapsule*)info
 {
     return NPT_FAILURE;
