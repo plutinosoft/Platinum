@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include "Neptune.h"
+#include <Neptune/Neptune.h>
 #include "PltXbox360.h"
 #include "PltService.h"
 #include "PltUtilities.h"

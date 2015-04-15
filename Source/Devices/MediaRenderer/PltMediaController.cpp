@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include "Neptune.h"
+#include <Neptune/Neptune.h>
 #include "PltMediaController.h"
 #include "PltDidl.h"
 #include "PltDeviceData.h"

@@ -36,7 +36,7 @@
 |   includes
 +---------------------------------------------------------------------*/
 #include "PltRingBufferStream.h"
-#include "Neptune.h"
+#include <Neptune/Neptune.h>
 
 /*----------------------------------------------------------------------
 |   defines

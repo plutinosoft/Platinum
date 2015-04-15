@@ -7,7 +7,7 @@
 //
 
 #import "MediaServerCocoaTestController.h"
-#import "Neptune.h"
+#import <Neptune/Neptune.h>
 
 
 @implementation MediaServerCocoaTestController

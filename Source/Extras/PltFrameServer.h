@@ -38,7 +38,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include "Neptune.h"
+#include <Neptune/Neptune.h>
 #include "PltHttpServer.h"
 #include "PltFrameBuffer.h"
 

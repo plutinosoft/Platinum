@@ -42,7 +42,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include "Neptune.h"
+#include <Neptune/Neptune.h>
 #include "PltService.h"
 #include "PltSsdp.h"
 #include "PltDeviceData.h"
