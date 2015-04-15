@@ -89,7 +89,7 @@
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">|   includes</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">+---------------------------------------------------------------------*/</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &quot;Neptune.h&quot;</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="preprocessor">#include &lt;Neptune/Neptune.h&gt;</span></div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
 <div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;<span class="comment">/*----------------------------------------------------------------------</span></div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="comment">|   forward declarations</span></div>
@@ -125,16 +125,15 @@
 <div class="line"><a name="l00105"></a><span class="lineno">  105</span>&#160;<span class="keyword">private</span>:</div>
 <div class="line"><a name="l00106"></a><span class="lineno">  106</span>&#160;    NPT_List&lt;PLT_ThreadTask*&gt;  m_Tasks;</div>
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;    NPT_Mutex                  m_TasksLock;</div>
-<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    NPT_Mutex                  m_CallbackLock;</div>
-<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    NPT_Queue&lt;int&gt;*            m_Queue;</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    NPT_Cardinal               m_MaxTasks;</div>
-<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    NPT_Cardinal               m_RunningTasks;</div>
-<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;    <span class="keywordtype">bool</span>                       m_Stopping;</div>
-<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;};</div>
-<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;</div>
-<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;<span class="keyword">typedef</span> NPT_Reference&lt;PLT_TaskManager&gt; PLT_TaskManagerReference;</div>
-<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;</div>
-<div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _PLT_TASKMANAGER_H_ */</span><span class="preprocessor"></span></div>
+<div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;    NPT_Queue&lt;int&gt;*            m_Queue;</div>
+<div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;    NPT_Cardinal               m_MaxTasks;</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;    NPT_Cardinal               m_RunningTasks;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;    <span class="keywordtype">bool</span>                       m_Stopping;</div>
+<div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;};</div>
+<div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;</div>
+<div class="line"><a name="l00114"></a><span class="lineno">  114</span>&#160;<span class="keyword">typedef</span> NPT_Reference&lt;PLT_TaskManager&gt; PLT_TaskManagerReference;</div>
+<div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;</div>
+<div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* _PLT_TASKMANAGER_H_ */</span><span class="preprocessor"></span></div>
 <div class="ttc" id="classPLT__TaskManager_html_a6f4dbfbbdf1c4feeaf57b6ee45dbcb95"><div class="ttname"><a href="classPLT__TaskManager.html#a6f4dbfbbdf1c4feeaf57b6ee45dbcb95">PLT_TaskManager::PLT_TaskManager</a></div><div class="ttdeci">PLT_TaskManager(NPT_Cardinal max_tasks=0)</div><div class="ttdoc">Create a new Task Manager. </div></div>
 <div class="ttc" id="classPLT__TaskManager_html_ad030ce70cd9ce09f719f4d5d97497bee"><div class="ttname"><a href="classPLT__TaskManager.html#ad030ce70cd9ce09f719f4d5d97497bee">PLT_TaskManager::GetMaxTasks</a></div><div class="ttdeci">NPT_Cardinal GetMaxTasks()</div><div class="ttdoc">Returns the max number of concurrent tasks allowed. </div><div class="ttdef"><b>Definition:</b> PltTaskManager.h:96</div></div>
 <div class="ttc" id="classPLT__TaskManager_html"><div class="ttname"><a href="classPLT__TaskManager.html">PLT_TaskManager</a></div><div class="ttdoc">The PLT_TaskManager class maintains a list of runnable tasks. </div><div class="ttdef"><b>Definition:</b> PltTaskManager.h:60</div></div>
