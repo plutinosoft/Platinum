@@ -252,7 +252,7 @@ PLT_FileMediaServerDelegate::OnBrowseDirectChildren(PLT_ActionReference&        
     
     didl += didl_footer;
     
-    NPT_LOG_FINE_6("BrowseDirectChildren from %s returning %d-%d/%d objects (%d out of %d requested)",
+    NPT_LOG_FINE_6("BrowseDirectChildren from %s returning %d-%lu/%lu objects (%lu out of %d requested)",
                    (const char*)context.GetLocalAddress().GetIpAddress().ToString(),
                    starting_index, starting_index+num_returned, total_matches, num_returned, requested_count);
     

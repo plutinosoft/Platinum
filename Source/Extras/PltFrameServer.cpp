@@ -110,7 +110,7 @@ public:
                     
             NPT_SocketInfo client_info;
             client->GetInfo(client_info);
-            NPT_LOG_FINE_2("client connected (%s)",
+            NPT_LOG_FINE_2("client connected (%s -> %s)",
                 client_info.local_address.ToString().GetChars(),
                 client_info.remote_address.ToString().GetChars());
 
