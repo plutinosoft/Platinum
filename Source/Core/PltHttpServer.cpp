@@ -159,7 +159,7 @@ PLT_HttpServer::SetupResponse(NPT_HttpRequest&              request,
         (const char*) request.GetMethod(),
         (const char*) context.GetRemoteAddress().ToString(),
         (const char*) request.GetUrl().ToString());
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINE, prefix, &request);
+    PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
 
     NPT_List<NPT_HttpRequestHandler*> handlers = FindRequestHandlers(request);
     if (handlers.GetItemCount() == 0) return NPT_ERROR_NO_SUCH_ITEM;

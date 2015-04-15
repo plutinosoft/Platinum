@@ -61,7 +61,7 @@ PLT_SsdpSender::SendSsdp(NPT_HttpRequest&   request,
     NPT_String prefix = NPT_String::Format("Sending SSDP %s packet for %s",
         (const char*)request.GetMethod(), 
         usn);
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &request);
+    PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINER, prefix, &request);
 
     // use a memory stream to write all the data
     NPT_MemoryStream stream;
@@ -93,7 +93,7 @@ PLT_SsdpSender::SendSsdp(NPT_HttpResponse&  response,
 
     // logging
     NPT_String prefix = NPT_String::Format("Sending SSDP Response:");
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, &response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, prefix, &response);
 
     // use a memory stream to write all the data
     NPT_MemoryStream stream;

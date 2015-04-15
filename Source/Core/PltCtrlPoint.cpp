@@ -235,6 +235,7 @@ public:
 PLT_CtrlPoint::PLT_CtrlPoint(const char* search_criteria /* = "upnp:rootdevice" */) :
     m_EventHttpServer(NULL),
     m_TaskManager(NULL),
+	m_Lock(true),
     m_SearchCriteria(search_criteria),
     m_Started(false)
 {
@@ -871,7 +872,7 @@ PLT_CtrlPoint::ProcessPendingEventNotifications()
             service = sub->GetService();
 
             // Reprocess notification
-            NPT_LOG_WARNING_1("Reprocessing delayed notification for subscriber", (const char*)notification->m_SID);
+            NPT_LOG_WARNING_1("Reprocessing delayed notification for subscriber %s", (const char*)notification->m_SID);
             NPT_Result result = ProcessEventNotification(sub, notification, vars);
             delete notification;
             
@@ -904,7 +905,7 @@ PLT_CtrlPoint::ProcessHttpNotify(const NPT_HttpRequest&        request,
     PLT_EventSubscriberReference sub;
     NPT_Result result;
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", request);
+    PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessHttpNotify:", &request);
 
     // Create notification from request
     PLT_EventNotification* notification = PLT_EventNotification::Parse(request, context, response);
@@ -962,7 +963,7 @@ PLT_CtrlPoint::ProcessSsdpSearchResponse(NPT_Result                    res,
     NPT_String prefix = NPT_String::Format("PLT_CtrlPoint::ProcessSsdpSearchResponse from %s:%d",
         (const char*)context.GetRemoteAddress().GetIpAddress().ToString() , 
         context.GetRemoteAddress().GetPort());
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, prefix, response);
     
     // any 2xx responses are ok
     if (response->GetStatusCode()/100 == 2) {
@@ -1033,7 +1034,7 @@ PLT_CtrlPoint::ProcessSsdpNotify(const NPT_HttpRequest&        request,
             context.GetRemoteAddress().GetIpAddress().ToString().GetChars(), 
             context.GetRemoteAddress().GetPort(),
             usn?usn->GetChars():"unknown");
-        PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, request);
+        PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINER, prefix, &request);
 
         if ((uri.Compare("*") != 0) || (protocol.Compare("HTTP/1.1") != 0))
             return NPT_FAILURE;
@@ -1341,7 +1342,7 @@ PLT_CtrlPoint::ProcessGetDescriptionResponse(NPT_Result                    res,
     NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
 
     // log response
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // get response body
     res = PLT_HttpHelper::GetBody(*response, desc);
@@ -1418,7 +1419,7 @@ PLT_CtrlPoint::ProcessGetSCPDResponse(NPT_Result                    res,
     NPT_CHECK_LABEL_FATAL(res, bad_response);
     NPT_CHECK_POINTER_LABEL_FATAL(response, bad_response);
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // make sure root device hasn't disappeared
     NPT_CHECK_LABEL_WARNING(FindDevice(device->GetUUID(), root_device, true),
@@ -1608,7 +1609,7 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
     NPT_AutoLock lock(m_Lock);
     
     const NPT_String*    sid = NULL;
-    NPT_Int32            seconds;
+    NPT_Int32            seconds = -1;
     PLT_EventSubscriberReference sub;
     bool                 subscription = (request.GetMethod().ToUppercase() == "SUBSCRIBE");
 
@@ -1617,7 +1618,7 @@ PLT_CtrlPoint::ProcessSubscribeResponse(NPT_Result                    res,
         (const char*)service->GetServiceID(),
         res,
         response?response->GetStatusCode():0);
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, prefix, response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, prefix, response);
 
     // if there's a failure or it's a response to a cancellation
     // we get out (any 2xx status code ok)
@@ -1756,7 +1757,7 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
         goto failure;
     }
 
-    PLT_LOG_HTTP_MESSAGE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessActionResponse:", response);
+    PLT_LOG_HTTP_RESPONSE(NPT_LOG_LEVEL_FINER, "PLT_CtrlPoint::ProcessActionResponse:", response);
 
     NPT_LOG_FINER("Reading/Parsing Action Response Body...");
     if (NPT_FAILED(PLT_HttpHelper::ParseBody(*response, xml))) {

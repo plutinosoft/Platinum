@@ -69,28 +69,6 @@ class NPT_HttpHeaderFinder
 };
 
 /*----------------------------------------------------------------------
-|   NPT_HttpHeaderPrinter
-+---------------------------------------------------------------------*/
-class NPT_HttpHeaderPrinter
-{
-public:
-    // methods
-    NPT_HttpHeaderPrinter(NPT_OutputStreamReference& stream) : 
-        m_Stream(stream) {}
-    NPT_Result operator()(NPT_HttpHeader*& header) const {
-        m_Stream->WriteString(header->GetName());
-        m_Stream->Write(": ", 2);
-        m_Stream->WriteString(header->GetValue());
-        m_Stream->Write("\r\n", 2, NULL);
-        return NPT_SUCCESS;
-    }
-
-private:
-    // members
-    NPT_OutputStreamReference& m_Stream;
-};
-
-/*----------------------------------------------------------------------
 |   NPT_HttpHeaderLogger
 +---------------------------------------------------------------------*/
 class NPT_HttpHeaderLogger
@@ -321,48 +299,6 @@ PLT_HttpHelper::SetHost(NPT_HttpRequest& request, const char* host)
 }
 
 /*----------------------------------------------------------------------
-|   PLT_HttpHelper::ToLog
-+---------------------------------------------------------------------*/
-NPT_Result
-PLT_HttpHelper::ToLog(NPT_LoggerReference logger, 
-                      int                 level,
-                      const char*          prefix,
-                      NPT_HttpRequest*    request)
-{
-    if (!request) {
-        NPT_LOG_L(logger, level, "NULL HTTP Request!");
-        return NPT_FAILURE;
-    }
-
-    return ToLog(logger, level, prefix, *request);
-}
-
-/*----------------------------------------------------------------------
-|   PLT_HttpHelper::ToLog
-+---------------------------------------------------------------------*/
-NPT_Result
-PLT_HttpHelper::ToLog(NPT_LoggerReference    logger, 
-                      int                    level,
-                      const char*            prefix, 
-                      const NPT_HttpRequest& request)
-{
-    NPT_COMPILER_UNUSED(logger);
-    NPT_COMPILER_UNUSED(level);
-
-    NPT_StringOutputStreamReference stream(new NPT_StringOutputStream);
-    NPT_OutputStreamReference output = stream;
-    request.GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output));
-
-    NPT_LOG_L5(logger, level, "%s\n%s %s %s\n%s", 
-        prefix,
-        (const char*)request.GetMethod(), 
-        (const char*)request.GetUrl().ToRequestString(true), 
-        (const char*)request.GetProtocol(),
-        (const char*)stream->GetString());
-    return NPT_SUCCESS;
-}
-
-/*----------------------------------------------------------------------
 |   PLT_HttpHelper::GetDeviceSignature
 +---------------------------------------------------------------------*/
 PLT_DeviceSignature
@@ -397,48 +333,6 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
     }
 
 	return PLT_DEVICE_UNKNOWN;
-}
-
-/*----------------------------------------------------------------------
-|   NPT_HttpResponse::ToLog
-+---------------------------------------------------------------------*/
-NPT_Result
-PLT_HttpHelper::ToLog(NPT_LoggerReference logger,
-                      int                 level,
-                      const char*         prefix, 
-                      NPT_HttpResponse*   response)
-{
-    if (!response) {
-        NPT_LOG_L(logger, level, "NULL HTTP Response!");
-        return NPT_FAILURE;
-    }
-
-    return ToLog(logger, level, prefix, *response);
-}
-
-/*----------------------------------------------------------------------
-|   NPT_HttpResponse::ToLog
-+---------------------------------------------------------------------*/
-NPT_Result
-PLT_HttpHelper::ToLog(NPT_LoggerReference     logger, 
-                      int                     level,
-                      const char*             prefix, 
-                      const NPT_HttpResponse& response)
-{
-    NPT_COMPILER_UNUSED(logger);
-    NPT_COMPILER_UNUSED(level);
-
-    NPT_StringOutputStreamReference stream(new NPT_StringOutputStream);
-    NPT_OutputStreamReference output = stream;
-    response.GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output));
-
-    NPT_LOG_L5(logger, level, "%s\n%s %d %s\n%s", 
-        prefix,
-        (const char*)response.GetProtocol(), 
-        response.GetStatusCode(), 
-        (const char*)response.GetReasonPhrase(),
-        (const char*)stream->GetString());
-    return NPT_SUCCESS;
 }
 
 /*----------------------------------------------------------------------
