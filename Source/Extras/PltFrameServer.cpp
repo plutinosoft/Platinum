@@ -55,6 +55,7 @@ public:
     PLT_SocketPolicyServer(const char* policy, 
                            NPT_IpPort  port = 0,
                            const char* authorized_ports = "5900") :
+		m_Socket(NPT_SOCKET_FLAG_CANCELLABLE),
         m_Policy(policy),
         m_Port(port),
         m_AuthorizedPorts(authorized_ports),

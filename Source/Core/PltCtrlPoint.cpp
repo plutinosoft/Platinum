@@ -371,7 +371,7 @@ PLT_CtrlPoint::CreateSearchTask(const NPT_HttpUrl&   url,
     if (mx<1) mx=1;
 
     // create socket
-    NPT_Reference<NPT_UdpMulticastSocket> socket(new NPT_UdpMulticastSocket());
+    NPT_Reference<NPT_UdpMulticastSocket> socket(new NPT_UdpMulticastSocket(NPT_SOCKET_FLAG_CANCELLABLE));
     socket->SetInterface(address);
     socket->SetTimeToLive(PLT_Constants::GetInstance().GetSearchMulticastTimeToLive());
 
@@ -472,7 +472,7 @@ PLT_CtrlPoint::Discover(const NPT_HttpUrl& url,
     if (mx<1) mx = 1;
 
     // create socket
-    NPT_UdpSocket* socket = new NPT_UdpSocket();
+    NPT_UdpSocket* socket = new NPT_UdpSocket(NPT_SOCKET_FLAG_CANCELLABLE);
 
     // create request
     NPT_HttpRequest* request = new NPT_HttpRequest(url, "M-SEARCH", NPT_HTTP_PROTOCOL_1_1);

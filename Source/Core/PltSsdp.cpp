@@ -147,7 +147,7 @@ PLT_SsdpDeviceSearchResponseInterfaceIterator::operator()(NPT_NetworkInterface*&
     if (!niaddr) return NPT_SUCCESS;
 
     // don't try to bind on port 1900 or connect will fail later
-    NPT_UdpSocket socket;
+    NPT_UdpSocket socket(NPT_SOCKET_FLAG_CANCELLABLE);
     //socket.Bind(NPT_SocketAddress(NPT_IpAddress::Any, 1900), true);
 
     // by connecting, the kernel chooses which interface to use to route to the remote
@@ -238,8 +238,8 @@ PLT_SsdpAnnounceInterfaceIterator::operator()(NPT_NetworkInterface*& net_if) con
     }
 
     NPT_HttpUrl            url;
-    NPT_UdpMulticastSocket multicast_socket;
-    NPT_UdpSocket          broadcast_socket;
+    NPT_UdpMulticastSocket multicast_socket(NPT_SOCKET_FLAG_CANCELLABLE);
+    NPT_UdpSocket          broadcast_socket(NPT_SOCKET_FLAG_CANCELLABLE);
     NPT_UdpSocket*         socket;
 
     if (m_Broadcast) {
