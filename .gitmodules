@@ -1,0 +1,3 @@
+[submodule "Carthage/Checkouts/Neptune"]
+	path = Carthage/Checkouts/Neptune
+	url = https://github.com/plutinosoft/Neptune.git
