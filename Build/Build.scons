@@ -191,7 +191,7 @@ if os.path.exists(target_config_file):
 # module's implementation only.
 #######################################################
 # Neptune
-NPT_SOURCE_ROOT = '../Neptune'
+NPT_SOURCE_ROOT = 'ThirdParty/Neptune'
 
 LibraryModule(name                  = 'Zlib',
               source_root           = NPT_SOURCE_ROOT,
