@@ -1,3 +1,3 @@
-[submodule "Carthage/Checkouts/Neptune"]
+[submodule "ThirdParty/Neptune"]
 	path = ThirdParty/Neptune
 	url = https://github.com/plutinosoft/Neptune.git
