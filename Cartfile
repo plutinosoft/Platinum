@@ -1,3 +1,2 @@
 # Neptune
-#git "file:/Users/home/sylvain/dev/neptune-github"
-github "plutinosoft/Neptune" ~> 1.1.4
+github "plutinosoft/Neptune"
