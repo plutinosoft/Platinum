@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ozone", "Ozone\Ozone.vcproj", "{03046B3D-BE6C-4B83-B7D6-75F225A15FB6}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SchemaTest1", "SchemaTest1\SchemaTest1.vcproj", "{D41074B7-7DFD-46B8-B278-E8CEE127E07F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{03046B3D-BE6C-4B83-B7D6-75F225A15FB6} = {03046B3D-BE6C-4B83-B7D6-75F225A15FB6}
+		{A1356A65-1EEA-4F5C-AA48-D53DC622B36D} = {A1356A65-1EEA-4F5C-AA48-D53DC622B36D}
+		{12AFF2E5-6D95-4809-9728-9551677C078A} = {12AFF2E5-6D95-4809-9728-9551677C078A}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Neptune", "..\..\..\..\Neptune\Build\Targets\x86-microsoft-win32-vs2008\Neptune\Neptune.vcproj", "{12AFF2E5-6D95-4809-9728-9551677C078A}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SQLite", "..\..\..\..\SQLite\Build\Targets\x86-microsoft-win32-vs2008\SQLite\SQLite.vcproj", "{A1356A65-1EEA-4F5C-AA48-D53DC622B36D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{03046B3D-BE6C-4B83-B7D6-75F225A15FB6}.Debug|Win32.ActiveCfg = Debug|Win32
+		{03046B3D-BE6C-4B83-B7D6-75F225A15FB6}.Debug|Win32.Build.0 = Debug|Win32
+		{03046B3D-BE6C-4B83-B7D6-75F225A15FB6}.Release|Win32.ActiveCfg = Release|Win32
+		{03046B3D-BE6C-4B83-B7D6-75F225A15FB6}.Release|Win32.Build.0 = Release|Win32
+		{D41074B7-7DFD-46B8-B278-E8CEE127E07F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D41074B7-7DFD-46B8-B278-E8CEE127E07F}.Debug|Win32.Build.0 = Debug|Win32
+		{D41074B7-7DFD-46B8-B278-E8CEE127E07F}.Release|Win32.ActiveCfg = Release|Win32
+		{D41074B7-7DFD-46B8-B278-E8CEE127E07F}.Release|Win32.Build.0 = Release|Win32
+		{12AFF2E5-6D95-4809-9728-9551677C078A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{12AFF2E5-6D95-4809-9728-9551677C078A}.Debug|Win32.Build.0 = Debug|Win32
+		{12AFF2E5-6D95-4809-9728-9551677C078A}.Release|Win32.ActiveCfg = Release|Win32
+		{12AFF2E5-6D95-4809-9728-9551677C078A}.Release|Win32.Build.0 = Release|Win32
+		{A1356A65-1EEA-4F5C-AA48-D53DC622B36D}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A1356A65-1EEA-4F5C-AA48-D53DC622B36D}.Debug|Win32.Build.0 = Debug|Win32
+		{A1356A65-1EEA-4F5C-AA48-D53DC622B36D}.Release|Win32.ActiveCfg = Release|Win32
+		{A1356A65-1EEA-4F5C-AA48-D53DC622B36D}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
