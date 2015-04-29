@@ -1,0 +1,7 @@
+Carthage
+/Targets
+*/**/Debug
+xcuserdata
+*.xcworkspace
+*.pyc
+.scons*
