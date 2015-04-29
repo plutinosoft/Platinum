@@ -42,7 +42,7 @@
 #include "PltMediaServer.h"
 #include "PltSyncMediaBrowser.h"
 #include "PltMediaController.h"
-#include <Neptune/Neptune.h>
+#include "Neptune.h"
 
 /*----------------------------------------------------------------------
 |   definitions

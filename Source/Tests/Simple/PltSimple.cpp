@@ -35,7 +35,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include <Neptune/Neptune.h>
+#include "Neptune.h"
 #include "Platinum.h"
 #include "PltSimple.h"
 

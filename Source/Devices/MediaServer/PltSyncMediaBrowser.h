@@ -42,7 +42,7 @@
 /*----------------------------------------------------------------------
 |   includes
 +---------------------------------------------------------------------*/
-#include <Neptune/Neptune.h>
+#include "Neptune.h"
 #include "PltCtrlPoint.h"
 #include "PltMediaBrowser.h"
 #include "PltMediaCache.h"

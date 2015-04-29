@@ -38,7 +38,7 @@
 +---------------------------------------------------------------------*/
 #include <stdlib.h>
 #include <stdio.h>
-#include <Neptune/Neptune.h>
+#include "Neptune.h"
 #include "Platinum.h"
 
 /*----------------------------------------------------------------------
