@@ -326,6 +326,8 @@
 		E45332B21AAED318004A52FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B11AAED318004A52FD /* main.m */; };
 		E45332B51AAED318004A52FD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B41AAED318004A52FD /* AppDelegate.m */; };
 		E45332B81AAED318004A52FD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E45332B71AAED318004A52FD /* ViewController.mm */; };
+		E48EAA811AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; };
+		E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -710,6 +712,7 @@
 		E48D4D9013B51BAC00359E06 /* PltProtocolInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PltProtocolInfo.h; path = ../../../Source/Core/PltProtocolInfo.h; sourceTree = SOURCE_ROOT; };
 		E48D4DA613B51CB600359E06 /* PltMimeType.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PltMimeType.cpp; path = ../../../Source/Core/PltMimeType.cpp; sourceTree = SOURCE_ROOT; };
 		E48D4DA713B51CB600359E06 /* PltMimeType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PltMimeType.h; path = ../../../Source/Core/PltMimeType.h; sourceTree = SOURCE_ROOT; };
+		E48EAA801AF1EDD800D9EDC0 /* Neptune.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Neptune.h; sourceTree = "<group>"; };
 		E48F8A9E1632026F009E46A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E4A7DB76108596B900E6ADE2 /* AVTransportSCPD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AVTransportSCPD.cpp; sourceTree = "<group>"; };
 		E4A7DB77108596B900E6ADE2 /* RdrConnectionManagerSCPD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = RdrConnectionManagerSCPD.cpp; sourceTree = "<group>"; };
@@ -1022,6 +1025,7 @@
 		E41016221ACFA826000E994F /* Platinum */ = {
 			isa = PBXGroup;
 			children = (
+				E48EAA801AF1EDD800D9EDC0 /* Neptune.h */,
 				E41016251ACFA826000E994F /* Platinum.h */,
 				E41016231ACFA826000E994F /* Supporting Files */,
 			);
@@ -1391,6 +1395,7 @@
 				E410168A1ACFA8B9000E994F /* PltMediaServerObject.h in Headers */,
 				E41016971ACFA8B9000E994F /* PltFrameStream.h in Headers */,
 				E41016761ACFA893000E994F /* PltMediaController.h in Headers */,
+				E48EAA811AF1EDD800D9EDC0 /* Neptune.h in Headers */,
 				E410164E1ACFA858000E994F /* PltDeviceData.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1429,6 +1434,7 @@
 				E44E2B751AE761220092347B /* PltFrameServer.h in Headers */,
 				E44E2B761AE761220092347B /* PltMediaRenderer.h in Headers */,
 				E44E2B771AE761220092347B /* PltArgument.h in Headers */,
+				E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */,
 				E44E2B781AE761220092347B /* PltHttpClientTask.h in Headers */,
 				E44E2B791AE761220092347B /* PltSyncMediaBrowser.h in Headers */,
 				E44E2B7A1AE761220092347B /* PltStateVariable.h in Headers */,
@@ -1474,7 +1480,6 @@
 			buildPhases = (
 				E423F35E18415DC500E24E39 /* Sources */,
 				E423F36018415DC500E24E39 /* Frameworks */,
-				E423F36418415DC500E24E39 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1492,7 +1497,6 @@
 			buildPhases = (
 				E42D3ABA0FDC87130045379C /* Sources */,
 				E42D3ABB0FDC87130045379C /* Frameworks */,
-				E4FFCFEF143ADFF6001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1510,7 +1514,6 @@
 			buildPhases = (
 				E42D3AD00FDC87DB0045379C /* Sources */,
 				E42D3AD10FDC87DB0045379C /* Frameworks */,
-				E4FFCFF0143ADFFF001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1528,7 +1531,6 @@
 			buildPhases = (
 				E42D3ADA0FDC87F50045379C /* Sources */,
 				E42D3ADB0FDC87F50045379C /* Frameworks */,
-				E4FFCFF1143AE006001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1546,7 +1548,6 @@
 			buildPhases = (
 				E42D3AE40FDC880D0045379C /* Sources */,
 				E42D3AE50FDC880D0045379C /* Frameworks */,
-				E4FFCFF2143AE00D001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1564,7 +1565,6 @@
 			buildPhases = (
 				E42D3B180FDC895A0045379C /* Sources */,
 				E42D3B190FDC895A0045379C /* Frameworks */,
-				E4FFCFF3143AE014001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1582,7 +1582,6 @@
 			buildPhases = (
 				E42D3B230FDC89720045379C /* Sources */,
 				E42D3B240FDC89720045379C /* Frameworks */,
-				E4FFCFF4143AE01B001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1600,7 +1599,6 @@
 			buildPhases = (
 				E42D3B360FDC89B70045379C /* Sources */,
 				E42D3B370FDC89B70045379C /* Frameworks */,
-				E4FFCFF5143AE020001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1618,7 +1616,6 @@
 			buildPhases = (
 				E42D3B420FDC89CD0045379C /* Sources */,
 				E42D3B430FDC89CD0045379C /* Frameworks */,
-				E4FFCFF6143AE025001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1636,7 +1633,6 @@
 			buildPhases = (
 				E42D3B4D0FDC89E10045379C /* Sources */,
 				E42D3B4E0FDC89E10045379C /* Frameworks */,
-				E4FFCFF7143AE02A001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1673,7 +1669,6 @@
 			buildPhases = (
 				E43F6BBE10F1B74E00C97612 /* Sources */,
 				E43F6BC010F1B74E00C97612 /* Frameworks */,
-				E4FFCFF8143AE030001F4662 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1817,19 +1812,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		E423F36418415DC500E24E39 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
 		E459CC2011F82C3F00621896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1842,136 +1824,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# shell script goes here\n#  Build the doxygen documentation for the project and load the docset into Xcode.\n\n#  Use the following to adjust the value of the $DOXYGEN_PATH User-Defined Setting:\n#    Binary install location: /Applications/Doxygen.app/Contents/Resources/doxygen\n#    Source build install location: /usr/local/bin/doxygen\n\n\ncd \"$SOURCE_ROOT/../../../Docs/Doxygen\"\nDIR=\"$( cd \"$( dirname \"${BASH_SOURCE[0]}\" )\" && pwd )\"\necho $(pwd)\n\nif ! [ -f Doxyfile ] \nthen \n  echo doxygen config file does not exist\nfi\n\nVERSION=$(python ../../Scripts/version.py)\n\n#  Run doxygen on the updated config file.\n#  Note: doxygen creates a Makefile that does most of the heavy lifting.\n\n( cat Doxyfile ; echo \"PROJECT_NUMBER=$VERSION\" ) | /usr/local/bin/doxygen -\n\n#  make will invoke docsetutil. Take a look at the Makefile to see how this is done.\n\nmake -C Platinum-HTML install\n\n#  Construct a temporary applescript file to tell Xcode to load a docset.\n\nrm -f \"$TEMP_DIR/loadDocSet.scpt\"\n\necho \"tell application \\\"Xcode\\\"\" >> \"$TEMP_DIR/loadDocSet.scpt\"\necho \"load documentation set with path \\\"/Users/$USER/Library/Developer/Shared/Documentation/DocSets/\\\"\" \n     >> $TEMP_DIR/loadDocSet.scpt\necho \"end tell\" >> \"$TEMP_DIR/loadDocSet.scpt\"\n\n#  Run the load-docset applescript command.\n\nosascript \"$TEMP_DIR/loadDocSet.scpt\"\n\nexit 0";
-		};
-		E4FFCFEF143ADFF6001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF0143ADFFF001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF1143AE006001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF2143AE00D001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF3143AE014001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF4143AE01B001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF5143AE020001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF6143AE025001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF7143AE02A001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
-		};
-		E4FFCFF8143AE030001F4662 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "cp -Rp \"${TARGET_BUILD_DIR}/${EXECUTABLE_NAME}\" \"${PROJECT_DIR}/../../../Targets/universal-apple-${PLATFORM_NAME}/${CONFIGURATION}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -3757,6 +3609,7 @@
 				E44E2BD31AE775510092347B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E45332CD1AAED318004A52FD /* Build configuration list for PBXNativeTarget "MobileMediaServer" */ = {
 			isa = XCConfigurationList;

@@ -6,7 +6,7 @@
 //  Copyright 2010 Plutinosoft LLC. All rights reserved.
 //
 
-#import <Neptune/Neptune.h>
+#import "Neptune.h"
 
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 #include <UIKit/UIKit.h>
