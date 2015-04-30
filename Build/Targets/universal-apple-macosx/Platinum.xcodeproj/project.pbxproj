@@ -326,8 +326,8 @@
 		E45332B21AAED318004A52FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B11AAED318004A52FD /* main.m */; };
 		E45332B51AAED318004A52FD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B41AAED318004A52FD /* AppDelegate.m */; };
 		E45332B81AAED318004A52FD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E45332B71AAED318004A52FD /* ViewController.mm */; };
-		E48EAA811AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; };
-		E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; };
+		E48EAA811AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1434,7 +1434,6 @@
 				E44E2B751AE761220092347B /* PltFrameServer.h in Headers */,
 				E44E2B761AE761220092347B /* PltMediaRenderer.h in Headers */,
 				E44E2B771AE761220092347B /* PltArgument.h in Headers */,
-				E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */,
 				E44E2B781AE761220092347B /* PltHttpClientTask.h in Headers */,
 				E44E2B791AE761220092347B /* PltSyncMediaBrowser.h in Headers */,
 				E44E2B7A1AE761220092347B /* PltStateVariable.h in Headers */,
@@ -1448,6 +1447,7 @@
 				E44E2B821AE761220092347B /* PltMimeType.h in Headers */,
 				E44E2B831AE761220092347B /* PltMediaServerObject.h in Headers */,
 				E44E2B841AE761220092347B /* PltFrameStream.h in Headers */,
+				E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */,
 				E44E2B851AE761220092347B /* PltMediaController.h in Headers */,
 				E44E2B861AE761220092347B /* PltDeviceData.h in Headers */,
 			);
