@@ -14,6 +14,7 @@
 ////! Project version string for Platinum.
 //FOUNDATION_EXPORT const unsigned char PlatinumVersionString[];
 
+#ifndef _PLATINUM_H_
 #define _PLATINUM_H_
 
 #include <Platinum/PltUPnP.h>
@@ -61,3 +62,5 @@
 #include <Platinum/PltFrameServer.h>
 #include <Platinum/PltFrameStream.h>
 #include <Platinum/PltRingBufferStream.h>
+
+#endif // _PLATINUM_H_
