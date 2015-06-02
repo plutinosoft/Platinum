@@ -3,33 +3,35 @@ Platinum UPnP SDK
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
-* Platinum: a modular UPnP Framework [Platinum uses Neptune]
+* Platinum: a modular UPnP Framework [Platinum depends on Neptune]
 
-Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the "Build" tree of Platinum. All the dependent binaries will be rebuilt automatically (including Neptune).
+Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the Platinum root directory. All the dependent binaries will be rebuilt automatically (including Neptune).
 
 ---------------------------------------------
 BUILDING SDK & SAMPLE APPLICATIONS
 
 * Windows:
-Open the Visual Studio 2008 solution located @ Platinum\Build\Targets\x86-microsoft-win32-vs2008\Platinum.sln
+Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32-vs2010\Platinum.sln
 
 * MacOSX, iOS:
-Open the XCode project file located @ Platinum/Build/Targets/universal-apple-macosx/Platinum.xcodeproj
-To include Platinum to your XCode projects, simply add the project file then add Platinum as a Target Dependency as well as libPlatinum.lib in Link Binaries.
-Alternatively, you can build the Platinum.Framework using the PlatinumFramework target and add it to your project.
+First install carthage (https://github.com/Carthage/Carthage)
+> brew update || brew install carthage
+Build Neptune & Platinum frameworks
+> carthage bootstrap
+> carthage build --no-skip-current
 
-* Linux, Cygwin, MacOSX, iOS
-Open a shell, go to the Platinum root directory and type 'scons' (http://scons.org). 
-The output of the scons build will be found under Platinum/Build/Targets/{TARGET}/{Debug|Release}. 
-Additionally, the output is copied under Platinum/Targets/{TARGET}/{Debug|Release} for convenience when applicable.
+Both Neptune and Platinum frameworks binaries can be found under Carthage/Build folders which you can link with your applications.
+Follow the instructions here (https://github.com/Carthage/Carthage).
+If you are building for iOS, special instructions here (https://github.com/Carthage/Carthage#if-youre-building-for-ios).
 
-Command Line Examples:
-Builds libPlatinum.a, Platinum.Framework on both OSX & iOS using Xcode. Apps & Tests on OSX only.
-[The framework for OSX is i386 and x86_64 compatible, the iOS version is armv6, armv7 and i386 compatible so you can link with it and run your app on device and simulator]
-> scons target=universal-apple-macosx-xcode build_config=Release
+If you are interested in building sample apps or tests, you can also open the XCode project file located @ Build/Targets/universal-apple-macosx/Platinum.xcodeproj.
 
-Builds Platinum.lib, Tests & Apps for Windows
-> scons target=x86-microsoft-win32 build_config=Release
+* Linux, Cygwin, etc ...
+Open a shell, go to the Platinum root directory and type 'scons' (http://scons.org).
+> brew update || brew install scons
+> scons target={TARGET} build_config={Debug|Release}
+The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
+Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
 ---------------------------------------------
 RUNNING SAMPLE APPLICATIONS
@@ -66,22 +68,22 @@ This is a ControlPoint (synchronous) that lets you browse any MediaServer using 
      exit    -   same as quit
      setms   -   select a media server to become the active media server
      getms   -   print the friendly name of the active media server
-     ls      -   list the contents of the current directory on the active 
+     ls      -   list the contents of the current directory on the active
                  media server
      cd      -   traverse down one level in the content tree on the active
                  media server
      cd ..   -   traverse up one level in the content tree on the active
                  media server
-     pwd     -   print the path from the root to your current position in the 
+     pwd     -   print the path from the root to your current position in the
                  content tree on the active media server
-                 
+
 Experimental MediaRenderer commands (not yet full implemented):
      setmr   -   select a media renderer to become the active media renderer
      getmr   -   print the friendly name of the active media renderer
      open    -   set the uri on the active media renderer
      play    -   play the active uri on the active media renderer
      stop    -   stop the active uri on the active media renderer
-     
+
 * MediaConnect
 --------------
 This is a derived implementation of the FileMediaServerTest with the only difference that it makes it visible to a XBox 360.
@@ -89,6 +91,13 @@ This is a derived implementation of the FileMediaServerTest with the only differ
 * MediaServerCocoaTest
 ----------------------
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
+
+---------------------------------------------
+Crypto & Export requirements
+
+In some situations, it may be necessary to remove all crytographic code, including SSL support.
+It is possible by prepending the scons command with certain environment variables.
+> env NPT_CONFIG_NO_CRYPTO=1 scons target={TARGET} build_config={Debug|Release}
 
 ---------------------------------------------
 LANGUAGE BINDINGS
@@ -103,15 +112,18 @@ Under Source/Extras/Managed
 
 * Android Java/JNI
 ------------------
-To build the JNI shared library, you will need to have installed the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT. 
-> cd <PlatinumKit>/Platinum
+To build the JNI shared library, you will need to have installed the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT.
 > scons target=arm-android-linux build_config=Release
 
-> cd <PlatinumKit>/Platinum/Source/Platform/Android/module/platinum
+> cd Source/Platform/Android/module/platinum
 > ndk-build NDK_DEBUG=0
 
-> import eclipse Android .project located @ <PlatinumKit>/Platinum/Source/Platform/Android/modules/platinum/
-This will create the jar file @ <PlatinumKit>/Platinum/Source/Platform/Android/modules/platinum/bin/platinum.jar
+> import eclipse Android .project located @ Source/Platform/Android/modules/platinum/
+This will create the jar file @ Source/Platform/Android/modules/platinum/bin/platinum.jar
 
-> To Test the Platinum jni layer, import into eclipse both Android projects located @ <PlatinumKit>/Platinum/Source/Platform/Android/samples/sample-upnp & <PlatinumKit>/Platinum/Source/Platform/Android/modules/platinum.
+> To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
+
+If the library must be build without crypto or ssl, you can pass an extra parameter
+> ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_CRYPTO=1
+
 
