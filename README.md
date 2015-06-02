@@ -67,6 +67,7 @@ Once started, type 'q' to quit.
 
 ## MicroMediaController
 This is a ControlPoint (synchronous) that lets you browse any MediaServer using a shell-like interface. Once started, a command prompt lets you enter commands such as:
+```
      quit    -   shutdown
      exit    -   same as quit
      setms   -   select a media server to become the active media server
@@ -79,13 +80,16 @@ This is a ControlPoint (synchronous) that lets you browse any MediaServer using 
                  media server
      pwd     -   print the path from the root to your current position in the
                  content tree on the active media server
+```
 
 Experimental MediaRenderer commands (not yet full implemented):
+```
      setmr   -   select a media renderer to become the active media renderer
      getmr   -   print the friendly name of the active media renderer
      open    -   set the uri on the active media renderer
      play    -   play the active uri on the active media renderer
      stop    -   stop the active uri on the active media renderer
+```
 
 ## MediaConnect
 This is a derived implementation of the FileMediaServerTest with the only difference that it makes it visible to a XBox 360.
@@ -117,12 +121,12 @@ To build the JNI shared library, you will need to install the Android NDK and se
 > ndk-build NDK_DEBUG=0
 ```
 
-This will create the .so & jar file @ Source/Platform/Android/modules/platinum/bin/platinum.jar
-You can then import eclipse Android .project located @ Source/Platform/Android/modules/platinum/ inside your project.
+This will create the libplatinum-jni.so files under the Source/Platform/Android/module/platinum/libs folder.
+You can then import eclipse Android .project located @ Source/Platform/Android/modules/platinum to create the jar file @ Source/Platform/Android/modules/platinum/bin/platinum.jar
 
 To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
 
-If the library must be build without crypto or ssl, you can pass an extra parameter
+* If you wish to build the android shred library without crypto or ssl, you can build it by passing an extra parameter as follows:
 ```
 > ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_CRYPTO=1
 ```
