@@ -11,7 +11,7 @@ Unless you intend to use Neptune independently from Platinum, it is recommended 
 ## Windows:
 Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32-vs2010\Platinum.sln
 
-## MacOSX, iOS:
+## Mac, iOS:
 First install carthage (https://github.com/Carthage/Carthage)
 ```
 > brew update || brew install carthage
@@ -107,9 +107,9 @@ In some situations, it may be necessary to remove all crytographic code, includi
 > carthage build --configuration Release-NoCrypto --platform ios --no-skip-current
 ```
 
-## Linux, Cygwin, Android, etc ...
+## Linux, Cygwin, etc ...
 ```
-> env NPT_CONFIG_NO_CRYPTO=1 scons target={TARGET} build_config={Debug|Release}
+> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target={TARGET} build_config={Debug|Release}
 ```
 
 #LANGUAGE BINDINGS
@@ -135,6 +135,7 @@ To Test the Platinum jni layer, import into eclipse both Android projects locate
 
 * If you wish to build the android shred library without crypto or ssl, you can build it by passing an extra parameter as follows:
 ```
-> ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_CRYPTO=1
+> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target=arm-android-linux build_config=Release
+> ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_SSL=1
 ```
 
