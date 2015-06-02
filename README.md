@@ -15,10 +15,14 @@ Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32
 
 * MacOSX, iOS:
 First install carthage (https://github.com/Carthage/Carthage)
+```
 > brew update || brew install carthage
+```
 Build Neptune & Platinum frameworks
+```
 > carthage bootstrap
 > carthage build --no-skip-current
+```
 
 Both Neptune and Platinum frameworks binaries can be found under Carthage/Build folders which you can link with your applications.
 Follow the instructions on the [carthage page](https://github.com/Carthage/Carthage).
