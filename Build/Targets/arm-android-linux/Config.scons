@@ -103,5 +103,5 @@ env.AppendUnique(LINKFLAGS = ['--sysroot', ANDROID_SYSROOT,
 env['NPT_SYSTEM_SOURCES']={'System/StdC':'NptStdc[!D]*.cpp',
                            'System/Bsd':'*.cpp',
                            'System/Posix':'*.cpp',
-                           'System/Null':'NptNullSerialPort.cpp', 'System/Null':'NptNullAutoreleasePool.cpp',
+                           'System/Null':['NptNullSerialPort.cpp', 'NptNullAutoreleasePool.cpp'],
                            'System/Android':'*.cpp'}
