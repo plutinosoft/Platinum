@@ -32,6 +32,7 @@ If you are interested in building sample apps or tests, you can also open the XC
 Open a shell, go to the Platinum root directory and type 'scons' (http://scons.org).
 ```
 > brew update || brew install scons
+> git submodule update --init
 > scons target={TARGET} build_config={Debug|Release}
 ```
 The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
@@ -100,7 +101,13 @@ A basic cocoa test server app showing how to use the Platinum framework on Mac O
 #Crypto & Export requirements
 
 In some situations, it may be necessary to remove all crytographic code, including SSL support.
-It is possible by prepending the scons command with certain environment variables.
+## Mac, iOS
+```
+> carthage bootstrap --no-use-binaries
+> carthage build --configuration Release-NoCrypto --platform ios --no-skip-current
+```
+
+## Linux, Cygwin, Android, etc ...
 ```
 > env NPT_CONFIG_NO_CRYPTO=1 scons target={TARGET} build_config={Debug|Release}
 ```
