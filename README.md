@@ -1,5 +1,4 @@
-[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
-#Platinum UPnP SDK
+#Platinum UPnP SDK [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
