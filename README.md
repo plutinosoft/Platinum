@@ -21,15 +21,17 @@ Build Neptune & Platinum frameworks
 > carthage build --no-skip-current
 
 Both Neptune and Platinum frameworks binaries can be found under Carthage/Build folders which you can link with your applications.
-Follow the instructions here (https://github.com/Carthage/Carthage).
-If you are building for iOS, special instructions here (https://github.com/Carthage/Carthage#if-youre-building-for-ios).
+Follow the instructions on the [carthage page](https://github.com/Carthage/Carthage).
+If you are building for iOS, special [instructions here](https://github.com/Carthage/Carthage#if-youre-building-for-ios).
 
 If you are interested in building sample apps or tests, you can also open the XCode project file located @ Build/Targets/universal-apple-macosx/Platinum.xcodeproj.
 
 * Linux, Cygwin, etc ...
 Open a shell, go to the Platinum root directory and type 'scons' (http://scons.org).
+```
 > brew update || brew install scons
 > scons target={TARGET} build_config={Debug|Release}
+```
 The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
 Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
@@ -40,9 +42,11 @@ RUNNING SAMPLE APPLICATIONS
 ---------------------
 This is an example of a UPnP MediaServer. Given a path, it allows a UPnP ControlPoint to browse the content of the directory and its sub-directories. Additionally, files can be streamed (Note that only files with known mimetypes are advertised).
 
-usage: FileMediaServerTest [-f <friendly_name>] <path>
+```
+FileMediaServerTest [-f <friendly_name>] <path>
     -f : optional upnp server friendly name
     <path> : local path to serve
+```
 
 Once started, type 'q' to quit.
 
@@ -50,8 +54,10 @@ Once started, type 'q' to quit.
 -------------------
 This is an example shell of a UPnP MediaRenderer. It is to be contolled by a UPnP ControlPoint. This is just a SHELL, this won't play anything yet. You need to hook up the playback functionality yourself.
 
-usage: MediaRendererTest [-f <friendly_name>]
+```
+MediaRendererTest [-f <friendly_name>]
     -f : optional upnp server friendly name
+```
 
 Once started, type 'q' to quit.
 
@@ -97,7 +103,9 @@ Crypto & Export requirements
 
 In some situations, it may be necessary to remove all crytographic code, including SSL support.
 It is possible by prepending the scons command with certain environment variables.
+```
 > env NPT_CONFIG_NO_CRYPTO=1 scons target={TARGET} build_config={Debug|Release}
+```
 
 ---------------------------------------------
 LANGUAGE BINDINGS
@@ -112,18 +120,20 @@ Under Source/Extras/Managed
 
 * Android Java/JNI
 ------------------
-To build the JNI shared library, you will need to have installed the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT.
+To build the JNI shared library, you will need to install the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT.
+```
 > scons target=arm-android-linux build_config=Release
-
 > cd Source/Platform/Android/module/platinum
 > ndk-build NDK_DEBUG=0
+```
 
-> import eclipse Android .project located @ Source/Platform/Android/modules/platinum/
-This will create the jar file @ Source/Platform/Android/modules/platinum/bin/platinum.jar
+This will create the .so & jar file @ Source/Platform/Android/modules/platinum/bin/platinum.jar
+You can then import eclipse Android .project located @ Source/Platform/Android/modules/platinum/ inside your project.
 
-> To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
+To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
 
 If the library must be build without crypto or ssl, you can pass an extra parameter
+```
 > ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_CRYPTO=1
-
+```
 
