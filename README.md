@@ -1,4 +1,4 @@
-#Platinum UPnP SDK [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+#PLATINUM UPNP SDK [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
@@ -98,20 +98,6 @@ This is a derived implementation of the FileMediaServerTest with the only differ
 ## MediaServerCocoaTest
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
 
-#Crypto & Export requirements
-
-In some situations, it may be necessary to remove all crytographic code, including SSL support.
-## Mac, iOS
-```
-> carthage bootstrap --no-use-binaries
-> carthage build --configuration Release-NoCrypto --platform ios --no-skip-current
-```
-
-## Linux, Cygwin, etc ...
-```
-> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target={TARGET} build_config={Debug|Release}
-```
-
 #LANGUAGE BINDINGS
 
 ## Objective-C
@@ -133,7 +119,22 @@ You can then import eclipse Android .project located @ Source/Platform/Android/m
 
 To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
 
-* If you wish to build the android shred library without crypto or ssl, you can build it by passing an extra parameter as follows:
+
+#CRYPTOGRAPHY AND EXPORT REQUIREMENTS
+
+In some situations, it may be necessary to remove all crytographic code, including SSL support.
+## Mac, iOS
+```
+> carthage bootstrap --no-use-binaries
+> carthage build --configuration Release-NoCrypto --no-skip-current
+```
+
+## Linux, Cygwin, etc ...
+```
+> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target={TARGET} build_config={Debug|Release}
+```
+
+## Android
 ```
 > env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target=arm-android-linux build_config=Release
 > ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_SSL=1
