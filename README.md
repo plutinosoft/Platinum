@@ -1,4 +1,4 @@
-Platinum UPnP SDK
+###Platinum UPnP SDK
 =================
 
 This toolkit consists of 2 modules:
@@ -8,12 +8,12 @@ This toolkit consists of 2 modules:
 Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the Platinum root directory. All the dependent binaries will be rebuilt automatically (including Neptune).
 
 ---------------------------------------------
-BUILDING SDK & SAMPLE APPLICATIONS
+#BUILDING SDK & SAMPLE APPLICATIONS
 
-* Windows:
+## Windows:
 Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32-vs2010\Platinum.sln
 
-* MacOSX, iOS:
+## MacOSX, iOS:
 First install carthage (https://github.com/Carthage/Carthage)
 ```
 > brew update || brew install carthage
@@ -30,7 +30,7 @@ If you are building for iOS, special [instructions here](https://github.com/Cart
 
 If you are interested in building sample apps or tests, you can also open the XCode project file located @ Build/Targets/universal-apple-macosx/Platinum.xcodeproj.
 
-* Linux, Cygwin, etc ...
+## Linux, Cygwin, etc ...
 Open a shell, go to the Platinum root directory and type 'scons' (http://scons.org).
 ```
 > brew update || brew install scons
@@ -40,9 +40,9 @@ The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|
 Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
 ---------------------------------------------
-RUNNING SAMPLE APPLICATIONS
+#RUNNING SAMPLE APPLICATIONS
 
-* FileMediaServerTest
+## FileMediaServerTest
 ---------------------
 This is an example of a UPnP MediaServer. Given a path, it allows a UPnP ControlPoint to browse the content of the directory and its sub-directories. Additionally, files can be streamed (Note that only files with known mimetypes are advertised).
 
@@ -54,7 +54,7 @@ FileMediaServerTest [-f <friendly_name>] <path>
 
 Once started, type 'q' to quit.
 
-* MediaRendererTest
+## MediaRendererTest
 -------------------
 This is an example shell of a UPnP MediaRenderer. It is to be contolled by a UPnP ControlPoint. This is just a SHELL, this won't play anything yet. You need to hook up the playback functionality yourself.
 
@@ -65,13 +65,13 @@ MediaRendererTest [-f <friendly_name>]
 
 Once started, type 'q' to quit.
 
-* MediaCrawler
+## MediaCrawler
 --------------
 This is a combo UPnP MediaServer + ControlPoint. It browses content from other MediaServers it finds on the network and present them under one single aggregated view. This is useful for some devices that need to select one single MediaServer at boot time (i.e. Roku).
 
 Once started, type 'q' to quit.
 
-* MicroMediaController
+## MicroMediaController
 ----------------------
 This is a ControlPoint (synchronous) that lets you browse any MediaServer using a shell-like interface. Once started, a command prompt lets you enter commands such as:
      quit    -   shutdown
@@ -94,16 +94,16 @@ Experimental MediaRenderer commands (not yet full implemented):
      play    -   play the active uri on the active media renderer
      stop    -   stop the active uri on the active media renderer
 
-* MediaConnect
+## MediaConnect
 --------------
 This is a derived implementation of the FileMediaServerTest with the only difference that it makes it visible to a XBox 360.
 
-* MediaServerCocoaTest
+## MediaServerCocoaTest
 ----------------------
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
 
 ---------------------------------------------
-Crypto & Export requirements
+#Crypto & Export requirements
 
 In some situations, it may be necessary to remove all crytographic code, including SSL support.
 It is possible by prepending the scons command with certain environment variables.
@@ -112,17 +112,17 @@ It is possible by prepending the scons command with certain environment variable
 ```
 
 ---------------------------------------------
-LANGUAGE BINDINGS
+#LANGUAGE BINDINGS
 
-* Objective-C
+## Objective-C
 -------------
 Under Source/Extras/ObjectiveC
 
-* C++/CLR
+## C++/CLR
 ---------
 Under Source/Extras/Managed
 
-* Android Java/JNI
+## Android Java/JNI
 ------------------
 To build the JNI shared library, you will need to install the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT.
 ```
