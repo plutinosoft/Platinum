@@ -1,5 +1,4 @@
-###Platinum UPnP SDK
-=================
+#Platinum UPnP SDK
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
@@ -7,7 +6,6 @@ This toolkit consists of 2 modules:
 
 Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the Platinum root directory. All the dependent binaries will be rebuilt automatically (including Neptune).
 
----------------------------------------------
 #BUILDING SDK & SAMPLE APPLICATIONS
 
 ## Windows:
@@ -39,11 +37,9 @@ Open a shell, go to the Platinum root directory and type 'scons' (http://scons.o
 The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
 Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
----------------------------------------------
 #RUNNING SAMPLE APPLICATIONS
 
 ## FileMediaServerTest
----------------------
 This is an example of a UPnP MediaServer. Given a path, it allows a UPnP ControlPoint to browse the content of the directory and its sub-directories. Additionally, files can be streamed (Note that only files with known mimetypes are advertised).
 
 ```
@@ -55,7 +51,6 @@ FileMediaServerTest [-f <friendly_name>] <path>
 Once started, type 'q' to quit.
 
 ## MediaRendererTest
--------------------
 This is an example shell of a UPnP MediaRenderer. It is to be contolled by a UPnP ControlPoint. This is just a SHELL, this won't play anything yet. You need to hook up the playback functionality yourself.
 
 ```
@@ -66,13 +61,11 @@ MediaRendererTest [-f <friendly_name>]
 Once started, type 'q' to quit.
 
 ## MediaCrawler
---------------
 This is a combo UPnP MediaServer + ControlPoint. It browses content from other MediaServers it finds on the network and present them under one single aggregated view. This is useful for some devices that need to select one single MediaServer at boot time (i.e. Roku).
 
 Once started, type 'q' to quit.
 
 ## MicroMediaController
-----------------------
 This is a ControlPoint (synchronous) that lets you browse any MediaServer using a shell-like interface. Once started, a command prompt lets you enter commands such as:
      quit    -   shutdown
      exit    -   same as quit
@@ -95,14 +88,11 @@ Experimental MediaRenderer commands (not yet full implemented):
      stop    -   stop the active uri on the active media renderer
 
 ## MediaConnect
---------------
 This is a derived implementation of the FileMediaServerTest with the only difference that it makes it visible to a XBox 360.
 
 ## MediaServerCocoaTest
-----------------------
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
 
----------------------------------------------
 #Crypto & Export requirements
 
 In some situations, it may be necessary to remove all crytographic code, including SSL support.
@@ -111,19 +101,15 @@ It is possible by prepending the scons command with certain environment variable
 > env NPT_CONFIG_NO_CRYPTO=1 scons target={TARGET} build_config={Debug|Release}
 ```
 
----------------------------------------------
 #LANGUAGE BINDINGS
 
 ## Objective-C
--------------
 Under Source/Extras/ObjectiveC
 
 ## C++/CLR
----------
 Under Source/Extras/Managed
 
 ## Android Java/JNI
-------------------
 To build the JNI shared library, you will need to install the Android NDK and set up the proper environment variables such as ANDROID_NDK_ROOT.
 ```
 > scons target=arm-android-linux build_config=Release
