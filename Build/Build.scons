@@ -203,11 +203,13 @@ if not env.has_key('NPT_CONFIG_NO_ZIP'):
                   source_root           = NPT_SOURCE_ROOT,
                   build_source_dirs     = ['ThirdParty/zlib-1.2.3'])
 
-if not env.has_key('NPT_CONFIG_NO_SSL'):
+neptune_excluded_files = []
+if not env.has_key('NPT_CONFIG_NO_CRYPTO'):
     extra_cpp_flags += ['NPT_CONFIG_ENABLE_TLS']
     tls_data_dirs  = ['Data/TLS']
     tls_tests      = ['Tls1']
     neptune_extra_linked_modules += ['axTLS']
+    neptune_excluded_files = ['NptCrypto.cpp']
 
     LibraryModule(name                  = 'axTLS',
                   source_root           = NPT_SOURCE_ROOT,
@@ -219,6 +221,7 @@ else:
 LibraryModule(name                  = 'Neptune',
               build_source_dirs     = ['Core']+tls_data_dirs,
               build_source_files    = env['NPT_SYSTEM_SOURCES'],
+              excluded_files        = neptune_excluded_files,
               extra_cpp_defines     = extra_cpp_flags,
               linked_modules        = env['NPT_EXTRA_LIBS']+neptune_extra_linked_modules,
               source_root           = NPT_SOURCE_ROOT + '/Source')
