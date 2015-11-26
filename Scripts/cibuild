@@ -7,7 +7,12 @@ export SCRIPT_DIR=$(dirname "$0")
 ##
 
 # The name of the keychain to create for iOS code signing.
-KEYCHAIN=ios-build.keychain
+USER_KEYCHAIN_DIR="$HOME/Library/Keychains"
+SYSTEM_KEYCHAIN_DIR="/Library/Keychains"
+CI_KEYCHAIN_NAME='ci'
+CI_KEYCHAIN_PATH="$USER_KEYCHAIN_DIR/$CI_KEYCHAIN_NAME.keychain"
+SYSTEM_KEYCHAIN_PATH="$SYSTEM_KEYCHAIN_DIR/System.keychain"
+LOGIN_KEYCHAIN_PATH="$USER_KEYCHAIN_DIR/login.keychain"
 
 ##
 ## Build Process
@@ -17,7 +22,7 @@ main ()
 {
     import_certs
 
-    carthage bootstrap --platform ios
+	carthage bootstrap --platform ios
 	carthage build --platform ios --no-skip-current
     local status=$?
 
@@ -33,23 +38,27 @@ import_certs ()
         return 0
     fi
 
+	delete_keychain
+
     echo "*** Setting up code signing..."
     local password=cibuild
 
     # Create a temporary keychain for code signing.
-    security create-keychain -p "$password" "$KEYCHAIN"
-    security default-keychain -s "$KEYCHAIN"
-    security unlock-keychain -p "$password" "$KEYCHAIN"
-    security set-keychain-settings -t 3600 -l "$KEYCHAIN"
+    security create-keychain -p "$password" "$CI_KEYCHAIN_PATH"
+    security unlock-keychain -p "$password" "$CI_KEYCHAIN_PATH"
+    security set-keychain-settings -lut 7200 "$CI_KEYCHAIN_PATH"
 
     # Download the certificate for the Apple Worldwide Developer Relations
     # Certificate Authority.
     local certpath="$SCRIPT_DIR/apple_wwdr.cer"
     curl 'https://developer.apple.com/certificationauthority/AppleWWDRCA.cer' > "$certpath"
-    security import "$certpath" -k "$KEYCHAIN" -T /usr/bin/codesign
+    security import "$certpath" -k "$CI_KEYCHAIN_PATH" -T /usr/bin/codesign
 
     # Import our development certificate.
-    security import "$SCRIPT_DIR/Certificates/development.p12" -k "$KEYCHAIN" -P "$KEY_PASSWORD" -T /usr/bin/codesign
+    security import "$SCRIPT_DIR/Certificates/development.p12" -k "$CI_KEYCHAIN_PATH" -P "$KEY_PASSWORD" -T /usr/bin/codesign
+
+    # Set the ci keychain to the list of current keychains
+    security list-keychains -s "$CI_KEYCHAIN_PATH"
 }
 
 delete_keychain ()
@@ -59,12 +68,15 @@ delete_keychain ()
         return 0
     fi
 
-    security delete-keychain "$KEYCHAIN"
+    security list-keychains -s "$LOGIN_KEYCHAIN_PATH" "$SYSTEM_KEYCHAIN_PATH"
+
+    # Remove the keychain if it already exists
+    if [ -e "$CI_KEYCHAIN_PATH" ]; then
+        security delete-keychain "$CI_KEYCHAIN_PATH"
+        rm -f "$CI_KEYCHAIN_PATH"
+    fi
 }
 
-# trap delete_keychain EXIT
-
-export -f import_certs
-export -f delete_keychain
+trap delete_keychain EXIT
 
 main
