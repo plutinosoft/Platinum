@@ -5,4 +5,4 @@ before_install:
   - brew upgrade xctool
   - brew install carthage
 install: true
-script: script/cibuild
+script: Script/cibuild
