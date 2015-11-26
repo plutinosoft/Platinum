@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 export SCRIPT_DIR=$(dirname "$0")
 
@@ -24,9 +24,8 @@ main ()
 
 	carthage bootstrap --platform ios
 	carthage build --platform ios --no-skip-current
+	carthage archive Platinum
     local status=$?
-
-    delete_keychain
     exit $status
 }
 
