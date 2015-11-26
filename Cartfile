@@ -1,2 +1,2 @@
 # Neptune
-github "plutinosoft/Neptune" "master"
+github "plutinosoft/Neptune" ~> 1.1.9
