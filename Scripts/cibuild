@@ -62,7 +62,7 @@ delete_keychain ()
     security delete-keychain "$KEYCHAIN"
 }
 
-trap delete_keychain EXIT
+# trap delete_keychain EXIT
 
 export -f import_certs
 export -f delete_keychain
