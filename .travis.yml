@@ -5,6 +5,4 @@ before_install:
   - brew upgrade xctool
   - brew install carthage
 install: true
-script:
-  - carthage bootstrap --verbose --platform ios
-  - carthage build --verbose --platform ios --no-skip-current
+script: script/cibuild
