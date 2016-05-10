@@ -42,6 +42,7 @@
 #include "PltDeviceData.h"
 #include "PltUtilities.h"
 #include "PltCtrlPointTask.h"
+#include "PltHttp.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.event")
 
@@ -177,7 +178,6 @@ PLT_EventSubscriber::SetLocalIf(NPT_SocketAddress value)
 /*----------------------------------------------------------------------
 |   PLT_EventSubscriber::GetExpirationTime
 +---------------------------------------------------------------------*/
-// a TimeStamp of 0 means no expiration
 NPT_TimeStamp
 PLT_EventSubscriber::GetExpirationTime()
 {
@@ -292,10 +292,10 @@ PLT_EventSubscriber::Notify(NPT_List<PLT_StateVariable*>& vars)
 
     // start the task now if not started already
     if (!m_SubscriberTask) {
-        // TODO: the subscriber task should inform subscriber if
+        // The subscriber task should inform subscriber if
         // a notification failed to be received so it can be removed
         // from the list of subscribers inside the device host
-        NPT_Reference<PLT_HttpClientSocketTask> task(new PLT_HttpClientSocketTask(request, true));
+        NPT_Reference<PLT_HttpClientSocketTask> task(new PLT_HttpClientTask<PLT_EventSubscriber>(this, true));
         
         // short connection time out in case subscriber is not alive
         NPT_HttpClient::Config config;
@@ -311,11 +311,34 @@ PLT_EventSubscriber::Notify(NPT_List<PLT_StateVariable*>& vars)
         // Task successfully started, keep around for future notifications
         m_SubscriberTask = task.AsPointer();
         task.Detach();
-    } else {
-        m_SubscriberTask->AddRequest(request);
     }
-     
-    return NPT_SUCCESS;
+
+	return m_SubscriberTask->AddRequest(request);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_EventSubscriberFinderByService::operator()
++---------------------------------------------------------------------*/
+NPT_Result
+PLT_EventSubscriber::ProcessResponse(NPT_Result                    res,
+									 const NPT_HttpRequest&        request,
+									 const NPT_HttpRequestContext& context,
+									 NPT_HttpResponse*             response)
+{
+	NPT_COMPILER_UNUSED(request);
+	NPT_COMPILER_UNUSED(context);
+	
+	NPT_NullOutputStreamReference output;
+	if (NPT_FAILED(res) || NPT_FAILED(PLT_HttpHelper::GetBody(*response, output))) {
+		NPT_LOG_WARNING_1("Notification failed for subscriber: %s", GetSID().GetChars());
+
+		// Force expiration time to be far in the past so this subscriber
+		// gets purged next time a notification needs to be sent
+		m_ExpirationTime = 0.;
+		return NPT_FAILURE;
+	}
+
+	return NPT_SUCCESS;
 }
 
 /*----------------------------------------------------------------------
