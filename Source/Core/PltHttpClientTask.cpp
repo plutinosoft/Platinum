@@ -37,6 +37,7 @@
 +---------------------------------------------------------------------*/
 #include "PltHttpClientTask.h"
 #include "PltConstants.h"
+#include "PltHttp.h"
 
 NPT_SET_LOCAL_LOGGER("platinum.core.http.clienttask")
 
@@ -166,25 +167,10 @@ PLT_HttpClientSocketTask::ProcessResponse(NPT_Result                    res,
 
     NPT_LOG_FINE_1("PLT_HttpClientSocketTask::ProcessResponse (result=%d)", res);
     NPT_CHECK_WARNING(res);
+	NPT_CHECK_POINTER_WARNING(response);
 
-    NPT_CHECK_POINTER_WARNING(response);
-
-    // check if there's a body to read
-    NPT_HttpEntity* entity;
-    NPT_InputStreamReference body;
-    if (!(entity = response->GetEntity()) || 
-        NPT_FAILED(entity->GetInputStream(body)) ||
-        body.IsNull()) {
-        return NPT_SUCCESS;
-    }
-
-    // dump body into ether  
-    // (if no content-length specified, read until disconnected)
-    NPT_NullOutputStream output;
-    NPT_CHECK_SEVERE(NPT_StreamToStreamCopy(*body, 
-                                            output,
-                                            0, 
-                                            entity->GetContentLength()));
+	NPT_NullOutputStreamReference output;
+	NPT_CHECK_SEVERE(PLT_HttpHelper::GetBody(*response, output));
 
     return NPT_SUCCESS;
 }
