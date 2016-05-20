@@ -182,6 +182,10 @@ do { \
 #else /* NPT_CONFIG_ENABLE_LOGGING */
 #define PLT_LOG_HTTP_MESSAGE_L(_logger, _level, _prefix, _msg)
 #define PLT_LOG_HTTP_MESSAGE(_level, _prefix, _msg)
+#define PLT_LOG_HTTP_REQUEST_L(_logger, _level, _prefix, _request)
+#define PLT_LOG_HTTP_RESPONSE_L(_logger, _level, _prefix, _response)
+#define PLT_LOG_HTTP_REQUEST(_level,_prefix,_request)
+#define PLT_LOG_HTTP_RESPONSE(_level,_prefix,_response)
 #endif /* NPT_CONFIG_ENABLE_LOGGING */
 
 /*----------------------------------------------------------------------
