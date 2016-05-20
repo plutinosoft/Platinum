@@ -256,6 +256,12 @@ LibraryModule(name               = 'PltMediaConnect',
               excluded_files	 = ['MACFromIP.cpp'],
               source_root        = 'Source/Devices')
 
+# Platinum OpenHome
+LibraryModule(name               = 'PltOpenHome',
+              build_source_dirs  = ['OpenHome'],
+              included_modules   = ['Platinum'],
+              source_root        = 'Source/Devices')
+
 for app in ['MicroMediaController', 'MediaCrawler', 'MediaConnect', 'FrameStreamer']:
     Application(name    = app,
                 dir     = 'Source/Apps/' + app,
