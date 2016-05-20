@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>1</minor>
+  </specVersion>
+  <actionList>
+    <action>
+      <name>Time</name>
+      <argumentList>
+        <argument>
+          <name>TrackCount</name>
+          <direction>out</direction>
+          <relatedStateVariable>TrackCount</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Duration</name>
+          <direction>out</direction>
+          <relatedStateVariable>Duration</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Seconds</name>
+          <direction>out</direction>
+          <relatedStateVariable>Seconds</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+  </actionList>
+  <serviceStateTable>
+    <stateVariable sendEvents="yes">
+      <name>TrackCount</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Duration</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Seconds</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+  </serviceStateTable>
+</scpd>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<scpd xmlns="urn:schemas-upnp-org:service-1-0">
+  <specVersion>
+    <major>1</major>
+    <minor>1</minor>
+  </specVersion>
+  <actionList>
+    <action>
+      <name>Counters</name>
+      <argumentList>
+        <argument>
+          <name>TrackCount</name>
+          <direction>out</direction>
+          <relatedStateVariable>TrackCount</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>DetailsCount</name>
+          <direction>out</direction>
+          <relatedStateVariable>DetailsCount</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>MetatextCount</name>
+          <direction>out</direction>
+          <relatedStateVariable>MetatextCount</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+      <name>Track</name>
+      <argumentList>
+        <argument>
+          <name>Uri</name>
+          <direction>out</direction>
+          <relatedStateVariable>Uri</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Metadata</name>
+          <direction>out</direction>
+          <relatedStateVariable>Metadata</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+      <name>Details</name>
+      <argumentList>
+        <argument>
+          <name>Duration</name>
+          <direction>out</direction>
+          <relatedStateVariable>Duration</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>BitRate</name>
+          <direction>out</direction>
+          <relatedStateVariable>BitRate</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>BitDepth</name>
+          <direction>out</direction>
+          <relatedStateVariable>BitDepth</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>SampleRate</name>
+          <direction>out</direction>
+          <relatedStateVariable>SampleRate</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>Lossless</name>
+          <direction>out</direction>
+          <relatedStateVariable>Lossless</relatedStateVariable>
+        </argument>
+        <argument>
+          <name>CodecName</name>
+          <direction>out</direction>
+          <relatedStateVariable>CodecName</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+    <action>
+      <name>Metatext</name>
+      <argumentList>
+        <argument>
+          <name>Value</name>
+          <direction>out</direction>
+          <relatedStateVariable>Metatext</relatedStateVariable>
+        </argument>
+      </argumentList>
+    </action>
+  </actionList>
+  <serviceStateTable>
+    <stateVariable sendEvents="yes">
+      <name>TrackCount</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>DetailsCount</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>MetatextCount</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Uri</name>
+      <dataType>string</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Metadata</name>
+      <dataType>string</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Duration</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>BitRate</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>BitDepth</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>SampleRate</name>
+      <dataType>ui4</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Lossless</name>
+      <dataType>boolean</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>CodecName</name>
+      <dataType>string</dataType>
+    </stateVariable>
+    <stateVariable sendEvents="yes">
+      <name>Metatext</name>
+      <dataType>string</dataType>
+    </stateVariable>
+  </serviceStateTable>
+</scpd>
