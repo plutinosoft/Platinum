@@ -310,6 +310,111 @@ done:
     return res;
 }
 
+/* M.Schenk 2010.02.02 for customizing filter and sort */
+NPT_Result
+PLT_SyncMediaBrowser::BrowseSyncA(PLT_DeviceDataReference&      device,
+                                 const char*                   object_id,
+                                 PLT_MediaObjectListReference& list,
+                                 bool                          metadata, /* = false */
+                                 NPT_Int32                     start, /* = 0 */
+                                 NPT_Cardinal                  max_results, /* = 0 */
+                                 const char*              filter,
+                                 const char*              sort)
+{
+    NPT_Result res = NPT_FAILURE;
+    NPT_Int32  index = start;
+
+    // only cache metadata or if starting from 0 and asking for maximum
+    bool cache = m_UseCache && (metadata || (start == 0 && max_results == 0));
+
+/* M.Schenk 2012.05.04 added for step by step load */
+#if 1
+    NPT_Int32 count = max_results ? max_results : 100;
+#endif
+
+    // reset output params
+    list = NULL;
+
+    // look into cache first
+    if (cache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
+
+    do {
+        PLT_BrowseDataReference browse_data(new PLT_BrowseData());
+
+        // send off the browse packet.  Note that this will
+        // not block.  There is a call to WaitForResponse in order
+        // to block until the response comes back.
+        res = BrowseSync(
+            browse_data,
+            device,
+            (const char*)object_id,
+            index,
+#if 0
+            metadata?1:30, // DLNA recommendations for browsing children is no more than 30 at a time
+#else
+/* M.Schenk 2012.05.04 added for step by step load */
+#if 1
+            metadata ? 1 : count,
+#else
+            metadata?1:100, // Snk query for 100 items per loop
+#endif
+#endif
+            metadata, filter, sort);
+        NPT_CHECK_LABEL_WARNING(res, done);
+
+        if (NPT_FAILED(browse_data->res)) {
+            res = browse_data->res;
+            NPT_CHECK_LABEL_WARNING(res, done);
+        }
+
+        // server returned no more, bail now
+        if (browse_data->info.items->GetItemCount() == 0)
+            break;
+
+        if (list.IsNull()) {
+            list = browse_data->info.items;
+        } else {
+            list->Add(*browse_data->info.items);
+            // clear the list items so that the data inside is not
+            // cleaned up by PLT_MediaItemList dtor since we copied
+            // each pointer into the new list.
+            browse_data->info.items->Clear();
+        }
+
+        // stop now if our list contains exactly what the server said it had.
+        // Note that the server could return 0 if it didn't know how many items were
+        // available. In this case we have to continue browsing until
+        // nothing is returned back by the server.
+        // Unless we were told to stop after reaching a certain amount to avoid
+        // length delays
+        // (some servers may return a total matches out of whack at some point too)
+        if ((browse_data->info.tm && browse_data->info.tm <= list->GetItemCount()) ||
+            (max_results && list->GetItemCount() >= max_results))
+            break;
+
+/* M.Schenk 2012.05.04 added for step by step load */
+#if 1
+        /* if max_results used and list is smaller, we had reached the end **/
+        if (max_results && (list->GetItemCount() < max_results))
+        	break;
+#endif
+
+        // ask for the next chunk of entries
+        index = list->GetItemCount();
+    } while(1);
+
+done:
+    // cache the result
+	if (cache && NPT_SUCCEEDED(res) && !list.IsNull() && list->GetItemCount()) {
+        m_Cache.Put(device->GetUUID(), object_id, list);
+    }
+
+    // clear entire cache data for device if failed, the device could be gone
+	if (NPT_FAILED(res) && cache) m_Cache.Clear(device->GetUUID());
+
+    return res;
+}
+
 /*----------------------------------------------------------------------
 |   PLT_SyncMediaBrowser::IsCached
 +---------------------------------------------------------------------*/

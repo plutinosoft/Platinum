@@ -108,6 +108,16 @@ public:
                           NPT_Int32                     start = 0,
                           NPT_Cardinal                  max_results = 0); // 0 means all
 
+    /* M.Schenk 2010.02.02 for customizing filter and sort */
+    NPT_Result BrowseSyncA(PLT_DeviceDataReference&      device,
+                           const char*                   id,
+                           PLT_MediaObjectListReference& list,
+                           bool                          metadata = false,
+                           NPT_Int32                     start = 0,
+                           NPT_Cardinal                  max_results = 0, // 0 means all
+                           const char*                   filter = "dc:date,upnp:genre,res,res@duration,res@size,upnp:albumArtURI,upnp:album,upnp:artist,upnp:author,searchable,childCount", // explicitely specify res otherwise WMP won't return a URL!
+                           const char*                   sort = "+upnp:originalTrackNumber,+dc:title");
+
     const NPT_Lock<PLT_DeviceMap>& GetMediaServersMap() const { return m_MediaServers; }
     bool IsCached(const char* uuid, const char* object_id);
 
