@@ -446,11 +446,27 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
     }
     m_Date = parsed_date;
 
+    /**
+     * M.Schenk 2015.07.03 relax for Kazoo which sends
+     * no id and no parentID
+     */
+#if 0
     res = PLT_XmlHelper::GetAttribute(entry, "id", m_ObjectID);
     NPT_CHECK_SEVERE(res);
+#else
+    res = PLT_XmlHelper::GetAttribute(entry, "id", m_ObjectID);
+#endif
 
+    /**
+     * M.Schenk 2010.08.03 hack for getting SongBook DS working
+     * SongBook DS doesn't send parentID and refID
+     */
+#if 0
     res = PLT_XmlHelper::GetAttribute(entry, "parentID", m_ParentID);
     NPT_CHECK_SEVERE(res);
+#else
+    res = PLT_XmlHelper::GetAttribute(entry, "parentID", m_ParentID);
+#endif
 
     PLT_XmlHelper::GetAttribute(entry, "refID", m_ReferenceID);
 
@@ -559,7 +575,26 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
                 str = PLT_Didl::FormatTimeStamp(resource.m_Duration);
                 PLT_XmlHelper::SetAttribute(children[i], "duration", str); 
             }
-        }    
+        }
+
+/**
+ * M.Schenk 2015.07.03
+ * Add some more res parsing
+ */
+#if 1
+        PLT_XmlHelper::GetAttribute(children[i], "bitrate", str, "", 256);
+        if (NPT_FAILED(str.ToInteger(resource.m_Bitrate))) resource.m_Bitrate = 0;
+
+        PLT_XmlHelper::GetAttribute(children[i], "bitsPerSample", str, "", 256);
+        if (NPT_FAILED(str.ToInteger(resource.m_BitsPerSample))) resource.m_BitsPerSample = 0;
+
+        PLT_XmlHelper::GetAttribute(children[i], "sampleFrequency", str, "", 256);
+        if (NPT_FAILED(str.ToInteger(resource.m_SampleFrequency))) resource.m_SampleFrequency = 0;
+
+        PLT_XmlHelper::GetAttribute(children[i], "nrAudioChannels", str, "", 256);
+        if (NPT_FAILED(str.ToInteger(resource.m_NbAudioChannels))) resource.m_NbAudioChannels = 0;
+#endif
+
         m_Resources.Add(resource);
     }
 
