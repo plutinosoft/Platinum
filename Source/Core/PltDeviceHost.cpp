@@ -206,6 +206,14 @@ PLT_DeviceHost::Start(PLT_SsdpListenTask* task)
     NPT_TimeInterval repeat;
     repeat.SetSeconds(leaseTime?(int)((leaseTime >> 1) - 10):30);
 
+    /**
+     * M.Schenk 2010.11.26
+     * Songbook fix for device discovery
+     */
+#if 1
+    repeat.SetSeconds(5);
+#endif
+
     PLT_ThreadTask* announce_task = new PLT_SsdpDeviceAnnounceTask(
         this, 
         repeat, 
