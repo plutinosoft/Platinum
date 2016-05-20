@@ -285,7 +285,17 @@ PLT_HttpServerSocketTask::SendResponseHeaders(NPT_HttpResponse* response,
     // get the request entity to set additional headers
     NPT_InputStreamReference body_stream;
     NPT_HttpEntity* entity = response->GetEntity();
+/**
+ * M.Schenk 2014.01.29
+ * fixed: upnp server's http server
+ *        would not provide content length on HEAD requests
+ * see https://github.com/Montellese/xbmc/commit/ef110ae370a5b24e125bbce72caee4ca62790bf2
+ */
+#if 0
     if (entity && NPT_SUCCEEDED(entity->GetInputStream(body_stream))) {
+#else
+    if (entity) {
+#endif
         // set the content length if known
         if (entity->ContentLengthIsKnown()) {
             headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH,
