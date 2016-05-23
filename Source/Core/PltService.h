@@ -302,6 +302,11 @@ private:
     
     // methods
     void Cleanup();
+
+	/**
+	 Called regularly prior to notifying new or existing subscribers
+	 */
+    void PurgeSubscribers();
     
     /**
      Called by a PLT_StateVariable to keep track of what events need to be 

@@ -108,7 +108,13 @@ public:
     NPT_Result        FindCallbackURL(const char* callback_url);
     NPT_Result        AddCallbackURL(const char* callback_url);
     NPT_Result        Notify(NPT_List<PLT_StateVariable*>& vars);
-    
+
+	// PLT_HttpClientTask methods
+	NPT_Result ProcessResponse(NPT_Result                    res,
+							   const NPT_HttpRequest&        request,
+							   const NPT_HttpRequestContext& context,
+							   NPT_HttpResponse*             response);
+
 protected:
     //members
     PLT_TaskManagerReference  m_TaskManager;

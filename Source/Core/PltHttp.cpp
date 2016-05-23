@@ -192,7 +192,17 @@ PLT_HttpHelper::SetBody(NPT_HttpMessage&         message,
 NPT_Result 
 PLT_HttpHelper::GetBody(const NPT_HttpMessage& message, NPT_String& body) 
 {
-    NPT_Result res;
+    // extract body
+    NPT_StringOutputStreamReference output_stream(new NPT_StringOutputStream(&body));
+	return PLT_HttpHelper::GetBody(message, output_stream);
+}
+
+/*----------------------------------------------------------------------
+|   PLT_HttpHelper::GetBody
++---------------------------------------------------------------------*/
+NPT_Result 
+PLT_HttpHelper::GetBody(const NPT_HttpMessage& message, NPT_OutputStreamReference output_stream)
+{
     NPT_InputStreamReference stream;
 
     // get stream
@@ -204,13 +214,10 @@ PLT_HttpHelper::GetBody(const NPT_HttpMessage& message, NPT_String& body)
     }
 
     // extract body
-    NPT_StringOutputStream* output_stream = new NPT_StringOutputStream(&body);
-    res = NPT_StreamToStreamCopy(*stream, 
-                                 *output_stream, 
-                                 0, 
-                                 entity->GetContentLength());
-    delete output_stream;
-    return res;
+    return NPT_StreamToStreamCopy(*stream,
+                                  *output_stream.AsPointer(),
+                                  0,
+                                  entity->GetContentLength());
 }
 
 /*----------------------------------------------------------------------

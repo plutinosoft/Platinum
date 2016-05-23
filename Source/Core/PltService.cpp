@@ -85,6 +85,29 @@ PLT_Service::~PLT_Service()
  }
 
 /*----------------------------------------------------------------------
+|   PLT_Service::PurgeSubscribers
++---------------------------------------------------------------------*/
+void
+PLT_Service::PurgeSubscribers()
+{
+	NPT_List<PLT_EventSubscriberReference>::Iterator sub_iter = m_Subscribers.GetFirstItem();
+	while (sub_iter) {
+		NPT_TimeStamp now, expiration;
+		NPT_System::GetCurrentTimeStamp(now);
+		expiration = (*sub_iter)->GetExpirationTime();
+
+		// forget sub if it didn't renew subscription in time
+		if (now >= (expiration + NPT_TimeStamp(30.f))) {
+			NPT_LOG_FINE_1("Removing expired subscriber: %s", (*sub_iter)->GetSID().GetChars());
+			m_Subscribers.Erase(sub_iter++);
+			continue;
+		}
+
+		++sub_iter;
+    }
+}
+
+/*----------------------------------------------------------------------
 |   PLT_Service::GetSCPDXML
 +---------------------------------------------------------------------*/
 NPT_Result
@@ -638,7 +661,7 @@ PLT_Service::ProcessRenewSubscription(const NPT_SocketAddress& addr,
         m_EventSubURL.GetChars(), 
         sid.GetChars());
 
-    // first look if we don't have a subscriber with same callbackURL
+    // first look that we have a subscriber with corresponding SID
     PLT_EventSubscriberReference subscriber;
     if (NPT_SUCCEEDED(NPT_ContainerFind(m_Subscribers, 
                                         PLT_EventSubscriberFinderBySID(sid), 
@@ -800,7 +823,7 @@ PLT_Service::NotifyChanged()
             m_StateVarsToPublish.Erase(iter++);
 
             // clear last changed list if we're about to send LastChange var
-            if (!var->GetName().Compare("LastChange")) m_StateVarsChanged.Clear();
+            if (var->GetName().Compare("LastChange") == 0) m_StateVarsChanged.Clear();
             
             continue;
         }
@@ -808,31 +831,26 @@ PLT_Service::NotifyChanged()
         ++iter;
     }
     
-    // if nothing to publish then bail out now
-    // we'll clean up expired subscribers when we have something to publish
-    if (vars_ready.GetItemCount() == 0) return NPT_SUCCESS;
-    
-    // send vars that are ready to go and remove old subscribers 
+	// if nothing to publish then bail out now
+	// we'll clean up expired subscribers when we have something to publish
+	if (vars_ready.GetItemCount() == 0) return NPT_SUCCESS;
+
+    // purge expired subscribers now
+    PurgeSubscribers();
+
+    // send vars that are ready to go
     NPT_List<PLT_EventSubscriberReference>::Iterator sub_iter = m_Subscribers.GetFirstItem();
     while (sub_iter) {
-        PLT_EventSubscriberReference sub = *sub_iter;
-
-        NPT_TimeStamp now, expiration;
-        NPT_System::GetCurrentTimeStamp(now);
-        expiration = sub->GetExpirationTime();
-
-        // forget sub if it didn't renew subscription in time or if notification failed
-        if (expiration == NPT_TimeStamp() || now < expiration + NPT_TimeStamp(30.f)) {
-            // TODO: Notification is asynchronous, so we won't know if it failed until
-            // the subscriber m_SubscriberTask is done
-            NPT_Result res = vars_ready.GetItemCount()?sub->Notify(vars_ready):NPT_SUCCESS;
-            if (NPT_SUCCEEDED(res)) {
-                ++sub_iter;
-                continue;
-            }
+        // forget sub if notification failed immediately. However, since
+		// the request is asynchronous, the subscriber may be purged at
+		// a later time.
+        if (NPT_FAILED((*sub_iter)->Notify(vars_ready))) {
+			NPT_LOG_WARNING_1("Failed to notify subscriber: %s", (*sub_iter)->GetSID().GetChars());
+            m_Subscribers.Erase(sub_iter++);
+			continue;
         }
-            
-        m_Subscribers.Erase(sub_iter++);
+
+		++sub_iter;
     }
 
     return NPT_SUCCESS;

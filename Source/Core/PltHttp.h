@@ -95,6 +95,7 @@ public:
     static NPT_Result   SetBody(NPT_HttpMessage& message, const void* body, NPT_LargeSize len, NPT_HttpEntity** entity = NULL);
     static NPT_Result   SetBody(NPT_HttpMessage& message, NPT_InputStreamReference stream, NPT_HttpEntity** entity = NULL);
     static NPT_Result   GetBody(const NPT_HttpMessage& message, NPT_String& body);
+	static NPT_Result   GetBody(const NPT_HttpMessage& message, NPT_OutputStreamReference output_stream);
     static NPT_Result   ParseBody(const NPT_HttpMessage& message, NPT_XmlElementNode*& xml);
 
 	static void			SetBasicAuthorization(NPT_HttpRequest& request, const char* username, const char* password);
