@@ -334,7 +334,8 @@
 		F3031E991DF1BF6400C5B803 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F3031E911DF1BF6400C5B803 /* main.m */; };
 		F3031E9A1DF1BF6400C5B803 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F3031E931DF1BF6400C5B803 /* ViewController.m */; };
 		F3031E9D1DF1C10000C5B803 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F3031E9C1DF1C10000C5B803 /* AppDelegate.m */; };
-		F3031E9F1DF1C19200C5B803 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = F3031E9E1DF1C19200C5B803 /* README.md */; };
+		F3031EA21DF1C36000C5B803 /* PltMediaControllerObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = F3031EA11DF1C36000C5B803 /* PltMediaControllerObject.mm */; };
+		F3031EA31DF1C36000C5B803 /* PltMediaControllerObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = F3031EA11DF1C36000C5B803 /* PltMediaControllerObject.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -757,7 +758,8 @@
 		F3031E921DF1BF6400C5B803 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F3031E931DF1BF6400C5B803 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F3031E9C1DF1C10000C5B803 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		F3031E9E1DF1C19200C5B803 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
+		F3031EA01DF1C36000C5B803 /* PltMediaControllerObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PltMediaControllerObject.h; sourceTree = "<group>"; };
+		F3031EA11DF1C36000C5B803 /* PltMediaControllerObject.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = PltMediaControllerObject.mm; sourceTree = "<group>"; };
 		F305D4A71DF06BCA00301D24 /* MobileMediaController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MobileMediaController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F305D4D11DF07BDA00301D24 /* MobileMediaServer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "MobileMediaServer-Info.plist"; path = "../../../Source/Apps/MobileMediaServer/MobileMediaServer-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -959,7 +961,6 @@
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
-				F3031E9E1DF1C19200C5B803 /* README.md */,
 				E4CB6A441640354E002478B0 /* CHANGELOG.txt */,
 				E4CB6A451640354E002478B0 /* LICENSE.txt */,
 			);
@@ -1324,6 +1325,8 @@
 				E4374C1612417AA800000109 /* PltMediaServerObject.mm */,
 				E4374C1712417AA800000109 /* PltUPnPObject.h */,
 				E4374C1812417AA800000109 /* PltUPnPObject.mm */,
+				F3031EA01DF1C36000C5B803 /* PltMediaControllerObject.h */,
+				F3031EA11DF1C36000C5B803 /* PltMediaControllerObject.mm */,
 			);
 			path = ObjectiveC;
 			sourceTree = "<group>";
@@ -1998,6 +2001,7 @@
 			files = (
 				E42D3AC40FDC87300045379C /* MediaCrawler.cpp in Sources */,
 				E42D3AC50FDC87310045379C /* main.cpp in Sources */,
+				F3031EA21DF1C36000C5B803 /* PltMediaControllerObject.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2158,9 +2162,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F3031EA31DF1C36000C5B803 /* PltMediaControllerObject.mm in Sources */,
 				F3031E9A1DF1BF6400C5B803 /* ViewController.m in Sources */,
 				F3031E991DF1BF6400C5B803 /* main.m in Sources */,
-				F3031E9F1DF1C19200C5B803 /* README.md in Sources */,
 				F3031E9D1DF1C10000C5B803 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
