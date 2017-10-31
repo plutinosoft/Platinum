@@ -1,3 +1,3 @@
 [submodule "ThirdParty/Neptune"]
 	path = ThirdParty/Neptune
-	url = https://github.com/plutinosoft/Neptune.git
+url=https://github.com/naimaudio/Neptune.git
