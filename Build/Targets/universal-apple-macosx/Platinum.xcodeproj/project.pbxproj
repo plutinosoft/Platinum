@@ -294,8 +294,6 @@
 		E44E2B861AE761220092347B /* PltDeviceData.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155090D6FFDEB00899579 /* PltDeviceData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E44E2BC41AE76E0F0092347B /* Platinum.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E2B8B1AE761220092347B /* Platinum.framework */; };
 		E44E2BC51AE76E330092347B /* Platinum.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = E44E2B8B1AE761220092347B /* Platinum.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		E44E2BC61AE76E910092347B /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E2B8D1AE7622F0092347B /* Neptune.framework */; };
-		E44E2BCA1AE76FF50092347B /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40616C01ADE5C9A008BDAEB /* Neptune.framework */; };
 		E44E2BCB1AE76FF90092347B /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E2B8D1AE7622F0092347B /* Neptune.framework */; };
 		E44E2BCC1AE770150092347B /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40616C01ADE5C9A008BDAEB /* Neptune.framework */; };
 		E44E2BCD1AE7701D0092347B /* Neptune.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E40616C01ADE5C9A008BDAEB /* Neptune.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -326,8 +324,10 @@
 		E45332B21AAED318004A52FD /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B11AAED318004A52FD /* main.m */; };
 		E45332B51AAED318004A52FD /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E45332B41AAED318004A52FD /* AppDelegate.m */; };
 		E45332B81AAED318004A52FD /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = E45332B71AAED318004A52FD /* ViewController.mm */; };
+		E45BD1F71FC95BFC00F1D812 /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E40616C01ADE5C9A008BDAEB /* Neptune.framework */; };
 		E48EAA811AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E48EAA821AF1EDD800D9EDC0 /* Neptune.h in Headers */ = {isa = PBXBuildFile; fileRef = E48EAA801AF1EDD800D9EDC0 /* Neptune.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		E4B2A5A71FC90AE500C891D7 /* Neptune.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E44E2B8D1AE7622F0092347B /* Neptune.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -601,7 +601,7 @@
 		E42D3A9C0FDC85E70045379C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		E42D3A9D0FDC85E70045379C /* PltMicroMediaController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PltMicroMediaController.cpp; sourceTree = "<group>"; };
 		E42D3A9E0FDC85E70045379C /* PltMicroMediaController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PltMicroMediaController.h; sourceTree = "<group>"; };
-		E42D3AAB0FDC86A60045379C /* FileMediaServerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileMediaServerTest.cpp; sourceTree = "<group>"; };
+		E42D3AAB0FDC86A60045379C /* FileMediaServerTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FileMediaServerTest.cpp; sourceTree = "<group>"; usesTabs = 0; };
 		E42D3AAD0FDC86A60045379C /* HttpTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HttpTest.cpp; sourceTree = "<group>"; };
 		E42D3AAF0FDC86A60045379C /* PltLightSample.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PltLightSample.h; sourceTree = "<group>"; };
 		E42D3AB00FDC86A60045379C /* LightSampleTest.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LightSampleTest.cpp; sourceTree = "<group>"; };
@@ -735,7 +735,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E44E2BCA1AE76FF50092347B /* Neptune.framework in Frameworks */,
+				E45BD1F71FC95BFC00F1D812 /* Neptune.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -852,7 +852,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E44E2BC61AE76E910092347B /* Neptune.framework in Frameworks */,
+				E4B2A5A71FC90AE500C891D7 /* Neptune.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1464,6 +1464,7 @@
 				E410161D1ACFA826000E994F /* Frameworks */,
 				E410161E1ACFA826000E994F /* Headers */,
 				E410161F1ACFA826000E994F /* Resources */,
+				E4B2A5A41FC8F8EB00C891D7 /* Copy Products to Carthage/Build/iOS */,
 			);
 			buildRules = (
 			);
@@ -1688,6 +1689,7 @@
 				E44E2B571AE761220092347B /* Frameworks */,
 				E44E2B591AE761220092347B /* Headers */,
 				E44E2B871AE761220092347B /* Resources */,
+				E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/iOS */,
 			);
 			buildRules = (
 			);
@@ -1824,6 +1826,34 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# shell script goes here\n#  Build the doxygen documentation for the project and load the docset into Xcode.\n\n#  Use the following to adjust the value of the $DOXYGEN_PATH User-Defined Setting:\n#    Binary install location: /Applications/Doxygen.app/Contents/Resources/doxygen\n#    Source build install location: /usr/local/bin/doxygen\n\n\ncd \"$SOURCE_ROOT/../../../Docs/Doxygen\"\nDIR=\"$( cd \"$( dirname \"${BASH_SOURCE[0]}\" )\" && pwd )\"\necho $(pwd)\n\nif ! [ -f Doxyfile ] \nthen \n  echo doxygen config file does not exist\nfi\n\nVERSION=$(python ../../Scripts/version.py)\n\n#  Run doxygen on the updated config file.\n#  Note: doxygen creates a Makefile that does most of the heavy lifting.\n\n( cat Doxyfile ; echo \"PROJECT_NUMBER=$VERSION\" ) | /usr/local/bin/doxygen -\n\n#  make will invoke docsetutil. Take a look at the Makefile to see how this is done.\n\nmake -C Platinum-HTML install\n\n#  Construct a temporary applescript file to tell Xcode to load a docset.\n\nrm -f \"$TEMP_DIR/loadDocSet.scpt\"\n\necho \"tell application \\\"Xcode\\\"\" >> \"$TEMP_DIR/loadDocSet.scpt\"\necho \"load documentation set with path \\\"/Users/$USER/Library/Developer/Shared/Documentation/DocSets/\\\"\" \n     >> $TEMP_DIR/loadDocSet.scpt\necho \"end tell\" >> \"$TEMP_DIR/loadDocSet.scpt\"\n\n#  Run the load-docset applescript command.\n\nosascript \"$TEMP_DIR/loadDocSet.scpt\"\n\nexit 0";
+		};
+		E4B2A5A41FC8F8EB00C891D7 /* Copy Products to Carthage/Build/iOS */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Products to Carthage/Build/iOS";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -av \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/iOS\"";
+		};
+		E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/iOS */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Products to Carthage/Build/iOS";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -av \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/Mac\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2228,6 +2258,7 @@
 		1DEB91F108733DB70010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0;
@@ -2275,7 +2306,6 @@
 		E410163B1ACFA826000E994F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -2335,7 +2365,6 @@
 		E410163C1ACFA826000E994F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3134,7 +3163,6 @@
 		E44E2B891AE761220092347B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3192,7 +3220,6 @@
 		E44E2B8A1AE761220092347B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -3381,6 +3408,7 @@
 		E46270E90F81F4F8007FE869 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1.0;
