@@ -188,7 +188,7 @@ PLT_DeviceData::GetIconUrl(const char* mimetype,
         // pick the biggest and better resolution we can
         if (icon.m_Width  >= m_Icons[i].m_Width  ||
             icon.m_Height >= m_Icons[i].m_Height ||
-            icon.m_Depth  >= m_Icons[i].m_Depth  ||
+            //icon.m_Depth  >= m_Icons[i].m_Depth  ||
             m_Icons[i].m_UrlPath.IsEmpty())
             continue;
 
