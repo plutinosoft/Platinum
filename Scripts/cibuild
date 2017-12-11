@@ -22,8 +22,8 @@ main ()
 {
     import_certs
 
-	carthage bootstrap --platform ios
-	carthage build --platform ios --no-skip-current
+	carthage bootstrap
+	carthage build --no-skip-current
 	carthage archive Platinum
     local status=$?
     exit $status
