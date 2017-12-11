@@ -1,4 +1,5 @@
-#PLATINUM UPNP SDK [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/plutinosoft/Platinum.svg?branch=master)](https://travis-ci.org/plutinosoft/Platinum)
+# PLATINUM UPNP SDK
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/plutinosoft/Platinum.svg)](https://travis-ci.org/plutinosoft/Platinum)
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
@@ -6,7 +7,7 @@ This toolkit consists of 2 modules:
 
 Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the Platinum root directory. All the dependent binaries will be rebuilt automatically (including Neptune).
 
-#Building SDK and Sample Applications
+# Building SDK and Sample Applications
 
 ## Windows:
 Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32-vs2010\Platinum.sln
@@ -38,7 +39,7 @@ Open a shell, go to the Platinum root directory and type 'scons' (http://scons.o
 The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
 Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
-#Running Sample Applications
+# Running Sample Applications
 
 ## FileMediaServerTest
 This is an example of a UPnP MediaServer. Given a path, it allows a UPnP ControlPoint to browse the content of the directory and its sub-directories. Additionally, files can be streamed (Note that only files with known mimetypes are advertised).
@@ -98,7 +99,7 @@ This is a derived implementation of the FileMediaServerTest with the only differ
 ## MediaServerCocoaTest
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
 
-#Language Bindings
+# Language Bindings
 
 ## Objective-C
 Under Source/Extras/ObjectiveC
@@ -119,7 +120,7 @@ You can then import eclipse Android .project located @ Source/Platform/Android/m
 
 To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
 
-#Contributing
+# Contributing
 
 We're glad you're interested in Platinum, and we'd love to see where you take it.
 
