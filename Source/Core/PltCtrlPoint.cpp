@@ -1732,6 +1732,8 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
                                      PLT_ActionReference&          action,
                                      void*                         userdata)
 {
+	NPT_COMPILER_UNUSED(request);
+	
     NPT_String          service_type;
     NPT_String          str;
     NPT_XmlElementNode* xml = NULL;
@@ -1749,6 +1751,7 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
     // check context validity
     if (NPT_FAILED(res) || response == NULL) {
         PLT_Service* service = action_desc.GetService();
+		NPT_COMPILER_UNUSED(service);
         NPT_LOG_WARNING_4("Failed to reach %s for %s.%s (%d)",
                           request.GetUrl().ToString().GetChars(),
                           service->GetDevice()->GetUUID().GetChars(),

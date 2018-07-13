@@ -680,7 +680,7 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
             }
           
             // default lease
-            NPT_Int32 timeout = *PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            NPT_Int32 timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
 
             // subscription renewed
             // send the info to the service
@@ -703,7 +703,7 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
             }
 
             // default lease time
-            NPT_Int32 timeout = *PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            NPT_Int32 timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
 
             // send the info to the service
             service->ProcessNewSubscription(m_TaskManager,
@@ -757,7 +757,7 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
 		NPT_String prefix = NPT_String::Format("PLT_DeviceHost::OnSsdpPacket M-SEARCH for %s from %s:%d", 
 			st?st->GetChars():"Unknown",
 			(const char*) ip_address, remote_port);
-		PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINER, prefix, &request);
+		PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
 
         /*
         // DLNA 7.2.3.5 support
@@ -786,7 +786,12 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
         PLT_SsdpDeviceSearchResponseTask* task = new PLT_SsdpDeviceSearchResponseTask(this, context.GetRemoteAddress(), *st);
         m_TaskManager->StartTask(task, &timer);
         return NPT_SUCCESS;
-    }
+	} else {
+		NPT_String prefix = NPT_String::Format("Ignoring %s request from %s:%d",
+											   method.GetChars(),
+											   (const char*) ip_address, remote_port);
+		PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
+	}
 
     return NPT_FAILURE;
 }
