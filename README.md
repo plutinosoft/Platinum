@@ -1,4 +1,5 @@
-#PLATINUM UPNP SDK [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/plutinosoft/Platinum.svg?branch=master)](https://travis-ci.org/plutinosoft/Platinum)
+# PLATINUM UPNP SDK
+[![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build Status](https://travis-ci.org/plutinosoft/Platinum.svg)](https://travis-ci.org/plutinosoft/Platinum)
 
 This toolkit consists of 2 modules:
 * Neptune : a C++ Runtime Library
@@ -6,7 +7,7 @@ This toolkit consists of 2 modules:
 
 Unless you intend to use Neptune independently from Platinum, it is recommended that you build binaries directly from the Platinum root directory. All the dependent binaries will be rebuilt automatically (including Neptune).
 
-#Building SDK and Sample Applications
+# Building SDK and Sample Applications
 
 ## Windows:
 Open the Visual Studio 2010 solution located @ Build\Targets\x86-microsoft-win32-vs2010\Platinum.sln
@@ -38,7 +39,7 @@ Open a shell, go to the Platinum root directory and type 'scons' (http://scons.o
 The output of the scons build will be found under Build/Targets/{TARGET}/{Debug|Release}.
 Additionally, the output is copied under Targets/{TARGET}/{Debug|Release} for convenience when applicable.
 
-#Running Sample Applications
+# Running Sample Applications
 
 ## FileMediaServerTest
 This is an example of a UPnP MediaServer. Given a path, it allows a UPnP ControlPoint to browse the content of the directory and its sub-directories. Additionally, files can be streamed (Note that only files with known mimetypes are advertised).
@@ -98,7 +99,7 @@ This is a derived implementation of the FileMediaServerTest with the only differ
 ## MediaServerCocoaTest
 A basic cocoa test server app showing how to use the Platinum framework on Mac OSX.
 
-#Language Bindings
+# Language Bindings
 
 ## Objective-C
 Under Source/Extras/ObjectiveC
@@ -119,31 +120,11 @@ You can then import eclipse Android .project located @ Source/Platform/Android/m
 
 To Test the Platinum jni layer, import into eclipse both Android projects located @ Source/Platform/Android/samples/sample-upnp & Source/Platform/Android/modules/platinum.
 
-#Cryptography And Export Requirements
-
-In some situations, it may be necessary to remove all crytographic code, including SSL support.
-## Mac, iOS
-```
-> carthage bootstrap --no-use-binaries
-> carthage build --configuration Release-NoCrypto --no-skip-current
-```
-
-## Linux, Cygwin, etc ...
-```
-> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target={TARGET} build_config={Debug|Release}
-```
-
-## Android
-```
-> env NPT_CONFIG_NO_CRYPTO=1 NPT_CONFIG_NO_SSL=1 scons target=arm-android-linux build_config=Release
-> ndk-build NDK_DEBUG=0 NPT_CONFIG_NO_SSL=1
-```
-
-#Contributing
+# Contributing
 
 We're glad you're interested in Platinum, and we'd love to see where you take it.
 
-Any contributors to the master Platinum repository must sign the [Individual Contributor License Agreement (CLA)](https://docs.google.com/forms/d/1-SuyEu0LfYuhY3kKDDdfdYn5cmTU2lrQRSQSDHau4PI/viewform). 
+Any contributors to the master Platinum repository must sign the [Individual Contributor License Agreement (CLA)](https://docs.google.com/forms/d/1-SuyEu0LfYuhY3kKDDdfdYn5cmTU2lrQRSQSDHau4PI/viewform).
 It's a short form that covers our bases and makes sure you're eligible to contribute.
 
 When you have a change you'd like to see in the master repository, [send a pull request](https://github.com/plutinosoft/Platinum/pulls). Before we merge your request, we'll make sure you're in the list of people who have signed a CLA.
