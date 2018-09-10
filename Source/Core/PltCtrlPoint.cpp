@@ -1242,6 +1242,12 @@ PLT_CtrlPoint::InspectDevice(const NPT_HttpUrl& location,
                              NPT_TimeInterval   leasetime)
 {
     NPT_AutoLock lock(m_Lock);
+	
+	if (!m_Started) {
+		NPT_LOG_INFO_1("InspectDevice called before control point started.  location url: %s",
+					   (const char*) location.ToString());
+		return NPT_FAILURE;
+	}
 
     // check if already inspecting device
     NPT_String pending_uuid;
