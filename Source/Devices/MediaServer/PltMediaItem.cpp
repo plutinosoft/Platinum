@@ -446,12 +446,8 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
     }
     m_Date = parsed_date;
 
-    res = PLT_XmlHelper::GetAttribute(entry, "id", m_ObjectID);
-    NPT_CHECK_SEVERE(res);
-
-    res = PLT_XmlHelper::GetAttribute(entry, "parentID", m_ParentID);
-    NPT_CHECK_SEVERE(res);
-
+    PLT_XmlHelper::GetAttribute(entry, "id", m_ObjectID);
+    PLT_XmlHelper::GetAttribute(entry, "parentID", m_ParentID);
     PLT_XmlHelper::GetAttribute(entry, "refID", m_ReferenceID);
 
     res = PLT_XmlHelper::GetChildText(entry, "title", m_Title, didl_namespace_dc);
