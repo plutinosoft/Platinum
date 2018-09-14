@@ -544,6 +544,18 @@ PLT_MediaObject::FromDidl(NPT_XmlElementNode* entry)
         if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "size", str, "", 256))) {
             if (NPT_FAILED(str.ToInteger64(resource.m_Size))) resource.m_Size = (NPT_Size)-1;
         }
+		if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "bitrate", str, "", 256))) {
+			if (NPT_FAILED(str.ToInteger32(resource.m_Bitrate))) resource.m_Bitrate = 0;
+		}
+		if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "bitsPerSample", str, "", 256))) {
+			if (NPT_FAILED(str.ToInteger32(resource.m_BitsPerSample))) resource.m_BitsPerSample = 0;
+		}
+		if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "sampleFrequency", str, "", 256))) {
+			if (NPT_FAILED(str.ToInteger32(resource.m_SampleFrequency))) resource.m_SampleFrequency = 0;
+		}
+		if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "nrAudioChannels", str, "", 256))) {
+			if (NPT_FAILED(str.ToInteger32(resource.m_NbAudioChannels))) resource.m_NbAudioChannels = 0;
+		}
 
         if (NPT_SUCCEEDED(PLT_XmlHelper::GetAttribute(children[i], "duration", str, "", 256))) {
             if (NPT_FAILED(PLT_Didl::ParseTimeStamp(str, resource.m_Duration))) {
