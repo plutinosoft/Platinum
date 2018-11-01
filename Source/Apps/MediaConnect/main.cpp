@@ -118,7 +118,7 @@ main(int argc, char** argv)
         return 1;
 
     char buf[256];
-    while (gets(buf))
+    while (fgets(buf, 256, stdin))
     {
         if (*buf == 'q')
         {
