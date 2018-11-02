@@ -114,6 +114,7 @@ class LibraryModule(Module):
 
         # the product is a library
         self.env.AppendUnique(CPPPATH=cpp_path)
+        self.env.AppendUnique(CCFLAGS='-fPIC')
         if shared is False:
             self.product = self.env.Library(target=name, source=sources)
         else:
@@ -152,7 +153,7 @@ def Swig(name, dir, deps):
     inc = '-I' + ' -I'.join([env.GetBuildPath(x) for x in cpp_path])
 
     def generator(source, target, env, for_signature):
-        return 'swig -python -c++ {} -o {} {}'.format(inc, target[0], source[0])
+        return 'swig -python -py3 -c++ {} -o {} {}'.format(inc, target[0], source[0])
 
     bld = Builder(generator = generator)
     env.Append(BUILDERS={'Swig' : bld})
@@ -169,7 +170,7 @@ def PythonBinding(name, dir, deps):
     # the product is a library
     env_ = env.Clone()
     env_.AppendUnique(CPPPATH=cpp_path, LIBS=libs)
-    env_.ParseConfig('pkg-config python --cflags --libs')
+    env_.ParseConfig('pkg-config python3 --cflags --libs')
     product = env_.SharedLibrary(target=name,
                                  source=GlobSources(dir, ['*.cxx']) + [swig_out[0]],
                                  SHLIBSUFFIX='.so', SHLIBPREFIX='_')
