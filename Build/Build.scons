@@ -145,6 +145,42 @@ def Application(name, dir, deps, install = False):
         if env['build_config'] == 'Release' and env.has_key('STRIP'):
             env.AddPostAction(inst, env['STRIP']+' $TARGETS');
 
+def Swig(name, dir, deps):
+    DeclareBuildDir(dir)
+    cpp_path = GetIncludeDirs(deps)
+
+    inc = '-I' + ' -I'.join([env.GetBuildPath(x) for x in cpp_path])
+
+    def generator(source, target, env, for_signature):
+        return 'swig -python -c++ {} -o {} {}'.format(inc, target[0], source[0])
+
+    bld = Builder(generator = generator)
+    env.Append(BUILDERS={'Swig' : bld})
+
+    return env.Swig([name + '_wrap.cxx', name + '_wrap.h', name + '.py'], GlobSources(dir, ['*.i']))
+
+def PythonBinding(name, dir, deps):
+    swig_out = Swig(name, dir, deps)
+
+    DeclareBuildDir(dir)
+    cpp_path = GetIncludeDirs(deps) + [GetDirPath(dir)]
+    libs = GetLibraries(deps)
+
+    # the product is a library
+    env_ = env.Clone()
+    env_.AppendUnique(CPPPATH=cpp_path, LIBS=libs)
+    env_.ParseConfig('pkg-config python --cflags --libs')
+    product = env_.SharedLibrary(target=name,
+                                 source=GlobSources(dir, ['*.cxx']) + [swig_out[0]],
+                                 SHLIBSUFFIX='.so', SHLIBPREFIX='_')
+    env_.Alias(name, product)
+
+    # copy to Targets folder
+    inst = env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=product)
+    if env['build_config'] == 'Release' and env.has_key('STRIP'):
+        env.AddPostAction(inst, env['STRIP']+' $TARGETS');
+
+    env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=name + '.py')
 #######################################################
 # Main Build
 #######################################################
@@ -273,3 +309,7 @@ for tool in ['TextToHeader']:
                 dir     = 'Source/Tools/' + tool,
                 deps    = ['Platinum'],
              	install = True)
+
+PythonBinding(name = 'media_renderer',
+     dir = 'binding/python',
+     deps    = ['Platinum', 'PltMediaRenderer'])
