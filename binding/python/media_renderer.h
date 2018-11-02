@@ -36,6 +36,11 @@ public:
     virtual void Stop() = 0;
 };
 
-MediaRenderer * create_media_renderer(MediaRendererDelegate * delegate);
+MediaRenderer * create_media_renderer(MediaRendererDelegate * delegate,
+                                      const char*  friendly_name,
+                                      bool         show_ip = false,
+                                      const char*  uuid = NULL,
+                                      unsigned int port = 0,
+                                      bool         port_rebind = false);
 
 #endif //__MEDIA_RENDER_H__
