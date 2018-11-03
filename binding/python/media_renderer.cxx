@@ -3,14 +3,18 @@
 
 #include "PltUPnP.h"
 #include "PltMediaRenderer.h"
+#include "NptLogging.h"
 #include "media_renderer.h"
+
+NPT_SET_LOCAL_LOGGER("media_render.upnp.renderer")
 
 namespace media_renderer {
 class PLT_MediaRendererDelegateImpl : public PLT_MediaRendererDelegate
 {
 public:
-    PLT_MediaRendererDelegateImpl(MediaRendererDelegate * delegate)
-        : m_Delegate(delegate) {
+    PLT_MediaRendererDelegateImpl(PLT_MediaRenderer * renderer, MediaRendererDelegate * delegate)
+        : m_Delegate(delegate)
+        , m_Renderer(renderer) {
     }
 
     virtual ~PLT_MediaRendererDelegateImpl() {}
@@ -66,6 +70,21 @@ public:
 
         m_Delegate->OnPlay(curURI.GetChars(), metaData.GetChars());
 
+        PLT_Service* service;
+        NPT_CHECK_SEVERE(m_Renderer->FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
+
+        NPT_CHECK_SEVERE(service->GetStateVariableValue("AVTransportURI", curURI));
+        NPT_CHECK_SEVERE(service->GetStateVariableValue("AVTransportURIMetaData", metaData));
+
+        service->SetStateVariable("TransportState", "PLAYING");
+        service->SetStateVariable("TransportStatus", "OK");
+        service->SetStateVariable("AVTransportURI", curURI);
+        service->SetStateVariable("AVTransportURIMetaData", metaData);
+
+        service->SetStateVariable("NextAVTransportURI", "");
+        service->SetStateVariable("NextAVTransportURIMetaData", "");
+
+        NPT_CHECK_SEVERE(action->SetArgumentsOutFromStateVariable());
         return NPT_SUCCESS;
     }
 
@@ -118,8 +137,20 @@ public:
 
         m_Delegate->OnSetAVTransportURI(curURI.GetChars(), metaData.GetChars());
 
-        return NPT_SUCCESS;
+        PLT_Service* service;
+        NPT_CHECK_SEVERE(m_Renderer->FindServiceByType("urn:schemas-upnp-org:service:AVTransport:1", service));
 
+        service->SetStateVariable("TransportState", "PLAYING");
+        service->SetStateVariable("TransportStatus", "OK");
+        service->SetStateVariable("AVTransportURI", curURI);
+        service->SetStateVariable("AVTransportURIMetaData", metaData);
+
+        service->SetStateVariable("NextAVTransportURI", "");
+        service->SetStateVariable("NextAVTransportURIMetaData", "");
+
+        NPT_CHECK_SEVERE(action->SetArgumentsOutFromStateVariable());
+
+        return NPT_SUCCESS;
     }
 
     virtual NPT_Result OnSetPlayMode(PLT_ActionReference& action) {
@@ -191,6 +222,7 @@ public:
 
 private:
     std::shared_ptr<MediaRendererDelegate> m_Delegate;
+    PLT_MediaRenderer * m_Renderer;
 };
 
 class MediaRendererImpl : public MediaRenderer {
@@ -207,8 +239,7 @@ public:
         , m_ShowIp(show_ip)
         , m_Uuid(uuid)
         , m_Port(port)
-        , m_PortRebind(port_rebind)
-        , m_PLTDelegate(std::make_shared<PLT_MediaRendererDelegateImpl>(delegate)) {
+        , m_PortRebind(port_rebind) {
 
         PLT_MediaRenderer * renderer =
                 new PLT_MediaRenderer(m_FriendlyName,
@@ -216,6 +247,7 @@ public:
                                       m_Uuid,
                                       m_Port,
                                       m_PortRebind);
+        m_PLTDelegate = std::make_shared<PLT_MediaRendererDelegateImpl>(renderer, delegate);
         renderer->SetDelegate(m_PLTDelegate.get());
 
         PLT_DeviceHostReference device(renderer);
