@@ -3,7 +3,6 @@
 #include "media_renderer.h"
 %}
 
-%feature("director") MediaRendererDelegate;
-%feature("director") MediaRenderer;
+%feature("director");
 
 %include "media_renderer.h"

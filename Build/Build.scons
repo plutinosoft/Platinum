@@ -153,7 +153,7 @@ def Swig(name, dir, deps):
     inc = '-I' + ' -I'.join([env.GetBuildPath(x) for x in cpp_path])
 
     def generator(source, target, env, for_signature):
-        return 'swig -python -py3 -c++ {} -o {} {}'.format(inc, target[0], source[0])
+        return 'swig -python -py3 -threads -c++ {} -o {} {}'.format(inc, target[0], source[0])
 
     bld = Builder(generator = generator)
     env.Append(BUILDERS={'Swig' : bld})
@@ -181,7 +181,7 @@ def PythonBinding(name, dir, deps):
     if env['build_config'] == 'Release' and env.has_key('STRIP'):
         env.AddPostAction(inst, env['STRIP']+' $TARGETS');
 
-    env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=name + '.py')
+    env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=swig_out[2])
 #######################################################
 # Main Build
 #######################################################
