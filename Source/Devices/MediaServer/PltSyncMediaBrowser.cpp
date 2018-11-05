@@ -236,7 +236,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
                                  bool                          metadata, /* = false */
                                  NPT_Int32                     start, /* = 0 */
                                  NPT_Cardinal                  max_results, /* = 0 */
-                                 const char*                   filter, /* = PLT_DEFAULT_BROWSE_FILTER */
+                                 const char*                   filter, /* = PLT_DEFAULT_FILTER */
                                  const char*                   sort /* = "" */)
 {
     NPT_Result res = NPT_FAILURE;

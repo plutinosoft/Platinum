@@ -47,10 +47,6 @@
 #include "PltMediaBrowser.h"
 #include "PltMediaCache.h"
 
-#ifndef PLT_DEFAULT_BROWSE_FILTER
-#define PLT_DEFAULT_BROWSE_FILTER "dc:date,upnp:genre,res,res@duration,res@size,upnp:albumArtURI,upnp:album,upnp:artist,upnp:author,searchable,childCount" // explicitely specify res otherwise WMP won't return a URL!
-#endif
-
 /*----------------------------------------------------------------------
 |   types
 +---------------------------------------------------------------------*/
@@ -111,7 +107,7 @@ public:
                           bool                          metadata = false,
                           NPT_Int32                     start = 0,
                           NPT_Cardinal                  max_results = 0, // 0 means all
-                          const char*                   filter = PLT_DEFAULT_BROWSE_FILTER,
+                          const char*                   filter = PLT_DEFAULT_FILTER,
                           const char*                   sort = "");
 
     const NPT_Lock<PLT_DeviceMap>& GetMediaServersMap() const { return m_MediaServers; }
@@ -124,7 +120,7 @@ protected:
                           NPT_Int32                index, 
                           NPT_Int32                count,
                           bool                     browse_metadata = false,
-                          const char*              filter = PLT_DEFAULT_BROWSE_FILTER,
+                          const char*              filter = PLT_DEFAULT_FILTER,
                           const char*              sort = "");
 private:
     NPT_Result Find(const char* ip, PLT_DeviceDataReference& device);
