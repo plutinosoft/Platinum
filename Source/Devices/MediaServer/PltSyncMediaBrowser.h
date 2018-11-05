@@ -47,10 +47,6 @@
 #include "PltMediaBrowser.h"
 #include "PltMediaCache.h"
 
-#ifndef PLT_DEFAULT_BROWSE_FILTER
-#define PLT_DEFAULT_BROWSE_FILTER "dc:date,upnp:genre,res,res@duration,res@size,upnp:albumArtURI,upnp:album,upnp:artist,upnp:author,searchable,childCount" // explicitely specify res otherwise WMP won't return a URL!
-#endif
-
 /*----------------------------------------------------------------------
 |   types
 +---------------------------------------------------------------------*/
