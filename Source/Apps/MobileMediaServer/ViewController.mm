@@ -31,6 +31,8 @@
 	server.delegate = self;
 
 	[self.upnp addDevice:server];
+
+    [super awakeFromNib];
 }
 
 - (void)viewDidLoad {
