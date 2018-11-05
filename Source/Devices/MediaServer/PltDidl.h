@@ -74,14 +74,14 @@
 #define PLT_FILTER_MASK_RES_RESOLUTION              0x00100000
 #define PLT_FILTER_MASK_RES_BITRATE                 0x00200000
 #define PLT_FILTER_MASK_RES_BITSPERSAMPLE           0x00400000
-#define PLT_FILTER_MASK_RES_NRAUDIOCHANNELS			0x00800000
-#define PLT_FILTER_MASK_RES_SAMPLEFREQUENCY			0x01000000
+#define PLT_FILTER_MASK_RES_NRAUDIOCHANNELS         0x00800000
+#define PLT_FILTER_MASK_RES_SAMPLEFREQUENCY         0x01000000
 
 #define PLT_FILTER_MASK_LONGDESCRIPTION             0x02000000
 #define PLT_FILTER_MASK_ICON                        0x04000000
 
-#define PLT_FILTER_MASK_TOC							0x02000000
-#define PLT_FILTER_MASK_SEARCHCLASS					0x04000000
+#define PLT_FILTER_MASK_TOC                         0x02000000
+#define PLT_FILTER_MASK_SEARCHCLASS                 0x04000000
 #define PLT_FILTER_MASK_REFID                       0x08000000
 
 #define PLT_FILTER_FIELD_TITLE                      "dc:title"
@@ -101,7 +101,7 @@
 #define PLT_FILTER_FIELD_PROGRAMTITLE               "upnp:programTitle"
 #define PLT_FILTER_FIELD_SERIESTITLE                "upnp:seriesTitle"
 #define PLT_FILTER_FIELD_EPISODE                    "upnp:episodeNumber"
-#define PLT_FILTER_FIELD_SEARCHCLASS				"upnp:searchClass"
+#define PLT_FILTER_FIELD_SEARCHCLASS                "upnp:searchClass"
 #define PLT_FILTER_FIELD_SEARCHABLE                 "@searchable"
 #define PLT_FILTER_FIELD_CHILDCOUNT                 "@childcount"
 #define PLT_FILTER_FIELD_CONTAINER_CHILDCOUNT       "container@childCount"

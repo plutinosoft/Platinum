@@ -43,34 +43,34 @@
 
 Platinum::Service^ Platinum::Action::ParentService::get()
 {
-	return marshal_as<Service^>(*(*m_pHandle)->GetActionDesc().GetService());
+    return marshal_as<Service^>(*(*m_pHandle)->GetActionDesc().GetService());
 }
 
 Platinum::ActionDescription^ Platinum::Action::Description::get()
 {
-	return marshal_as<ActionDescription^>((*m_pHandle)->GetActionDesc());
+    return marshal_as<ActionDescription^>((*m_pHandle)->GetActionDesc());
 }
 
 IEnumerable<Platinum::ActionArgumentDescription^>^ Platinum::Action::Arguments::get()
 {
-	return gcnew Enumerables::EnumerableNptArray<ActionArgumentDescription^, PLT_ArgumentDesc*>(
-		(*m_pHandle)->GetActionDesc().GetArgumentDescs()
-		);
+    return gcnew Enumerables::EnumerableNptArray<ActionArgumentDescription^, PLT_ArgumentDesc*>(
+        (*m_pHandle)->GetActionDesc().GetArgumentDescs()
+        );
 }
 
 Platinum::ActionArgumentDescription^ Platinum::Action::GetArgument( String^ name )
 {
-	if (String::IsNullOrEmpty(name))
-		throw gcnew ArgumentException("null or empty", "name");
+    if (String::IsNullOrEmpty(name))
+        throw gcnew ArgumentException("null or empty", "name");
 
-	marshal_context c;
+    marshal_context c;
 
-	PLT_ArgumentDesc* arg = (*m_pHandle)->GetActionDesc().GetArgumentDesc(c.marshal_as<const char*>(name));
+    PLT_ArgumentDesc* arg = (*m_pHandle)->GetActionDesc().GetArgumentDesc(c.marshal_as<const char*>(name));
 
-	if (!arg)
-		return nullptr;
+    if (!arg)
+        return nullptr;
 
-	return marshal_as<ActionArgumentDescription^>(*arg);
+    return marshal_as<ActionArgumentDescription^>(*arg);
 }
 
 Int32 Platinum::Action::SetArgumentValue( String^ name, String^ value )
@@ -84,9 +84,9 @@ Int32 Platinum::Action::SetArgumentValue( String^ name, String^ value )
 
 void Platinum::Action::HandleActionResponse( NeptuneException^ error, Action^ action )
 {
-	if (action->m_pHandle == m_pHandle)
-	{
-		this->ActionResponse(error);
-	}
+    if (action->m_pHandle == m_pHandle)
+    {
+        this->ActionResponse(error);
+    }
 }
 

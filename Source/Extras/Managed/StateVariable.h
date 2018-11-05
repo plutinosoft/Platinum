@@ -44,118 +44,118 @@ public ref class StateVariable
 {
 private:
 
-	PLT_StateVariable* m_pHandle;
+    PLT_StateVariable* m_pHandle;
 
 public:
 
-	property String^ Name
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetName());
-		}
-	}
+    property String^ Name
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetName());
+        }
+    }
 
-	property Service^ ParentService
-	{
-		Service^ get();
-	}
+    property Service^ ParentService
+    {
+        Service^ get();
+    }
 
-	property Type^ DataType
-	{
-		Type^ get()
-		{
-			return Helpers::ParseType(m_pHandle->GetDataType());
-		}
-	}
+    property Type^ DataType
+    {
+        Type^ get()
+        {
+            return Helpers::ParseType(m_pHandle->GetDataType());
+        }
+    }
 
-	property String^ DataTypeString
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetDataType());
-		}
-	}
+    property String^ DataTypeString
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetDataType());
+        }
+    }
 
-	property Object^ Value
-	{
-		Object^ get()
-		{
-			return Helpers::ConvertValue(
-				m_pHandle->GetDataType(),
-				m_pHandle->GetValue()
-				);
-		}
-	}
+    property Object^ Value
+    {
+        Object^ get()
+        {
+            return Helpers::ConvertValue(
+                m_pHandle->GetDataType(),
+                m_pHandle->GetValue()
+                );
+        }
+    }
 
-	property String^ ValueString
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetValue());
-		}
+    property String^ ValueString
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetValue());
+        }
 
-		void set (String^ value)
-		{
-			if (value == nullptr)
-				throw gcnew ArgumentNullException("value");
+        void set (String^ value)
+        {
+            if (value == nullptr)
+                throw gcnew ArgumentNullException("value");
 
-			marshal_context c;
+            marshal_context c;
 
-			Helpers::ThrowOnError(m_pHandle->SetValue(
-				c.marshal_as<const char*>(value)
-				));
-		}
-	}
-
-public:
-
-	void ValidateValue(String^ value)
-	{
-		if (value == nullptr)
-			throw gcnew ArgumentNullException("value");
-
-		marshal_context c;
-
-		Helpers::ThrowOnError(m_pHandle->ValidateValue(
-			c.marshal_as<const char*>(value)
-			));
-	}
+            Helpers::ThrowOnError(m_pHandle->SetValue(
+                c.marshal_as<const char*>(value)
+                ));
+        }
+    }
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    void ValidateValue(String^ value)
+    {
+        if (value == nullptr)
+            throw gcnew ArgumentNullException("value");
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        marshal_context c;
 
-		return (m_pHandle == ((StateVariable^)obj)->m_pHandle);
-	}
+        Helpers::ThrowOnError(m_pHandle->ValidateValue(
+            c.marshal_as<const char*>(value)
+            ));
+    }
+
+public:
+
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
+
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
+
+        return (m_pHandle == ((StateVariable^)obj)->m_pHandle);
+    }
 
 internal:
 
-	StateVariable(PLT_StateVariable& devData)
-	{
-		m_pHandle = &devData;
-	}
+    StateVariable(PLT_StateVariable& devData)
+    {
+        m_pHandle = &devData;
+    }
 
 public:
 
-	~StateVariable()
-	{
-		// clean-up managed
+    ~StateVariable()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!StateVariable();
-	}
-
-	!StateVariable()
-	{
         // clean-up unmanaged
-	}
+        this->!StateVariable();
+    }
+
+    !StateVariable()
+    {
+        // clean-up unmanaged
+    }
 
 };
 

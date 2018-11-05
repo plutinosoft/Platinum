@@ -45,75 +45,75 @@ public ref class ActionDescription
 {
 private:
 
-	PLT_ActionDesc* m_pHandle;
+    PLT_ActionDesc* m_pHandle;
 
 internal:
 
-	property PLT_ActionDesc& Handle
-	{
-		PLT_ActionDesc& get()
-		{
-			return *m_pHandle;
-		}
-	}
+    property PLT_ActionDesc& Handle
+    {
+        PLT_ActionDesc& get()
+        {
+            return *m_pHandle;
+        }
+    }
 
 public:
 
-	property String^ Name
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetName());
-		}
-	}
+    property String^ Name
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetName());
+        }
+    }
 
-	property IEnumerable<ActionArgumentDescription^>^ Arguments
-	{
-		IEnumerable<ActionArgumentDescription^>^ get();
-	}
+    property IEnumerable<ActionArgumentDescription^>^ Arguments
+    {
+        IEnumerable<ActionArgumentDescription^>^ get();
+    }
 
-	property Service^ ParentService
-	{
-		Service^ get();
-	}
-
-public:
-
-	ActionArgumentDescription^ GetArgument(String^ name);
+    property Service^ ParentService
+    {
+        Service^ get();
+    }
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    ActionArgumentDescription^ GetArgument(String^ name);
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+public:
 
-		return (m_pHandle == ((ActionDescription^)obj)->m_pHandle);
-	}
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
+
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
+
+        return (m_pHandle == ((ActionDescription^)obj)->m_pHandle);
+    }
 
 internal:
 
-	ActionDescription(PLT_ActionDesc& devData)
-	{
-		m_pHandle = &devData;
-	}
+    ActionDescription(PLT_ActionDesc& devData)
+    {
+        m_pHandle = &devData;
+    }
 
 public:
 
-	~ActionDescription()
-	{
-		// clean-up managed
+    ~ActionDescription()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!ActionDescription();
-	}
+        // clean-up unmanaged
+        this->!ActionDescription();
+    }
 
-	!ActionDescription()
-	{
-	}
+    !ActionDescription()
+    {
+    }
 
 };
 

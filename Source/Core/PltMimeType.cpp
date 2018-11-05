@@ -124,14 +124,14 @@ PLT_MimeType::GetMimeTypeFromExtension(const NPT_String&   extension,
     if (signature != PLT_DEVICE_UNKNOWN) {
         // look for special case for 360
         if (signature == PLT_DEVICE_XBOX_360 || signature == PLT_DEVICE_XBOX_ONE) {
-			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360FileTypeMap); i++) {
+            for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360FileTypeMap); i++) {
                 if (extension.Compare(PLT_HttpFileRequestHandler_360FileTypeMap[i].extension, true) == 0) {
                     return PLT_HttpFileRequestHandler_360FileTypeMap[i].mime_type;
                 }
             }
 
             // fallback to default if not found
-		} else if (signature == PLT_DEVICE_PS3) {
+        } else if (signature == PLT_DEVICE_PS3) {
             for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_PS3FileTypeMap); i++) {
                 if (extension.Compare(PLT_HttpFileRequestHandler_PS3FileTypeMap[i].extension, true) == 0) {
                     return PLT_HttpFileRequestHandler_PS3FileTypeMap[i].mime_type;

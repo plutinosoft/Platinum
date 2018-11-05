@@ -46,25 +46,25 @@ public ref class UPnP
 {
 public:
 
-	static const unsigned short DefaultPort = 1900;
+    static const unsigned short DefaultPort = 1900;
 
 private:
 
-	PLT_UPnP* m_pHandle;
+    PLT_UPnP* m_pHandle;
 
 public:
 
-	void Start()
-	{
-		Helpers::ThrowOnError(m_pHandle->Start());
-	}
+    void Start()
+    {
+        Helpers::ThrowOnError(m_pHandle->Start());
+    }
 
-	void Stop()
-	{
-		if (m_pHandle) m_pHandle->Stop();
-	}
+    void Stop()
+    {
+        if (m_pHandle) m_pHandle->Stop();
+    }
 
-	void AddControlPoint(ControlPoint^ cp);
+    void AddControlPoint(ControlPoint^ cp);
     void RemoveControlPoint(ControlPoint^ cp);
 
     void AddDeviceHost(DeviceHost^ host);
@@ -86,44 +86,44 @@ public:
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		return (m_pHandle == ((UPnP^)obj)->m_pHandle);
-	}
+        return (m_pHandle == ((UPnP^)obj)->m_pHandle);
+    }
 
 public:
 
-	static UPnP();
+    static UPnP();
 
-	UPnP()
-	{
-		m_pHandle = new PLT_UPnP();
-	}
+    UPnP()
+    {
+        m_pHandle = new PLT_UPnP();
+    }
 
-	~UPnP()
-	{
-		// clean-up managed
+    ~UPnP()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!UPnP();
-	}
+        // clean-up unmanaged
+        this->!UPnP();
+    }
 
-	!UPnP()
-	{
-		// clean-up unmanaged
-		if (m_pHandle != 0)
-		{
-			delete m_pHandle;
+    !UPnP()
+    {
+        // clean-up unmanaged
+        if (m_pHandle != 0)
+        {
+            delete m_pHandle;
 
-			m_pHandle = 0;
-		}
-	}
+            m_pHandle = 0;
+        }
+    }
 };
 
 

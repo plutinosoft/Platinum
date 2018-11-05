@@ -129,7 +129,7 @@ public:
      @param name the attribute name
      @param value the attribute value
      */
-	NPT_Result SetExtraAttribute(const char* name, const char* value);
+    NPT_Result SetExtraAttribute(const char* name, const char* value);
 
     /**
      Return the state variable name.
@@ -153,7 +153,7 @@ public:
      Return the state variable allowed value range if any.
      @return state variable value range pointer or null if none.
      */
-	const NPT_AllowedValueRange* GetAllowedValueRange() const { return m_AllowedValueRange; }
+    const NPT_AllowedValueRange* GetAllowedValueRange() const { return m_AllowedValueRange; }
 
     /**
      Helper function to return a state variable given a list of state variables
@@ -175,7 +175,7 @@ protected:
     /**
      Serialize the state variable into xml.
      */
-	NPT_Result Serialize(NPT_XmlElementNode& node);
+    NPT_Result Serialize(NPT_XmlElementNode& node);
 
 protected:
     friend class PLT_Service;
@@ -194,7 +194,7 @@ protected:
     NPT_Array<NPT_String*>  m_AllowedValues;
     NPT_String              m_Value;
 
-	NPT_Map<NPT_String,NPT_String> m_ExtraAttributes;
+    NPT_Map<NPT_String,NPT_String> m_ExtraAttributes;
 };
 
 /*----------------------------------------------------------------------

@@ -177,7 +177,7 @@ public:
      @param value the bool value to retrieve
      @return error if the argument is not found or if the type does not correspond.
      */
-	NPT_Result GetArgumentValue(const char* name, bool& value);
+    NPT_Result GetArgumentValue(const char* name, bool& value);
     
     /**
      Verify a value is valid for a given argument.
@@ -267,7 +267,7 @@ protected:
     
     // keep reference of service root device to prevent it 
     // from being released during action lifetime
-	PLT_DeviceDataReference m_RootDevice;
+    PLT_DeviceDataReference m_RootDevice;
 };
 
 typedef NPT_Reference<PLT_Action> PLT_ActionReference;

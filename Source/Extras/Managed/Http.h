@@ -185,10 +185,10 @@ namespace Platinum
 +---------------------------------------------------------------------*/
 public enum class DeviceSignature
 {
-	Unknown,
-	XBox,
-	PS3,
-	WMP
+    Unknown,
+    XBox,
+    PS3,
+    WMP
 };
 
 /*----------------------------------------------------------------------
@@ -234,29 +234,29 @@ public:
         }
     }
 
-	virtual property DeviceSignature Signature
-	{
-		DeviceSignature get()
-		{
-			return ParseDeviceSignature(m_pHandle->GetDeviceSignature());
-		}
-	}
+    virtual property DeviceSignature Signature
+    {
+        DeviceSignature get()
+        {
+            return ParseDeviceSignature(m_pHandle->GetDeviceSignature());
+        }
+    }
 private:
 
-	static DeviceSignature ParseDeviceSignature(PLT_DeviceSignature signature)
-	{
-		switch (signature) 
-		{
-		case PLT_DEVICE_XBOX:
-			return DeviceSignature::XBox;
-		case PLT_DEVICE_PS3:
-			return DeviceSignature::PS3;
-		case PLT_DEVICE_WMP:
-			return DeviceSignature::WMP;
-		default:
-			return DeviceSignature::Unknown;
-		}
-	}
+    static DeviceSignature ParseDeviceSignature(PLT_DeviceSignature signature)
+    {
+        switch (signature) 
+        {
+        case PLT_DEVICE_XBOX:
+            return DeviceSignature::XBox;
+        case PLT_DEVICE_PS3:
+            return DeviceSignature::PS3;
+        case PLT_DEVICE_WMP:
+            return DeviceSignature::WMP;
+        default:
+            return DeviceSignature::Unknown;
+        }
+    }
 
 
 internal:

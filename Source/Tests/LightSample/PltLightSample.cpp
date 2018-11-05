@@ -49,7 +49,7 @@ extern NPT_UInt8 SCPDXML[];
 /*----------------------------------------------------------------------
 |   PLT_LightSampleDevice::PLT_LightSampleDevice
 +---------------------------------------------------------------------*/
-PLT_LightSampleDevice::PLT_LightSampleDevice(const char* FriendlyName, const char* UUID) :	
+PLT_LightSampleDevice::PLT_LightSampleDevice(const char* FriendlyName, const char* UUID) :  
     PLT_DeviceHost("/", UUID, "urn:schemas-upnp-org:device:SwitchPower:1", FriendlyName)
 {
 }

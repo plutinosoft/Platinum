@@ -55,7 +55,7 @@ public:
     PLT_SocketPolicyServer(const char* policy, 
                            NPT_IpPort  port = 0,
                            const char* authorized_ports = "5900") :
-		m_Socket(NPT_SOCKET_FLAG_CANCELLABLE),
+        m_Socket(NPT_SOCKET_FLAG_CANCELLABLE),
         m_Policy(policy),
         m_Port(port),
         m_AuthorizedPorts(authorized_ports),
@@ -189,7 +189,7 @@ PLT_FrameServer::PLT_FrameServer(const char*          resource_name,
                                  PLT_StreamValidator& stream_validator,
                                  NPT_IpAddress        address,
                                  NPT_UInt16           port,
-                                 bool                 policy_server_enabled) :	
+                                 bool                 policy_server_enabled) :  
     PLT_HttpServer(address, port, false),
     m_PolicyServer(NULL),
     m_StreamValidator(stream_validator),

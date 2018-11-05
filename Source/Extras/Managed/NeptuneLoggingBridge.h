@@ -44,163 +44,163 @@ class NeptuneLoggingBridge : NPT_LogHandler
 {
 private:
 
-	NPT_Mutex m_SetLoggerNameLock;
-	gcroot<String^> m_pFormatString;
-	gcroot<ILog^> m_pLogger;
+    NPT_Mutex m_SetLoggerNameLock;
+    gcroot<String^> m_pFormatString;
+    gcroot<ILog^> m_pLogger;
 
 public:
 
-	static void Configure()
-	{
-		static NPT_Mutex lock;
+    static void Configure()
+    {
+        static NPT_Mutex lock;
 
-		lock.Lock();
+        lock.Lock();
 
-		static NeptuneLoggingBridge instance;
+        static NeptuneLoggingBridge instance;
 
-		// clear config
-		NPT_LogManager::GetDefault().Configure("plist:.level=ALL;.handlers=;platinum.level=ALL;platinum.handlers=");
+        // clear config
+        NPT_LogManager::GetDefault().Configure("plist:.level=ALL;.handlers=;platinum.level=ALL;platinum.handlers=");
 
-		// get root logger
-		NPT_Logger* rootLogger = NPT_LogManager::GetLogger("platinum");
+        // get root logger
+        NPT_Logger* rootLogger = NPT_LogManager::GetLogger("platinum");
 
-		if (rootLogger)
-		{
-			// set handler
-			rootLogger->AddHandler(&instance, false);
-		}
+        if (rootLogger)
+        {
+            // set handler
+            rootLogger->AddHandler(&instance, false);
+        }
 
-		lock.Unlock();
-	}
+        lock.Unlock();
+    }
 
 public:
 
-	virtual void Log(const NPT_LogRecord& record)
-	{
-		gcroot<ILog^> log = SetLoggerName(record.m_LoggerName);
+    virtual void Log(const NPT_LogRecord& record)
+    {
+        gcroot<ILog^> log = SetLoggerName(record.m_LoggerName);
 
-		switch (record.m_Level)
-		{
-			case NPT_LOG_LEVEL_FATAL:
-				if (log->IsFatalEnabled)
-				{
-					log->FatalFormat(
-						m_pFormatString,
-						marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+        switch (record.m_Level)
+        {
+            case NPT_LOG_LEVEL_FATAL:
+                if (log->IsFatalEnabled)
+                {
+                    log->FatalFormat(
+                        m_pFormatString,
+                        marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
+                break;
 
-			case NPT_LOG_LEVEL_SEVERE:
-				if (log->IsErrorEnabled)
-				{
-					log->ErrorFormat(
-						m_pFormatString,
-						marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+            case NPT_LOG_LEVEL_SEVERE:
+                if (log->IsErrorEnabled)
+                {
+                    log->ErrorFormat(
+                        m_pFormatString,
+                        marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
+                break;
 
-			case NPT_LOG_LEVEL_WARNING:
-				if (log->IsWarnEnabled)
-				{
-					log->WarnFormat(
-						m_pFormatString,
-						marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+            case NPT_LOG_LEVEL_WARNING:
+                if (log->IsWarnEnabled)
+                {
+                    log->WarnFormat(
+                        m_pFormatString,
+                        marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
+                break;
 
-			case NPT_LOG_LEVEL_INFO:
-				if (log->IsInfoEnabled)
-				{
-					log->InfoFormat(
-						m_pFormatString,
-						marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+            case NPT_LOG_LEVEL_INFO:
+                if (log->IsInfoEnabled)
+                {
+                    log->InfoFormat(
+                        m_pFormatString,
+                        marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
+                break;
 
-			case NPT_LOG_LEVEL_FINE:
-			case NPT_LOG_LEVEL_FINER:
-			case NPT_LOG_LEVEL_FINEST:
-				if (log->IsDebugEnabled)
-				{
-					log->DebugFormat(
-						m_pFormatString,
-						marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+            case NPT_LOG_LEVEL_FINE:
+            case NPT_LOG_LEVEL_FINER:
+            case NPT_LOG_LEVEL_FINEST:
+                if (log->IsDebugEnabled)
+                {
+                    log->DebugFormat(
+                        m_pFormatString,
+                        marshal_as<String^>(NPT_Log::GetLogLevelName(record.m_Level)),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
+                break;
 
-			default:
-				if (log->IsWarnEnabled)
-				{
-					log->WarnFormat(
-						m_pFormatString,
-						marshal_as<String^>("UNKNOWN_LOG_LEVEL"),
-						marshal_as<String^>(record.m_Message),
-						marshal_as<String^>(record.m_SourceFile),
-						UInt32(record.m_SourceLine)
-						);
-				}
+            default:
+                if (log->IsWarnEnabled)
+                {
+                    log->WarnFormat(
+                        m_pFormatString,
+                        marshal_as<String^>("UNKNOWN_LOG_LEVEL"),
+                        marshal_as<String^>(record.m_Message),
+                        marshal_as<String^>(record.m_SourceFile),
+                        UInt32(record.m_SourceLine)
+                        );
+                }
 
-				break;
-		}
-	}
+                break;
+        }
+    }
 
 private:
 
-	gcroot<ILog^> SetLoggerName(const char* name)
-	{
-		m_SetLoggerNameLock.Lock();
+    gcroot<ILog^> SetLoggerName(const char* name)
+    {
+        m_SetLoggerNameLock.Lock();
 
-		gcroot<String^> loggerName = gcnew String(name);
-		gcroot<ILog^> logger = m_pLogger;
+        gcroot<String^> loggerName = gcnew String(name);
+        gcroot<ILog^> logger = m_pLogger;
 
-		if (logger->Logger->Name != loggerName)
-		{
-			logger = LogManager::GetLogger(loggerName);
+        if (logger->Logger->Name != loggerName)
+        {
+            logger = LogManager::GetLogger(loggerName);
 
-			m_pLogger = logger;
-		}
+            m_pLogger = logger;
+        }
 
-		m_SetLoggerNameLock.Unlock();
+        m_SetLoggerNameLock.Unlock();
 
-		return logger;
-	}
+        return logger;
+    }
 
 public:
 
-	NeptuneLoggingBridge()
-	{
-		m_pLogger = LogManager::GetLogger(gcnew String("NeptuneLoggingBridge"));
-		m_pFormatString = gcnew String("{0}: {2}:{3}: {1}");
-	}
+    NeptuneLoggingBridge()
+    {
+        m_pLogger = LogManager::GetLogger(gcnew String("NeptuneLoggingBridge"));
+        m_pFormatString = gcnew String("{0}: {2}:{3}: {1}");
+    }
 
-	virtual ~NeptuneLoggingBridge()
-	{
-	}
+    virtual ~NeptuneLoggingBridge()
+    {
+    }
 
 };
 

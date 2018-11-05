@@ -54,7 +54,7 @@ PLT_MediaConnect::PLT_MediaConnect(const char*  friendly_name,
                                    bool         add_hostname     /* = true */, 
                                    const char*  udn              /* = NULL */, 
                                    NPT_UInt16   port             /* = 0 */,
-                                   bool         port_rebind      /* = false */) :	
+                                   bool         port_rebind      /* = false */) :   
     PLT_MediaServer(friendly_name, false, udn, port, port_rebind),
     m_AddHostname(add_hostname)
 {
@@ -73,7 +73,7 @@ PLT_MediaConnect::~PLT_MediaConnect()
 NPT_Result
 PLT_MediaConnect::SetupServices()
 {
-	NPT_Reference<PLT_Service> service(new PLT_Service(
+    NPT_Reference<PLT_Service> service(new PLT_Service(
         this,
         "urn:microsoft.com:service:X_MS_MediaReceiverRegistrar:1", 
         "urn:microsoft.com:serviceId:X_MS_MediaReceiverRegistrar",
@@ -99,10 +99,10 @@ PLT_MediaConnect::ProcessGetDescription(NPT_HttpRequest&              request,
                                         const NPT_HttpRequestContext& context,
                                         NPT_HttpResponse&             response)
 {
-	// lock to make sure another request is not modifying the device while we are already
-	NPT_AutoLock lock(m_Lock);
+    // lock to make sure another request is not modifying the device while we are already
+    NPT_AutoLock lock(m_Lock);
 
-	NPT_Result res				   = NPT_SUCCESS;
+    NPT_Result res                 = NPT_SUCCESS;
     NPT_String oldModelName        = m_ModelName;
     NPT_String oldModelNumber      = m_ModelNumber;
     NPT_String oldModelURL         = m_ModelURL;
@@ -179,9 +179,9 @@ PLT_MediaConnect::ProcessGetSCPD(PLT_Service*                  service,
     // to all devices except XBox or WMP which need it
     if (service->GetServiceType() == "urn:schemas-upnp-org:service:ContentDirectory:1" &&
         signature != PLT_DEVICE_XBOX_360 &&
-		signature != PLT_DEVICE_XBOX_ONE &&
-		signature != PLT_DEVICE_WMP &&
-		signature != PLT_DEVICE_SONOS) {
+        signature != PLT_DEVICE_XBOX_ONE &&
+        signature != PLT_DEVICE_WMP &&
+        signature != PLT_DEVICE_SONOS) {
         NPT_HttpEntity* entity;
         PLT_HttpHelper::SetBody(response, (const char*) MS_ContentDirectorySCPD, &entity);    
         entity->SetContentType("text/xml; charset=\"utf-8\"");

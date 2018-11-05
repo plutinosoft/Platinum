@@ -95,9 +95,9 @@ static void strchomp(char* str)
  * Presents a list to the user, allows the user to choose one item.
  *
  * Parameters:
- *		PLT_StringMap: A map that contains the set of items from
+ *      PLT_StringMap: A map that contains the set of items from
  *                        which the user should choose.  The key should be a unique ID,
- *						 and the value should be a string describing the item. 
+ *                       and the value should be a string describing the item. 
  *       returns a NPT_String with the unique ID. 
  */
 const char*
@@ -127,11 +127,11 @@ PLT_MicroMediaController::ChooseIDFromTable(PLT_StringMap& table)
 
             if (1 != sscanf(buffer, "%d", &index)) {
                 printf("Please enter a number\n");
-            } else if (index < 0 || index > count)	{
+            } else if (index < 0 || index > count)  {
                 printf("Please choose one of the above, or 0 for none\n");
                 watchdog--;
                 index = 0;
-            } else {	
+            } else {    
                 watchdog = 0;
             }
         }
@@ -307,7 +307,7 @@ PLT_MicroMediaController::DoBrowse(const char* object_id, /* = NULL */
             device, 
             object_id?object_id:(const char*)cur_object_id, 
             m_MostRecentBrowseResults, 
-            metadata);		
+            metadata);      
     }
 
     return res;

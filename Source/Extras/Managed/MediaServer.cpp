@@ -109,13 +109,13 @@ Int32 Platinum::MediaServer::SetResponseFilePath(HttpRequestContext^ context, Ht
 Int32 Platinum::MediaServer::SetResponseData(HttpRequestContext^ context, HttpResponse^ response, array<Byte>^ data)
 {
     NPT_HttpEntity* entity = response->Handle.GetEntity();
-	if (entity) 
-	{
-		pin_ptr<Byte> pinnedBuffer = &data[0];
-		entity->SetInputStream((const void*)pinnedBuffer, data->Length);
-	}
-	
+    if (entity) 
+    {
+        pin_ptr<Byte> pinnedBuffer = &data[0];
+        entity->SetInputStream((const void*)pinnedBuffer, data->Length);
+    }
+    
     /* interactive header for DLNA ?*/
     response->Handle.GetHeaders().SetHeader("transferMode.dlna.org", "Interactive");
-	return NPT_SUCCESS;
+    return NPT_SUCCESS;
 }

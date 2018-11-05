@@ -90,7 +90,7 @@ public:
         PLT_BrowseInfo*          /*info*/, 
         void*                    /*userdata*/) {}
 
-	virtual void OnSearchResult(
+    virtual void OnSearchResult(
         NPT_Result               /*res*/, 
         PLT_DeviceDataReference& /*device*/, 
         PLT_BrowseInfo*          /*info*/, 
@@ -146,7 +146,7 @@ protected:
                                         PLT_ActionReference&     action, 
                                         void*                    userdata);
 
-	virtual NPT_Result OnSearchResponse(NPT_Result               res, 
+    virtual NPT_Result OnSearchResponse(NPT_Result               res, 
                                         PLT_DeviceDataReference& device, 
                                         PLT_ActionReference&     action, 
                                         void*                    userdata);

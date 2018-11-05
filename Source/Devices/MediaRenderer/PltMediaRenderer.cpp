@@ -55,7 +55,7 @@ PLT_MediaRenderer::PLT_MediaRenderer(const char*  friendly_name,
                                      bool         show_ip     /* = false */, 
                                      const char*  uuid        /* = NULL */, 
                                      unsigned int port        /* = 0 */,
-                                     bool         port_rebind /* = false */) :	
+                                     bool         port_rebind /* = false */) :  
     PLT_DeviceHost("/", 
                    uuid, 
                    "urn:schemas-upnp-org:device:MediaRenderer:1", 
@@ -117,7 +117,7 @@ PLT_MediaRenderer::SetupServices()
         service->SetStateVariable("NextAVTransportURIMetadata", "NOT_IMPLEMENTED");
         service->SetStateVariable("PlaybackStorageMedium", "NONE");
         service->SetStateVariable("RecordStorageMedium", "NOT_IMPLEMENTED");
-		service->SetStateVariable("RecordMediumWriteStatus", "NOT_IMPLEMENTED");
+        service->SetStateVariable("RecordMediumWriteStatus", "NOT_IMPLEMENTED");
 
         // GetPositionInfo
         service->SetStateVariable("CurrentTrack", "0");
@@ -223,20 +223,20 @@ PLT_MediaRenderer::OnAction(PLT_ActionReference&          action,
             return NPT_FAILURE;
         }
     }
-	serviceType = action->GetActionDesc().GetService()->GetServiceType();
-	if (serviceType.Compare("urn:schemas-upnp-org:service:RenderingControl:1", true) == 0) {
-		if (NPT_FAILED(action->VerifyArgumentValue("InstanceID", "0"))) {
-			action->SetError(702, "Not valid InstanceID");
-			return NPT_FAILURE;
-		}
-	}
+    serviceType = action->GetActionDesc().GetService()->GetServiceType();
+    if (serviceType.Compare("urn:schemas-upnp-org:service:RenderingControl:1", true) == 0) {
+        if (NPT_FAILED(action->VerifyArgumentValue("InstanceID", "0"))) {
+            action->SetError(702, "Not valid InstanceID");
+            return NPT_FAILURE;
+        }
+    }
 
-	/* Is it a ConnectionManager Service Action ? */
-	if (name.Compare("GetCurrentConnectionInfo", true) == 0) {
-		return OnGetCurrentConnectionInfo(action);
-	}  
+    /* Is it a ConnectionManager Service Action ? */
+    if (name.Compare("GetCurrentConnectionInfo", true) == 0) {
+        return OnGetCurrentConnectionInfo(action);
+    }
 
-	/* Is it a AVTransport Service Action ? */
+    /* Is it a AVTransport Service Action ? */
     if (name.Compare("Next", true) == 0) {
         return OnNext(action);
     }
@@ -266,13 +266,12 @@ PLT_MediaRenderer::OnAction(PLT_ActionReference&          action,
     if (name.Compare("SetVolume", true) == 0) {
           return OnSetVolume(action);
     }
-	if (name.Compare("SetVolumeDB", true) == 0) {
-		return OnSetVolumeDB(action);
+    if (name.Compare("SetVolumeDB", true) == 0) {
+        return OnSetVolumeDB(action);
     }
-	if (name.Compare("GetVolumeDBRange", true) == 0) {
-		return OnGetVolumeDBRange(action);
-
-	}
+    if (name.Compare("GetVolumeDBRange", true) == 0) {
+        return OnGetVolumeDBRange(action);
+    }
     if (name.Compare("SetMute", true) == 0) {
           return OnSetMute(action);
     }

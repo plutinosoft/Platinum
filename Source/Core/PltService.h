@@ -234,7 +234,7 @@ public:
      @param key the attribute name
      @param value the attribute value
      */
-	NPT_Result SetStateVariableExtraAttribute(const char* name, const char* key, const char* value);
+    NPT_Result SetStateVariableExtraAttribute(const char* name, const char* key, const char* value);
     
     /**
      Helper function to increment a state variable representing a number.
@@ -363,7 +363,7 @@ protected:
     PLT_DeviceData*                         m_Device;
     NPT_String                              m_ServiceType;
     NPT_String                              m_ServiceID;
-	NPT_String                              m_ServiceName;
+    NPT_String                              m_ServiceName;
     NPT_String                              m_SCPDURL;
     NPT_String                              m_ControlURL;
     NPT_String                              m_EventSubURL;

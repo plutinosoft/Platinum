@@ -44,7 +44,7 @@ public ref class DeviceHost : public DeviceData
 {
 private:
 
-	PLT_DeviceHostReference* m_pHostHandle;
+    PLT_DeviceHostReference* m_pHostHandle;
 
 public:
 
@@ -61,26 +61,26 @@ public:
 
 internal:
 
-	property PLT_DeviceHostReference& Host
-	{
-		PLT_DeviceHostReference& get()
-		{
-			return *m_pHostHandle;
-		}
-	}
+    property PLT_DeviceHostReference& Host
+    {
+        PLT_DeviceHostReference& get()
+        {
+            return *m_pHostHandle;
+        }
+    }
 
 internal:
 
-	DeviceHost(PLT_DeviceHostReference& devHost) : 
-		m_pHostHandle(new PLT_DeviceHostReference(devHost)),
-		DeviceData((PLT_DeviceDataReference&)*m_pHostHandle)
-	{
+    DeviceHost(PLT_DeviceHostReference& devHost) : 
+        m_pHostHandle(new PLT_DeviceHostReference(devHost)),
+        DeviceData((PLT_DeviceDataReference&)*m_pHostHandle)
+    {
     }
 
     DeviceHost(PLT_DeviceHost& devHost) : 
-		m_pHostHandle(new PLT_DeviceHostReference(&devHost)),  
-		DeviceData((PLT_DeviceDataReference&)*m_pHostHandle) // we must make sure to pass our newly created ref object
-	{
+        m_pHostHandle(new PLT_DeviceHostReference(&devHost)),  
+        DeviceData((PLT_DeviceDataReference&)*m_pHostHandle) // we must make sure to pass our newly created ref object
+    {
     }
 
 public:
@@ -90,11 +90,11 @@ public:
         (*m_pHostHandle)->SetLeaseTime(NPT_TimeInterval((double)lease->TotalSeconds));
     }
 
-	NPT_Result AddIcon(DeviceIcon^ icon, array<Byte>^ data)
-	{
-		pin_ptr<Byte> pinnedBuffer = &data[0];
-		return (*m_pHostHandle)->AddIcon(icon->Handle, (const void*)pinnedBuffer, data->Length, true);
-	}
+    NPT_Result AddIcon(DeviceIcon^ icon, array<Byte>^ data)
+    {
+        pin_ptr<Byte> pinnedBuffer = &data[0];
+        return (*m_pHostHandle)->AddIcon(icon->Handle, (const void*)pinnedBuffer, data->Length, true);
+    }
 
     ~DeviceHost()
     {
@@ -107,12 +107,12 @@ public:
     !DeviceHost()
     {
         // clean-up unmanaged
-		if (m_pHostHandle != 0)
-		{
-			delete m_pHostHandle;
+        if (m_pHostHandle != 0)
+        {
+            delete m_pHostHandle;
 
-			m_pHostHandle = 0;
-		}
+            m_pHostHandle = 0;
+        }
     }
 
 };

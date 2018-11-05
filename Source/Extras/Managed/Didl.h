@@ -46,14 +46,14 @@ namespace Platinum
 public ref class Didl
 {
 public:
-	
-	static property String^ header
-	{   
+    
+    static property String^ header
+    {   
         String^ get()
         {
             return gcnew String(didl_header);
         }
-	}
+    }
 
     static property String^ footer
     {   

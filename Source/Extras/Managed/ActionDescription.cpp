@@ -42,28 +42,28 @@
 
 Platinum::Service^ Platinum::ActionDescription::ParentService::get()
 {
-	return marshal_as<Service^>(*m_pHandle->GetService());
+    return marshal_as<Service^>(*m_pHandle->GetService());
 }
 
 IEnumerable<Platinum::ActionArgumentDescription^>^ Platinum::ActionDescription::Arguments::get()
 {
-	return gcnew Enumerables::EnumerableNptArray<ActionArgumentDescription^, PLT_ArgumentDesc*>(
-		m_pHandle->GetArgumentDescs()
-		);
+    return gcnew Enumerables::EnumerableNptArray<ActionArgumentDescription^, PLT_ArgumentDesc*>(
+        m_pHandle->GetArgumentDescs()
+        );
 }
 
 Platinum::ActionArgumentDescription^ Platinum::ActionDescription::GetArgument( String^ name )
 {
-	if (String::IsNullOrEmpty(name))
-		throw gcnew ArgumentException("null or empty", "name");
+    if (String::IsNullOrEmpty(name))
+        throw gcnew ArgumentException("null or empty", "name");
 
-	marshal_context c;
+    marshal_context c;
 
-	PLT_ArgumentDesc* arg = m_pHandle->GetArgumentDesc(c.marshal_as<const char*>(name));
+    PLT_ArgumentDesc* arg = m_pHandle->GetArgumentDesc(c.marshal_as<const char*>(name));
 
-	if (!arg)
-		return nullptr;
+    if (!arg)
+        return nullptr;
 
-	return marshal_as<ActionArgumentDescription^>(*arg);
+    return marshal_as<ActionArgumentDescription^>(*arg);
 }
 

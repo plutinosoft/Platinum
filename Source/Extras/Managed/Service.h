@@ -46,98 +46,98 @@ public ref class Service
 {
 private:
 
-	PLT_Service* m_pHandle;
+    PLT_Service* m_pHandle;
 
 internal:
 
-	property PLT_Service& Handle
-	{
-		PLT_Service& get()
-		{
-			return *m_pHandle;
-		}
-	}
+    property PLT_Service& Handle
+    {
+        PLT_Service& get()
+        {
+            return *m_pHandle;
+        }
+    }
 
 public:
 
-	property Uri^ SCPDURL
-	{
-		Uri^ get()
-		{
-			return marshal_as<Uri^>(m_pHandle->GetSCPDURL());
-		}
-	}
+    property Uri^ SCPDURL
+    {
+        Uri^ get()
+        {
+            return marshal_as<Uri^>(m_pHandle->GetSCPDURL());
+        }
+    }
 
-	property String^ ServiceID
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetServiceID());
-		}
-	}
+    property String^ ServiceID
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetServiceID());
+        }
+    }
 
-	property String^ ServiceType
-	{
-		String^ get()
-		{
-			return gcnew String(m_pHandle->GetServiceType());
-		}
-	}
+    property String^ ServiceType
+    {
+        String^ get()
+        {
+            return gcnew String(m_pHandle->GetServiceType());
+        }
+    }
 
-	property DeviceData^ ParentDevice
-	{
-		DeviceData^ get();
-	}
+    property DeviceData^ ParentDevice
+    {
+        DeviceData^ get();
+    }
 
-	property IEnumerable<StateVariable^>^ StateVariables
-	{
-		IEnumerable<StateVariable^>^ get();
-	}
+    property IEnumerable<StateVariable^>^ StateVariables
+    {
+        IEnumerable<StateVariable^>^ get();
+    }
 
-	property IEnumerable<ActionDescription^>^ Actions
-	{
-		IEnumerable<ActionDescription^>^ get();
-	}
+    property IEnumerable<ActionDescription^>^ Actions
+    {
+        IEnumerable<ActionDescription^>^ get();
+    }
 
 public:
 
-	ActionDescription^ FindAction(String^ name);
+    ActionDescription^ FindAction(String^ name);
     StateVariable^ FindStateVariable(String^ name);
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		return (m_pHandle == ((Service^)obj)->m_pHandle);
-	}
+        return (m_pHandle == ((Service^)obj)->m_pHandle);
+    }
 
 internal:
 
-	Service(PLT_Service& devData)
-	{
-		m_pHandle = &devData;
-	}
+    Service(PLT_Service& devData)
+    {
+        m_pHandle = &devData;
+    }
 
 public:
 
-	~Service()
-	{
-		// clean-up managed
+    ~Service()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!Service();
-	}
+        // clean-up unmanaged
+        this->!Service();
+    }
 
-	!Service()
-	{
-		// clean-up unmanaged
-	}
+    !Service()
+    {
+        // clean-up unmanaged
+    }
 
 };
 

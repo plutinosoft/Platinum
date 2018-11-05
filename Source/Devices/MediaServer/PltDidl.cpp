@@ -126,7 +126,7 @@ PLT_Didl::ConvertFilterToMask(const NPT_String& filter)
         } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES;
         } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_DURATION, len, true) == 0 ||
-				   NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_DURATION_SHORT, len, true) == 0) {
+                   NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_DURATION_SHORT, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_DURATION;
         } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_SIZE, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_SIZE;
@@ -138,11 +138,11 @@ PLT_Didl::ConvertFilterToMask(const NPT_String& filter)
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_BITRATE;
         } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_BITSPERSAMPLE, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_BITSPERSAMPLE;
-		} else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_NRAUDIOCHANNELS, len, true) == 0) {
+        } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_NRAUDIOCHANNELS, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_NRAUDIOCHANNELS;
-		} else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_SAMPLEFREQUENCY, len, true) == 0) {
+        } else if (NPT_String::CompareN(s+i, PLT_FILTER_FIELD_RES_SAMPLEFREQUENCY, len, true) == 0) {
             mask |= PLT_FILTER_MASK_RES | PLT_FILTER_MASK_RES_SAMPLEFREQUENCY;
-		}
+        }
 
         if (next_comma < 0) {
             return mask;
@@ -243,7 +243,7 @@ PLT_Didl::FormatTimeStamp(NPT_UInt32 seconds)
         result += NPT_String::FromInteger(secs);
     }
 
-	result += ".000"; // needed for XBOX360 otherwise it won't play the track
+    result += ".000"; // needed for XBOX360 otherwise it won't play the track
     return result;
 }
 
@@ -313,20 +313,20 @@ PLT_Didl::FromDidl(const char* xml, PLT_MediaObjectListReference& objects)
     PLT_MediaObject*    object = NULL;
     NPT_XmlNode*        node = NULL;
     NPT_XmlElementNode* didl = NULL;
-	NPT_XmlParser		parser;
+    NPT_XmlParser       parser;
 
     NPT_LOG_FINE("Parsing Didl...");
 
-	NPT_CHECK_LABEL_SEVERE(parser.Parse(xml, node), cleanup);
+    NPT_CHECK_LABEL_SEVERE(parser.Parse(xml, node), cleanup);
     if (!node || !node->AsElementNode()) {
-		NPT_LOG_SEVERE("Invalid node type");
+        NPT_LOG_SEVERE("Invalid node type");
         goto cleanup;
     }
 
     didl = node->AsElementNode();
 
-	if (didl->GetTag().Compare("DIDL-Lite", true)) {
-		NPT_LOG_SEVERE("Invalid node tag");
+    if (didl->GetTag().Compare("DIDL-Lite", true)) {
+        NPT_LOG_SEVERE("Invalid node tag");
         goto cleanup;
     }
 
@@ -343,15 +343,15 @@ PLT_Didl::FromDidl(const char* xml, PLT_MediaObjectListReference& objects)
             object = new PLT_MediaContainer();
         } else if (child->GetTag().Compare("item", true) == 0) {
             object = new PLT_MediaItem();
-		} else {
-			NPT_LOG_WARNING("Invalid node tag");
+        } else {
+            NPT_LOG_WARNING("Invalid node tag");
             continue;
         }
 
         if (NPT_FAILED(object->FromDidl(child))) {
             NPT_LOG_WARNING_1("Invalid didl for object: %s", 
                 (const char*) PLT_XmlHelper::Serialize(*child, false));
-          	continue;
+            continue;
         }
 
         objects->Add(object);

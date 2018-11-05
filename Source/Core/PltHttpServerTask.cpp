@@ -312,7 +312,7 @@ PLT_HttpServerSocketTask::SendResponseHeaders(NPT_HttpResponse* response,
         
     } else if (!headers.GetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH)) {
         // force content length to 0 if there is no message body
-		// (necessary for 1.1 or 1.0 with keep-alive connections)
+        // (necessary for 1.1 or 1.0 with keep-alive connections)
         headers.SetHeader(NPT_HTTP_HEADER_CONTENT_LENGTH, "0");
     }
 
