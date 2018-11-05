@@ -57,7 +57,7 @@ PLT_OHPlaylist::PLT_OHPlaylist(const char*  friendly_name,
                                      bool         show_ip     /* = false */, 
                                      const char*  uuid        /* = NULL */, 
                                      unsigned int port        /* = 0 */,
-                                     bool         port_rebind /* = false */) :	
+                                     bool         port_rebind /* = false */) :  
     PLT_DeviceHost("/", 
                    uuid, 
                    "urn:av-openhome-org:service:Playlist:1",
@@ -89,13 +89,13 @@ PLT_OHPlaylist::SetupServices()
     NPT_Reference<PLT_Service> service;
 
     {
-    	/* OHProduct */
+        /* OHProduct */
         service = new PLT_Service(
             this,
             "urn:av-openhome-org:service:Product:1",
             "urn:av-openhome-org:serviceId:Product",
             "Product",
-			"urn:schemas-upnp-org:service-1-0");
+            "urn:schemas-upnp-org:service-1-0");
         NPT_CHECK_FATAL(service->SetSCPDXML((const char*) OH_ProductSCPD));
         NPT_CHECK_FATAL(AddService(service.AsPointer()));
 
@@ -103,7 +103,7 @@ PLT_OHPlaylist::SetupServices()
 
         NPT_String csxml = "<SourceList>\n";
         csxml+= NPT_String(" <Source>\n") + "  <Name>" + "Playlist" + "</Name>\n" + "  <Type>" + "Playlist" + "</Type>\n" +
-        		"  <Visible>true</Visible>\n" + "  </Source>\n" + "</SourceList>\n";
+                "  <Visible>true</Visible>\n" + "  </Source>\n" + "</SourceList>\n";
 
         service->SetStateVariable("ManufacturerName", "Albis Technologies");
         service->SetStateVariable("ManufacturerInfo", "SNK");
@@ -129,13 +129,13 @@ PLT_OHPlaylist::SetupServices()
     }
 
     {
-    	/* OHVolume */
+        /* OHVolume */
         service = new PLT_Service(
             this,
             "urn:av-openhome-org:service:Volume:1",
             "urn:av-openhome-org:serviceId:Volume",
             "Volume",
-			"urn:schemas-upnp-org:service-1-0");
+            "urn:schemas-upnp-org:service-1-0");
         NPT_CHECK_FATAL(service->SetSCPDXML((const char*) OH_VolumeSCPD));
         NPT_CHECK_FATAL(AddService(service.AsPointer()));
 
@@ -158,13 +158,13 @@ PLT_OHPlaylist::SetupServices()
     }
 
     {
-    	/* OHTime */
+        /* OHTime */
         service = new PLT_Service(
             this,
             "urn:av-openhome-org:service:Time:1",
             "urn:av-openhome-org:serviceId:Time",
             "Time",
-			"urn:schemas-upnp-org:service-1-0");
+            "urn:schemas-upnp-org:service-1-0");
         NPT_CHECK_FATAL(service->SetSCPDXML((const char*) OH_TimeSCPD));
         NPT_CHECK_FATAL(AddService(service.AsPointer()));
 
@@ -183,13 +183,13 @@ PLT_OHPlaylist::SetupServices()
     }
 
     {
-    	/* OHInfo */
+        /* OHInfo */
         service = new PLT_Service(
             this,
             "urn:av-openhome-org:service:Info:1",
             "urn:av-openhome-org:serviceId:Info",
             "Info",
-			"urn:schemas-upnp-org:service-1-0");
+            "urn:schemas-upnp-org:service-1-0");
         NPT_CHECK_FATAL(service->SetSCPDXML((const char*) OH_InfoSCPD));
         NPT_CHECK_FATAL(AddService(service.AsPointer()));
 
@@ -213,9 +213,9 @@ PLT_OHPlaylist::SetupServices()
                 "xmlns:upnp=\"urn:schemas-upnp-org:metadata-1-0/upnp/\" "
                 "xmlns=\"urn:schemas-upnp-org:metadata-1-0/DIDL-Lite/\" "
                 "xmlns:dlna=\"urn:schemas-dlna-org:metadata-1-0/\">"
-        		"<item restricted=\"1\">"
-        		"<orig>snk</orig>"
-        		"</item></DIDL-Lite>";
+                "<item restricted=\"1\">"
+                "<orig>snk</orig>"
+                "</item></DIDL-Lite>";
 
         service->SetStateVariable("TrackCount", "0");
         service->SetStateVariable("DetailsCount", "0");
@@ -235,13 +235,13 @@ PLT_OHPlaylist::SetupServices()
     }
 
     {
-    	/* OHPlaylist */
+        /* OHPlaylist */
         service = new PLT_Service(
             this,
             "urn:av-openhome-org:service:Playlist:1",
             "urn:av-openhome-org:serviceId:Playlist",
             "Playlist",
-			"urn:schemas-upnp-org:service-1-0");
+            "urn:schemas-upnp-org:service-1-0");
         NPT_CHECK_FATAL(service->SetSCPDXML((const char*) OH_PlaylistSCPD));
         NPT_CHECK_FATAL(AddService(service.AsPointer()));
 
@@ -283,81 +283,81 @@ PLT_OHPlaylist::OnAction(PLT_ActionReference&          action,
 #endif
 
     if (serviceType.Compare("urn:av-openhome-org:service:Playlist:1", true) == 0) {
-    	if (name.Compare("Insert", true) == 0) {
-   	       return OnPlaylistInsert(action);
-    	}
-    	if (name.Compare("DeleteAll", true) == 0) {
-   	       return OnPlaylistDeleteAll(action);
-    	}
-    	if (name.Compare("ReadList", true) == 0) {
-   	       return OnPlaylistReadList(action);
-    	}
-    	if (name.Compare("IdArray", true) == 0) {
-   	       return OnPlaylistIdArray(action);
-    	}
-    	if (name.Compare("SeekIndex", true) == 0) {
-   	       return OnPlaylistSeekIndex(action);
-    	}
-    	if (name.Compare("DeleteId", true) == 0) {
-   	       return OnPlaylistDeleteId(action);
-    	}
-    	if (name.Compare("SeekId", true) == 0) {
-   	       return OnPlaylistSeekId(action);
-    	}
-    	if (name.Compare("Play", true) == 0) {
-   	       return OnPlaylistPlay(action);
-    	}
-    	if (name.Compare("Pause", true) == 0) {
-   	       return OnPlaylistPause(action);
-    	}
-    	if (name.Compare("Stop", true) == 0) {
-   	       return OnPlaylistStop(action);
-    	}
-    	if (name.Compare("Next", true) == 0) {
-   	       return OnPlaylistNext(action);
-    	}
-    	if (name.Compare("Previous", true) == 0) {
-   	       return OnPlaylistPrevious(action);
-    	}
-    	if (name.Compare("SeekSecondAbsolute", true) == 0) {
-   	       return OnPlaylistSeekSecondAbsolute(action);
-    	}
-    	if (name.Compare("SeekSecondRelative", true) == 0) {
-   	       return OnPlaylistSeekSecondRelative(action);
-    	}
-    	if (name.Compare("SetRepeat", true) == 0) {
-   	       return OnPlaylistSetRepeat(action);
-    	}
-    	if (name.Compare("Repeat", true) == 0) {
-   	       return OnPlaylistRepeat(action);
-    	}
-    	if (name.Compare("SetShuffle", true) == 0) {
-   	       return OnPlaylistSetShuffle(action);
-    	}
-    	if (name.Compare("Shuffle", true) == 0) {
-   	       return OnPlaylistShuffle(action);
-    	}
+        if (name.Compare("Insert", true) == 0) {
+           return OnPlaylistInsert(action);
+        }
+        if (name.Compare("DeleteAll", true) == 0) {
+           return OnPlaylistDeleteAll(action);
+        }
+        if (name.Compare("ReadList", true) == 0) {
+           return OnPlaylistReadList(action);
+        }
+        if (name.Compare("IdArray", true) == 0) {
+           return OnPlaylistIdArray(action);
+        }
+        if (name.Compare("SeekIndex", true) == 0) {
+           return OnPlaylistSeekIndex(action);
+        }
+        if (name.Compare("DeleteId", true) == 0) {
+           return OnPlaylistDeleteId(action);
+        }
+        if (name.Compare("SeekId", true) == 0) {
+           return OnPlaylistSeekId(action);
+        }
+        if (name.Compare("Play", true) == 0) {
+           return OnPlaylistPlay(action);
+        }
+        if (name.Compare("Pause", true) == 0) {
+           return OnPlaylistPause(action);
+        }
+        if (name.Compare("Stop", true) == 0) {
+           return OnPlaylistStop(action);
+        }
+        if (name.Compare("Next", true) == 0) {
+           return OnPlaylistNext(action);
+        }
+        if (name.Compare("Previous", true) == 0) {
+           return OnPlaylistPrevious(action);
+        }
+        if (name.Compare("SeekSecondAbsolute", true) == 0) {
+           return OnPlaylistSeekSecondAbsolute(action);
+        }
+        if (name.Compare("SeekSecondRelative", true) == 0) {
+           return OnPlaylistSeekSecondRelative(action);
+        }
+        if (name.Compare("SetRepeat", true) == 0) {
+           return OnPlaylistSetRepeat(action);
+        }
+        if (name.Compare("Repeat", true) == 0) {
+           return OnPlaylistRepeat(action);
+        }
+        if (name.Compare("SetShuffle", true) == 0) {
+           return OnPlaylistSetShuffle(action);
+        }
+        if (name.Compare("Shuffle", true) == 0) {
+           return OnPlaylistShuffle(action);
+        }
     }
 
     if (serviceType.Compare("urn:av-openhome-org:service:Volume:1", true) == 0) {
-    	if (name.Compare("SetVolume", true) == 0) {
-   	       return OnPlaylistSetVolume(action);
-    	}
-    	if (name.Compare("VolumeInc", true) == 0) {
-   	       return OnPlaylistVolumeInc(action);
-    	}
-    	if (name.Compare("VolumeDec", true) == 0) {
-   	       return OnPlaylistVolumeDec(action);
-    	}
-    	if (name.Compare("Volume", true) == 0) {
-   	       return OnPlaylistVolume(action);
-    	}
-    	if (name.Compare("SetMute", true) == 0) {
-   	       return OnPlaylistSetMute(action);
-    	}
-    	if (name.Compare("Mute", true) == 0) {
-   	       return OnPlaylistMute(action);
-    	}
+        if (name.Compare("SetVolume", true) == 0) {
+           return OnPlaylistSetVolume(action);
+        }
+        if (name.Compare("VolumeInc", true) == 0) {
+           return OnPlaylistVolumeInc(action);
+        }
+        if (name.Compare("VolumeDec", true) == 0) {
+           return OnPlaylistVolumeDec(action);
+        }
+        if (name.Compare("Volume", true) == 0) {
+           return OnPlaylistVolume(action);
+        }
+        if (name.Compare("SetMute", true) == 0) {
+           return OnPlaylistSetMute(action);
+        }
+        if (name.Compare("Mute", true) == 0) {
+           return OnPlaylistMute(action);
+        }
     }
 
     // other actions rely on state variables
