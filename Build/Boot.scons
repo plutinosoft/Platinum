@@ -1,6 +1,7 @@
 import sys
 import os
 import platform
+import re
 
 EnsureSConsVersion(0,98,1)
 
@@ -16,7 +17,8 @@ PLATFORM_TO_TARGET_MAP = {
     'linux2'      : 'x86-unknown-linux',
     'win32'       : 'x86-microsoft-win32',
     'cygwin'      : 'x86-unknown-cygwin',
-    'darwin'      : 'universal-apple-macosx'
+    'darwin'      : 'universal-apple-macosx',
+    'raspberry-pi-arm' : 'arm-raspberry-pi-linux'
 }
 
 # list all target dirs
@@ -25,17 +27,50 @@ targets_dir = scons_root+'/Build/Targets'
 targets_dirs = os.listdir(targets_dir)
 TARGET_PLATFORMS = [x for x in targets_dirs if os.path.exists(targets_dir +'/'+x+'/Config.scons')]
 
+def pi_version():
+    """Detect the version of the Raspberry Pi.  Returns either 1, 2 or
+    None depending on if it's a Raspberry Pi 1 (model A, B, A+, B+),
+    Raspberry Pi 2 (model B+), or not a Raspberry Pi.
+    """
+    # Check /proc/cpuinfo for the Hardware field value.
+    # 2708 is pi 1
+    # 2709 is pi 2
+    # 2835 is pi 3 on 4.9.x kernel
+    # Anything else is not a pi.
+    with open('/proc/cpuinfo', 'r') as infile:
+        cpuinfo = infile.read()
+    # Match a line like 'Hardware   : BCM2709'
+    match = re.search('^Hardware\s+:\s+(\w+)$', cpuinfo,
+                      flags=re.MULTILINE | re.IGNORECASE)
+    if not match:
+        # Couldn't find the hardware, assume it isn't a pi.
+        return None
+    if match.group(1) == 'BCM2708':
+        # Pi 1
+        return 1
+    elif match.group(1) == 'BCM2709':
+        # Pi 2
+        return 2
+    elif match.group(1) == 'BCM2835':
+        # Pi 3 / Pi on 4.9.x kernel
+        return 3
+    else:
+        # Something else, not a pi.
+        return None
+
 def DefaultTarget():
     platform_id = sys.platform
     if platform.system() == 'Linux':
-        if (platform.machine() == 'i386' or
+        if pi_version() is not None:
+            platform_id = 'raspberry-pi-arm'
+        elif (platform.machine() == 'i386' or
             platform.machine() == 'i486' or
             platform.machine() == 'i586'or
             platform.machine() == 'i686'):
             platform_id = 'linux-i386'
-        if (platform.machine() == 'x86_64'):
+        elif (platform.machine() == 'x86_64'):
             platform_id = 'linux-x86_64'
-        if (platform.machine().startswith('arm')):
+        elif (platform.machine().startswith('arm')):
             platform_id = 'linux-arm'
 
     if PLATFORM_TO_TARGET_MAP.has_key(platform_id):

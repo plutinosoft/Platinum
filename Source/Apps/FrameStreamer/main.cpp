@@ -11,14 +11,14 @@
 | as published by the Free Software Foundation; either version 2
 | of the License, or (at your option) any later version.
 |
-| OEMs, ISVs, VARs and other distributors that combine and 
+| OEMs, ISVs, VARs and other distributors that combine and
 | distribute commercially licensed software with Platinum software
 | and do not wish to distribute the source code for the commercially
 | licensed software under version 2, or (at your option) any later
 | version, of the GNU General Public License (the "GPL") must enter
 | into a commercial license agreement with Plutinosoft, LLC.
 | licensing@plutinosoft.com
-| 
+|
 | This program is distributed in the hope that it will be useful,
 | but WITHOUT ANY WARRANTY; without even the implied warranty of
 | MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
@@ -26,7 +26,7 @@
 |
 | You should have received a copy of the GNU General Public License
 | along with this program; see the file LICENSE.txt. If not, write to
-| the Free Software Foundation, Inc., 
+| the Free Software Foundation, Inc.,
 | 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 | http://www.gnu.org/licenses/gpl-2.0.html
 |
@@ -59,11 +59,11 @@ class StreamValidator : public PLT_StreamValidator
 public:
     StreamValidator(NPT_Reference<PLT_FrameBuffer>& buffer) : m_Buffer(buffer) {}
     virtual ~StreamValidator() {}
-    
+
     // PLT_StreamValidator methods
-    bool OnNewRequestAccept(const NPT_HttpRequest&          request, 
+    bool OnNewRequestAccept(const NPT_HttpRequest&          request,
                             const NPT_HttpRequestContext&   context,
-                            NPT_HttpResponse&               response, 
+                            NPT_HttpResponse&               response,
                             NPT_Reference<PLT_FrameBuffer>& buffer) {
         NPT_COMPILER_UNUSED(request);
         NPT_COMPILER_UNUSED(response);
@@ -72,7 +72,7 @@ public:
         buffer = m_Buffer;
         return true;
     }
-    
+
     NPT_Reference<PLT_FrameBuffer> m_Buffer;
 };
 
@@ -83,7 +83,7 @@ class FrameWriter : public NPT_Thread
 {
 public:
     FrameWriter(NPT_Reference<PLT_FrameBuffer>& frame_buffer,
-                const char*                     frame_folder) : 
+                const char*                     frame_folder) :
         m_FrameBuffer(frame_buffer),
         m_Aborted(false),
         m_Folder(frame_folder)
@@ -104,12 +104,12 @@ public:
         const char* frame_path = NULL;
         NPT_DataBuffer frame;
         NPT_List<NPT_String>::Iterator entry;
-        
+
         while (!m_Aborted) {
             // has number of images changed since last time?
             NPT_LargeSize count;
             NPT_File::GetSize(m_Folder, count);
-            
+
             if (entries.GetItemCount() == 0 || entries.GetItemCount() != count) {
                 NPT_File::ListDir(m_Folder, entries);
                 entry = entries.GetFirstItem();
@@ -118,18 +118,18 @@ public:
                     NPT_System::Sleep(NPT_TimeInterval(0.2f));
                     continue;
                 }
-                
+
                 // set delay based on number of files if necessary
                 m_Delay = NPT_TimeInterval((float)1.f/entries.GetItemCount());
             }
-            
+
             // look for path to next image
             if (!(frame_path = GetPath(entry))) {
                 // loop back if necessary
                 entry = entries.GetFirstItem();
                 continue;
             }
-            
+
             if (NPT_FAILED(NPT_File::Load(NPT_FilePath::Create(m_Folder, frame_path), frame))) {
                 NPT_LOG_SEVERE_1("Image \"%s\" not found!", frame_path?frame_path:"none");
                 // clear previously loaded names so we reload entire set
@@ -137,7 +137,7 @@ public:
                 continue;
             }
 
-            if (NPT_FAILED(m_FrameBuffer->SetNextFrame(frame.GetData(), 
+            if (NPT_FAILED(m_FrameBuffer->SetNextFrame(frame.GetData(),
                                                        frame.GetDataSize()))) {
                 NPT_LOG_SEVERE_1("Failed to set next frame %s", frame_path);
                 goto failure;
@@ -183,7 +183,7 @@ ParseCommandLine(char** args)
 
     /* default values */
     Options.path = NULL;
-    
+
     while ((arg = *args++)) {
         if (Options.path == NULL) {
             Options.path = arg;
@@ -207,13 +207,13 @@ int
 main(int argc, char** argv)
 {
     NPT_COMPILER_UNUSED(argc);
-    
+
     /* parse command line */
     ParseCommandLine(argv);
-    
-    // frame buffer 
+
+    // frame buffer
     NPT_Reference<PLT_FrameBuffer> frame_buffer(new PLT_FrameBuffer("image/jpeg"));
-    
+
     // A Framewriter reading images from a folder and writing them
     // into frame buffer in a loop
     FrameWriter writer(frame_buffer, Options.path);
@@ -221,10 +221,10 @@ main(int argc, char** argv)
 
     // stream request validation
     StreamValidator validator(frame_buffer);
-    
-    // frame server receiving requests and serving frames 
+
+    // frame server receiving requests and serving frames
     // read from frame buffer
-    NPT_Reference<PLT_FrameServer> device( 
+    NPT_Reference<PLT_FrameServer> device(
         new PLT_FrameServer(
             "frame",
             validator,
@@ -235,7 +235,7 @@ main(int argc, char** argv)
         return 1;
 
     char buf[256];
-    while (true) {
+   while (true) {
         fgets(buf, 256, stdin);
         if (*buf == 'q')
             break;
