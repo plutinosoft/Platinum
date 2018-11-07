@@ -182,15 +182,23 @@ PLT_DeviceData::GetIconUrl(const char* mimetype,
         if ((mimetype && m_Icons[i].m_MimeType != mimetype) ||
             (maxsize  && m_Icons[i].m_Width > maxsize)      ||
             (maxsize  && m_Icons[i].m_Height > maxsize)     ||
-            (maxdepth && m_Icons[i].m_Depth > maxdepth))
-            continue;
-
-        // pick the biggest and better resolution we can
-        if (icon.m_Width  >= m_Icons[i].m_Width  ||
-            icon.m_Height >= m_Icons[i].m_Height ||
-            icon.m_Depth  >= m_Icons[i].m_Depth  ||
+            (maxdepth && m_Icons[i].m_Depth > maxdepth)     ||
             m_Icons[i].m_UrlPath.IsEmpty())
             continue;
+
+
+        // skip a smaller size icon
+        if (icon.m_Width  > m_Icons[i].m_Width  ||
+            icon.m_Height > m_Icons[i].m_Height) {
+            continue;
+        }
+
+        // skip a lower resolution for the same size
+        if ((icon.m_Width  == m_Icons[i].m_Width  ||
+             icon.m_Height == m_Icons[i].m_Height) &&
+            icon.m_Depth >= m_Icons[i].m_Depth) {
+            continue;
+        }
 
         icon = m_Icons[i];
     }
