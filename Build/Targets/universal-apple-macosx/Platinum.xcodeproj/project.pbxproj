@@ -77,6 +77,102 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		A107160621A1FA8300C6F4E6 /* Platinum_tvOS.h in Headers */ = {isa = PBXBuildFile; fileRef = A10715F821A1FA8300C6F4E6 /* Platinum_tvOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107160D21A1FAEE00C6F4E6 /* PltAction.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43154FE0D6FFDEB00899579 /* PltAction.cpp */; };
+		A107160E21A1FAEE00C6F4E6 /* PltAction.h in Headers */ = {isa = PBXBuildFile; fileRef = E43154FF0D6FFDEB00899579 /* PltAction.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107160F21A1FAEE00C6F4E6 /* PltArgument.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155000D6FFDEB00899579 /* PltArgument.cpp */; };
+		A107161021A1FAEE00C6F4E6 /* PltArgument.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155010D6FFDEB00899579 /* PltArgument.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161121A1FAEE00C6F4E6 /* PltConstants.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4BA7CBC0FE2200700A4D16B /* PltConstants.cpp */; };
+		A107161221A1FAEE00C6F4E6 /* PltConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BA7CBB0FE2200700A4D16B /* PltConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161321A1FAEE00C6F4E6 /* PltCtrlPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155020D6FFDEB00899579 /* PltCtrlPoint.cpp */; };
+		A107161421A1FAEE00C6F4E6 /* PltCtrlPoint.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155030D6FFDEB00899579 /* PltCtrlPoint.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161521A1FAEE00C6F4E6 /* PltCtrlPointTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155040D6FFDEB00899579 /* PltCtrlPointTask.cpp */; };
+		A107161621A1FAEE00C6F4E6 /* PltCtrlPointTask.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155050D6FFDEB00899579 /* PltCtrlPointTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161721A1FAEE00C6F4E6 /* PltDatagramStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155060D6FFDEB00899579 /* PltDatagramStream.cpp */; };
+		A107161821A1FAEE00C6F4E6 /* PltDatagramStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155070D6FFDEB00899579 /* PltDatagramStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161921A1FAEE00C6F4E6 /* PltDeviceData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155080D6FFDEB00899579 /* PltDeviceData.cpp */; };
+		A107161A21A1FAEE00C6F4E6 /* PltDeviceData.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155090D6FFDEB00899579 /* PltDeviceData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161B21A1FAEE00C6F4E6 /* PltDeviceHost.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431550A0D6FFDEB00899579 /* PltDeviceHost.cpp */; };
+		A107161C21A1FAEE00C6F4E6 /* PltDeviceHost.h in Headers */ = {isa = PBXBuildFile; fileRef = E431550B0D6FFDEB00899579 /* PltDeviceHost.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161D21A1FAEE00C6F4E6 /* PltEvent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431550E0D6FFDEB00899579 /* PltEvent.cpp */; };
+		A107161E21A1FAEE00C6F4E6 /* PltEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = E431550F0D6FFDEB00899579 /* PltEvent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107161F21A1FAEE00C6F4E6 /* PltHttp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155100D6FFDEB00899579 /* PltHttp.cpp */; };
+		A107162021A1FAEE00C6F4E6 /* PltHttp.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155110D6FFDEB00899579 /* PltHttp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162121A1FAEE00C6F4E6 /* PltHttpClientTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155120D6FFDEB00899579 /* PltHttpClientTask.cpp */; };
+		A107162221A1FAEE00C6F4E6 /* PltHttpClientTask.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155130D6FFDEB00899579 /* PltHttpClientTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162321A1FAEE00C6F4E6 /* PltHttpServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155140D6FFDEB00899579 /* PltHttpServer.cpp */; };
+		A107162421A1FAEE00C6F4E6 /* PltHttpServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155150D6FFDEB00899579 /* PltHttpServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162521A1FAEE00C6F4E6 /* PltHttpServerTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155170D6FFDEB00899579 /* PltHttpServerTask.cpp */; };
+		A107162621A1FAEE00C6F4E6 /* PltHttpServerTask.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155180D6FFDEB00899579 /* PltHttpServerTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162721A1FAEE00C6F4E6 /* PltIconsData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4F7E9060FE4B12A00BEDFA6 /* PltIconsData.cpp */; };
+		A107162821A1FAEE00C6F4E6 /* PltMimeType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48D4DA613B51CB600359E06 /* PltMimeType.cpp */; };
+		A107162921A1FAEE00C6F4E6 /* PltMimeType.h in Headers */ = {isa = PBXBuildFile; fileRef = E48D4DA713B51CB600359E06 /* PltMimeType.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162A21A1FAEE00C6F4E6 /* PltProtocolInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E48D4D8F13B51BAC00359E06 /* PltProtocolInfo.cpp */; };
+		A107162B21A1FAEE00C6F4E6 /* PltProtocolInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = E48D4D9013B51BAC00359E06 /* PltProtocolInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162C21A1FAEE00C6F4E6 /* PltService.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155210D6FFDEB00899579 /* PltService.cpp */; };
+		A107162D21A1FAEE00C6F4E6 /* PltService.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155220D6FFDEB00899579 /* PltService.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107162E21A1FAEE00C6F4E6 /* PltSsdp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155230D6FFDEB00899579 /* PltSsdp.cpp */; };
+		A107162F21A1FAEE00C6F4E6 /* PltSsdp.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155240D6FFDEB00899579 /* PltSsdp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107163021A1FAEE00C6F4E6 /* PltStateVariable.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155260D6FFDEB00899579 /* PltStateVariable.cpp */; };
+		A107163121A1FAEE00C6F4E6 /* PltStateVariable.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155270D6FFDEB00899579 /* PltStateVariable.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107163221A1FAEE00C6F4E6 /* PltTaskManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431552A0D6FFDEB00899579 /* PltTaskManager.cpp */; };
+		A107163321A1FAEE00C6F4E6 /* PltTaskManager.h in Headers */ = {isa = PBXBuildFile; fileRef = E431552B0D6FFDEB00899579 /* PltTaskManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107163421A1FAEE00C6F4E6 /* PltThreadTask.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431552C0D6FFDEB00899579 /* PltThreadTask.cpp */; };
+		A107163521A1FAEE00C6F4E6 /* PltThreadTask.h in Headers */ = {isa = PBXBuildFile; fileRef = E431552D0D6FFDEB00899579 /* PltThreadTask.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107163621A1FAEE00C6F4E6 /* PltUPnP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431552E0D6FFDEB00899579 /* PltUPnP.cpp */; };
+		A107163721A1FAEE00C6F4E6 /* PltUPnP.h in Headers */ = {isa = PBXBuildFile; fileRef = E431552F0D6FFDEB00899579 /* PltUPnP.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107163821A1FAEE00C6F4E6 /* PltUtilities.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155320D6FFDEB00899579 /* PltUtilities.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107165621A1FB1A00C6F4E6 /* PltXbox360.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E426B3271130DF9500C58542 /* PltXbox360.cpp */; };
+		A107165721A1FB1A00C6F4E6 /* PltXbox360.h in Headers */ = {isa = PBXBuildFile; fileRef = E426B3281130DF9500C58542 /* PltXbox360.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107165821A1FB1A00C6F4E6 /* X_MS_MediaReceiverRegistrarSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB7F108596C800E6ADE2 /* X_MS_MediaReceiverRegistrarSCPD.cpp */; };
+		A107165921A1FB1A00C6F4E6 /* PltMediaConnect.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155960D6FFE4C00899579 /* PltMediaConnect.cpp */; };
+		A107165A21A1FB1A00C6F4E6 /* PltMediaConnect.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155970D6FFE4C00899579 /* PltMediaConnect.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107165B21A1FB1A00C6F4E6 /* AVTransportSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB76108596B900E6ADE2 /* AVTransportSCPD.cpp */; };
+		A107165C21A1FB1A00C6F4E6 /* RdrConnectionManagerSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB77108596B900E6ADE2 /* RdrConnectionManagerSCPD.cpp */; };
+		A107165D21A1FB1A00C6F4E6 /* RenderingControlSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB78108596B900E6ADE2 /* RenderingControlSCPD.cpp */; };
+		A107165E21A1FB1A00C6F4E6 /* PltMediaController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E431559D0D6FFE4C00899579 /* PltMediaController.cpp */; };
+		A107165F21A1FB1A00C6F4E6 /* PltMediaController.h in Headers */ = {isa = PBXBuildFile; fileRef = E431559E0D6FFE4C00899579 /* PltMediaController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166021A1FB1A00C6F4E6 /* PltMediaRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155A00D6FFE4C00899579 /* PltMediaRenderer.cpp */; };
+		A107166121A1FB1A00C6F4E6 /* PltMediaRenderer.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155A10D6FFE4C00899579 /* PltMediaRenderer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166221A1FB1A00C6F4E6 /* ContentDirectorySCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E402C7541297CECB00565B76 /* ContentDirectorySCPD.cpp */; };
+		A107166321A1FB1A00C6F4E6 /* ConnectionManagerSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB82108596E400E6ADE2 /* ConnectionManagerSCPD.cpp */; };
+		A107166421A1FB1A00C6F4E6 /* ContentDirectorywSearchSCPD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E4A7DB83108596E400E6ADE2 /* ContentDirectorywSearchSCPD.cpp */; };
+		A107166521A1FB1A00C6F4E6 /* PltDidl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155A80D6FFE4C00899579 /* PltDidl.cpp */; };
+		A107166621A1FB1A00C6F4E6 /* PltDidl.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155A90D6FFE4C00899579 /* PltDidl.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166721A1FB1A00C6F4E6 /* PltFileMediaServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155AA0D6FFE4C00899579 /* PltFileMediaServer.cpp */; };
+		A107166821A1FB1A00C6F4E6 /* PltFileMediaServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155AB0D6FFE4C00899579 /* PltFileMediaServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166921A1FB1A00C6F4E6 /* PltMediaBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155AC0D6FFE4C00899579 /* PltMediaBrowser.cpp */; };
+		A107166A21A1FB1A00C6F4E6 /* PltMediaBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155AD0D6FFE4C00899579 /* PltMediaBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166B21A1FB1A00C6F4E6 /* PltMediaCache.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155AF0D6FFE4C00899579 /* PltMediaCache.cpp */; };
+		A107166C21A1FB1A00C6F4E6 /* PltMediaCache.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155B00D6FFE4C00899579 /* PltMediaCache.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166D21A1FB1A00C6F4E6 /* PltMediaItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155B10D6FFE4C00899579 /* PltMediaItem.cpp */; };
+		A107166E21A1FB1A00C6F4E6 /* PltMediaItem.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155B20D6FFE4C00899579 /* PltMediaItem.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107166F21A1FB1A00C6F4E6 /* PltMediaServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155B50D6FFE4C00899579 /* PltMediaServer.cpp */; };
+		A107167021A1FB1A00C6F4E6 /* PltMediaServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155B60D6FFE4C00899579 /* PltMediaServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167121A1FB1A00C6F4E6 /* PltSyncMediaBrowser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E43155B80D6FFE4C00899579 /* PltSyncMediaBrowser.cpp */; };
+		A107167221A1FB1A00C6F4E6 /* PltSyncMediaBrowser.h in Headers */ = {isa = PBXBuildFile; fileRef = E43155B90D6FFE4C00899579 /* PltSyncMediaBrowser.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167321A1FB3500C6F4E6 /* PltMediaServerObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E4374C1512417AA800000109 /* PltMediaServerObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167421A1FB3500C6F4E6 /* PltMediaServerObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4374C1612417AA800000109 /* PltMediaServerObject.mm */; };
+		A107167521A1FB3500C6F4E6 /* PltUPnPObject.h in Headers */ = {isa = PBXBuildFile; fileRef = E4374C1712417AA800000109 /* PltUPnPObject.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167621A1FB3500C6F4E6 /* PltUPnPObject.mm in Sources */ = {isa = PBXBuildFile; fileRef = E4374C1812417AA800000109 /* PltUPnPObject.mm */; };
+		A107167721A1FB3500C6F4E6 /* PltDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69E211E6F0D90024CAD4 /* PltDownloader.cpp */; };
+		A107167821A1FB3500C6F4E6 /* PltDownloader.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69E311E6F0D90024CAD4 /* PltDownloader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167921A1FB3500C6F4E6 /* PltStreamPump.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69E411E6F0D90024CAD4 /* PltStreamPump.cpp */; };
+		A107167A21A1FB3500C6F4E6 /* PltStreamPump.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69E511E6F0D90024CAD4 /* PltStreamPump.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167B21A1FB3500C6F4E6 /* PltFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C699E11E6ED710024CAD4 /* PltFrameBuffer.cpp */; };
+		A107167C21A1FB3500C6F4E6 /* PltFrameBuffer.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C699F11E6ED710024CAD4 /* PltFrameBuffer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167D21A1FB3500C6F4E6 /* PltFrameServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69A011E6ED710024CAD4 /* PltFrameServer.cpp */; };
+		A107167E21A1FB3500C6F4E6 /* PltFrameServer.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69A111E6ED710024CAD4 /* PltFrameServer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107167F21A1FB3500C6F4E6 /* PltFrameStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69A211E6ED710024CAD4 /* PltFrameStream.cpp */; };
+		A107168021A1FB3500C6F4E6 /* PltFrameStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69A311E6ED710024CAD4 /* PltFrameStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107168121A1FB3500C6F4E6 /* PltLeaks.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69A411E6ED710024CAD4 /* PltLeaks.cpp */; };
+		A107168221A1FB3500C6F4E6 /* PltLeaks.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69A511E6ED710024CAD4 /* PltLeaks.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107168321A1FB3500C6F4E6 /* PltMetadataHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69A611E6ED710024CAD4 /* PltMetadataHandler.cpp */; };
+		A107168421A1FB3500C6F4E6 /* PltMetadataHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69A711E6ED710024CAD4 /* PltMetadataHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107168521A1FB3500C6F4E6 /* PltRingBufferStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = E40C69A811E6ED710024CAD4 /* PltRingBufferStream.cpp */; };
+		A107168621A1FB3500C6F4E6 /* PltRingBufferStream.h in Headers */ = {isa = PBXBuildFile; fileRef = E40C69A911E6ED710024CAD4 /* PltRingBufferStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107168721A1FB4600C6F4E6 /* PltVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = E43EEEFF101E1AEF007A9CE7 /* PltVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A107176F21A2066500C6F4E6 /* Platinum.h in Headers */ = {isa = PBXBuildFile; fileRef = E41016251ACFA826000E994F /* Platinum.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E410161A1ACFA761000E994F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E41016181ACFA761000E994F /* LaunchScreen.xib */; };
 		E410161B1ACFA761000E994F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E41016191ACFA761000E994F /* Main.storyboard */; };
 		E41016261ACFA826000E994F /* Platinum.h in Headers */ = {isa = PBXBuildFile; fileRef = E41016251ACFA826000E994F /* Platinum.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -563,6 +659,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		A10715F621A1FA8300C6F4E6 /* Platinum.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Platinum.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A10715F821A1FA8300C6F4E6 /* Platinum_tvOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Platinum_tvOS.h; sourceTree = "<group>"; };
+		A10715F921A1FA8300C6F4E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A107160321A1FA8300C6F4E6 /* Platinum_tvOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platinum_tvOSTests.swift; sourceTree = "<group>"; };
+		A107160521A1FA8300C6F4E6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E402C7541297CECB00565B76 /* ContentDirectorySCPD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ContentDirectorySCPD.cpp; sourceTree = "<group>"; };
 		E40616C01ADE5C9A008BDAEB /* Neptune.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Neptune.framework; path = ../../../Carthage/Build/iOS/Neptune.framework; sourceTree = "<group>"; };
 		E40C699E11E6ED710024CAD4 /* PltFrameBuffer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PltFrameBuffer.cpp; sourceTree = "<group>"; };
@@ -731,6 +832,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		A10715F321A1FA8300C6F4E6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E410161D1ACFA826000E994F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -875,6 +983,8 @@
 				E44470B312C31B5900E01480 /* Resources */,
 				C6A0FF2B0290797F04C91782 /* Documentation */,
 				E41016221ACFA826000E994F /* Platinum */,
+				A10715F721A1FA8300C6F4E6 /* Platinum-tvOS */,
+				A107160221A1FA8300C6F4E6 /* Platinum-tvOSTests */,
 				E4294C5F14319C9400B6FDED /* Frameworks */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 			);
@@ -913,8 +1023,27 @@
 				E45332AD1AAED318004A52FD /* MobileMediaServer.app */,
 				E41016211ACFA826000E994F /* Platinum.framework */,
 				E44E2B8B1AE761220092347B /* Platinum.framework */,
+				A10715F621A1FA8300C6F4E6 /* Platinum.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		A10715F721A1FA8300C6F4E6 /* Platinum-tvOS */ = {
+			isa = PBXGroup;
+			children = (
+				A10715F821A1FA8300C6F4E6 /* Platinum_tvOS.h */,
+				A10715F921A1FA8300C6F4E6 /* Info.plist */,
+			);
+			path = "Platinum-tvOS";
+			sourceTree = "<group>";
+		};
+		A107160221A1FA8300C6F4E6 /* Platinum-tvOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				A107160321A1FA8300C6F4E6 /* Platinum_tvOSTests.swift */,
+				A107160521A1FA8300C6F4E6 /* Info.plist */,
+			);
+			path = "Platinum-tvOSTests";
 			sourceTree = "<group>";
 		};
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
@@ -1348,6 +1477,59 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A10715F121A1FA8300C6F4E6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A107163321A1FAEE00C6F4E6 /* PltTaskManager.h in Headers */,
+				A107161C21A1FAEE00C6F4E6 /* PltDeviceHost.h in Headers */,
+				A107168221A1FB3500C6F4E6 /* PltLeaks.h in Headers */,
+				A107162421A1FAEE00C6F4E6 /* PltHttpServer.h in Headers */,
+				A107166E21A1FB1A00C6F4E6 /* PltMediaItem.h in Headers */,
+				A107167C21A1FB3500C6F4E6 /* PltFrameBuffer.h in Headers */,
+				A107166A21A1FB1A00C6F4E6 /* PltMediaBrowser.h in Headers */,
+				A107161821A1FAEE00C6F4E6 /* PltDatagramStream.h in Headers */,
+				A107163821A1FAEE00C6F4E6 /* PltUtilities.h in Headers */,
+				A107168621A1FB3500C6F4E6 /* PltRingBufferStream.h in Headers */,
+				A107162F21A1FAEE00C6F4E6 /* PltSsdp.h in Headers */,
+				A107160621A1FA8300C6F4E6 /* Platinum_tvOS.h in Headers */,
+				A107161221A1FAEE00C6F4E6 /* PltConstants.h in Headers */,
+				A107163521A1FAEE00C6F4E6 /* PltThreadTask.h in Headers */,
+				A107167521A1FB3500C6F4E6 /* PltUPnPObject.h in Headers */,
+				A107162B21A1FAEE00C6F4E6 /* PltProtocolInfo.h in Headers */,
+				A107161421A1FAEE00C6F4E6 /* PltCtrlPoint.h in Headers */,
+				A107162D21A1FAEE00C6F4E6 /* PltService.h in Headers */,
+				A107165721A1FB1A00C6F4E6 /* PltXbox360.h in Headers */,
+				A107162021A1FAEE00C6F4E6 /* PltHttp.h in Headers */,
+				A107165A21A1FB1A00C6F4E6 /* PltMediaConnect.h in Headers */,
+				A107162621A1FAEE00C6F4E6 /* PltHttpServerTask.h in Headers */,
+				A107167021A1FB1A00C6F4E6 /* PltMediaServer.h in Headers */,
+				A107166821A1FB1A00C6F4E6 /* PltFileMediaServer.h in Headers */,
+				A107167A21A1FB3500C6F4E6 /* PltStreamPump.h in Headers */,
+				A107166C21A1FB1A00C6F4E6 /* PltMediaCache.h in Headers */,
+				A107167E21A1FB3500C6F4E6 /* PltFrameServer.h in Headers */,
+				A107166121A1FB1A00C6F4E6 /* PltMediaRenderer.h in Headers */,
+				A107161021A1FAEE00C6F4E6 /* PltArgument.h in Headers */,
+				A107162221A1FAEE00C6F4E6 /* PltHttpClientTask.h in Headers */,
+				A107167221A1FB1A00C6F4E6 /* PltSyncMediaBrowser.h in Headers */,
+				A107163121A1FAEE00C6F4E6 /* PltStateVariable.h in Headers */,
+				A107167821A1FB3500C6F4E6 /* PltDownloader.h in Headers */,
+				A107166621A1FB1A00C6F4E6 /* PltDidl.h in Headers */,
+				A107163721A1FAEE00C6F4E6 /* PltUPnP.h in Headers */,
+				A107168721A1FB4600C6F4E6 /* PltVersion.h in Headers */,
+				A107161621A1FAEE00C6F4E6 /* PltCtrlPointTask.h in Headers */,
+				A107168421A1FB3500C6F4E6 /* PltMetadataHandler.h in Headers */,
+				A107176F21A2066500C6F4E6 /* Platinum.h in Headers */,
+				A107160E21A1FAEE00C6F4E6 /* PltAction.h in Headers */,
+				A107161E21A1FAEE00C6F4E6 /* PltEvent.h in Headers */,
+				A107162921A1FAEE00C6F4E6 /* PltMimeType.h in Headers */,
+				A107167321A1FB3500C6F4E6 /* PltMediaServerObject.h in Headers */,
+				A107168021A1FB3500C6F4E6 /* PltFrameStream.h in Headers */,
+				A107165F21A1FB1A00C6F4E6 /* PltMediaController.h in Headers */,
+				A107161A21A1FAEE00C6F4E6 /* PltDeviceData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E410161E1ACFA826000E994F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -1457,6 +1639,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		A10715F521A1FA8300C6F4E6 /* Platinum-tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A107160B21A1FA8300C6F4E6 /* Build configuration list for PBXNativeTarget "Platinum-tvOS" */;
+			buildPhases = (
+				A10715F221A1FA8300C6F4E6 /* Sources */,
+				A10715F321A1FA8300C6F4E6 /* Frameworks */,
+				A10715F121A1FA8300C6F4E6 /* Headers */,
+				A10715F421A1FA8300C6F4E6 /* Resources */,
+				A107168A21A1FB9A00C6F4E6 /* Copy Products to Carthage/Build/tvOS */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Platinum-tvOS";
+			productName = "Platinum-tvOS";
+			productReference = A10715F621A1FA8300C6F4E6 /* Platinum.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 		E41016201ACFA826000E994F /* Platinum-iOS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E410163A1ACFA826000E994F /* Build configuration list for PBXNativeTarget "Platinum-iOS" */;
@@ -1690,7 +1891,7 @@
 				E44E2B571AE761220092347B /* Frameworks */,
 				E44E2B591AE761220092347B /* Headers */,
 				E44E2B871AE761220092347B /* Resources */,
-				E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/iOS */,
+				E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/Mac */,
 			);
 			buildRules = (
 			);
@@ -1726,8 +1927,13 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				TargetAttributes = {
+					A10715F521A1FA8300C6F4E6 = {
+						CreatedOnToolsVersion = 10.1;
+						ProvisioningStyle = Manual;
+					};
 					E41016201ACFA826000E994F = {
 						CreatedOnToolsVersion = 6.2;
 					};
@@ -1775,11 +1981,19 @@
 				E45332AC1AAED318004A52FD /* MobileMediaServer */,
 				E41016201ACFA826000E994F /* Platinum-iOS */,
 				E44E2B231AE761220092347B /* Platinum-Mac */,
+				A10715F521A1FA8300C6F4E6 /* Platinum-tvOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		A10715F421A1FA8300C6F4E6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E410161F1ACFA826000E994F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1815,6 +2029,24 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		A107168A21A1FB9A00C6F4E6 /* Copy Products to Carthage/Build/tvOS */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Products to Carthage/Build/tvOS";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -avL \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/tvOS\"\n";
+		};
 		E459CC2011F82C3F00621896 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1840,25 +2072,82 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -avL \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/iOS\"";
+			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -avL \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/iOS\"\n";
 		};
-		E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/iOS */ = {
+		E4B2A5A51FC8F8F100C891D7 /* Copy Products to Carthage/Build/Mac */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Products to Carthage/Build/iOS";
+			name = "Copy Products to Carthage/Build/Mac";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -avL \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/Mac\"";
+			shellScript = "build_dir=\"$SRCROOT/../../../Carthage/Build\"\n\n# Only copy when the Carthage/Build directory is a symlink\nif ! [ -L \"$build_dir\" ]; then exit 0; fi\n\nrsync --delete -avL \"$BUILT_PRODUCTS_DIR/$PRODUCT_NAME\"* \"$build_dir/Mac\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		A10715F221A1FA8300C6F4E6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A107167421A1FB3500C6F4E6 /* PltMediaServerObject.mm in Sources */,
+				A107167D21A1FB3500C6F4E6 /* PltFrameServer.cpp in Sources */,
+				A107168521A1FB3500C6F4E6 /* PltRingBufferStream.cpp in Sources */,
+				A107161F21A1FAEE00C6F4E6 /* PltHttp.cpp in Sources */,
+				A107161B21A1FAEE00C6F4E6 /* PltDeviceHost.cpp in Sources */,
+				A107165E21A1FB1A00C6F4E6 /* PltMediaController.cpp in Sources */,
+				A107162A21A1FAEE00C6F4E6 /* PltProtocolInfo.cpp in Sources */,
+				A107161321A1FAEE00C6F4E6 /* PltCtrlPoint.cpp in Sources */,
+				A107165821A1FB1A00C6F4E6 /* X_MS_MediaReceiverRegistrarSCPD.cpp in Sources */,
+				A107165C21A1FB1A00C6F4E6 /* RdrConnectionManagerSCPD.cpp in Sources */,
+				A107167921A1FB3500C6F4E6 /* PltStreamPump.cpp in Sources */,
+				A107165D21A1FB1A00C6F4E6 /* RenderingControlSCPD.cpp in Sources */,
+				A107166D21A1FB1A00C6F4E6 /* PltMediaItem.cpp in Sources */,
+				A107166021A1FB1A00C6F4E6 /* PltMediaRenderer.cpp in Sources */,
+				A107166721A1FB1A00C6F4E6 /* PltFileMediaServer.cpp in Sources */,
+				A107166521A1FB1A00C6F4E6 /* PltDidl.cpp in Sources */,
+				A107161721A1FAEE00C6F4E6 /* PltDatagramStream.cpp in Sources */,
+				A107163421A1FAEE00C6F4E6 /* PltThreadTask.cpp in Sources */,
+				A107161521A1FAEE00C6F4E6 /* PltCtrlPointTask.cpp in Sources */,
+				A107167F21A1FB3500C6F4E6 /* PltFrameStream.cpp in Sources */,
+				A107166421A1FB1A00C6F4E6 /* ContentDirectorywSearchSCPD.cpp in Sources */,
+				A107168321A1FB3500C6F4E6 /* PltMetadataHandler.cpp in Sources */,
+				A107163621A1FAEE00C6F4E6 /* PltUPnP.cpp in Sources */,
+				A107161D21A1FAEE00C6F4E6 /* PltEvent.cpp in Sources */,
+				A107162521A1FAEE00C6F4E6 /* PltHttpServerTask.cpp in Sources */,
+				A107167721A1FB3500C6F4E6 /* PltDownloader.cpp in Sources */,
+				A107162121A1FAEE00C6F4E6 /* PltHttpClientTask.cpp in Sources */,
+				A107165921A1FB1A00C6F4E6 /* PltMediaConnect.cpp in Sources */,
+				A107166921A1FB1A00C6F4E6 /* PltMediaBrowser.cpp in Sources */,
+				A107165621A1FB1A00C6F4E6 /* PltXbox360.cpp in Sources */,
+				A107165B21A1FB1A00C6F4E6 /* AVTransportSCPD.cpp in Sources */,
+				A107168121A1FB3500C6F4E6 /* PltLeaks.cpp in Sources */,
+				A107163221A1FAEE00C6F4E6 /* PltTaskManager.cpp in Sources */,
+				A107166B21A1FB1A00C6F4E6 /* PltMediaCache.cpp in Sources */,
+				A107160D21A1FAEE00C6F4E6 /* PltAction.cpp in Sources */,
+				A107162E21A1FAEE00C6F4E6 /* PltSsdp.cpp in Sources */,
+				A107162721A1FAEE00C6F4E6 /* PltIconsData.cpp in Sources */,
+				A107160F21A1FAEE00C6F4E6 /* PltArgument.cpp in Sources */,
+				A107167B21A1FB3500C6F4E6 /* PltFrameBuffer.cpp in Sources */,
+				A107162321A1FAEE00C6F4E6 /* PltHttpServer.cpp in Sources */,
+				A107163021A1FAEE00C6F4E6 /* PltStateVariable.cpp in Sources */,
+				A107166F21A1FB1A00C6F4E6 /* PltMediaServer.cpp in Sources */,
+				A107167121A1FB1A00C6F4E6 /* PltSyncMediaBrowser.cpp in Sources */,
+				A107161921A1FAEE00C6F4E6 /* PltDeviceData.cpp in Sources */,
+				A107161121A1FAEE00C6F4E6 /* PltConstants.cpp in Sources */,
+				A107166221A1FB1A00C6F4E6 /* ContentDirectorySCPD.cpp in Sources */,
+				A107167621A1FB3500C6F4E6 /* PltUPnPObject.mm in Sources */,
+				A107162C21A1FAEE00C6F4E6 /* PltService.cpp in Sources */,
+				A107162821A1FAEE00C6F4E6 /* PltMimeType.cpp in Sources */,
+				A107166321A1FB1A00C6F4E6 /* ConnectionManagerSCPD.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E410161C1ACFA826000E994F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2324,6 +2613,107 @@
 					"-Wextra",
 					"-Wno-long-long",
 				);
+			};
+			name = Release;
+		};
+		A107160721A1FA8300C6F4E6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../Carthage/Build/tvOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Platinum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plutinosoft.Platinum;
+				PRODUCT_NAME = Platinum;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A107160821A1FA8300C6F4E6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)/../../../Carthage/Build/tvOS",
+				);
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Platinum/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.plutinosoft.Platinum;
+				PRODUCT_NAME = Platinum;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 9.0;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
@@ -3517,6 +3907,15 @@
 			buildConfigurations = (
 				E46270E90F81F4F8007FE869 /* Debug */,
 				1DEB91F108733DB70010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A107160B21A1FA8300C6F4E6 /* Build configuration list for PBXNativeTarget "Platinum-tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A107160721A1FA8300C6F4E6 /* Debug */,
+				A107160821A1FA8300C6F4E6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
