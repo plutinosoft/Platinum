@@ -64,7 +64,7 @@ public:
     ObjectClass(String^ type)
     {
         Type = type;
-	}
+    }
 
     ObjectClass(String^ type, String^ friendly_name)
     {
@@ -100,15 +100,15 @@ internal:
     {}
 
 public:
-	PersonRole(String^ name)
+    PersonRole(String^ name)
     {
         Name = name;
     }
 
-	PersonRole(String^ name, String^ role)
+    PersonRole(String^ name, String^ role)
     {
         Name = name;
-		Role = role;
+        Role = role;
     }
 };
 
@@ -303,7 +303,7 @@ public:
     AlbumArtInfo(String^ uri)
     {
         Uri = uri;
-	}
+    }
 
     AlbumArtInfo(String^ uri, String^ dlna_profile)
     {
@@ -450,8 +450,8 @@ public:
     ProtocolInfo(NPT_String& protocol_info) :
         ManagedWrapper<PLT_ProtocolInfo>()
     {
-		*m_pHandle = PLT_ProtocolInfo(protocol_info);
-	}
+        *m_pHandle = PLT_ProtocolInfo(protocol_info);
+    }
 };
 
 }
@@ -513,7 +513,7 @@ public ref class MediaObject
 {
 protected:
 
-	PLT_MediaObjectReference* m_pHandle;
+    PLT_MediaObjectReference* m_pHandle;
    
 public:
 
@@ -569,7 +569,7 @@ public:
     MediaItem^      item();
     MediaContainer^ container();
 
-	String^ ToDidl(String^ filter)
+    String^ ToDidl(String^ filter)
     {
         NPT_String didl;
         didl.Reserve(1024);
@@ -584,31 +584,31 @@ public:
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		return (*m_pHandle == *((MediaObject^)obj)->m_pHandle);
-	}
+        return (*m_pHandle == *((MediaObject^)obj)->m_pHandle);
+    }
 
 internal:
 
-	MediaObject(PLT_MediaObjectReference& media)
-	{
-		if (media.IsNull())
-			throw gcnew ArgumentNullException("media");
+    MediaObject(PLT_MediaObjectReference& media)
+    {
+        if (media.IsNull())
+            throw gcnew ArgumentNullException("media");
 
-		m_pHandle = new PLT_MediaObjectReference(media);
-	}
+        m_pHandle = new PLT_MediaObjectReference(media);
+    }
 
-	MediaObject(PLT_MediaObject& media)
-	{
-		m_pHandle = new PLT_MediaObjectReference(&media);
-	}
+    MediaObject(PLT_MediaObject& media)
+    {
+        m_pHandle = new PLT_MediaObjectReference(&media);
+    }
 
 protected:
 
@@ -622,24 +622,24 @@ protected:
 
 public:
 
-	~MediaObject()
-	{
+    ~MediaObject()
+    {
         // clean-up managed
 
         // clean-up unmanaged
-		this->!MediaObject();
-	}
+        this->!MediaObject();
+    }
 
-	!MediaObject()
+    !MediaObject()
     {
         // clean-up unmanaged
-		if (m_pHandle != 0)
-		{
-			delete m_pHandle;
+        if (m_pHandle != 0)
+        {
+            delete m_pHandle;
 
-			m_pHandle = 0;
-		}
-	}
+            m_pHandle = 0;
+        }
+    }
 
 };
 

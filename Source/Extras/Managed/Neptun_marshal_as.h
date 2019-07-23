@@ -40,7 +40,7 @@ namespace interop {
 template<> 
 inline String^ marshal_as<String^, NPT_IpAddress> (const NPT_IpAddress& from)
 {
-	return gcnew String(from.ToString());
+    return gcnew String(from.ToString());
 }
 
 // -------------------------- NPT_HttpUrl -------
@@ -48,10 +48,10 @@ inline String^ marshal_as<String^, NPT_IpAddress> (const NPT_IpAddress& from)
 template<> 
 inline Uri^ marshal_as<Uri^, NPT_HttpUrl> (const NPT_HttpUrl& from)
 {
-	if (!from.IsValid())
-		return nullptr;
+    if (!from.IsValid())
+        return nullptr;
 
-	return gcnew Uri(gcnew String(from.ToString()));
+    return gcnew Uri(gcnew String(from.ToString()));
 }
 
 // -------------------------- NPT_String -------
@@ -59,10 +59,10 @@ inline Uri^ marshal_as<Uri^, NPT_HttpUrl> (const NPT_HttpUrl& from)
 template<> 
 inline Uri^ marshal_as<Uri^, NPT_String> (const NPT_String& from)
 {
-	if (from.IsEmpty())
-		return nullptr;
+    if (from.IsEmpty())
+        return nullptr;
 
-	return gcnew Uri(gcnew String(from));
+    return gcnew Uri(gcnew String(from));
 }
 
 template<> 
@@ -84,7 +84,7 @@ inline String^ marshal_as<String^, PLT_ProtocolInfo> (const PLT_ProtocolInfo& fr
 template<> 
 inline TimeSpan marshal_as<TimeSpan, NPT_TimeInterval> (const NPT_TimeInterval& from)
 {
-	return TimeSpan(from.ToSeconds() * TimeSpan::TicksPerSecond);
+    return TimeSpan(from.ToSeconds() * TimeSpan::TicksPerSecond);
 }
 
 // ---------------------------------------------
@@ -96,9 +96,9 @@ inline TimeSpan marshal_as<TimeSpan, NPT_TimeInterval> (const NPT_TimeInterval& 
 // -------------------------- generic wrapper marshal macro -------
 
 #define PLATINUM_MANAGED_MARSHAL_AS(dotNetType,nativeType) \
-	namespace msclr { namespace interop { \
-		template<> \
-		inline dotNetType^ marshal_as<dotNetType^, nativeType> (const nativeType& from) \
-		{ return gcnew dotNetType(const_cast<nativeType&>(from)); } \
-	}}
+    namespace msclr { namespace interop { \
+        template<> \
+        inline dotNetType^ marshal_as<dotNetType^, nativeType> (const nativeType& from) \
+        { return gcnew dotNetType(const_cast<nativeType&>(from)); } \
+    }}
 

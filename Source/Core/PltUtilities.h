@@ -323,17 +323,17 @@ public:
         return NPT_SUCCESS;
     }
 
-	static NPT_String Serialize(NPT_XmlNode& node, bool add_header = true, NPT_Int8 indentation = 0) {
-		NPT_XmlWriter writer(indentation);
-		NPT_String xml;
-		NPT_StringOutputStreamReference stream(new NPT_StringOutputStream(&xml));
-		if (NPT_FAILED(writer.Serialize(node, *stream, add_header))) {
-			NPT_Debug("Failed to serialize xml node");
-			return "";
-		}
+    static NPT_String Serialize(NPT_XmlNode& node, bool add_header = true, NPT_Int8 indentation = 0) {
+        NPT_XmlWriter writer(indentation);
+        NPT_String xml;
+        NPT_StringOutputStreamReference stream(new NPT_StringOutputStream(&xml));
+        if (NPT_FAILED(writer.Serialize(node, *stream, add_header))) {
+            NPT_Debug("Failed to serialize xml node");
+            return "";
+        }
 
-		return xml;
-	}
+        return xml;
+    }
 private:
     // members
 };
@@ -680,7 +680,7 @@ public:
         return NPT_SUCCESS;
     }
     
-	static NPT_Result GetMACAddresses(NPT_List<NPT_String>& addresses) {
+    static NPT_Result GetMACAddresses(NPT_List<NPT_String>& addresses) {
         NPT_List<NPT_NetworkInterface*> if_list;
         NPT_CHECK(GetNetworkInterfaces(if_list));
         
@@ -688,7 +688,7 @@ public:
         while (iface) {
             NPT_String ip = (*(*iface)->GetAddresses().GetFirstItem()).GetPrimaryAddress().ToString();
             if (ip.Compare("0.0.0.0") && ip.Compare("127.0.0.1")) {
-				addresses.Add((*iface)->GetMacAddress().ToString());
+                addresses.Add((*iface)->GetMacAddress().ToString());
             }
             ++iface;
         }
@@ -698,21 +698,21 @@ public:
     }
     
     
-	static bool IsLocalNetworkAddress(const NPT_IpAddress& address) {
-		if (address.ToString() == "127.0.0.1") return true;
+    static bool IsLocalNetworkAddress(const NPT_IpAddress& address) {
+        if (address.ToString() == "127.0.0.1") return true;
         
-		NPT_List<NPT_NetworkInterface*> if_list;
+        NPT_List<NPT_NetworkInterface*> if_list;
         NPT_NetworkInterface::GetNetworkInterfaces(if_list);
         
-		NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
+        NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
         while (iface) {
-			if((*iface)->IsAddressInNetwork(address)) return true;
+            if((*iface)->IsAddressInNetwork(address)) return true;
             ++iface;
         }
         
-		if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
-		return false;
-	}
+        if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());
+        return false;
+    }
     
 private:
     

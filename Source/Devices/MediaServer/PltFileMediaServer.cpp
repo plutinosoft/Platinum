@@ -344,7 +344,7 @@ PLT_FileMediaServerDelegate::BuildSafeResourceUri(const NPT_HttpUrl& base_uri,
     NPT_String uri_path = uri.GetPath();
     if (!uri_path.EndsWith("/")) uri_path += "/";
 
-	/* some controllers (like WMP) will call us with an already urldecoded version.
+    /* some controllers (like WMP) will call us with an already urldecoded version.
        We're intentionally prepending a known urlencoded string
        to detect it when we receive the request urlencoded or already decoded to avoid double decoding*/
     uri_path += "%/";

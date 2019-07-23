@@ -123,7 +123,7 @@ public:
      to ignore devices associated with the same UPnP context.
      @param ignore boolean to ignore devices in context
      */
-	void SetIgnoreLocalUUIDs(bool ignore) { m_IgnoreLocalUUIDs = ignore; }
+    void SetIgnoreLocalUUIDs(bool ignore) { m_IgnoreLocalUUIDs = ignore; }
 
 private:
     // members
@@ -137,7 +137,7 @@ private:
     // and devices to it when they're added
     bool                                m_Started;
     PLT_SsdpListenTask*                 m_SsdpListenTask; 
-	bool								m_IgnoreLocalUUIDs;
+    bool                                m_IgnoreLocalUUIDs;
 };
 
 #endif /* _PLT_UPNP_H_ */

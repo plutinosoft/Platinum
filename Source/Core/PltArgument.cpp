@@ -90,22 +90,22 @@ PLT_Argument::CreateArgument(PLT_ActionDesc& action_desc,
     arg = NULL;
 
     PLT_ArgumentDesc* arg_desc = action_desc.GetArgumentDesc(name);
-	if (!arg_desc) {
-		NPT_LOG_WARNING_2("Invalid argument %s for action %s", 
-			name, 
-			(const char*)action_desc.GetName());
-		return NPT_ERROR_NO_SUCH_NAME;
-	}
+    if (!arg_desc) {
+        NPT_LOG_WARNING_2("Invalid argument %s for action %s", 
+            name, 
+            (const char*)action_desc.GetName());
+        return NPT_ERROR_NO_SUCH_NAME;
+    }
 
-	NPT_Result    res;
+    NPT_Result    res;
     PLT_Argument* new_arg = new PLT_Argument(*arg_desc);
     if (NPT_FAILED(res = new_arg->SetValue(value))) {
         delete new_arg;
 
-		NPT_LOG_WARNING_3("Invalid value of %s for argument %s of action %s", 
-			value,
-			name, 
-			(const char*)action_desc.GetName());
+        NPT_LOG_WARNING_3("Invalid value of %s for argument %s of action %s", 
+            value,
+            name, 
+            (const char*)action_desc.GetName());
         return res;
     }
 

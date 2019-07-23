@@ -40,5 +40,5 @@
 
 Platinum::Service^ Platinum::StateVariable::ParentService::get()
 {
-	return marshal_as<Service^>(*m_pHandle->GetService());
+    return marshal_as<Service^>(*m_pHandle->GetService());
 }

@@ -60,11 +60,11 @@
 |   types
 +---------------------------------------------------------------------*/
 typedef enum {
-	PLT_DEVICE_UNKNOWN,
-	PLT_DEVICE_XBOX_360,
-	PLT_DEVICE_XBOX_ONE,
-	PLT_DEVICE_PS3,
-	PLT_DEVICE_WMP,
+    PLT_DEVICE_UNKNOWN,
+    PLT_DEVICE_XBOX_360,
+    PLT_DEVICE_XBOX_ONE,
+    PLT_DEVICE_PS3,
+    PLT_DEVICE_WMP,
     PLT_DEVICE_SONOS,
     PLT_DEVICE_MAC,
     PLT_DEVICE_WINDOWS,
@@ -88,7 +88,7 @@ public:
 
     static NPT_Result   GetHost(const NPT_HttpRequest& request, NPT_String& value);
     static void         SetHost(NPT_HttpRequest& request, const char* host);
-	static PLT_DeviceSignature GetDeviceSignature(const NPT_HttpRequest& request);
+    static PLT_DeviceSignature GetDeviceSignature(const NPT_HttpRequest& request);
 
     static NPT_Result   SetBody(NPT_HttpMessage& message, NPT_String& text, NPT_HttpEntity** entity = NULL);
     static NPT_Result   SetBody(NPT_HttpMessage& message, const char* text, NPT_HttpEntity** entity = NULL);
@@ -97,7 +97,7 @@ public:
     static NPT_Result   GetBody(const NPT_HttpMessage& message, NPT_String& body);
     static NPT_Result   ParseBody(const NPT_HttpMessage& message, NPT_XmlElementNode*& xml);
 
-	static void			SetBasicAuthorization(NPT_HttpRequest& request, const char* username, const char* password);
+    static void         SetBasicAuthorization(NPT_HttpRequest& request, const char* username, const char* password);
 };
 
 /*----------------------------------------------------------------------
@@ -119,7 +119,7 @@ public:
     virtual ~PLT_HttpRequestContext() {}
     
     const NPT_HttpRequest& GetRequest() const { return m_Request; }
-	PLT_DeviceSignature GetDeviceSignature() { return PLT_HttpHelper::GetDeviceSignature(m_Request); }
+    PLT_DeviceSignature GetDeviceSignature() { return PLT_HttpHelper::GetDeviceSignature(m_Request); }
     
 private:
     const NPT_HttpRequest& m_Request;
@@ -131,20 +131,20 @@ private:
 class NPT_HttpHeaderPrinter
 {
 public:
-	// methods
-	NPT_HttpHeaderPrinter(NPT_OutputStreamReference& stream) :
-	m_Stream(stream) {}
-	NPT_Result operator()(NPT_HttpHeader*& header) const {
-		m_Stream->WriteString(header->GetName());
-		m_Stream->Write(": ", 2);
-		m_Stream->WriteString(header->GetValue());
-		m_Stream->Write("\r\n", 2, NULL);
-		return NPT_SUCCESS;
-	}
+    // methods
+    NPT_HttpHeaderPrinter(NPT_OutputStreamReference& stream) :
+    m_Stream(stream) {}
+    NPT_Result operator()(NPT_HttpHeader*& header) const {
+        m_Stream->WriteString(header->GetName());
+        m_Stream->Write(": ", 2);
+        m_Stream->WriteString(header->GetValue());
+        m_Stream->Write("\r\n", 2, NULL);
+        return NPT_SUCCESS;
+    }
 
 private:
-	// members
-	NPT_OutputStreamReference& m_Stream;
+    // members
+    NPT_OutputStreamReference& m_Stream;
 };
 
 /*----------------------------------------------------------------------
@@ -154,25 +154,25 @@ private:
 #define PLT_LOG_HTTP_REQUEST_L(_logger, _level, _prefix, _request) \
 do { \
     if (!_request) break; \
-	NPT_LOG_GET_LOGGER((_logger))                                       \
-	if ((_logger).logger && (_level) >= (_logger).logger->GetLevel()) { \
-		NPT_StringOutputStreamReference stream(new NPT_StringOutputStream); \
-		NPT_OutputStreamReference output = stream; \
-		_request->GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output)); \
-		NPT_LOG_X((_logger),(_level),((_level),__FILE__,__LINE__,(NPT_LocalFunctionName),"%s\n%s %s %s\n%s", (const char*)_prefix, (const char*)_request->GetMethod(), (const char*)_request->GetUrl().ToRequestString(true), (const char*)_request->GetProtocol(), (const char*)stream->GetString())); \
-	} \
+    NPT_LOG_GET_LOGGER((_logger))                                       \
+    if ((_logger).logger && (_level) >= (_logger).logger->GetLevel()) { \
+        NPT_StringOutputStreamReference stream(new NPT_StringOutputStream); \
+        NPT_OutputStreamReference output = stream; \
+        _request->GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output)); \
+        NPT_LOG_X((_logger),(_level),((_level),__FILE__,__LINE__,(NPT_LocalFunctionName),"%s\n%s %s %s\n%s", (const char*)_prefix, (const char*)_request->GetMethod(), (const char*)_request->GetUrl().ToRequestString(true), (const char*)_request->GetProtocol(), (const char*)stream->GetString())); \
+    } \
 } while (0)
 
 #define PLT_LOG_HTTP_RESPONSE_L(_logger, _level, _prefix, _response) \
 do { \
     if (!_response) break; \
-	NPT_LOG_GET_LOGGER((_logger))                                       \
-	if ((_logger).logger && (_level) >= (_logger).logger->GetLevel()) { \
-		NPT_StringOutputStreamReference stream(new NPT_StringOutputStream); \
-		NPT_OutputStreamReference output = stream; \
-		_response->GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output)); \
-		NPT_LOG_X((_logger),(_level),((_level),__FILE__,__LINE__,(NPT_LocalFunctionName),"%s\n%s %d %s\n%s", (const char*)_prefix, (const char*)_response->GetProtocol(), _response->GetStatusCode(), (const char*)_response->GetReasonPhrase(), (const char*)stream->GetString())); \
-	} \
+    NPT_LOG_GET_LOGGER((_logger))                                       \
+    if ((_logger).logger && (_level) >= (_logger).logger->GetLevel()) { \
+        NPT_StringOutputStreamReference stream(new NPT_StringOutputStream); \
+        NPT_OutputStreamReference output = stream; \
+        _response->GetHeaders().GetHeaders().Apply(NPT_HttpHeaderPrinter(output)); \
+        NPT_LOG_X((_logger),(_level),((_level),__FILE__,__LINE__,(NPT_LocalFunctionName),"%s\n%s %d %s\n%s", (const char*)_prefix, (const char*)_response->GetProtocol(), _response->GetStatusCode(), (const char*)_response->GetReasonPhrase(), (const char*)stream->GetString())); \
+    } \
 } while (0)
 
 #define PLT_LOG_HTTP_REQUEST(_level,_prefix,_request) PLT_LOG_HTTP_REQUEST_L(_NPT_LocalLogger,(_level),(_prefix),(_request))

@@ -81,8 +81,8 @@ PLT_HttpFileRequestHandler_DefaultDlnaMap[] = {
     {"image/jp2",      "DLNA.ORG_PN=JPEG_LRG"},
     {"image/png",      "DLNA.ORG_PN=PNG_LRG"},
     {"image/bmp",      "DLNA.ORG_PN=BMP_LRG"},
-	{"image/tiff",     "DLNA.ORG_PN=TIFF_LRG"},
-	{"audio/L16",		"DLNA.ORG_PN=LPCM;DLNA.ORG_OP=01;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01500000000000000000000000000000"},
+    {"image/tiff",     "DLNA.ORG_PN=TIFF_LRG"},
+    {"audio/L16",      "DLNA.ORG_PN=LPCM;DLNA.ORG_OP=01;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01500000000000000000000000000000"},
     {"audio/L16;rate=44100;channels=2", "DLNA.ORG_PN=LPCM;DLNA.ORG_OP=01;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01500000000000000000000000000000"},
     {"audio/L16;rate=44100;channels=1", "DLNA.ORG_PN=LPCM;DLNA.ORG_OP=01;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01500000000000000000000000000000"},
     {"audio/L16;rate=32000;channels=1", "DLNA.ORG_PN=LPCM;DLNA.ORG_OP=01;DLNA.ORG_CI=1;DLNA.ORG_FLAGS=01500000000000000000000000000000"},
@@ -250,7 +250,7 @@ NPT_Result
 PLT_ProtocolInfo::ValidateExtra()
 {
     if (m_Extra != "*") {
-		m_Valid = false;
+        m_Valid = false;
 
         NPT_List<FieldEntry> entries;
         NPT_CHECK(ParseExtra(entries));
@@ -402,15 +402,15 @@ PLT_ProtocolInfo::ToString() const
     NPT_String output = m_Protocol + ":";
     output += m_Mask + ":";
     output += m_ContentType + ":";
-	// if it wasn't valid or extra is not DLNA, just use it as is
+    // if it wasn't valid or extra is not DLNA, just use it as is
     if (!m_Valid || m_Extra == "*") {
         output += m_Extra;
     } else {
         bool add_semicolon = false;
-		if (!m_DLNA_PN.IsEmpty()) {
-			output += "DLNA.ORG_PN=" + m_DLNA_PN;
+        if (!m_DLNA_PN.IsEmpty()) {
+            output += "DLNA.ORG_PN=" + m_DLNA_PN;
             add_semicolon = true;
-		}
+        }
         if (!m_DLNA_OP.IsEmpty()) {
             if (add_semicolon) output += ";";
             output += "DLNA.ORG_OP=" + m_DLNA_OP;
@@ -483,10 +483,10 @@ PLT_ProtocolInfo::Match(const PLT_ProtocolInfo& other) const
 NPT_String  
 PLT_ProtocolInfo::GetMimeTypeFromProtocolInfo(const char* protocol_info)
 {
-	/*NPT_String info = protocol_info;
-	NPT_List<NPT_String> fragments = info.Split(":");
-	if (fragments.GetItemCount() != 4) return "";
-	return *fragments.GetItem(2);*/
+    /*NPT_String info = protocol_info;
+    NPT_List<NPT_String> fragments = info.Split(":");
+    if (fragments.GetItemCount() != 4) return "";
+    return *fragments.GetItem(2);*/
 
     PLT_ProtocolInfo info(protocol_info);
     return info.m_ContentType;
@@ -515,18 +515,18 @@ PLT_ProtocolInfo::GetDlnaExtension(const char*         mime_type,
     if (signature != PLT_DEVICE_UNKNOWN) {
         // look for special case for 360
         if (signature == PLT_DEVICE_XBOX_360 || signature == PLT_DEVICE_XBOX_ONE || signature == PLT_DEVICE_WMP) {
-			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360DlnaMap); i++) {
+            for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_360DlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_360DlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_360DlnaMap[i].dlna_ext;
                 }
             }
-		} else if (signature == PLT_DEVICE_SONOS) {
-			for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_SonosDlnaMap); i++) {
+        } else if (signature == PLT_DEVICE_SONOS) {
+            for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_SonosDlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_SonosDlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_SonosDlnaMap[i].dlna_ext;
                 }
             }
-		} else if (signature == PLT_DEVICE_PS3) {
+        } else if (signature == PLT_DEVICE_PS3) {
             for (unsigned int i=0; i<NPT_ARRAY_SIZE(PLT_HttpFileRequestHandler_PS3DlnaMap); i++) {
                 if (_mime_type.Compare(PLT_HttpFileRequestHandler_PS3DlnaMap[i].mime_type, true) == 0) {
                     return PLT_HttpFileRequestHandler_PS3DlnaMap[i].dlna_ext;
@@ -590,7 +590,7 @@ PLT_ProtocolInfo::GetProtocolInfo(const char*         filename,
 PLT_ProtocolInfo
 PLT_ProtocolInfo::GetProtocolInfo(const char*                   filename, 
                                   bool                          with_dlna_extension /* = true */,
-								  const PLT_HttpRequestContext* context /* = NULL */)
+                                  const PLT_HttpRequestContext* context /* = NULL */)
 {
     return GetProtocolInfoFromMimeType(PLT_MimeType::GetMimeType(filename, context), 
                                        with_dlna_extension, 

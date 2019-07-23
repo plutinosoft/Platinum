@@ -49,7 +49,7 @@ extern const char* SCPDXML_SIMPLE;
 /*----------------------------------------------------------------------
 |   PLT_Simple::PLT_Simple
 +---------------------------------------------------------------------*/
-PLT_Simple::PLT_Simple(const char* FriendlyName, const char* UUID) :	
+PLT_Simple::PLT_Simple(const char* FriendlyName, const char* UUID) :    
     PLT_DeviceHost("/", UUID, "urn:schemas-upnp-org:device:Simple:1", FriendlyName)
 {
 }
@@ -91,8 +91,8 @@ const char* SCPDXML_SIMPLE =
     "  <scpd xmlns=\"urn:schemas-upnp-org:service-1-0\">"
     "    <specVersion>"
     "       <major>1</major>"
-    "	    <minor>0</minor>"
-    "	 </specVersion>"
+    "       <minor>0</minor>"
+    "    </specVersion>"
     "    <serviceStateTable>"
     "      <stateVariable sendEvents=\"yes\">"
     "        <name>LastChange</name>"

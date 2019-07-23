@@ -41,128 +41,128 @@
 
 IEnumerable<Platinum::Service^>^ Platinum::DeviceData::Services::get()
 {
-	return gcnew Enumerables::EnumerableNptArray<Service^, PLT_Service*>(
-		(*m_pHandle)->GetServices()
-		);
+    return gcnew Enumerables::EnumerableNptArray<Service^, PLT_Service*>(
+        (*m_pHandle)->GetServices()
+        );
 }
 
 IEnumerable<Platinum::DeviceData^>^ Platinum::DeviceData::EmbeddedDevices::get()
 {
-	return gcnew Enumerables::EnumerableNptArrayRef<DeviceData^, PLT_DeviceDataReference>(
-		(*m_pHandle)->GetEmbeddedDevices()
-		);
+    return gcnew Enumerables::EnumerableNptArrayRef<DeviceData^, PLT_DeviceDataReference>(
+        (*m_pHandle)->GetEmbeddedDevices()
+        );
 }
 
 Platinum::DeviceData^ Platinum::DeviceData::FindEmbeddedDeviceByType( String^ type )
 {
-	if (String::IsNullOrEmpty(type))
-		throw gcnew ArgumentException("null or empty", "type");
+    if (String::IsNullOrEmpty(type))
+        throw gcnew ArgumentException("null or empty", "type");
 
-	PLT_DeviceDataReference r;
-	marshal_context c;
+    PLT_DeviceDataReference r;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindEmbeddedDeviceByType(
-		c.marshal_as<const char*>(type),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindEmbeddedDeviceByType(
+        c.marshal_as<const char*>(type),
+        r
+        ));
 
-	if (r.IsNull())
-		return nullptr;
+    if (r.IsNull())
+        return nullptr;
 
-	return marshal_as<DeviceData^>(r);
+    return marshal_as<DeviceData^>(r);
 }
 
 Platinum::Service^ Platinum::DeviceData::FindServiceById( String^ id )
 {
-	if (String::IsNullOrEmpty(id))
-		throw gcnew ArgumentException("null or empty", "id");
+    if (String::IsNullOrEmpty(id))
+        throw gcnew ArgumentException("null or empty", "id");
 
-	PLT_Service* r = 0;
-	marshal_context c;
+    PLT_Service* r = 0;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceById(
-		c.marshal_as<const char*>(id),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceById(
+        c.marshal_as<const char*>(id),
+        r
+        ));
 
-	if (!r)
-		return nullptr;
+    if (!r)
+        return nullptr;
 
-	return marshal_as<Service^>(*r);
+    return marshal_as<Service^>(*r);
 }
 
 Platinum::Service^ Platinum::DeviceData::FindServiceByType( String^ type )
 {
-	if (String::IsNullOrEmpty(type))
-		throw gcnew ArgumentException("null or empty", "type");
+    if (String::IsNullOrEmpty(type))
+        throw gcnew ArgumentException("null or empty", "type");
 
-	PLT_Service* r = 0;
-	marshal_context c;
+    PLT_Service* r = 0;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByType(
-		c.marshal_as<const char*>(type),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByType(
+        c.marshal_as<const char*>(type),
+        r
+        ));
 
-	if (!r)
-		return nullptr;
+    if (!r)
+        return nullptr;
 
-	return marshal_as<Service^>(*r);
+    return marshal_as<Service^>(*r);
 }
 
 Platinum::Service^ Platinum::DeviceData::FindServiceBySCPDURL( Uri^ url )
 {
-	if (url == nullptr)
-		throw gcnew ArgumentNullException("url");
+    if (url == nullptr)
+        throw gcnew ArgumentNullException("url");
 
-	PLT_Service* r = 0;
-	marshal_context c;
+    PLT_Service* r = 0;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceBySCPDURL(
-		c.marshal_as<const char*>(url->ToString()),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceBySCPDURL(
+        c.marshal_as<const char*>(url->ToString()),
+        r
+        ));
 
-	if (!r)
-		return nullptr;
+    if (!r)
+        return nullptr;
 
-	return marshal_as<Service^>(*r);
+    return marshal_as<Service^>(*r);
 }
 
 Platinum::Service^ Platinum::DeviceData::FindServiceByControlURL( Uri^ url )
 {
-	if (url == nullptr)
-		throw gcnew ArgumentNullException("url");
+    if (url == nullptr)
+        throw gcnew ArgumentNullException("url");
 
-	PLT_Service* r = 0;
-	marshal_context c;
+    PLT_Service* r = 0;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByControlURL(
-		c.marshal_as<const char*>(url->ToString()),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByControlURL(
+        c.marshal_as<const char*>(url->ToString()),
+        r
+        ));
 
-	if (!r)
-		return nullptr;
+    if (!r)
+        return nullptr;
 
-	return marshal_as<Service^>(*r);
+    return marshal_as<Service^>(*r);
 }
 
 Platinum::Service^ Platinum::DeviceData::FindServiceByEventSubURL( Uri^ url )
 {
-	if (url == nullptr)
-		throw gcnew ArgumentNullException("url");
+    if (url == nullptr)
+        throw gcnew ArgumentNullException("url");
 
-	PLT_Service* r = 0;
-	marshal_context c;
+    PLT_Service* r = 0;
+    marshal_context c;
 
-	Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByEventSubURL(
-		c.marshal_as<const char*>(url->ToString()),
-		r
-		));
+    Helpers::ThrowOnErrorButNoSuchItem((*m_pHandle)->FindServiceByEventSubURL(
+        c.marshal_as<const char*>(url->ToString()),
+        r
+        ));
 
-	if (!r)
-		return nullptr;
+    if (!r)
+        return nullptr;
 
-	return marshal_as<Service^>(*r);
+    return marshal_as<Service^>(*r);
 }

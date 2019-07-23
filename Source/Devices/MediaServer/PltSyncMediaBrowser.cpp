@@ -220,7 +220,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_BrowseDataReference& browse_data,
         browse_metadata,
         filter,
         sort,
-        new PLT_BrowseDataReference(browse_data));		
+        new PLT_BrowseDataReference(browse_data));      
     NPT_CHECK_SEVERE(res);
 
     return WaitForResponse(browse_data->shared_var);
@@ -251,12 +251,11 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
     // look into cache first
     if (cache && NPT_SUCCEEDED(m_Cache.Get(device->GetUUID(), object_id, list))) return NPT_SUCCESS;
 
-    do {	
+    do {    
         PLT_BrowseDataReference browse_data(new PLT_BrowseData());
 
         // send off the browse packet.  Note that this will
-        // not block.  There is a call to WaitForResponse in order
-        // to block until the response comes back.
+        // block until server responds or times out.
         res = BrowseSync(
             browse_data,
             device,
@@ -282,7 +281,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         } else {
             list->Add(*browse_data->info.items);
             // clear the list items so that the data inside is not
-            // cleaned up by PLT_MediaItemList dtor since we copied
+            // cleaned up by PLT_MediaItemList destructor since we copied
             // each pointer into the new list.
             browse_data->info.items->Clear();
         }

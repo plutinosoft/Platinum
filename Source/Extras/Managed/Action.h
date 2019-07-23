@@ -46,110 +46,110 @@ public ref class Action
 {
 public:
 
-	delegate void ActionResponseDelegate(NeptuneException^ error);
+    delegate void ActionResponseDelegate(NeptuneException^ error);
 
 private:
 
-	PLT_ActionReference* m_pHandle;
+    PLT_ActionReference* m_pHandle;
 
 internal:
 
-	property PLT_ActionReference& Handle
-	{
-		PLT_ActionReference& get()
-		{
-			return *m_pHandle;
-		}
-	}
+    property PLT_ActionReference& Handle
+    {
+        PLT_ActionReference& get()
+        {
+            return *m_pHandle;
+        }
+    }
 
 public:
 
-	property String^ Name
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetActionDesc().GetName());
-		}
-	}
+    property String^ Name
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetActionDesc().GetName());
+        }
+    }
 
-	property IEnumerable<ActionArgumentDescription^>^ Arguments
-	{
-		IEnumerable<ActionArgumentDescription^>^ get();
-	}
+    property IEnumerable<ActionArgumentDescription^>^ Arguments
+    {
+        IEnumerable<ActionArgumentDescription^>^ get();
+    }
 
-	property Service^ ParentService
-	{
-		Service^ get();
-	}
+    property Service^ ParentService
+    {
+        Service^ get();
+    }
 
-	property ActionDescription^ Description
-	{
-		ActionDescription^ get();
-	}
-
-public:
-
-	event ActionResponseDelegate^ ActionResponse;
+    property ActionDescription^ Description
+    {
+        ActionDescription^ get();
+    }
 
 public:
 
-	ActionArgumentDescription^ GetArgument(String^ name);
+    event ActionResponseDelegate^ ActionResponse;
+
+public:
+
+    ActionArgumentDescription^ GetArgument(String^ name);
     Int32 SetArgumentValue(String^ name, String^ value);
 
 internal:
 
-	void HandleActionResponse(NeptuneException^ error, Action^ action);
+    void HandleActionResponse(NeptuneException^ error, Action^ action);
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		Action^ a = (Action^)obj;
+        Action^ a = (Action^)obj;
 
         return (m_pHandle->AsPointer() == a->m_pHandle->AsPointer());
 
-		/*if (m_pHandle->AsPointer() == a->m_pHandle->AsPointer())
-			return true;
+        /*if (m_pHandle->AsPointer() == a->m_pHandle->AsPointer())
+            return true;
 
-		return ((*m_pHandle)->GetActionDesc() == (*a->m_pHandle)->GetActionDesc());*/
-	}
+        return ((*m_pHandle)->GetActionDesc() == (*a->m_pHandle)->GetActionDesc());*/
+    }
 
 internal:
 
-	Action(PLT_ActionReference& action)
-	{
-		if (action.IsNull())
-			throw gcnew ArgumentNullException("action");
+    Action(PLT_ActionReference& action)
+    {
+        if (action.IsNull())
+            throw gcnew ArgumentNullException("action");
 
-		m_pHandle = new PLT_ActionReference(action);
-	}
+        m_pHandle = new PLT_ActionReference(action);
+    }
 
 public:
 
-	~Action()
-	{
-		// clean-up managed
+    ~Action()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!Action();
-	}
+        // clean-up unmanaged
+        this->!Action();
+    }
 
-	!Action()
-	{
-		// clean-up unmanaged
-		if (m_pHandle != 0)
-		{
-			delete m_pHandle;
+    !Action()
+    {
+        // clean-up unmanaged
+        if (m_pHandle != 0)
+        {
+            delete m_pHandle;
 
-			m_pHandle = 0;
-		}
-	}
+            m_pHandle = 0;
+        }
+    }
 
 };
 

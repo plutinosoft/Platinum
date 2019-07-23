@@ -117,7 +117,7 @@ main(int /* argc */, char** argv)
     /* parse command line */
     ParseCommandLine(argv+1);
 
-	/* for faster DLNA faster testing */
+    /* for faster DLNA faster testing */
     PLT_Constants::GetInstance().SetDefaultDeviceLease(NPT_TimeInterval(60.));
     
     PLT_UPnP upnp;

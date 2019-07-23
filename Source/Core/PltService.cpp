@@ -54,7 +54,7 @@ PLT_Service::PLT_Service(PLT_DeviceData* device,
     m_Device(device),
     m_ServiceType(type),
     m_ServiceID(id),
-	m_ServiceName(name),
+    m_ServiceName(name),
     m_EventTask(NULL),
     m_EventingPaused(false),
     m_LastChangeNamespace(last_change_namespace)
@@ -488,8 +488,8 @@ PLT_Service::SetStateVariableRate(const char* name, NPT_TimeInterval rate)
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_Service::SetStateVariableExtraAttribute(const char* name, 
-											const char* key,
-											const char* value)
+                                            const char* key,
+                                            const char* value)
 {
     PLT_StateVariable* stateVariable = NULL;
     NPT_ContainerFind(m_StateVars, PLT_StateVariableNameFinder(name), stateVariable);
@@ -908,6 +908,6 @@ PLT_LastChangeXMLIterator::operator()(PLT_StateVariable* const &var) const
 
     NPT_XmlElementNode* variable = new NPT_XmlElementNode((const char*)var->GetName());
     NPT_CHECK_SEVERE(m_Node->AddChild(variable));
-	NPT_CHECK_SEVERE(var->Serialize(*variable));
+    NPT_CHECK_SEVERE(var->Serialize(*variable));
     return NPT_SUCCESS;
 }

@@ -101,14 +101,14 @@ main(int argc, char** argv)
     // parse command line
     ParseCommandLine(argv);
     
-	// setup device
+    // setup device
     PLT_MediaConnect* connect(
         new PLT_MediaConnect("Platinum"));
-	connect->SetByeByeFirst(false);
+    connect->SetByeByeFirst(false);
     
-	// setup delegate
-	NPT_Reference<PLT_FileMediaConnectDelegate> delegate( 
-		new PLT_FileMediaConnectDelegate("/", Options.path));
+    // setup delegate
+    NPT_Reference<PLT_FileMediaConnectDelegate> delegate( 
+        new PLT_FileMediaConnectDelegate("/", Options.path));
     connect->SetDelegate((PLT_MediaServerDelegate*)delegate.AsPointer());
     
     PLT_UPnP upnp;

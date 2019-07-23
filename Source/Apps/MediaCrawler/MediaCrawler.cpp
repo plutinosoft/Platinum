@@ -221,33 +221,33 @@ CMediaCrawler::OnBrowseRoot(PLT_ActionReference& action)
         NPT_String item_didl;
         NPT_String didl = didl_header;
 
-		{
-			// populate a list of containers (one container per known servers)
-			const NPT_Lock<PLT_DeviceDataReferenceList>& devices = GetMediaServers();
-			NPT_AutoLock lock((NPT_Mutex&)devices);
+        {
+            // populate a list of containers (one container per known servers)
+            const NPT_Lock<PLT_DeviceDataReferenceList>& devices = GetMediaServers();
+            NPT_AutoLock lock((NPT_Mutex&)devices);
 
-			NPT_Lock<PLT_DeviceDataReferenceList>::Iterator entry = devices.GetFirstItem();
-			while (entry) {
-				PLT_DeviceDataReference device = (*entry);
-				item.m_Title = device->GetFriendlyName();
-				item.m_ObjectID = FormatObjectId(device->GetUUID(), "0");
-				item.m_ParentID = "0";
-				item.m_ObjectClass.type = "object.container";
+            NPT_Lock<PLT_DeviceDataReferenceList>::Iterator entry = devices.GetFirstItem();
+            while (entry) {
+                PLT_DeviceDataReference device = (*entry);
+                item.m_Title = device->GetFriendlyName();
+                item.m_ObjectID = FormatObjectId(device->GetUUID(), "0");
+                item.m_ParentID = "0";
+                item.m_ObjectClass.type = "object.container";
 
                 // reset tmp didl
                 item_didl = "";
-				if ((cur_index >= start_index) && ((num_returned < req_count) || (req_count == 0))) {
-					NPT_CHECK_SEVERE(PLT_Didl::ToDidl(item, filter, item_didl));
+                if ((cur_index >= start_index) && ((num_returned < req_count) || (req_count == 0))) {
+                    NPT_CHECK_SEVERE(PLT_Didl::ToDidl(item, filter, item_didl));
 
-					didl += item_didl;
-					num_returned++;
-				}
-				cur_index++;
-				total_matches++;  
+                    didl += item_didl;
+                    num_returned++;
+                }
+                cur_index++;
+                total_matches++;  
 
-				++entry;
-			}
-		}
+                ++entry;
+            }
+        }
 
         didl += didl_footer;
 
@@ -313,7 +313,7 @@ CMediaCrawler::OnBrowseDevice(PLT_ActionReference&          action,
         (browseFlagValue == "BrowseMetadata")?1:0,
         filter,
         sort,
-        new CMediaCrawlerBrowseInfoReference(browse_info));		
+        new CMediaCrawlerBrowseInfoReference(browse_info));     
     NPT_CHECK_SEVERE(res);
 
     // wait 10 secs for response

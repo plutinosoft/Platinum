@@ -219,17 +219,17 @@ public:
         bool                     /* mute */,
         void*                    /* userdata */) {}
 
-	virtual void OnSetVolumeResult(
+    virtual void OnSetVolumeResult(
         NPT_Result               /* res */,
         PLT_DeviceDataReference& /* device */,
         void*                    /* userdata */) {}
 
-	virtual void OnGetVolumeResult(
+    virtual void OnGetVolumeResult(
         NPT_Result               /* res */,
         PLT_DeviceDataReference& /* device */,
-		const char*              /* channel */,
-    	NPT_UInt32				 /* volume */,
-	    void*                    /* userdata */) {}
+        const char*              /* channel */,
+        NPT_UInt32               /* volume */,
+        void*                    /* userdata */) {}
 };
 
 /*----------------------------------------------------------------------
@@ -279,8 +279,8 @@ public:
     // RenderingControl
     NPT_Result SetMute(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, bool mute, void* userdata);
     NPT_Result GetMute(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, void* userdata);
-	NPT_Result SetVolume(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, int volume, void* userdata);
-	NPT_Result GetVolume(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, void* userdata);	
+    NPT_Result SetVolume(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, int volume, void* userdata);
+    NPT_Result GetVolume(PLT_DeviceDataReference& device, NPT_UInt32 instance_id, const char* channel, void* userdata); 
 
     // VariableStates    
     virtual NPT_Result GetProtocolInfoSink(const NPT_String& device_uuid, NPT_List<NPT_String>& sinks);
@@ -307,7 +307,7 @@ private:
     NPT_Result OnGetProtocolInfoResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
     
     NPT_Result OnGetMuteResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
-	NPT_Result OnGetVolumeResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
+    NPT_Result OnGetVolumeResponse(NPT_Result res, PLT_DeviceDataReference& device, PLT_ActionReference& action, void* userdata);
 
 public:
     static void ParseCSV(const char* csv, PLT_StringList& values) {

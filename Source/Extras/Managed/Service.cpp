@@ -44,54 +44,54 @@
 
 Platinum::DeviceData^ Platinum::Service::ParentDevice::get()
 {
-	return marshal_as<DeviceData^>(*m_pHandle->GetDevice());
+    return marshal_as<DeviceData^>(*m_pHandle->GetDevice());
 }
 
 IEnumerable<Platinum::StateVariable^>^ Platinum::Service::StateVariables::get()
 {
-	return gcnew Enumerables::EnumerableNptList<StateVariable^, PLT_StateVariable*>(
-		m_pHandle->GetStateVariables()
-		);
+    return gcnew Enumerables::EnumerableNptList<StateVariable^, PLT_StateVariable*>(
+        m_pHandle->GetStateVariables()
+        );
 }
 
 IEnumerable<Platinum::ActionDescription^>^ Platinum::Service::Actions::get()
 {
-	return gcnew Enumerables::EnumerableNptArray<ActionDescription^, PLT_ActionDesc*>(
-		m_pHandle->GetActionDescs()
-		);
+    return gcnew Enumerables::EnumerableNptArray<ActionDescription^, PLT_ActionDesc*>(
+        m_pHandle->GetActionDescs()
+        );
 }
 
 Platinum::ActionDescription^ Platinum::Service::FindAction( String^ name )
 {
-	if (String::IsNullOrEmpty(name))
-		throw gcnew ArgumentException("null or empty", "name");
+    if (String::IsNullOrEmpty(name))
+        throw gcnew ArgumentException("null or empty", "name");
 
-	marshal_context c;
+    marshal_context c;
 
-	PLT_ActionDesc* d = m_pHandle->FindActionDesc(
-		c.marshal_as<const char*>(name)
-		);
+    PLT_ActionDesc* d = m_pHandle->FindActionDesc(
+        c.marshal_as<const char*>(name)
+        );
 
-	if (!d)
-		return nullptr;
+    if (!d)
+        return nullptr;
 
-	return marshal_as<ActionDescription^>(*d);
+    return marshal_as<ActionDescription^>(*d);
 }
 
 Platinum::StateVariable^ Platinum::Service::FindStateVariable( String^ name )
 {
-	if (String::IsNullOrEmpty(name))
-		throw gcnew ArgumentException("null or empty", "name");
+    if (String::IsNullOrEmpty(name))
+        throw gcnew ArgumentException("null or empty", "name");
 
-	marshal_context c;
+    marshal_context c;
 
-	PLT_StateVariable* d = m_pHandle->FindStateVariable(
-		c.marshal_as<const char*>(name)
-		);
+    PLT_StateVariable* d = m_pHandle->FindStateVariable(
+        c.marshal_as<const char*>(name)
+        );
 
-	if (!d)
-		return nullptr;
+    if (!d)
+        return nullptr;
 
-	return marshal_as<StateVariable^>(*d);
+    return marshal_as<StateVariable^>(*d);
 }
 

@@ -50,7 +50,7 @@ private class MediaServerEventBridge : public PLT_MediaServerDelegate
 {
 private:
 
-	gcroot<MediaServer^> m_pMediaServer;
+    gcroot<MediaServer^> m_pMediaServer;
 
 public:
 
@@ -83,10 +83,10 @@ public:
 
 public:
 
-	MediaServerEventBridge(gcroot<MediaServer^> server)
-	{
-		m_pMediaServer = server;
-	}
+    MediaServerEventBridge(gcroot<MediaServer^> server)
+    {
+        m_pMediaServer = server;
+    }
 
     virtual ~MediaServerEventBridge()
     {}

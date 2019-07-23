@@ -101,7 +101,7 @@ int main(void)
 
 #ifdef SIMULATE_XBOX_360
     // override default headers
-	PLT_Constants::GetInstance().SetDefaultUserAgent("Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0");
+    PLT_Constants::GetInstance().SetDefaultUserAgent("Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0");
 //    NPT_HttpServer::m_ServerHeader    = "Xbox/2.0.8955.0 UPnP/1.0 Xbox/2.0.8955.0";
 
     // create device

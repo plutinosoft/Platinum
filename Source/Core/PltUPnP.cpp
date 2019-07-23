@@ -133,7 +133,7 @@ PLT_UPnP::PLT_UPnP() :
     m_TaskManager(NULL),
     m_Started(false),
     m_SsdpListenTask(NULL),
-	m_IgnoreLocalUUIDs(true)
+    m_IgnoreLocalUUIDs(true)
 {
 }
     
@@ -221,14 +221,14 @@ PLT_UPnP::AddDevice(PLT_DeviceHostReference& device)
     NPT_AutoLock lock(m_Lock);
 
     // tell all our controllers to ignore this device
-	if (m_IgnoreLocalUUIDs) {
-		for (NPT_List<PLT_CtrlPointReference>::Iterator iter = 
+    if (m_IgnoreLocalUUIDs) {
+        for (NPT_List<PLT_CtrlPointReference>::Iterator iter = 
                  m_CtrlPoints.GetFirstItem(); 
              iter; 
              iter++) {
-		    (*iter)->IgnoreUUID(device->GetUUID());
-		}
-	}
+            (*iter)->IgnoreUUID(device->GetUUID());
+        }
+    }
 
     if (m_Started) {
         NPT_LOG_INFO("Starting Device...");
@@ -263,14 +263,14 @@ PLT_UPnP::AddCtrlPoint(PLT_CtrlPointReference& ctrl_point)
     NPT_AutoLock lock(m_Lock);
 
     // tell the control point to ignore our own running devices
-	if (m_IgnoreLocalUUIDs) {
-		for (NPT_List<PLT_DeviceHostReference>::Iterator iter = 
+    if (m_IgnoreLocalUUIDs) {
+        for (NPT_List<PLT_DeviceHostReference>::Iterator iter = 
                  m_Devices.GetFirstItem(); 
              iter; 
              iter++) {
-			ctrl_point->IgnoreUUID((*iter)->GetUUID());
-		}
-	}
+            ctrl_point->IgnoreUUID((*iter)->GetUUID());
+        }
+    }
 
     if (m_Started) {
         NPT_LOG_INFO("Starting Ctrlpoint...");

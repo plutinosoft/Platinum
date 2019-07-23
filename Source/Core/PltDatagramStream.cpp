@@ -80,7 +80,7 @@ PLT_InputDatagramStream::Read(void*     buffer,
         m_Socket->GetInfo(m_Info);
         m_Info.remote_address = addr;
 
-		NPT_LOG_FINER_1("PLT_InputDatagramStream received %d", m_Buffer.GetDataSize());
+        NPT_LOG_FINER_1("PLT_InputDatagramStream received %d", m_Buffer.GetDataSize());
     }
         
     if (bytes_to_read == 0) return res;
@@ -99,7 +99,7 @@ PLT_InputDatagramStream::Read(void*     buffer,
             m_Buffer.SetDataSize(0);
         }
 
-		NPT_LOG_FINER_3("PLT_InputDatagramStream requested %d, consumed %d, left %d", bytes_to_read, _bytes_to_read, m_Buffer.GetDataSize());
+        NPT_LOG_FINER_3("PLT_InputDatagramStream requested %d, consumed %d, left %d", bytes_to_read, _bytes_to_read, m_Buffer.GetDataSize());
     }
 
     return res;

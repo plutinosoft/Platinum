@@ -43,21 +43,21 @@ public ref class NeptuneException : Exception
 {
 private:
 
-	int m_err;
+    int m_err;
 
 public:
 
-	property int ErrorResult
-	{
-		int get() { return m_err; }
-	}
+    property int ErrorResult
+    {
+        int get() { return m_err; }
+    }
 
 public:
 
-	NeptuneException(NPT_Result r)
-		: Exception(gcnew String(NPT_ResultText(r))), m_err(r)
-	{
-	}
+    NeptuneException(NPT_Result r)
+        : Exception(gcnew String(NPT_ResultText(r))), m_err(r)
+    {
+    }
 
 };
 

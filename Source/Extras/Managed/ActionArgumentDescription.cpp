@@ -41,5 +41,5 @@
 
 Platinum::StateVariable^ Platinum::ActionArgumentDescription::RelatedStateVariable::get()
 {
-	return marshal_as<StateVariable^>(*m_pHandle->GetRelatedStateVariable());
+    return marshal_as<StateVariable^>(*m_pHandle->GetRelatedStateVariable());
 }

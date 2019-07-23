@@ -46,92 +46,92 @@ private ref class EnumerableNptList : public IEnumerable<T_DotNetType>
 {
 private:
 
-	ref class EnumerableNptListIterator : public IEnumerator<T_DotNetType>
-	{
-	private:
+    ref class EnumerableNptListIterator : public IEnumerator<T_DotNetType>
+    {
+    private:
 
-		const NPT_List<T_NativeType>* m_pList;
-		typename NPT_List<T_NativeType>::Iterator* m_pIt;
+        const NPT_List<T_NativeType>* m_pList;
+        typename NPT_List<T_NativeType>::Iterator* m_pIt;
 
-	public:
+    public:
 
-		virtual property T_DotNetType Current
-		{
-			T_DotNetType get()
-			{
-				return marshal_as<T_DotNetType>(***m_pIt); // FIXME: This is a problem when T_NativeType is not a pointer (like PLT_DeviceDataReference for example)
-			}
-		}
+        virtual property T_DotNetType Current
+        {
+            T_DotNetType get()
+            {
+                return marshal_as<T_DotNetType>(***m_pIt); // FIXME: This is a problem when T_NativeType is not a pointer (like PLT_DeviceDataReference for example)
+            }
+        }
 
-	private:
+    private:
 
-		virtual property Object^ Current2
-		{
-			Object^ get() sealed = System::Collections::IEnumerator::Current::get
-			{
-				return marshal_as<T_DotNetType>(***m_pIt); // FIXME: This is a problem when T_NativeType is not a pointer (like PLT_DeviceDataReference for example)
-			}
-		}
+        virtual property Object^ Current2
+        {
+            Object^ get() sealed = System::Collections::IEnumerator::Current::get
+            {
+                return marshal_as<T_DotNetType>(***m_pIt); // FIXME: This is a problem when T_NativeType is not a pointer (like PLT_DeviceDataReference for example)
+            }
+        }
 
-	public:
+    public:
 
-		virtual bool MoveNext()
-		{
-			if (!m_pIt)
-			{
-				m_pIt = &m_pList->GetFirstItem();
-			}
-			else
-			{
-				(*m_pIt)++;
-			}
+        virtual bool MoveNext()
+        {
+            if (!m_pIt)
+            {
+                m_pIt = &m_pList->GetFirstItem();
+            }
+            else
+            {
+                (*m_pIt)++;
+            }
 
-			return *m_pIt;
-		}
+            return *m_pIt;
+        }
 
-		virtual void Reset()
-		{ 
-			m_pIt = 0;
-		}
+        virtual void Reset()
+        { 
+            m_pIt = 0;
+        }
 
-	public:
+    public:
 
-		EnumerableNptListIterator(const NPT_List<T_NativeType>& list)
-		{
-			m_pIt = 0;
-			m_pList = &list;
-		}
+        EnumerableNptListIterator(const NPT_List<T_NativeType>& list)
+        {
+            m_pIt = 0;
+            m_pList = &list;
+        }
 
-		~EnumerableNptListIterator()
-		{
-		}
-		
-	};
-
-private:
-
-	const NPT_List<T_NativeType>* m_pList;
-
-public:
-
-	virtual IEnumerator<T_DotNetType>^ GetEnumerator()
-	{
-		return gcnew EnumerableNptListIterator(*m_pList);
-	}
+        ~EnumerableNptListIterator()
+        {
+        }
+        
+    };
 
 private:
 
-	virtual System::Collections::IEnumerator^ GetEnumerator2() sealed = System::Collections::IEnumerable::GetEnumerator
-	{
-		return gcnew EnumerableNptListIterator(*m_pList);
-	}
+    const NPT_List<T_NativeType>* m_pList;
 
 public:
 
-	EnumerableNptList(const NPT_List<T_NativeType>& list)
-	{
-		m_pList = &list;
-	}
+    virtual IEnumerator<T_DotNetType>^ GetEnumerator()
+    {
+        return gcnew EnumerableNptListIterator(*m_pList);
+    }
+
+private:
+
+    virtual System::Collections::IEnumerator^ GetEnumerator2() sealed = System::Collections::IEnumerable::GetEnumerator
+    {
+        return gcnew EnumerableNptListIterator(*m_pList);
+    }
+
+public:
+
+    EnumerableNptList(const NPT_List<T_NativeType>& list)
+    {
+        m_pList = &list;
+    }
 };
 
 /*----------------------------------------------------------------------

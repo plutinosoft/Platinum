@@ -117,7 +117,7 @@ PLT_Action::PLT_Action(PLT_ActionDesc&          action_desc,
                        PLT_DeviceDataReference& root_device) :
     m_ActionDesc(action_desc),
     m_ErrorCode(0),
-	m_RootDevice(root_device)
+    m_RootDevice(root_device)
 {
 }
 
@@ -173,18 +173,18 @@ PLT_Action::GetArgumentValue(const char* name, bool& value)
 {
     NPT_String tmp_value;
     NPT_CHECK_WARNING(GetArgumentValue(name, tmp_value));
-	if (tmp_value == "1" || 
-		!tmp_value.Compare("TRUE", true) || 
-		!tmp_value.Compare("YES", true)) {
-		value = true;
-	} else if (tmp_value == "0" ||
-		!tmp_value.Compare("FALSE", true) ||
-		!tmp_value.Compare("NO", true)) {
-		value = false;
-	} else {
-		return NPT_FAILURE;
-	}
-	return NPT_SUCCESS;
+    if (tmp_value == "1" ||
+        !tmp_value.Compare("TRUE", true) ||
+        !tmp_value.Compare("YES", true)) {
+        value = true;
+    } else if (tmp_value == "0" ||
+        !tmp_value.Compare("FALSE", true) ||
+        !tmp_value.Compare("NO", true)) {
+        value = false;
+    } else {
+        return NPT_FAILURE;
+    }
+    return NPT_SUCCESS;
 }
 
 /*----------------------------------------------------------------------
@@ -206,20 +206,20 @@ PLT_Action::SetArgumentValue(const char* name,
                              const char* value)
 {
     // look for this argument in our argument list
-    // and replace the value if we found it 
-	PLT_Arguments::Iterator iter = NULL;
+    // and replace the value if we found it
+    PLT_Arguments::Iterator iter = NULL;
     if (NPT_SUCCEEDED(NPT_ContainerFind(m_Arguments, PLT_ArgumentNameFinder(name), iter))) {
         NPT_Result res = (*iter)->SetValue(value);
 
-		// remove argument from list if failed
-		// so that when we verify arguments later, 
-		// we don't use a previously set value
-		if (NPT_FAILED(res)) m_Arguments.Erase(iter);
-		return res;
+        // remove argument from list if failed
+        // so that when we verify arguments later,
+        // we don't use a previously set value
+        if (NPT_FAILED(res)) m_Arguments.Erase(iter);
+        return res;
     }
 
     // since we didn't find it, create a clone 
-	PLT_Argument* arg;
+    PLT_Argument* arg;
     NPT_CHECK_SEVERE(PLT_Argument::CreateArgument(m_ActionDesc, name, value, arg));
 
     // insert it at the right position
@@ -266,9 +266,9 @@ PLT_Action::VerifyArguments(bool input)
         // look for this argument in the list we received
         PLT_Argument* arg = NULL;
         if (NPT_FAILED(NPT_ContainerFind(m_Arguments, PLT_ArgumentNameFinder(arg_desc->GetName()), arg))) {
-			NPT_LOG_WARNING_2("Argument %s for action %s not found", 
-				(const char*) arg_desc->GetName(), 
-				(const char*) m_ActionDesc.GetName());
+            NPT_LOG_WARNING_2("Argument %s for action %s not found", 
+                (const char*) arg_desc->GetName(), 
+                (const char*) m_ActionDesc.GetName());
             return NPT_FAILURE;
         }
         ++count;

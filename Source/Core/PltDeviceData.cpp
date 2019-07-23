@@ -355,7 +355,7 @@ PLT_DeviceData::AddService(PLT_Service* service)
 NPT_Result
 PLT_DeviceData::RemoveService(PLT_Service* service)
 {
-	for (NPT_Cardinal i=0;
+    for (NPT_Cardinal i=0;
          i<m_Services.GetItemCount();
          i++) {
         if (m_Services[i] == service) {
@@ -540,7 +540,7 @@ PLT_DeviceData::SetDescription(PLT_DeviceDataReference&      root_device,
     // look for optional URLBase element
     if (NPT_SUCCEEDED(PLT_XmlHelper::GetChildText(root, "URLBase", URLBase))) {
         NPT_HttpUrl url(URLBase);
-		// Some devices like Connect360 try to be funny - not so
+        // Some devices like Connect360 try to be funny - not so
         if (url.GetHost().ToLowercase() == "localhost" ||
             url.GetHost().ToLowercase() == "127.0.0.1") {
             url.SetHost(context.GetRemoteAddress().GetIpAddress().ToString());
@@ -773,7 +773,7 @@ PLT_DeviceData::FindServiceBySCPDURL(const char*   url,
     if (NPT_SUCCEEDED(res)) return res;
 
     if (recursive) {
-		for (int i=0; i<(int)m_EmbeddedDevices.GetItemCount(); i++) {
+        for (int i=0; i<(int)m_EmbeddedDevices.GetItemCount(); i++) {
             res = m_EmbeddedDevices[i]->FindServiceBySCPDURL(
                 url, 
                 service,
@@ -799,7 +799,7 @@ PLT_DeviceData::FindServiceByControlURL(const char*   url,
     if (NPT_SUCCEEDED(res)) return res;
 
     if (recursive) {
-		for (int i=0; i<(int)m_EmbeddedDevices.GetItemCount(); i++) {
+        for (int i=0; i<(int)m_EmbeddedDevices.GetItemCount(); i++) {
             res = m_EmbeddedDevices[i]->FindServiceByControlURL(
                 url, 
                 service,

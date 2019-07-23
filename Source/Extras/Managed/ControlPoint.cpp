@@ -43,23 +43,23 @@
 
 void Platinum::ControlPoint::RegisterEvents()
 {
-	if (!m_pBridge)
-	{
-		m_pBridge = new ControlPointEventBridge(this);
-	}
+    if (!m_pBridge)
+    {
+        m_pBridge = new ControlPointEventBridge(this);
+    }
 
-	Helpers::ThrowOnError((*m_pHandle)->AddListener(m_pBridge));
+    Helpers::ThrowOnError((*m_pHandle)->AddListener(m_pBridge));
 }
 
 Platinum::Action^ Platinum::ControlPoint::CreateAction( ActionDescription^ desc )
 {
-	if (desc == nullptr)
-		throw gcnew ArgumentNullException("desc");
+    if (desc == nullptr)
+        throw gcnew ArgumentNullException("desc");
 
-	// create action
-	PLT_ActionReference r(new PLT_Action(desc->Handle));
+    // create action
+    PLT_ActionReference r(new PLT_Action(desc->Handle));
 
-	return gcnew Action(r);
+    return gcnew Action(r);
 }
 
 
@@ -75,41 +75,41 @@ void Platinum::ControlPoint::InvokeAction(Action^ action)
 
 void Platinum::ControlPoint::Subscribe( Service^ srv )
 {
-	if (srv == nullptr)
-		throw gcnew ArgumentNullException("srv");
+    if (srv == nullptr)
+        throw gcnew ArgumentNullException("srv");
 
-	Helpers::ThrowOnError(
-		(*m_pHandle)->Subscribe(&srv->Handle, false)
-		);
+    Helpers::ThrowOnError(
+        (*m_pHandle)->Subscribe(&srv->Handle, false)
+        );
 }
 
 void Platinum::ControlPoint::Unsubscribe( Service^ srv )
 {
-	if (srv == nullptr)
-		throw gcnew ArgumentNullException("srv");
+    if (srv == nullptr)
+        throw gcnew ArgumentNullException("srv");
 
-	Helpers::ThrowOnError(
-		(*m_pHandle)->Subscribe(&srv->Handle, true)
-		);
+    Helpers::ThrowOnError(
+        (*m_pHandle)->Subscribe(&srv->Handle, true)
+        );
 }
 
 Platinum::ControlPoint::!ControlPoint()
 {
-	// clean-up unmanaged
-	if (m_pHandle != 0)
-	{
+    // clean-up unmanaged
+    if (m_pHandle != 0)
+    {
         // remove listener first, is it necessary?
         if (m_pBridge) (*m_pHandle)->RemoveListener(m_pBridge);
 
-		delete m_pHandle;
+        delete m_pHandle;
 
-		m_pHandle = 0;
-	}
+        m_pHandle = 0;
+    }
 
-	if (m_pBridge != 0)
-	{
-		delete m_pBridge;
+    if (m_pBridge != 0)
+    {
+        delete m_pBridge;
 
-		m_pBridge = 0;
-	}
+        m_pBridge = 0;
+    }
 }

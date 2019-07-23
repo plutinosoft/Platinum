@@ -120,16 +120,16 @@ public:
     bool Match(const PLT_ProtocolInfo& other) const;
 
 private:
-	typedef enum {
-		PLT_PROTINFO_PARSER_STATE_START,
-		PLT_PROTINFO_PARSER_STATE_PN,
-		PLT_PROTINFO_PARSER_STATE_OP,
-		PLT_PROTINFO_PARSER_STATE_PS,
-		PLT_PROTINFO_PARSER_STATE_CI,
-		PLT_PROTINFO_PARSER_STATE_FLAGS,
-		PLT_PROTINFO_PARSER_STATE_MAXSP,
-		PLT_PROTINFO_PARSER_STATE_OTHER
-	} PLT_ProtocolInfoParserState;
+    typedef enum {
+        PLT_PROTINFO_PARSER_STATE_START,
+        PLT_PROTINFO_PARSER_STATE_PN,
+        PLT_PROTINFO_PARSER_STATE_OP,
+        PLT_PROTINFO_PARSER_STATE_PS,
+        PLT_PROTINFO_PARSER_STATE_CI,
+        PLT_PROTINFO_PARSER_STATE_FLAGS,
+        PLT_PROTINFO_PARSER_STATE_MAXSP,
+        PLT_PROTINFO_PARSER_STATE_OTHER
+    } PLT_ProtocolInfoParserState;
 
     NPT_Result SetProtocolInfo(const char* protocol_info);
     NPT_Result ValidateField(const char*  val, 

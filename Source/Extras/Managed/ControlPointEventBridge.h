@@ -44,21 +44,21 @@ private class ControlPointEventBridge : public PLT_CtrlPointListener
 {
 private:
 
-	gcroot<ControlPoint^> m_pControlPoint;
+    gcroot<ControlPoint^> m_pControlPoint;
 
 public:
 
-	virtual NPT_Result OnDeviceAdded(PLT_DeviceDataReference& device);
-	virtual NPT_Result OnDeviceRemoved(PLT_DeviceDataReference& device);
-	virtual NPT_Result OnActionResponse(NPT_Result res, PLT_ActionReference& action, void* userdata);
-	virtual NPT_Result OnEventNotify(PLT_Service* service, NPT_List<PLT_StateVariable*>* vars);
+    virtual NPT_Result OnDeviceAdded(PLT_DeviceDataReference& device);
+    virtual NPT_Result OnDeviceRemoved(PLT_DeviceDataReference& device);
+    virtual NPT_Result OnActionResponse(NPT_Result res, PLT_ActionReference& action, void* userdata);
+    virtual NPT_Result OnEventNotify(PLT_Service* service, NPT_List<PLT_StateVariable*>* vars);
 
 public:
 
-	ControlPointEventBridge(gcroot<ControlPoint^> cp)
-	{
-		m_pControlPoint = cp;
-	}
+    ControlPointEventBridge(gcroot<ControlPoint^> cp)
+    {
+        m_pControlPoint = cp;
+    }
     virtual ~ControlPointEventBridge()
     {}
 

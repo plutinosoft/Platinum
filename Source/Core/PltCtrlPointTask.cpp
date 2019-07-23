@@ -173,13 +173,13 @@ PLT_CtrlPointHouseKeepingTask::DoRun()
 +---------------------------------------------------------------------*/
 PLT_CtrlPointSubscribeEventTask::PLT_CtrlPointSubscribeEventTask(NPT_HttpRequest*        request,
                                                                  PLT_CtrlPoint*          ctrl_point, 
-																 PLT_DeviceDataReference &device,
+                                                                 PLT_DeviceDataReference &device,
                                                                  PLT_Service*            service,
                                                                  void*                   userdata) : 
     PLT_HttpClientSocketTask(request), 
     m_CtrlPoint(ctrl_point), 
     m_Service(service), 
-	m_Device(device),
+    m_Device(device),
     m_Userdata(userdata) 
 {
 }

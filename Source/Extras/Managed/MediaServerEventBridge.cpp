@@ -83,7 +83,7 @@ NPT_Result Platinum::MediaServerEventBridge::OnSearchContainer(PLT_ActionReferen
                                                                const PLT_HttpRequestContext& context)
 {
 
-	return m_pMediaServer->OnSearchContainerDelegate(marshal_as<Action^>(action),
+    return m_pMediaServer->OnSearchContainerDelegate(marshal_as<Action^>(action),
                                                      marshal_as<String^>(object_id),
                                                      marshal_as<String^>(search_criteria),
                                                      marshal_as<String^>(filter),

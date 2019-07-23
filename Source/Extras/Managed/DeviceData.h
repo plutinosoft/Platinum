@@ -61,15 +61,15 @@ public:
         ManagedWrapper<PLT_DeviceIcon>()
     {}
 
-	DeviceIcon(String^ mimeType, Int32 width, Int32 height, Int32 depth, String^ urlPath) :
+    DeviceIcon(String^ mimeType, Int32 width, Int32 height, Int32 depth, String^ urlPath) :
         ManagedWrapper<PLT_DeviceIcon>()
     {
-		MimeType = mimeType;
-		Width = width;
-		Height = height;
-		Depth = depth;
-		UrlPath = urlPath;
-	}
+        MimeType = mimeType;
+        Width = width;
+        Height = height;
+        Depth = depth;
+        UrlPath = urlPath;
+    }
 };
 
 }
@@ -89,103 +89,103 @@ public ref class DeviceData
 {
 protected:
 
-	PLT_DeviceDataReference* m_pHandle;
+    PLT_DeviceDataReference* m_pHandle;
 
 public:
 
-	property String^ Description
-	{
-		String^ get()
-		{
-			NPT_String s;
+    property String^ Description
+    {
+        String^ get()
+        {
+            NPT_String s;
 
-			Helpers::ThrowOnError((*m_pHandle)->GetDescription(s));
+            Helpers::ThrowOnError((*m_pHandle)->GetDescription(s));
 
-			return gcnew String(s);
-		}
-	}
+            return gcnew String(s);
+        }
+    }
 
-	property Uri^ DescriptionUrl
-	{
-		Uri^ get()
-		{
-			return marshal_as<Uri^>((*m_pHandle)->GetDescriptionUrl());
-		}
-	}
+    property Uri^ DescriptionUrl
+    {
+        Uri^ get()
+        {
+            return marshal_as<Uri^>((*m_pHandle)->GetDescriptionUrl());
+        }
+    }
 
-	property Uri^ UrlBase
-	{
-		Uri^ get()
-		{
-			return marshal_as<Uri^>((*m_pHandle)->GetURLBase());
-		}
-	}
+    property Uri^ UrlBase
+    {
+        Uri^ get()
+        {
+            return marshal_as<Uri^>((*m_pHandle)->GetURLBase());
+        }
+    }
 
-	property Uri^ IconUrl
-	{
-		Uri^ get()
-		{
-			return marshal_as<Uri^>((*m_pHandle)->GetIconUrl());
-		}
-	}
+    property Uri^ IconUrl
+    {
+        Uri^ get()
+        {
+            return marshal_as<Uri^>((*m_pHandle)->GetIconUrl());
+        }
+    }
 
-	property TimeSpan^ LeaseTime
-	{
-		TimeSpan^ get()
-		{
-			return marshal_as<TimeSpan>((*m_pHandle)->GetLeaseTime());
-		}
-	}
+    property TimeSpan^ LeaseTime
+    {
+        TimeSpan^ get()
+        {
+            return marshal_as<TimeSpan>((*m_pHandle)->GetLeaseTime());
+        }
+    }
 
-	property String^ UUID
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetUUID());
-		}
-	}
+    property String^ UUID
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetUUID());
+        }
+    }
 
-	property String^ FriendlyName
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetFriendlyName());
-		}
-	}
+    property String^ FriendlyName
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetFriendlyName());
+        }
+    }
 
-	property String^ TypeName
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetType());
-		}
-	}
+    property String^ TypeName
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetType());
+        }
+    }
 
-	property String^ ModelDescription
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetModelDescription());
-		}
-	}
+    property String^ ModelDescription
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetModelDescription());
+        }
+    }
 
-	property String^ ParentUUID
-	{
-		String^ get()
-		{
-			return gcnew String((*m_pHandle)->GetParentUUID());
-		}
-	}
+    property String^ ParentUUID
+    {
+        String^ get()
+        {
+            return gcnew String((*m_pHandle)->GetParentUUID());
+        }
+    }
 
-	property IEnumerable<Service^>^ Services
-	{
-		IEnumerable<Service^>^ get();
-	}
+    property IEnumerable<Service^>^ Services
+    {
+        IEnumerable<Service^>^ get();
+    }
 
-	property IEnumerable<DeviceData^>^ EmbeddedDevices
-	{
-		IEnumerable<DeviceData^>^ get();
-	}
+    property IEnumerable<DeviceData^>^ EmbeddedDevices
+    {
+        IEnumerable<DeviceData^>^ get();
+    }
 
 internal:
 
@@ -199,61 +199,61 @@ internal:
 
 public:
 
-	DeviceData^ FindEmbeddedDeviceByType(String^ type);
-	Service^    FindServiceById(String^ serviceId);
-	Service^    FindServiceByType(String^ type);
-	Service^    FindServiceBySCPDURL(Uri^ url);
-	Service^    FindServiceByControlURL(Uri^ url);
-	Service^    FindServiceByEventSubURL(Uri^ url);
+    DeviceData^ FindEmbeddedDeviceByType(String^ type);
+    Service^    FindServiceById(String^ serviceId);
+    Service^    FindServiceByType(String^ type);
+    Service^    FindServiceBySCPDURL(Uri^ url);
+    Service^    FindServiceByControlURL(Uri^ url);
+    Service^    FindServiceByEventSubURL(Uri^ url);
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		return (*m_pHandle == *((DeviceData^)obj)->m_pHandle);
-	}
+        return (*m_pHandle == *((DeviceData^)obj)->m_pHandle);
+    }
 
 internal:
 
-	DeviceData(PLT_DeviceDataReference& devData)
-	{
-		if (devData.IsNull())
-			throw gcnew ArgumentNullException("devData");
+    DeviceData(PLT_DeviceDataReference& devData)
+    {
+        if (devData.IsNull())
+            throw gcnew ArgumentNullException("devData");
 
-		m_pHandle = new PLT_DeviceDataReference(devData);
-	}
+        m_pHandle = new PLT_DeviceDataReference(devData);
+    }
 
-	DeviceData(PLT_DeviceData& devData)
-	{
-		m_pHandle = new PLT_DeviceDataReference(&devData);
-	}
+    DeviceData(PLT_DeviceData& devData)
+    {
+        m_pHandle = new PLT_DeviceDataReference(&devData);
+    }
 
 public:
 
-	~DeviceData()
-	{
+    ~DeviceData()
+    {
         // clean-up managed
 
         // clean-up unmanaged
-		this->!DeviceData();
-	}
+        this->!DeviceData();
+    }
 
-	!DeviceData()
+    !DeviceData()
     {
         // clean-up unmanaged
-		if (m_pHandle != 0)
-		{
-			delete m_pHandle;
+        if (m_pHandle != 0)
+        {
+            delete m_pHandle;
 
-			m_pHandle = 0;
-		}
-	}
+            m_pHandle = 0;
+        }
+    }
 
 };
 

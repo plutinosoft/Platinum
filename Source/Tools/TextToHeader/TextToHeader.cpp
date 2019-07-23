@@ -221,8 +221,8 @@ main(int /*argc*/, char** argv)
 "| http://www.gnu.org/licenses/gpl-2.0.html\n"
 "|\n"
 "****************************************************************/\n", 
-		Options.header_name?Options.header_name:"");
-		fprintf(out, "\n"
+    Options.header_name?Options.header_name:"");
+    fprintf(out, "\n"
 "/*----------------------------------------------------------------------\n"
 "|   includes\n"
 "+---------------------------------------------------------------------*/\n");
@@ -232,7 +232,7 @@ main(int /*argc*/, char** argv)
 "|   globals\n"
 "+---------------------------------------------------------------------*/\n");
     fprintf(out, "NPT_UInt8 %s[] =\n", 
-    	  Options.variable_name?Options.variable_name:"kData");
+        Options.variable_name?Options.variable_name:"kData");
     fprintf(out, "{\n  ");
     col = 0;
     

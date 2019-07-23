@@ -81,7 +81,7 @@ PLT_StateVariable::GetSCPDXML(NPT_XmlElementNode* node)
     if (m_AllowedValues.GetItemCount()) {
         NPT_XmlElementNode* allowedValueList = new NPT_XmlElementNode("allowedValueList");
         NPT_CHECK_SEVERE(variable->AddChild(allowedValueList));
-	    for( int l = 0 ; l < (int)m_AllowedValues.GetItemCount(); l++) {
+        for( int l = 0 ; l < (int)m_AllowedValues.GetItemCount(); l++) {
             NPT_CHECK_SEVERE(PLT_XmlHelper::AddChildText(allowedValueList, "allowedValue", (*m_AllowedValues[l])));
         }
     } else if (m_AllowedValueRange) {
@@ -198,12 +198,12 @@ PLT_StateVariable::ValidateValue(const char* value)
             NPT_List<NPT_String>::Iterator val = values.GetFirstItem();
             while (val) {
                 val->Trim(" ");
-				if (!m_AllowedValues.Find(NPT_StringFinder(*val))) {
-					NPT_LOG_WARNING_2("Invalid value of %s for state variable %s", 
-						(const char*)*val,
-						(const char*)m_Name);
+                if (!m_AllowedValues.Find(NPT_StringFinder(*val))) {
+                    NPT_LOG_WARNING_2("Invalid value of %s for state variable %s", 
+                        (const char*)*val,
+                        (const char*)m_Name);
                     return NPT_ERROR_INVALID_PARAMETERS;
-				}
+                }
                 ++val;
             }
         }
@@ -230,7 +230,7 @@ PLT_StateVariable::Find(NPT_List<PLT_StateVariable*>& vars, const char* name)
 NPT_Result
 PLT_StateVariable::SetExtraAttribute(const char* name, const char* value)
 {
-	return m_ExtraAttributes.Put(NPT_String(name), NPT_String(value));
+    return m_ExtraAttributes.Put(NPT_String(name), NPT_String(value));
 }
 
 /*----------------------------------------------------------------------
@@ -244,7 +244,7 @@ PLT_StateVariable::Serialize(NPT_XmlElementNode& node)
     while (entry) {
         const NPT_String& key   = (*entry)->GetKey();
         const NPT_String& value = (*entry)->GetValue();
-		node.SetAttribute(key, value);
+        node.SetAttribute(key, value);
         ++entry;
     }
     return node.SetAttribute("val", GetValue());

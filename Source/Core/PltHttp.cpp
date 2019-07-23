@@ -56,11 +56,11 @@ class NPT_HttpHeaderFinder
     // methods
     NPT_HttpHeaderFinder(const char* name) : m_Name(name) {}
     bool operator()(const NPT_HttpHeader* const & header) const {
-		if (header->GetName().Compare(m_Name, true)) {
-			return true;
-		} else {
-			return false;
-		}
+        if (header->GetName().Compare(m_Name, true)) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
  private:
@@ -77,7 +77,7 @@ public:
     // methods
     NPT_HttpHeaderLogger(NPT_LoggerReference& logger, int level) : 
       m_Logger(logger), m_Level(level) {}
-	NPT_Result operator()(NPT_HttpHeader*& header) const {
+    NPT_Result operator()(NPT_HttpHeader*& header) const {
         NPT_COMPILER_UNUSED(header);
 
         NPT_LOG_L2(m_Logger, m_Level, "%s: %s", 
@@ -304,25 +304,25 @@ PLT_HttpHelper::SetHost(NPT_HttpRequest& request, const char* host)
 PLT_DeviceSignature
 PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
 {
-	const NPT_String* agent  = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_USER_AGENT);
-	const NPT_String* hdr    = request.GetHeaders().GetHeaderValue("X-AV-Client-Info");
+    const NPT_String* agent  = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_USER_AGENT);
+    const NPT_String* hdr    = request.GetHeaders().GetHeaderValue("X-AV-Client-Info");
     const NPT_String* server = request.GetHeaders().GetHeaderValue(NPT_HTTP_HEADER_SERVER);
-	const NPT_String* dlna_friendly_name = request.GetHeaders().GetHeaderValue("FriendlyName.DLNA.ORG");
-	NPT_LOG_FINEST_2("agent: %s, server: %s", agent?agent->GetChars():"none", server?server->GetChars():"none");
+    const NPT_String* dlna_friendly_name = request.GetHeaders().GetHeaderValue("FriendlyName.DLNA.ORG");
+    NPT_LOG_FINEST_2("agent: %s, server: %s", agent?agent->GetChars():"none", server?server->GetChars():"none");
 
-	if ((agent && (agent->Find("XBox", 0, true) >= 0 || agent->Find("Xenon", 0, true) >= 0)) ||
+    if ((agent && (agent->Find("XBox", 0, true) >= 0 || agent->Find("Xenon", 0, true) >= 0)) ||
         (server && server->Find("Xbox", 0, true) >= 0)) {
-		return PLT_DEVICE_XBOX_360;
-	} else if(dlna_friendly_name && (dlna_friendly_name->Find("XBOX-ONE", 0, true) >= 0)) {
-		return PLT_DEVICE_XBOX_ONE;
-	} else if (agent && (agent->Find("Windows Media Player", 0, true) >= 0 || agent->Find("Windows-Media-Player", 0, true) >= 0 || agent->Find("Mozilla/4.0", 0, true) >= 0 || agent->Find("WMFSDK", 0, true) >= 0)) {
-		return PLT_DEVICE_WMP;
-	} else if (agent && (agent->Find("Sonos", 0, true) >= 0)) {
-		return PLT_DEVICE_SONOS;
-	} else if ((agent && agent->Find("PLAYSTATION 3", 0, true) >= 0) || 
+        return PLT_DEVICE_XBOX_360;
+    } else if(dlna_friendly_name && (dlna_friendly_name->Find("XBOX-ONE", 0, true) >= 0)) {
+        return PLT_DEVICE_XBOX_ONE;
+    } else if (agent && (agent->Find("Windows Media Player", 0, true) >= 0 || agent->Find("Windows-Media-Player", 0, true) >= 0 || agent->Find("Mozilla/4.0", 0, true) >= 0 || agent->Find("WMFSDK", 0, true) >= 0)) {
+        return PLT_DEVICE_WMP;
+    } else if (agent && (agent->Find("Sonos", 0, true) >= 0)) {
+        return PLT_DEVICE_SONOS;
+    } else if ((agent && agent->Find("PLAYSTATION 3", 0, true) >= 0) || 
                (hdr && hdr->Find("PLAYSTATION 3", 0, true) >= 0)) {
-		return PLT_DEVICE_PS3;
-	} else if (agent && agent->Find("Windows", 0, true) >= 0) {
+        return PLT_DEVICE_PS3;
+    } else if (agent && agent->Find("Windows", 0, true) >= 0) {
         return PLT_DEVICE_WINDOWS;
     } else if (agent && (agent->Find("Mac", 0, true) >= 0 || agent->Find("OS X", 0, true) >= 0 || agent->Find("OSX", 0, true) >= 0)) {
         return PLT_DEVICE_MAC;
@@ -332,7 +332,7 @@ PLT_HttpHelper::GetDeviceSignature(const NPT_HttpRequest& request)
         NPT_LOG_FINER_2("Unknown device signature (ua=%s, server=%s)", agent?agent->GetChars():"none", server?server->GetChars():"none");
     }
 
-	return PLT_DEVICE_UNKNOWN;
+    return PLT_DEVICE_UNKNOWN;
 }
 
 /*----------------------------------------------------------------------
@@ -343,10 +343,10 @@ PLT_HttpHelper::SetBasicAuthorization(NPT_HttpRequest& request,
                                       const char*      username, 
                                       const char*      password)
 { 
-	NPT_String encoded;
-	NPT_String cred =  NPT_String(username) + ":" + password;
+    NPT_String encoded;
+    NPT_String cred =  NPT_String(username) + ":" + password;
 
-	NPT_Base64::Encode((const NPT_Byte *)cred.GetChars(), cred.GetLength(), encoded);
-	request.GetHeaders().SetHeader(NPT_HTTP_HEADER_AUTHORIZATION, NPT_String("Basic " + encoded)); 
+    NPT_Base64::Encode((const NPT_Byte *)cred.GetChars(), cred.GetLength(), encoded);
+    request.GetHeaders().SetHeader(NPT_HTTP_HEADER_AUTHORIZATION, NPT_String("Basic " + encoded)); 
 }
 

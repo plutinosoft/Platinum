@@ -49,175 +49,175 @@ public ref class ControlPoint
 {
 public:
 
-	delegate void DeviceAddedDelegate(DeviceData^ dev);
-	delegate void DeviceRemovedDelegate(DeviceData^ dev);
-	delegate void ActionResponseDelegate(NeptuneException^ error, Action^ action);
-	delegate void EventNotifyDelegate(Service^ srv, IEnumerable<StateVariable^>^ vars);
+    delegate void DeviceAddedDelegate(DeviceData^ dev);
+    delegate void DeviceRemovedDelegate(DeviceData^ dev);
+    delegate void ActionResponseDelegate(NeptuneException^ error, Action^ action);
+    delegate void EventNotifyDelegate(Service^ srv, IEnumerable<StateVariable^>^ vars);
 
 private:
 
-	PLT_CtrlPointReference* m_pHandle;
-	ControlPointEventBridge* m_pBridge;
-	List<DeviceData^>^ m_pDevices;
+    PLT_CtrlPointReference* m_pHandle;
+    ControlPointEventBridge* m_pBridge;
+    List<DeviceData^>^ m_pDevices;
 
 public:
 
-	property array<DeviceData^>^ Devices
-	{
-		array<DeviceData^>^ get()
-		{
-			System::Threading::Monitor::Enter(m_pDevices);
+    property array<DeviceData^>^ Devices
+    {
+        array<DeviceData^>^ get()
+        {
+            System::Threading::Monitor::Enter(m_pDevices);
 
-			return m_pDevices->ToArray();
+            return m_pDevices->ToArray();
 
-			System::Threading::Monitor::Exit(m_pDevices);
-		}
-	}
+            System::Threading::Monitor::Exit(m_pDevices);
+        }
+    }
 
 internal:
 
-	property PLT_CtrlPointReference& Handle
-	{
-		PLT_CtrlPointReference& get()
-		{
-			return *m_pHandle;
-		}
-	}
+    property PLT_CtrlPointReference& Handle
+    {
+        PLT_CtrlPointReference& get()
+        {
+            return *m_pHandle;
+        }
+    }
 
 public:
 
-	event DeviceAddedDelegate^ DeviceAdded;
-	event DeviceRemovedDelegate^ DeviceRemoved;
-	event ActionResponseDelegate^ ActionResponse;
-	event EventNotifyDelegate^ EventNotify;
+    event DeviceAddedDelegate^ DeviceAdded;
+    event DeviceRemovedDelegate^ DeviceRemoved;
+    event ActionResponseDelegate^ ActionResponse;
+    event EventNotifyDelegate^ EventNotify;
 
 internal:
 
-	void OnDeviceAdded(DeviceData^ dev)
-	{
-		// add to list
-		System::Threading::Monitor::Enter(m_pDevices);
+    void OnDeviceAdded(DeviceData^ dev)
+    {
+        // add to list
+        System::Threading::Monitor::Enter(m_pDevices);
 
-		m_pDevices->Add(dev);
+        m_pDevices->Add(dev);
 
-		System::Threading::Monitor::Exit(m_pDevices);
+        System::Threading::Monitor::Exit(m_pDevices);
 
-		// handle events
-		this->DeviceAdded(dev);
-	}
+        // handle events
+        this->DeviceAdded(dev);
+    }
 
-	void OnDeviceRemoved(DeviceData^ dev)
-	{
-		// handle events
-		this->DeviceRemoved(dev);
+    void OnDeviceRemoved(DeviceData^ dev)
+    {
+        // handle events
+        this->DeviceRemoved(dev);
 
-		// remove from list
-		System::Threading::Monitor::Enter(m_pDevices);
+        // remove from list
+        System::Threading::Monitor::Enter(m_pDevices);
 
-		m_pDevices->Remove(dev);
+        m_pDevices->Remove(dev);
 
-		System::Threading::Monitor::Exit(m_pDevices);
-	}
+        System::Threading::Monitor::Exit(m_pDevices);
+    }
 
-	void OnActionResponse(NeptuneException^ error, Action^ action)
-	{
-		this->ActionResponse(error, action);
-	}
+    void OnActionResponse(NeptuneException^ error, Action^ action)
+    {
+        this->ActionResponse(error, action);
+    }
 
-	void OnEventNotify(Service^ srv, IEnumerable<StateVariable^>^ vars)
-	{
-		this->EventNotify(srv, vars);
-	}
+    void OnEventNotify(Service^ srv, IEnumerable<StateVariable^>^ vars)
+    {
+        this->EventNotify(srv, vars);
+    }
 
 public:
 
-	Action^ CreateAction(ActionDescription^ desc);
+    Action^ CreateAction(ActionDescription^ desc);
     void InvokeAction(Action^ action);
 
-	void Subscribe(Service^ srv);
-	void Unsubscribe(Service^ srv);
+    void Subscribe(Service^ srv);
+    void Unsubscribe(Service^ srv);
 
 private:
 
-	void RegisterEvents();
+    void RegisterEvents();
 
 public:
 
-	virtual Boolean Equals(Object^ obj) override
-	{
-		if (obj == nullptr)
-			return false;
+    virtual Boolean Equals(Object^ obj) override
+    {
+        if (obj == nullptr)
+            return false;
 
-		if (!this->GetType()->IsInstanceOfType(obj))
-			return false;
+        if (!this->GetType()->IsInstanceOfType(obj))
+            return false;
 
-		return (*m_pHandle == *((ControlPoint^)obj)->m_pHandle);
-	}
+        return (*m_pHandle == *((ControlPoint^)obj)->m_pHandle);
+    }
 
 internal:
 
-	ControlPoint(PLT_CtrlPointReference& ctlPoint)
-	{
-		if (ctlPoint.IsNull())
-			throw gcnew ArgumentNullException("ctlPoint");
+    ControlPoint(PLT_CtrlPointReference& ctlPoint)
+    {
+        if (ctlPoint.IsNull())
+            throw gcnew ArgumentNullException("ctlPoint");
 
-		m_pHandle = new PLT_CtrlPointReference(ctlPoint);
+        m_pHandle = new PLT_CtrlPointReference(ctlPoint);
 
-		RegisterEvents();
-	}
+        RegisterEvents();
+    }
 
-	ControlPoint(PLT_CtrlPoint& ctlPoint)
-	{
-		m_pHandle = new PLT_CtrlPointReference(&ctlPoint);
+    ControlPoint(PLT_CtrlPoint& ctlPoint)
+    {
+        m_pHandle = new PLT_CtrlPointReference(&ctlPoint);
 
-		RegisterEvents();
-	}
+        RegisterEvents();
+    }
 
 public:
 
-	ControlPoint(String^ autoSearcheviceType)
-	{
-		if (String::IsNullOrEmpty(autoSearcheviceType))
-		{
-			throw gcnew ArgumentException("null or empty", "autoSearcheviceType");
-		}
+    ControlPoint(String^ autoSearcheviceType)
+    {
+        if (String::IsNullOrEmpty(autoSearcheviceType))
+        {
+            throw gcnew ArgumentException("null or empty", "autoSearcheviceType");
+        }
 
-		marshal_context c;
+        marshal_context c;
 
-		m_pHandle = new PLT_CtrlPointReference(
-			new PLT_CtrlPoint(c.marshal_as<const char*>(autoSearcheviceType))
-			);
+        m_pHandle = new PLT_CtrlPointReference(
+            new PLT_CtrlPoint(c.marshal_as<const char*>(autoSearcheviceType))
+            );
 
-		m_pDevices = gcnew List<DeviceData^>();
+        m_pDevices = gcnew List<DeviceData^>();
 
-		RegisterEvents();
-	}
+        RegisterEvents();
+    }
 
-	ControlPoint(bool autoSearch)
-	{
-		if (autoSearch)
-		{
-			m_pHandle = new PLT_CtrlPointReference(new PLT_CtrlPoint());
-		}
-		else
-		{
-			m_pHandle = new PLT_CtrlPointReference(new PLT_CtrlPoint(0));
-		}
+    ControlPoint(bool autoSearch)
+    {
+        if (autoSearch)
+        {
+            m_pHandle = new PLT_CtrlPointReference(new PLT_CtrlPoint());
+        }
+        else
+        {
+            m_pHandle = new PLT_CtrlPointReference(new PLT_CtrlPoint(0));
+        }
 
-		m_pDevices = gcnew List<DeviceData^>();
+        m_pDevices = gcnew List<DeviceData^>();
 
-		RegisterEvents();
-	}
+        RegisterEvents();
+    }
 
-	~ControlPoint()
-	{
-		// clean-up managed
+    ~ControlPoint()
+    {
+        // clean-up managed
 
-		// clean-up unmanaged
-		this->!ControlPoint();
-	}
+        // clean-up unmanaged
+        this->!ControlPoint();
+    }
 
-	!ControlPoint();
+    !ControlPoint();
 
 };
 

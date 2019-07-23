@@ -203,7 +203,7 @@ class PLT_CtrlPointSubscribeEventTask : public PLT_HttpClientSocketTask
 public:
     PLT_CtrlPointSubscribeEventTask(NPT_HttpRequest*         request,
                                     PLT_CtrlPoint*           ctrl_point, 
-									PLT_DeviceDataReference& device,
+                                    PLT_DeviceDataReference& device,
                                     PLT_Service*             service,
                                     void*                    userdata = NULL);
     virtual ~PLT_CtrlPointSubscribeEventTask();
@@ -218,7 +218,7 @@ protected:
 protected:
     PLT_CtrlPoint*          m_CtrlPoint;
     PLT_Service*            m_Service;
-	PLT_DeviceDataReference m_Device; // force to keep a reference to device owning m_Service
+    PLT_DeviceDataReference m_Device; // force to keep a reference to device owning m_Service
     void*                   m_Userdata;
 };
 

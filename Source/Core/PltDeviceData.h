@@ -124,7 +124,7 @@ public:
     NPT_Result FindEmbeddedDeviceByType(const char* type, PLT_DeviceDataReference& device);
     NPT_Result FindServiceById(const char* id, PLT_Service*& service);
     NPT_Result FindServiceByType(const char* type, PLT_Service*& service);
-	NPT_Result FindServiceByName(const char* name, PLT_Service*& service);
+    NPT_Result FindServiceByName(const char* name, PLT_Service*& service);
     NPT_Result FindServiceBySCPDURL(const char* url, PLT_Service*& service, bool recursive = false);
     NPT_Result FindServiceByControlURL(const char* url, PLT_Service*& service, bool recursive = false);
     NPT_Result FindServiceByEventSubURL(const char* url, PLT_Service*& service, bool recursive = false);
@@ -133,7 +133,7 @@ public:
     NPT_Result AddEmbeddedDevice(PLT_DeviceDataReference& device);
     NPT_Result RemoveEmbeddedDevice(PLT_DeviceDataReference& device);
     NPT_Result AddService(PLT_Service* service);
-	NPT_Result RemoveService(PLT_Service* service);
+    NPT_Result RemoveService(PLT_Service* service);
     
     /* BOOTID UPnP 1/1 */
     void SetBootId(NPT_UInt32 bootId);

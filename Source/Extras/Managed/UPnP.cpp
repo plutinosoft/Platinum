@@ -42,12 +42,12 @@
 
 void Platinum::UPnP::AddControlPoint( ControlPoint^ cp )
 {
-	Helpers::ThrowOnError(m_pHandle->AddCtrlPoint(cp->Handle));
+    Helpers::ThrowOnError(m_pHandle->AddCtrlPoint(cp->Handle));
 }
 
 void Platinum::UPnP::RemoveControlPoint( ControlPoint^ cp )
 {
-	Helpers::ThrowOnError(m_pHandle->RemoveCtrlPoint(cp->Handle));
+    Helpers::ThrowOnError(m_pHandle->RemoveCtrlPoint(cp->Handle));
 }
 
 void Platinum::UPnP::AddDeviceHost( DeviceHost^ host )
@@ -62,7 +62,7 @@ void Platinum::UPnP::RemoveDeviceHost( DeviceHost^ host )
 
 static Platinum::UPnP::UPnP()
 {
-	NeptuneLoggingBridge::Configure();
+    NeptuneLoggingBridge::Configure();
 }
 
 List<String^>^ Platinum::UPnP::GetIpAddresses(bool include_localhost)

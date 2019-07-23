@@ -235,7 +235,7 @@ public:
 PLT_CtrlPoint::PLT_CtrlPoint(const char* search_criteria /* = "upnp:rootdevice" */) :
     m_EventHttpServer(NULL),
     m_TaskManager(NULL),
-	m_Lock(true),
+    m_Lock(true),
     m_SearchCriteria(search_criteria),
     m_Started(false)
 {
@@ -1585,7 +1585,7 @@ PLT_CtrlPoint::Subscribe(PLT_Service* service,
     PLT_ThreadTask* task = new PLT_CtrlPointSubscribeEventTask(
         request,
         this, 
-		root_device,
+        root_device,
         service, 
         userdata);
     m_TaskManager->StartTask(task);
@@ -1732,8 +1732,8 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
                                      PLT_ActionReference&          action,
                                      void*                         userdata)
 {
-	NPT_COMPILER_UNUSED(request);
-	
+    NPT_COMPILER_UNUSED(request);
+
     NPT_String          service_type;
     NPT_String          str;
     NPT_XmlElementNode* xml = NULL;
@@ -1751,7 +1751,7 @@ PLT_CtrlPoint::ProcessActionResponse(NPT_Result                    res,
     // check context validity
     if (NPT_FAILED(res) || response == NULL) {
         PLT_Service* service = action_desc.GetService();
-		NPT_COMPILER_UNUSED(service);
+        NPT_COMPILER_UNUSED(service);
         NPT_LOG_WARNING_4("Failed to reach %s for %s.%s (%d)",
                           request.GetUrl().ToString().GetChars(),
                           service->GetDevice()->GetUUID().GetChars(),
@@ -1851,12 +1851,12 @@ PLT_CtrlPoint::ParseFault(PLT_ActionReference& action,
 
     NPT_XmlElementNode *upnp_error, *error_code, *error_desc;
     upnp_error = detail->GetChild("upnp_error");
-	
-	// WMP12 Hack
-	if (upnp_error == NULL) {
+
+    // WMP12 Hack
+    if (upnp_error == NULL) {
         upnp_error = detail->GetChild("UPnPError", NPT_XML_ANY_NAMESPACE);
         if (upnp_error == NULL) return NPT_FAILURE;
-	}
+    }
 
     error_code = upnp_error->GetChild("errorCode", NPT_XML_ANY_NAMESPACE);
     error_desc = upnp_error->GetChild("errorDescription", NPT_XML_ANY_NAMESPACE);

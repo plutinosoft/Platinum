@@ -71,7 +71,7 @@ PLT_MediaController::OnDeviceAdded(PLT_DeviceDataReference& device)
     // verify the device implements the function we need
     PLT_Service* serviceAVT = NULL;
     PLT_Service* serviceCMR;
-	PLT_Service* serviceRC;
+    PLT_Service* serviceRC;
     NPT_String   type;
     
     if (!device->GetType().StartsWith("urn:schemas-upnp-org:device:MediaRenderer"))
@@ -95,7 +95,7 @@ PLT_MediaController::OnDeviceAdded(PLT_DeviceDataReference& device)
         serviceCMR->ForceVersion(1);
     }
 
-	type = "urn:schemas-upnp-org:service:RenderingControl:*";
+    type = "urn:schemas-upnp-org:service:RenderingControl:*";
     if (NPT_FAILED(device->FindServiceByType(type, serviceRC))) {
         NPT_LOG_FINE_1("Service %s not found", (const char*)type);
         return NPT_FAILURE;
@@ -127,8 +127,8 @@ PLT_MediaController::OnDeviceAdded(PLT_DeviceDataReference& device)
         if (serviceAVT) m_CtrlPoint->Subscribe(serviceAVT);
 
         // subscribe to required services
-		m_CtrlPoint->Subscribe(serviceCMR);
-		m_CtrlPoint->Subscribe(serviceRC);
+        m_CtrlPoint->Subscribe(serviceCMR);
+        m_CtrlPoint->Subscribe(serviceRC);
     }
 
     return NPT_SUCCESS;
@@ -744,10 +744,10 @@ PLT_MediaController::SetMute(PLT_DeviceDataReference& device,
 |   PLT_MediaController::SetVolume
 +---------------------------------------------------------------------*/
 NPT_Result PLT_MediaController::SetVolume(PLT_DeviceDataReference&  device,
-										  NPT_UInt32				instance_id, 
-										  const char*               channel,
-										  int						volume, 
-										  void*						userdata) 
+                                          NPT_UInt32                instance_id,
+                                          const char*               channel,
+                                          int                       volume,
+                                          void*                     userdata)
 {
 
     PLT_ActionReference action;
@@ -757,15 +757,15 @@ NPT_Result PLT_MediaController::SetVolume(PLT_DeviceDataReference&  device,
         "SetVolume", 
         action));
 
-	    // set the channel
+    // set the channel
     if (NPT_FAILED(action->SetArgumentValue("Channel", channel))) {
         return NPT_ERROR_INVALID_PARAMETERS;
     }
 
-	if (NPT_FAILED(action->SetArgumentValue("DesiredVolume",  
-											NPT_String::FromInteger(volume)))) {
-		return NPT_ERROR_INVALID_PARAMETERS;
-	}
+    if (NPT_FAILED(action->SetArgumentValue("DesiredVolume",
+                                            NPT_String::FromInteger(volume)))) {
+        return NPT_ERROR_INVALID_PARAMETERS;
+    }
 
     return InvokeActionWithInstance(action, instance_id, userdata);
 }
@@ -798,9 +798,9 @@ PLT_MediaController::GetMute(PLT_DeviceDataReference& device,
 |   PLT_MediaController::GetVolume
 +---------------------------------------------------------------------*/
 NPT_Result PLT_MediaController::GetVolume(PLT_DeviceDataReference&  device, 
-										  NPT_UInt32				instance_id, 
-										  const char*				channel,
-										  void*						userdata) 
+                                          NPT_UInt32                instance_id,
+                                          const char*               channel,
+                                          void*                     userdata)
 {
     PLT_ActionReference action;
     NPT_CHECK_SEVERE(m_CtrlPoint->CreateAction(
@@ -809,7 +809,7 @@ NPT_Result PLT_MediaController::GetVolume(PLT_DeviceDataReference&  device,
         "GetVolume", 
         action));
 
-	    // set the channel
+    // set the channel
     if (NPT_FAILED(action->SetArgumentValue("Channel", channel))) {
         return NPT_ERROR_INVALID_PARAMETERS;
     }
@@ -910,7 +910,7 @@ PLT_MediaController::OnActionResponse(NPT_Result           res,
         if (NPT_FAILED(FindRenderer(uuid, device))) res = NPT_FAILURE;
         return OnGetMuteResponse(res, device, action, userdata);
     }
-	else if (actionName.Compare("SetVolume", true) == 0) { 
+    else if (actionName.Compare("SetVolume", true) == 0) {
         if (NPT_FAILED(FindRenderer(uuid, device))) res = NPT_FAILURE;
         m_Delegate->OnSetVolumeResult(res, device, userdata);
     }
@@ -1075,8 +1075,8 @@ PLT_MediaController::OnGetPositionInfoResponse(NPT_Result               res,
         goto bad_action;
     }
     if (NPT_FAILED(PLT_Didl::ParseTimeStamp(value, info.track_duration))) {
-         // some renderers return garbage sometimes
-		info.track_duration = NPT_TimeStamp(0.);
+        // some renderers return garbage sometimes
+        info.track_duration = NPT_TimeStamp(0.);
     }
 
     if (NPT_FAILED(action->GetArgumentValue("TrackMetaData", info.track_metadata))) {
@@ -1091,20 +1091,20 @@ PLT_MediaController::OnGetPositionInfoResponse(NPT_Result               res,
         goto bad_action;
     }
 
-	// NOT_IMPLEMENTED is a valid value according to spec
-	if (value != "NOT_IMPLEMENTED" && NPT_FAILED(PLT_Didl::ParseTimeStamp(value, info.rel_time))) {
-		// some dogy renderers return garbage sometimes
-		info.rel_time = NPT_TimeStamp(-1.0f);
+    // NOT_IMPLEMENTED is a valid value according to spec
+    if (value != "NOT_IMPLEMENTED" && NPT_FAILED(PLT_Didl::ParseTimeStamp(value, info.rel_time))) {
+        // some dogy renderers return garbage sometimes
+        info.rel_time = NPT_TimeStamp(-1.0f);
     }
 
     if (NPT_FAILED(action->GetArgumentValue("AbsTime", value))) {
         goto bad_action;
     }
     
-	// NOT_IMPLEMENTED is a valid value according to spec
-	if (value != "NOT_IMPLEMENTED" && NPT_FAILED(PLT_Didl::ParseTimeStamp(value, info.abs_time))) {
-		// some dogy renderers return garbage sometimes
-		info.abs_time = NPT_TimeStamp(-1.0f);
+    // NOT_IMPLEMENTED is a valid value according to spec
+    if (value != "NOT_IMPLEMENTED" && NPT_FAILED(PLT_Didl::ParseTimeStamp(value, info.abs_time))) {
+        // some dogy renderers return garbage sometimes
+        info.abs_time = NPT_TimeStamp(-1.0f);
     }
 
     if (NPT_FAILED(action->GetArgumentValue("RelCount", info.rel_count))) {
@@ -1335,32 +1335,32 @@ bad_action:
 +---------------------------------------------------------------------*/
 NPT_Result
 PLT_MediaController::OnGetVolumeResponse(NPT_Result               res, 
-										 PLT_DeviceDataReference& device, 
-										 PLT_ActionReference&	  action, 
-										 void*                    userdata) 
+                                         PLT_DeviceDataReference& device,
+                                         PLT_ActionReference&     action,
+                                         void*                    userdata)
 {
-	NPT_String channel;
-	NPT_String current_volume;
-	NPT_UInt32 volume;
-	
-	if (NPT_FAILED(res) || action->GetErrorCode() != 0) {
+    NPT_String channel;
+    NPT_String current_volume;
+    NPT_UInt32 volume;
+
+    if (NPT_FAILED(res) || action->GetErrorCode() != 0) {
         goto bad_action;
     }
 
-	if (NPT_FAILED(action->GetArgumentValue("Channel", channel))) {
+    if (NPT_FAILED(action->GetArgumentValue("Channel", channel))) {
         goto bad_action;
     }
 
-	if (NPT_FAILED(action->GetArgumentValue("CurrentVolume", current_volume))) {
+    if (NPT_FAILED(action->GetArgumentValue("CurrentVolume", current_volume))) {
         goto bad_action;
     }
 
-	if (NPT_FAILED(current_volume.ToInteger(volume))) {
-		  goto bad_action;
-	}
+    if (NPT_FAILED(current_volume.ToInteger(volume))) {
+        goto bad_action;
+    }
 
-	m_Delegate->OnGetVolumeResult(NPT_SUCCESS, device, channel, volume, userdata);
-	return NPT_SUCCESS;
+    m_Delegate->OnGetVolumeResult(NPT_SUCCESS, device, channel, volume, userdata);
+    return NPT_SUCCESS;
 
 bad_action:
     m_Delegate->OnGetVolumeResult(NPT_FAILURE, device, "", 0, userdata);

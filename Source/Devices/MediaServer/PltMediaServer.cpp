@@ -63,7 +63,7 @@ PLT_MediaServer::PLT_MediaServer(const char*  friendly_name,
                                  bool         show_ip     /* = false */, 
                                  const char*  uuid        /* = NULL */, 
                                  NPT_UInt16   port        /* = 0 */,
-                                 bool         port_rebind /* = false */) :	
+                                 bool         port_rebind /* = false */) :  
     PLT_DeviceHost("/DeviceDescription.xml", 
                    uuid, 
                    "urn:schemas-upnp-org:device:MediaServer:1", 
@@ -456,7 +456,7 @@ PLT_MediaServer::OnSearch(PLT_ActionReference&          action,
     NPT_Result res;
     NPT_String container_id;
     NPT_String search;
-	NPT_String filter;
+    NPT_String filter;
     NPT_String start;
     NPT_String count;
     NPT_String sort;
@@ -464,7 +464,7 @@ PLT_MediaServer::OnSearch(PLT_ActionReference&          action,
 
     if (NPT_FAILED(action->GetArgumentValue("ContainerId", container_id)) ||
         NPT_FAILED(action->GetArgumentValue("SearchCriteria", search)) || 
-		NPT_FAILED(action->GetArgumentValue("Filter",  filter)) ||
+        NPT_FAILED(action->GetArgumentValue("Filter",  filter)) ||
         NPT_FAILED(action->GetArgumentValue("StartingIndex",  start)) || 
         NPT_FAILED(action->GetArgumentValue("RequestedCount",  count)) || 
         NPT_FAILED(action->GetArgumentValue("SortCriteria",  sort))) {
@@ -502,7 +502,7 @@ PLT_MediaServer::OnSearch(PLT_ActionReference&          action,
         res = OnBrowseDirectChildren(
             action, 
             container_id,
-			filter,
+            filter,
             starting_index, 
             requested_count, 
             sort, 
@@ -512,7 +512,7 @@ PLT_MediaServer::OnSearch(PLT_ActionReference&          action,
             action, 
             container_id, 
             search, 
-			filter,
+            filter,
             starting_index, 
             requested_count, 
             sort,
@@ -581,7 +581,7 @@ NPT_Result
 PLT_MediaServer::OnSearchContainer(PLT_ActionReference&          action, 
                                    const char*                   object_id, 
                                    const char*                   search_criteria,
-								   const char*                   filter,
+                                   const char*                   filter,
                                    NPT_UInt32                    starting_index,
                                    NPT_UInt32                    requested_count,
                                    const char*                   sort_criteria,

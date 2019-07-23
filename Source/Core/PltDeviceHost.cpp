@@ -119,10 +119,10 @@ PLT_DeviceHost::AddIcon(const PLT_DeviceIcon& icon,
 {
     NPT_HttpStaticRequestHandler* icon_handler = 
         new NPT_HttpStaticRequestHandler(
-			data, 
-			size,
-			icon.m_MimeType,
-			copy);
+            data, 
+            size,
+            icon.m_MimeType,
+            copy);
     m_HttpServer->AddRequestHandler(icon_handler, icon.m_UrlPath, false, true);
     return m_Icons.Add(icon);
 }
@@ -133,20 +133,20 @@ PLT_DeviceHost::AddIcon(const PLT_DeviceIcon& icon,
 NPT_Result
 PLT_DeviceHost::SetupIcons()
 {
-	/*if (m_Icons.GetItemCount() == 0) {
-		AddIcon(
-			PLT_DeviceIcon("image/jpeg", 120, 120, 24, "/images/platinum-120x120.jpg"),
-			Platinum_120x120_jpg, sizeof(Platinum_120x120_jpg), false);
-		AddIcon(
-			PLT_DeviceIcon("image/jpeg", 48, 48, 24, "/images/platinum-48x48.jpg"),
-			Platinum_48x48_jpg, sizeof(Platinum_48x48_jpg), false);
-		AddIcon(
-			PLT_DeviceIcon("image/png", 120, 120, 24, "/images/platinum-120x120.png"),
-			Platinum_120x120_png, sizeof(Platinum_120x120_png), false);
-		AddIcon(
-			PLT_DeviceIcon("image/png", 48, 48, 24, "/images/platinum-48x48.png"),
-			Platinum_48x48_png, sizeof(Platinum_48x48_png), false);
-	}*/
+    /*if (m_Icons.GetItemCount() == 0) {
+        AddIcon(
+            PLT_DeviceIcon("image/jpeg", 120, 120, 24, "/images/platinum-120x120.jpg"),
+            Platinum_120x120_jpg, sizeof(Platinum_120x120_jpg), false);
+        AddIcon(
+            PLT_DeviceIcon("image/jpeg", 48, 48, 24, "/images/platinum-48x48.jpg"),
+            Platinum_48x48_jpg, sizeof(Platinum_48x48_jpg), false);
+        AddIcon(
+            PLT_DeviceIcon("image/png", 120, 120, 24, "/images/platinum-120x120.png"),
+            Platinum_120x120_png, sizeof(Platinum_120x120_png), false);
+        AddIcon(
+            PLT_DeviceIcon("image/png", 48, 48, 24, "/images/platinum-48x48.png"),
+            Platinum_48x48_png, sizeof(Platinum_48x48_png), false);
+    }*/
     return NPT_SUCCESS;
 }
 
@@ -574,8 +574,8 @@ PLT_DeviceHost::ProcessHttpPostRequest(NPT_HttpRequest&              request,
 
     // read all the arguments if any
     for (NPT_List<NPT_XmlNode*>::Iterator args = soap_action->GetChildren().GetFirstItem(); 
-		 args; 
-		 args++) {
+         args; 
+         args++) {
         NPT_XmlElementNode* child = (*args)->AsElementNode();
         if (!child) continue;
 
@@ -589,14 +589,14 @@ PLT_DeviceHost::ProcessHttpPostRequest(NPT_HttpRequest&              request,
             name,
             child->GetText()?*child->GetText():"");
 
-		// test if value was correct
-		if (res == NPT_ERROR_INVALID_PARAMETERS) {
-			action->SetError(701, "Invalid Name");
-			goto error;
-		}
+        // test if value was correct
+        if (res == NPT_ERROR_INVALID_PARAMETERS) {
+            action->SetError(701, "Invalid Name");
+            goto error;
+        }
     }
 
-	// verify all required arguments were passed
+    // verify all required arguments were passed
     if (NPT_FAILED(action->VerifyArguments(true))) {
         action->SetError(402, "Invalid or Missing Args");
         goto error;
@@ -750,14 +750,14 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
     NPT_String method      = request.GetMethod();
     NPT_String url         = request.GetUrl().ToRequestString(true);
     NPT_String protocol    = request.GetProtocol();
-	NPT_IpPort remote_port = context.GetRemoteAddress().GetPort();
-	const NPT_String* st   = PLT_UPnPMessageHelper::GetST(request);
+    NPT_IpPort remote_port = context.GetRemoteAddress().GetPort();
+    const NPT_String* st   = PLT_UPnPMessageHelper::GetST(request);
 
-	if (method.Compare("M-SEARCH") == 0) {
-		NPT_String prefix = NPT_String::Format("PLT_DeviceHost::OnSsdpPacket M-SEARCH for %s from %s:%d", 
-			st?st->GetChars():"Unknown",
-			(const char*) ip_address, remote_port);
-		PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
+    if (method.Compare("M-SEARCH") == 0) {
+        NPT_String prefix = NPT_String::Format("PLT_DeviceHost::OnSsdpPacket M-SEARCH for %s from %s:%d", 
+            st?st->GetChars():"Unknown",
+            (const char*) ip_address, remote_port);
+        PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
 
         /*
         // DLNA 7.2.3.5 support
@@ -786,12 +786,12 @@ PLT_DeviceHost::OnSsdpPacket(const NPT_HttpRequest&        request,
         PLT_SsdpDeviceSearchResponseTask* task = new PLT_SsdpDeviceSearchResponseTask(this, context.GetRemoteAddress(), *st);
         m_TaskManager->StartTask(task, &timer);
         return NPT_SUCCESS;
-	} else {
-		NPT_String prefix = NPT_String::Format("Ignoring %s request from %s:%d",
-											   method.GetChars(),
-											   (const char*) ip_address, remote_port);
-		PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
-	}
+    } else {
+        NPT_String prefix = NPT_String::Format("Ignoring %s request from %s:%d",
+                                               method.GetChars(),
+                                               (const char*) ip_address, remote_port);
+        PLT_LOG_HTTP_REQUEST(NPT_LOG_LEVEL_FINE, prefix, &request);
+    }
 
     return NPT_FAILURE;
 }

@@ -80,7 +80,7 @@ protected:
     virtual NPT_Result OnIsValidated(PLT_ActionReference&  action);
 
 protected:
-	NPT_Mutex   m_Lock;
+    NPT_Mutex   m_Lock;
     bool        m_AddHostname;
 };
 

@@ -49,150 +49,150 @@ namespace Platinum
 private ref class Helpers
 {
 public:
-	
-	static void ThrowOnError(NPT_Result r)
-	{
-		if (NPT_FAILED(r))
-		{
-			throw gcnew NeptuneException(r);
-		}
-	}
+    
+    static void ThrowOnError(NPT_Result r)
+    {
+        if (NPT_FAILED(r))
+        {
+            throw gcnew NeptuneException(r);
+        }
+    }
 
-	static void ThrowOnErrorButNoSuchItem(NPT_Result r)
-	{
-		if (NPT_FAILED(r) && (r != NPT_ERROR_NO_SUCH_ITEM))
-		{
-			throw gcnew NeptuneException(r);
-		}
-	}
+    static void ThrowOnErrorButNoSuchItem(NPT_Result r)
+    {
+        if (NPT_FAILED(r) && (r != NPT_ERROR_NO_SUCH_ITEM))
+        {
+            throw gcnew NeptuneException(r);
+        }
+    }
 
-	// this code was part of RouterControl.IO (http://routercontrol.codeplex.com)
-	// for more details see:
-	// http://www.knopflerfish.org/releases/current/docs/jars/upnp/upnp_api-2.0.0/src/org/osgi/service/upnp/UPnPStateVariable.java
-	static Type^ ParseType(const NPT_String& upnpType)
-	{
-		NPT_String s (upnpType);
+    // this code was part of RouterControl.IO (http://routercontrol.codeplex.com)
+    // for more details see:
+    // http://www.knopflerfish.org/releases/current/docs/jars/upnp/upnp_api-2.0.0/src/org/osgi/service/upnp/UPnPStateVariable.java
+    static Type^ ParseType(const NPT_String& upnpType)
+    {
+        NPT_String s (upnpType);
 
-		s.MakeLowercase();
+        s.MakeLowercase();
 
-		if (s == "string")
-			return String::typeid;
+        if (s == "string")
+            return String::typeid;
 
-		if (s == "char")
-			return Char::typeid;
+        if (s == "char")
+            return Char::typeid;
 
-		if (s == "boolean")
-			return Boolean::typeid;
+        if (s == "boolean")
+            return Boolean::typeid;
 
-		if (s == "ui1")
-			return Byte::typeid;
+        if (s == "ui1")
+            return Byte::typeid;
 
-		if (s == "ui2")
-			return UInt16::typeid;
+        if (s == "ui2")
+            return UInt16::typeid;
 
-		if (s == "ui4")
-			return UInt32::typeid;
+        if (s == "ui4")
+            return UInt32::typeid;
 
-		if (s == "i1")
-			return SByte::typeid;
+        if (s == "i1")
+            return SByte::typeid;
 
-		if (s == "i2")
-			return Int16::typeid;
+        if (s == "i2")
+            return Int16::typeid;
 
-		if ((s == "i4") || (s == "int"))
-			return Int32::typeid;
+        if ((s == "i4") || (s == "int"))
+            return Int32::typeid;
 
-		if ((s == "r4") || (s == "float"))
-			return Single::typeid;
+        if ((s == "r4") || (s == "float"))
+            return Single::typeid;
 
-		if ((s == "r8") || (s == "number") || (s == "fixed.14.4"))
-			return Double::typeid;
+        if ((s == "r8") || (s == "number") || (s == "fixed.14.4"))
+            return Double::typeid;
 
-		if ((s == "date") || (s == "datetime") || (s == "datetime.tz"))
-			return DateTime::typeid;
+        if ((s == "date") || (s == "datetime") || (s == "datetime.tz"))
+            return DateTime::typeid;
 
-		if ((s == "time") || (s == "time.tz"))	// milliseconds since midnight
-			return UInt64::typeid;
+        if ((s == "time") || (s == "time.tz"))  // milliseconds since midnight
+            return UInt64::typeid;
 
-		if ((s == "bin.base64") || (s == "bin.hex"))
-			return array<Byte>::typeid;
+        if ((s == "bin.base64") || (s == "bin.hex"))
+            return array<Byte>::typeid;
 
-		if (s == "uri")
-			return Uri::typeid;
+        if (s == "uri")
+            return Uri::typeid;
 
-		if (s == "uuid")
-			return Guid::typeid;
+        if (s == "uuid")
+            return Guid::typeid;
 
-		throw gcnew ArgumentException("unknown type", "upnpType");
-	}
+        throw gcnew ArgumentException("unknown type", "upnpType");
+    }
 
-	static Object^ ConvertValue(const NPT_String& targetType, const NPT_String& val)
-	{
-		return ConvertValue(ParseType(targetType), val);
-	}
+    static Object^ ConvertValue(const NPT_String& targetType, const NPT_String& val)
+    {
+        return ConvertValue(ParseType(targetType), val);
+    }
 
-	static Object^ ConvertValue(Type^ targetType, const NPT_String& val)
-	{
-		String^ strVal = gcnew String(val);
+    static Object^ ConvertValue(Type^ targetType, const NPT_String& val)
+    {
+        String^ strVal = gcnew String(val);
 
-		if (targetType == String::typeid)
-			return strVal;
+        if (targetType == String::typeid)
+            return strVal;
 
-		if (targetType == Char::typeid)
-		{
-			if (val.IsEmpty())
-				throw gcnew ArgumentException("character value is empty", "val");
+        if (targetType == Char::typeid)
+        {
+            if (val.IsEmpty())
+                throw gcnew ArgumentException("character value is empty", "val");
 
-			return Char(val[0]);
-		}
+            return Char(val[0]);
+        }
 
-		if (targetType == Boolean::typeid)
-			return Convert::ToBoolean(strVal);
+        if (targetType == Boolean::typeid)
+            return Convert::ToBoolean(strVal);
 
-		if (targetType == Byte::typeid)
-			return Convert::ToByte(strVal);
+        if (targetType == Byte::typeid)
+            return Convert::ToByte(strVal);
 
-		if (targetType == SByte::typeid)
-			return Convert::ToSByte(strVal);
+        if (targetType == SByte::typeid)
+            return Convert::ToSByte(strVal);
 
-		if (targetType == UInt16::typeid)
-			return Convert::ToUInt16(strVal);
+        if (targetType == UInt16::typeid)
+            return Convert::ToUInt16(strVal);
 
-		if (targetType == UInt32::typeid)
-			return Convert::ToUInt32(strVal);
+        if (targetType == UInt32::typeid)
+            return Convert::ToUInt32(strVal);
 
-		if (targetType == UInt64::typeid)
-			return Convert::ToUInt64(strVal);
+        if (targetType == UInt64::typeid)
+            return Convert::ToUInt64(strVal);
 
-		if (targetType == Int16::typeid)
-			return Convert::ToInt16(strVal);
+        if (targetType == Int16::typeid)
+            return Convert::ToInt16(strVal);
 
-		if (targetType == Int32::typeid)
-			return Convert::ToInt32(strVal);
+        if (targetType == Int32::typeid)
+            return Convert::ToInt32(strVal);
 
-		if (targetType == Int64::typeid)
-			return Convert::ToInt64(strVal);
+        if (targetType == Int64::typeid)
+            return Convert::ToInt64(strVal);
 
-		if (targetType == Single::typeid)
-			return Convert::ToSingle(strVal);
+        if (targetType == Single::typeid)
+            return Convert::ToSingle(strVal);
 
-		if (targetType == Double::typeid)
-			return Convert::ToDouble(strVal);
+        if (targetType == Double::typeid)
+            return Convert::ToDouble(strVal);
 
-		if (targetType == DateTime::typeid)
-			return Convert::ToDateTime(strVal);
+        if (targetType == DateTime::typeid)
+            return Convert::ToDateTime(strVal);
 
-		if (targetType == array<Byte>::typeid)
-			return Convert::FromBase64String(strVal);
+        if (targetType == array<Byte>::typeid)
+            return Convert::FromBase64String(strVal);
 
-		if (targetType == Uri::typeid)
-			return marshal_as<Uri^>(val);
+        if (targetType == Uri::typeid)
+            return marshal_as<Uri^>(val);
 
-		if (targetType == Guid::typeid)
-			return gcnew Guid(strVal);
+        if (targetType == Guid::typeid)
+            return gcnew Guid(strVal);
 
-		throw gcnew ArgumentException("unsupported type", "targetType");
-	}
+        throw gcnew ArgumentException("unsupported type", "targetType");
+    }
 
 };
 
@@ -276,7 +276,7 @@ public ref class ManagedWrapper
 protected:
 
     T_NativeType* m_pHandle;
-	bool		  m_Owned;
+    bool          m_Owned;
 
 internal:
 
@@ -303,7 +303,7 @@ public:
 
 internal:
 
-	ManagedWrapper() : m_Owned(true)
+    ManagedWrapper() : m_Owned(true)
     {
         m_pHandle = new T_NativeType();
     }
@@ -313,15 +313,15 @@ internal:
         m_pHandle = new T_NativeType(obj->Handle);
     }
 
-	ManagedWrapper(T_NativeType object_class) : m_Owned(true)
+    ManagedWrapper(T_NativeType object_class) : m_Owned(true)
     {
         m_pHandle = new T_NativeType(object_class.Handle);
     }*/
 
-	ManagedWrapper(T_NativeType& object_class) : m_Owned(false)
+    ManagedWrapper(T_NativeType& object_class) : m_Owned(false)
     {
-		// IMPORTANT: we're keeping a reference of the native pointer
-		// so passing a reference to a local variable allocated on the stack is not OK
+        // IMPORTANT: we're keeping a reference of the native pointer
+        // so passing a reference to a local variable allocated on the stack is not OK
         m_pHandle = &object_class;
     }
 
@@ -337,42 +337,42 @@ public:
         if (m_pHandle != 0 && m_Owned)
         {
             delete m_pHandle;
-		}
+        }
 
-		m_pHandle = 0;
+        m_pHandle = 0;
     }
 };
 
 }
 
 #define PLATINUM_MANAGED_IMPLEMENT_PROPERTY(propertyType, propertyName, nativeVar, nativePtr) \
-property propertyType propertyName {						             \
-	propertyType get() {	                                             \
-		return (nativePtr##->##nativeVar);	                             \
-	}																     \
-	void set(propertyType var) {	                                     \
+property propertyType propertyName {                                     \
+    propertyType get() {                                                 \
+        return (nativePtr##->##nativeVar);                               \
+    }                                                                    \
+    void set(propertyType var) {                                         \
         nativePtr##->##nativeVar = (var);                                \
-	}																     \
+    }                                                                    \
 }
 
 #define PLATINUM_MANAGED_IMPLEMENT_STRING_PROPERTY(propertyType, propertyName, nativeVar, nativePtr) \
-property propertyType propertyName {						             \
-	propertyType get() {	                                             \
-		return marshal_as<propertyType>(nativePtr##->##nativeVar);		 \
-	}																     \
-	void set(propertyType var) {	                                     \
+property propertyType propertyName {                                     \
+    propertyType get() {                                                 \
+        return marshal_as<propertyType>(nativePtr##->##nativeVar);       \
+    }                                                                    \
+    void set(propertyType var) {                                         \
         std::string s = marshalString<E_UTF8>(var);                      \
         nativePtr##->##nativeVar = s.c_str();                            \
-	}																     \
+    }                                                                    \
 }
 
 #define PLATINUM_MANAGED_IMPLEMENT_OBJECT_PROPERTY(propertyType, propertyName, nativeVar, nativePtr) \
-property propertyType propertyName {						             \
-	propertyType get() {	                                             \
-		return marshal_as<propertyType>(nativePtr##->##nativeVar);	     \
-	}																     \
-	void set(propertyType var) {                                         \
+property propertyType propertyName {                                     \
+    propertyType get() {                                                 \
+        return marshal_as<propertyType>(nativePtr##->##nativeVar);       \
+    }                                                                    \
+    void set(propertyType var) {                                         \
         nativePtr##->##nativeVar = var->Handle;                          \
-	}																     \
+    }                                                                    \
 }
 
