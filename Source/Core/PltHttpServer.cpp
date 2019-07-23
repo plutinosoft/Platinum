@@ -190,7 +190,7 @@ PLT_HttpServer::ServeFile(const NPT_HttpRequest&        request,
     NPT_FileInfo             file_info;
     
     // prevent hackers from accessing files outside of our root
-    if ((file_path.Find("/..") >= 0) || (file_path.Find("\\..") >= 0) ||
+    if ((file_path.Find("../") >= 0) || (file_path.Find("..\\") >= 0) ||
         NPT_FAILED(NPT_File::GetInfo(file_path, &file_info))) {
         return NPT_ERROR_NO_SUCH_ITEM;
     }
