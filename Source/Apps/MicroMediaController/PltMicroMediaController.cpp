@@ -855,7 +855,7 @@ PLT_MicroMediaController::ProcessCommandLoop()
         } else if (0 == strcmp(command, "mute")) {
             HandleCmd_mute();
         } else if (0 == strcmp(command, "unmute")) {
-            HandleCmd_mute();
+            HandleCmd_unmute();
         } else if (0 == strcmp(command, "help")) {
             HandleCmd_help();
         } else if (0 == strcmp(command, "")) {

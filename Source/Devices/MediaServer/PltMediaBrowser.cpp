@@ -177,10 +177,10 @@ PLT_MediaBrowser::FindServer(const char* uuid, PLT_DeviceDataReference& device)
 NPT_Result 
 PLT_MediaBrowser::Search(PLT_DeviceDataReference& device, 
                          const char*              container_id,
-						 const char*              search_criteria,
+                         const char*              search_criteria,
                          NPT_UInt32               start_index,
-                         NPT_UInt32               count,
-                         const char*              filter,
+                         NPT_UInt32               count, /* = 30 */
+                         const char*              filter, /* = PLT_DEFAULT_FILTER */
                          void*                    userdata)
 {
     // verify device still in our list
@@ -245,9 +245,9 @@ PLT_MediaBrowser::Browse(PLT_DeviceDataReference& device,
                          const char*              obj_id,
                          NPT_UInt32               start_index,
                          NPT_UInt32               count,
-                         bool                     browse_metadata,
-                         const char*              filter,
-                         const char*              sort_criteria,
+                         bool                     browse_metadata, /* = false */
+                         const char*              filter, /* = PLT_DEFAULT_FILTER */
+                         const char*              sort, /* = "" */
                          void*                    userdata)
 {
     // verify device still in our list
@@ -292,7 +292,7 @@ PLT_MediaBrowser::Browse(PLT_DeviceDataReference& device,
     }
 
     // set the Requested Count
-    if (NPT_FAILED(action->SetArgumentValue("SortCriteria", sort_criteria))) {
+    if (NPT_FAILED(action->SetArgumentValue("SortCriteria", sort))) {
         return NPT_ERROR_INVALID_PARAMETERS;
     }
 

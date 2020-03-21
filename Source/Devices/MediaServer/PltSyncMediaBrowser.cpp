@@ -235,7 +235,9 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
                                  PLT_MediaObjectListReference& list,
                                  bool                          metadata, /* = false */
                                  NPT_Int32                     start, /* = 0 */
-                                 NPT_Cardinal                  max_results /* = 0 */)
+                                 NPT_Cardinal                  max_results, /* = 0 */
+                                 const char*                   filter, /* = PLT_DEFAULT_FILTER */
+                                 const char*                   sort /* = "" */)
 {
     NPT_Result res = NPT_FAILURE;
     NPT_Int32  index = start;
@@ -261,7 +263,9 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
             (const char*)object_id,
             index,
             metadata?1:30, // DLNA recommendations for browsing children is no more than 30 at a time
-            metadata);		
+            metadata,
+            filter,
+            sort);
         NPT_CHECK_LABEL_WARNING(res, done);
         
         if (NPT_FAILED(browse_data->res)) {
@@ -288,7 +292,7 @@ PLT_SyncMediaBrowser::BrowseSync(PLT_DeviceDataReference&      device,
         // available. In this case we have to continue browsing until
         // nothing is returned back by the server.
         // Unless we were told to stop after reaching a certain amount to avoid
-        // length delays
+        // lengthy delays.
         // (some servers may return a total matches out of whack at some point too)
         if ((browse_data->info.tm && browse_data->info.tm <= list->GetItemCount()) ||
             (max_results && list->GetItemCount() >= max_results))
