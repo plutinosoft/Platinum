@@ -35,7 +35,7 @@ def DeclareBuildDir(dir):
 def GetIncludeDirs(modules, exclude=None):
     dirs = []
     for module in Split(modules):
-        if Modules.has_key(module) and not module == exclude:
+        if module in Modules and not module == exclude:
             dirs += Modules[module].GetIncludeDirs()
         else:
             dirs += [GetDirPath(module)]
@@ -44,7 +44,7 @@ def GetIncludeDirs(modules, exclude=None):
 def GetLibraries(modules):
     libs = []
     for module in Split(modules):
-        if Modules.has_key(module):
+        if module in Modules:
             libs += Modules[module].GetLibraries()
         else:
             libs += [module]
@@ -200,7 +200,8 @@ else:
 target_config_file = env.GetBuildPath('#/Build/Targets/'+env['target']+'/Config.scons')
 if os.path.exists(target_config_file):
     # Load the target-specific config file
-    execfile(target_config_file)
+    with open(target_config_file) as f:
+        exec(f.read())
 
 #######################################################
 # modules
