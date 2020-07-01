@@ -705,6 +705,7 @@
 		E45332B41AAED318004A52FD /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		E45332B61AAED318004A52FD /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		E45332B71AAED318004A52FD /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
+		E45EF4FC24AC62B100AF461C /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../../README.md; sourceTree = "<group>"; };
 		E467AC771447747D00CEAACA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E467AC791447747D00CEAACA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS5.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		E477694512A9C00E0011EEE4 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -726,7 +727,6 @@
 		E4BA7CBC0FE2200700A4D16B /* PltConstants.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PltConstants.cpp; path = ../../../Source/Core/PltConstants.cpp; sourceTree = SOURCE_ROOT; };
 		E4CB6A441640354E002478B0 /* CHANGELOG.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = CHANGELOG.txt; path = ../../../CHANGELOG.txt; sourceTree = "<group>"; };
 		E4CB6A451640354E002478B0 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = LICENSE.txt; path = ../../../LICENSE.txt; sourceTree = "<group>"; };
-		E4CB6A461640354E002478B0 /* README.txt */ = {isa = PBXFileReference; lastKnownFileType = text; name = README.txt; path = ../../../README.txt; sourceTree = "<group>"; };
 		E4F7E9060FE4B12A00BEDFA6 /* PltIconsData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PltIconsData.cpp; path = ../../../Source/Core/PltIconsData.cpp; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
@@ -920,9 +920,9 @@
 		C6A0FF2B0290797F04C91782 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				E45EF4FC24AC62B100AF461C /* README.md */,
 				E4CB6A441640354E002478B0 /* CHANGELOG.txt */,
 				E4CB6A451640354E002478B0 /* LICENSE.txt */,
-				E4CB6A461640354E002478B0 /* README.txt */,
 			);
 			name = Documentation;
 			sourceTree = "<group>";

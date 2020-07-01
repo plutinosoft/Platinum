@@ -5,4 +5,4 @@ xcuserdata
 *.xcworkspace
 *.pyc
 .scons*
-*/**/.DS_Store
+.DS_Store

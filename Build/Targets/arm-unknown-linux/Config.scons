@@ -1,4 +1,4 @@
-LoadTool('gcc-generic', env, gcc_cross_prefix='arm-linux')
+LoadTool('gcc-generic', env, gcc_cross_prefix='arm-none-eabi')
 
 ### Neptune System Files
 env['NPT_SYSTEM_SOURCES']={'System/StdC':'*.cpp', 'System/Bsd':'*.cpp', 'System/Posix':'*.cpp', 'System/Null':'NptNullAutoreleasePool.cpp'}
