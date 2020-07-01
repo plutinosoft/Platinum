@@ -35,7 +35,7 @@ def DeclareBuildDir(dir):
 def GetIncludeDirs(modules, exclude=None):
     dirs = []
     for module in Split(modules):
-        if Modules.has_key(module) and not module == exclude:
+        if module in Modules and not module == exclude:
             dirs += Modules[module].GetIncludeDirs()
         else:
             dirs += [GetDirPath(module)]
@@ -44,7 +44,7 @@ def GetIncludeDirs(modules, exclude=None):
 def GetLibraries(modules):
     libs = []
     for module in Split(modules):
-        if Modules.has_key(module):
+        if module in Modules:
             libs += Modules[module].GetLibraries()
         else:
             libs += [module]
@@ -124,7 +124,7 @@ class LibraryModule(Module):
         # copy to Targets folder
         if install is True:
             inst = env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=self.product)
-            if env['build_config'] == 'Release' and env.has_key('STRIP'):
+            if env['build_config'] == 'Release' and 'STRIP' in env:
                 env.AddPostAction(inst, env['STRIP']+' $TARGETS');
 
 def Application(name, dir, deps, install = False):
@@ -136,13 +136,13 @@ def Application(name, dir, deps, install = False):
                        GlobSources(dir, ['*.c', '*.cpp']) + env['NPT_EXTRA_EXECUTABLE_OBJECTS'],
                        LIBS=libs, CPPPATH=cpp_path)
     #env.Alias(name, prog)
-    if env.has_key('NPT_EXECUTABLE_POST_PROCESSOR'):
+    if 'NPT_EXECUTABLE_POST_PROCESSOR' in env:
         env.AddPostAction(prog, env['NPT_EXECUTABLE_POST_PROCESSOR'])
 
     # copy to Targets folder
     if install is True:
         inst = env.Install(dir=env.GetBuildPath('#/Targets/'+env['target']+'/'+env['build_config']), source=prog)
-        if env['build_config'] == 'Release' and env.has_key('STRIP'):
+        if env['build_config'] == 'Release' and 'STRIP' in env:
             env.AddPostAction(inst, env['STRIP']+' $TARGETS');
 
 #######################################################
@@ -163,7 +163,7 @@ else:
 target_config_file = env.GetBuildPath('#/Build/Targets/'+env['target']+'/Config.scons')
 if os.path.exists(target_config_file):
     # Load the target-specific config file
-    execfile(target_config_file)
+    exec(open(target_config_file).read())
 
 #######################################################
 # modules
@@ -195,7 +195,7 @@ NPT_SOURCE_ROOT = 'ThirdParty/Neptune'
 
 extra_cpp_flags = []
 neptune_extra_linked_modules = []
-if not env.has_key('NPT_CONFIG_NO_ZIP'):
+if not 'NPT_CONFIG_NO_ZIP' in env:
     extra_cpp_flags = ['NPT_CONFIG_ENABLE_ZIP']
     neptune_extra_linked_modules += ['Zlib']
 
@@ -203,7 +203,7 @@ if not env.has_key('NPT_CONFIG_NO_ZIP'):
                   source_root           = NPT_SOURCE_ROOT,
                   build_source_dirs     = ['ThirdParty/zlib-1.2.3'])
 
-if not env.has_key('NPT_CONFIG_NO_SSL'):
+if not 'NPT_CONFIG_NO_SSL' in env:
     extra_cpp_flags += ['NPT_CONFIG_ENABLE_TLS']
     tls_data_dirs  = ['Data/TLS']
     tls_tests      = ['Tls1']
@@ -216,7 +216,7 @@ else:
     tls_data_dirs = []
     tls_tests     = []
 
-if not env.has_key('NPT_CONFIG_NO_CRYPTO'):
+if not 'NPT_CONFIG_NO_CRYPTO' in env:
     extra_cpp_flags += ['NPT_CONFIG_ENABLE_CRYPTO']
     neptune_excluded_files = []
 else:

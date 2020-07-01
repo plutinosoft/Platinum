@@ -569,8 +569,13 @@ PLT_Service::ProcessNewSubscription(PLT_TaskManagerReference task_manager,
             if (*brackR == '>') {
                 NPT_String strCallbackURL = NPT_String(brackL+1, (NPT_Size)(brackR-brackL-1));
                 NPT_HttpUrl url(strCallbackURL);
+                NPT_IpAddress address;
 
-                if (url.IsValid()) {
+                if (!url.IsValid() ||
+                    NPT_FAILED(address.ResolveName(url.GetHost().GetChars())) ||
+                    !PLT_UPnPMessageHelper::IsLocalNetworkAddress(address)) {
+                    NPT_LOG_SEVERE_1("Invalid callback url %s", strCallbackURL.GetChars());
+                } else {
                     subscriber->AddCallbackURL(strCallbackURL);
                     reachable = true;
                 }
