@@ -4,9 +4,7 @@ install: true
 script: Scripts/cibuild
 deploy:
   provider: releases
-  api_key:
-    secure: YLp5tePMt+kFha5nT43+CHTm31LN1UOJCt6zZ1sEkdmpiZx6XyexJDaZoSxB3BlTTcCDA1DGcMyBP9+mly5TYl/0I5FTsR4HDenYHBl09qHzFJ1aeGrM+mxT7RV4dmgIf4/Czb+Zau0Zr2TDe23uHdyMKoGOpIbKasajw4U4zk2ozn8SpZaZ23MMVq3oNCJEJthfXH8Qr74gy8hooj1VjT7CGPX4gLXThDRlRq5mdeE46jS5OcOXKNPHbeYC/5MWrm2eFPLJgKiFvJ/1FsxE6i3OdSbBn+Yhp0UlNR9/qalvyCYofD4cePy1jsTcDqCxqDX6uspWqaTvVVluNlwfsKsVWHaO60cKjEYupIymtgWEIWDMEK40bgAaejp20OkD+vuvY/+eUNdAZhqE+C/QTTuanyHR6BRk8it2217xtqEuRP5MKAckH2mTgA5qWwYDfL7mPTX9gHcwOAZMb9F+JVdF23CGNUAt7lL+6+QUpONzCOq6VX7Mox3Scp5h4v5i5OtmB2qPp0LjfgwkbDIic9CA0tjBPyX3IokI1pQU7BgOS7QqZI5kkaeG88pt2aaOMx85EhvK+CGT7I9mryiyUMSalRjqNbZDxA1shPnbZDWN4PtfkyreeLQ3UhYPUID2w4i/5txE73JMTJKHLRcAATuu0rK8+LkIBBO0we17KLM=
+  api_key: "$GITHUB_OAUTH_TOKEN"
   file: Platinum.framework.zip
   skip_cleanup: true
-  on:
-    tags: true
+  draft: true
