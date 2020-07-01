@@ -1,3 +1,25 @@
+Platinum 1.3.0
+--------------
+- fixed: callstranger vulnerability (https://callstranger.com/)
+
+Platinum 1.2.0
+--------------
+- updated: Neptune 1.1.11
+- updated: xcode requirements
+- fixed: compiling issues when NPT_CONFIG_ENABLE_LOGGING is not defined
+- added: support for carthage workflow
+- fixed: linux config
+- removed: no-crypto info in readme
+
+Platinum 1.1.1
+--------------
+- updated: Neptune 1.1.9
+- added: Travis support
+
+Platinum 1.1.0
+--------------
+- updated: Neptune 1.1.7
+
 Platinum 1.0.5.13
 -----------------
 - fixed: didl used "actors" instead of "actor"
