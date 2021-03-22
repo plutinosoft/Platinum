@@ -5,21 +5,19 @@
       <Name>Root</Name>
       <Path>index.html</Path>
       <Subnodes>
-        <Subnodes>
-         <Node>
-          <Name>Introduction</Name>
-          <Path>index.html</Path>
-          <Anchor>intro</Anchor>
-         </Node>
-         <Node>
-          <Name>Architecture</Name>
-          <Path>index.html</Path>
-          <Anchor>architecture</Anchor>
-         </Node>
-        </Subnodes>
+       <Node>
+        <Name>Introduction</Name>
+        <Path>index.html</Path>
+        <Anchor>intro</Anchor>
+       </Node>
+       <Node>
+        <Name>Architecture</Name>
+        <Path>index.html</Path>
+        <Anchor>architecture</Anchor>
+       </Node>
        <Node>
         <Name>Classes</Name>
-        <Path></Path>
+        <Path>annotated.html</Path>
         <Subnodes>
          <Node>
           <Name>Class List</Name>
@@ -80,12 +78,7 @@
              <Node>
               <Name>GetArgumentValue</Name>
               <Path>classPLT__Action.html</Path>
-              <Anchor>ae9257a72ae5dd3c7e69e607582be6d18</Anchor>
-             </Node>
-             <Node>
-              <Name>GetArgumentValue</Name>
-              <Path>classPLT__Action.html</Path>
-              <Anchor>a99f233815a45a82119197ae7aa06ff1e</Anchor>
+              <Anchor>a8a30f97ece6feeaaf3ee74e237002dd4</Anchor>
              </Node>
              <Node>
               <Name>GetArgumentValue</Name>
@@ -95,7 +88,12 @@
              <Node>
               <Name>GetArgumentValue</Name>
               <Path>classPLT__Action.html</Path>
-              <Anchor>a8a30f97ece6feeaaf3ee74e237002dd4</Anchor>
+              <Anchor>ae9257a72ae5dd3c7e69e607582be6d18</Anchor>
+             </Node>
+             <Node>
+              <Name>GetArgumentValue</Name>
+              <Path>classPLT__Action.html</Path>
+              <Anchor>a99f233815a45a82119197ae7aa06ff1e</Anchor>
              </Node>
              <Node>
               <Name>GetError</Name>
@@ -161,7 +159,7 @@
              <Node>
               <Name>GetName</Name>
               <Path>classPLT__ActionDesc.html</Path>
-              <Anchor>af3bc5ebb6539e91632c8f033713c74bc</Anchor>
+              <Anchor>af55878f1c51ca4e0b17e2e528a260ad4</Anchor>
              </Node>
              <Node>
               <Name>GetSCPDXML</Name>
@@ -315,12 +313,12 @@
              <Node>
               <Name>Announce</Name>
               <Path>classPLT__DeviceHost.html</Path>
-              <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
+              <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
              </Node>
              <Node>
               <Name>Announce</Name>
               <Path>classPLT__DeviceHost.html</Path>
-              <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
+              <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
              </Node>
              <Node>
               <Name>GetPort</Name>
@@ -365,12 +363,12 @@
              <Node>
               <Name>SendSsdpSearchResponse</Name>
               <Path>classPLT__DeviceHost.html</Path>
-              <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
+              <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
              </Node>
              <Node>
               <Name>SendSsdpSearchResponse</Name>
               <Path>classPLT__DeviceHost.html</Path>
-              <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
+              <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
              </Node>
              <Node>
               <Name>SetByeByeFirst</Name>
@@ -616,18 +614,6 @@
             <Name>PLT_MediaServer</Name>
             <Path>classPLT__MediaServer.html</Path>
             <Subnodes>
-              <Subnodes>
-               <Node>
-                <Name>BROWSEMETADATA</Name>
-                <Path>classPLT__MediaServer.html</Path>
-                <Anchor>a2b1a61b7d8df726192f9df1677c32fd5ab7339643032153b501fe8f33ff8dd1a6</Anchor>
-               </Node>
-               <Node>
-                <Name>BROWSEDIRECTCHILDREN</Name>
-                <Path>classPLT__MediaServer.html</Path>
-                <Anchor>a2b1a61b7d8df726192f9df1677c32fd5ad6a35b3ccd6d968940c1617b0390b835</Anchor>
-               </Node>
-              </Subnodes>
              <Node>
               <Name>OnAction</Name>
               <Path>classPLT__MediaServer.html</Path>
@@ -702,7 +688,7 @@
              <Node>
               <Name>GetActionDescs</Name>
               <Path>classPLT__Service.html</Path>
-              <Anchor>a86045000e08335d7f403bdd82bc8d5df</Anchor>
+              <Anchor>a78679fc7406e8db016ac95008f9789c8</Anchor>
              </Node>
              <Node>
               <Name>GetControlURL</Name>
@@ -737,22 +723,22 @@
              <Node>
               <Name>GetServiceID</Name>
               <Path>classPLT__Service.html</Path>
-              <Anchor>a4b1050ca90463dbc64ca362346b2957b</Anchor>
+              <Anchor>a99aa8a2d926050dabea19747ae588a1b</Anchor>
              </Node>
              <Node>
               <Name>GetServiceName</Name>
               <Path>classPLT__Service.html</Path>
-              <Anchor>a615554808c3b06598038c1e9658e1fd9</Anchor>
+              <Anchor>acf20f9f0c3c1453bc37b0bb907964272</Anchor>
              </Node>
              <Node>
               <Name>GetServiceType</Name>
               <Path>classPLT__Service.html</Path>
-              <Anchor>aa9a2af0550c50e34a7e826b775fc66e4</Anchor>
+              <Anchor>a178469ba3e404c48003539cede7ab103</Anchor>
              </Node>
              <Node>
               <Name>GetStateVariables</Name>
               <Path>classPLT__Service.html</Path>
-              <Anchor>a294f32359568874d9d8a0e4d0994517b</Anchor>
+              <Anchor>a216f57ff32f6900dd8a95b4a540023e6</Anchor>
              </Node>
              <Node>
               <Name>GetStateVariableValue</Name>
@@ -960,17 +946,17 @@
              <Node>
               <Name>GetAllowedValueRange</Name>
               <Path>classPLT__StateVariable.html</Path>
-              <Anchor>a2b37176000fbbe8a93505a4aaee38fb1</Anchor>
+              <Anchor>a34accba754fe9e1c12ccf170303b1bc2</Anchor>
              </Node>
              <Node>
               <Name>GetDataType</Name>
               <Path>classPLT__StateVariable.html</Path>
-              <Anchor>a10eb75fa50927c3f359be8a50d615a23</Anchor>
+              <Anchor>a1079252f20ad2696bad7be8283bcd9b4</Anchor>
              </Node>
              <Node>
               <Name>GetName</Name>
               <Path>classPLT__StateVariable.html</Path>
-              <Anchor>a3912a728c58b7a0809570e7355695217</Anchor>
+              <Anchor>a0609dbbf5dcca48e52dbe9a13ea22ec2</Anchor>
              </Node>
              <Node>
               <Name>GetSCPDXML</Name>
@@ -985,7 +971,7 @@
              <Node>
               <Name>GetValue</Name>
               <Path>classPLT__StateVariable.html</Path>
-              <Anchor>a1d68497e653407d7ea4049afa2299f1e</Anchor>
+              <Anchor>a1c0bcd69e32d949c41c19f401c030176</Anchor>
              </Node>
              <Node>
               <Name>IsReadyToPublish</Name>
@@ -1591,7 +1577,7 @@
        </Node>
        <Node>
         <Name>Files</Name>
-        <Path></Path>
+        <Path>files.html</Path>
         <Subnodes>
          <Node>
           <Name>File List</Name>
@@ -1642,12 +1628,7 @@
                <Node>
                 <Name>GetArgumentValue</Name>
                 <Path>classPLT__Action.html</Path>
-                <Anchor>ae9257a72ae5dd3c7e69e607582be6d18</Anchor>
-               </Node>
-               <Node>
-                <Name>GetArgumentValue</Name>
-                <Path>classPLT__Action.html</Path>
-                <Anchor>a99f233815a45a82119197ae7aa06ff1e</Anchor>
+                <Anchor>a8a30f97ece6feeaaf3ee74e237002dd4</Anchor>
                </Node>
                <Node>
                 <Name>GetArgumentValue</Name>
@@ -1657,7 +1638,12 @@
                <Node>
                 <Name>GetArgumentValue</Name>
                 <Path>classPLT__Action.html</Path>
-                <Anchor>a8a30f97ece6feeaaf3ee74e237002dd4</Anchor>
+                <Anchor>ae9257a72ae5dd3c7e69e607582be6d18</Anchor>
+               </Node>
+               <Node>
+                <Name>GetArgumentValue</Name>
+                <Path>classPLT__Action.html</Path>
+                <Anchor>a99f233815a45a82119197ae7aa06ff1e</Anchor>
                </Node>
                <Node>
                 <Name>GetError</Name>
@@ -1723,7 +1709,7 @@
                <Node>
                 <Name>GetName</Name>
                 <Path>classPLT__ActionDesc.html</Path>
-                <Anchor>af3bc5ebb6539e91632c8f033713c74bc</Anchor>
+                <Anchor>af55878f1c51ca4e0b17e2e528a260ad4</Anchor>
                </Node>
                <Node>
                 <Name>GetSCPDXML</Name>
@@ -1937,12 +1923,12 @@
                <Node>
                 <Name>Announce</Name>
                 <Path>classPLT__DeviceHost.html</Path>
-                <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
+                <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
                </Node>
                <Node>
                 <Name>Announce</Name>
                 <Path>classPLT__DeviceHost.html</Path>
-                <Anchor>a0a0ee2ac18effda3e2a6c092e10fdf18</Anchor>
+                <Anchor>a8ee3f59b42b95745561fd7bb5e51a6e8</Anchor>
                </Node>
                <Node>
                 <Name>GetPort</Name>
@@ -1987,12 +1973,12 @@
                <Node>
                 <Name>SendSsdpSearchResponse</Name>
                 <Path>classPLT__DeviceHost.html</Path>
-                <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
+                <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
                </Node>
                <Node>
                 <Name>SendSsdpSearchResponse</Name>
                 <Path>classPLT__DeviceHost.html</Path>
-                <Anchor>a170851228317d1be999dcbb518b7b608</Anchor>
+                <Anchor>adeef84858f84d2b2c834747fc475d750</Anchor>
                </Node>
                <Node>
                 <Name>SetByeByeFirst</Name>
@@ -2124,53 +2110,6 @@
               <Name>PLT_HttpRequestHandler</Name>
               <Path>classPLT__HttpRequestHandler.html</Path>
               <Subnodes>
-              </Subnodes>
-              <Subnodes>
-               <Node>
-                <Name>PLT_DEVICE_UNKNOWN</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba76aa82dadbfe02a8053f5c97dd85bd25</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_XBOX_360</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3bab2af6db54e52e868050d68a264e0f0b5</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_XBOX_ONE</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba18d833ba49b9fe2fa9a8acef5991fc2a</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_PS3</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3bae8b171aca6740138b80928c6999c2580</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_WMP</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3bae3e245800d817486ce69f105a8a4568a</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_SONOS</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba74bafb4451409376497ee0bf8cfd078a</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_MAC</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3bab663244ab9bc276e01e6d6a85617c3cb</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_WINDOWS</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba0ab8c8605282ebcddbf2edd433709582</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_DEVICE_VLC</Name>
-                <Path>PltHttp_8h.html</Path>
-                <Anchor>a0e7774e8cacaf15f174e6ec69a088f3ba70f9666866bc60dd23563ec905d71916</Anchor>
-               </Node>
               </Subnodes>
              </Node>
             </Subnodes>
@@ -2351,18 +2290,6 @@
               <Name>PLT_MediaServer</Name>
               <Path>classPLT__MediaServer.html</Path>
               <Subnodes>
-                <Subnodes>
-                 <Node>
-                  <Name>BROWSEMETADATA</Name>
-                  <Path>classPLT__MediaServer.html</Path>
-                  <Anchor>a2b1a61b7d8df726192f9df1677c32fd5ab7339643032153b501fe8f33ff8dd1a6</Anchor>
-                 </Node>
-                 <Node>
-                  <Name>BROWSEDIRECTCHILDREN</Name>
-                  <Path>classPLT__MediaServer.html</Path>
-                  <Anchor>a2b1a61b7d8df726192f9df1677c32fd5ad6a35b3ccd6d968940c1617b0390b835</Anchor>
-                 </Node>
-                </Subnodes>
                <Node>
                 <Name>OnAction</Name>
                 <Path>classPLT__MediaServer.html</Path>
@@ -2441,7 +2368,7 @@
                <Node>
                 <Name>GetActionDescs</Name>
                 <Path>classPLT__Service.html</Path>
-                <Anchor>a86045000e08335d7f403bdd82bc8d5df</Anchor>
+                <Anchor>a78679fc7406e8db016ac95008f9789c8</Anchor>
                </Node>
                <Node>
                 <Name>GetControlURL</Name>
@@ -2476,22 +2403,22 @@
                <Node>
                 <Name>GetServiceID</Name>
                 <Path>classPLT__Service.html</Path>
-                <Anchor>a4b1050ca90463dbc64ca362346b2957b</Anchor>
+                <Anchor>a99aa8a2d926050dabea19747ae588a1b</Anchor>
                </Node>
                <Node>
                 <Name>GetServiceName</Name>
                 <Path>classPLT__Service.html</Path>
-                <Anchor>a615554808c3b06598038c1e9658e1fd9</Anchor>
+                <Anchor>acf20f9f0c3c1453bc37b0bb907964272</Anchor>
                </Node>
                <Node>
                 <Name>GetServiceType</Name>
                 <Path>classPLT__Service.html</Path>
-                <Anchor>aa9a2af0550c50e34a7e826b775fc66e4</Anchor>
+                <Anchor>a178469ba3e404c48003539cede7ab103</Anchor>
                </Node>
                <Node>
                 <Name>GetStateVariables</Name>
                 <Path>classPLT__Service.html</Path>
-                <Anchor>a294f32359568874d9d8a0e4d0994517b</Anchor>
+                <Anchor>a216f57ff32f6900dd8a95b4a540023e6</Anchor>
                </Node>
                <Node>
                 <Name>GetStateVariableValue</Name>
@@ -2693,23 +2620,6 @@
               <Path>classPLT__SsdpSender.html</Path>
               <Subnodes>
               </Subnodes>
-              <Subnodes>
-               <Node>
-                <Name>PLT_ANNOUNCETYPE_BYEBYE</Name>
-                <Path>PltSsdp_8h.html</Path>
-                <Anchor>aad45b62c0e65f7318d5aa672c1d61fe3aa9e776bdbe6702fd55a011b98ace7638</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_ANNOUNCETYPE_ALIVE</Name>
-                <Path>PltSsdp_8h.html</Path>
-                <Anchor>aad45b62c0e65f7318d5aa672c1d61fe3a7d5ebb595af92e3c246f99902ec08ce4</Anchor>
-               </Node>
-               <Node>
-                <Name>PLT_ANNOUNCETYPE_UPDATE</Name>
-                <Path>PltSsdp_8h.html</Path>
-                <Anchor>aad45b62c0e65f7318d5aa672c1d61fe3a421bd59c67ff66975cabbe6474521da1</Anchor>
-               </Node>
-              </Subnodes>
              </Node>
             </Subnodes>
            </Node>
@@ -2740,17 +2650,17 @@
                <Node>
                 <Name>GetAllowedValueRange</Name>
                 <Path>classPLT__StateVariable.html</Path>
-                <Anchor>a2b37176000fbbe8a93505a4aaee38fb1</Anchor>
+                <Anchor>a34accba754fe9e1c12ccf170303b1bc2</Anchor>
                </Node>
                <Node>
                 <Name>GetDataType</Name>
                 <Path>classPLT__StateVariable.html</Path>
-                <Anchor>a10eb75fa50927c3f359be8a50d615a23</Anchor>
+                <Anchor>a1079252f20ad2696bad7be8283bcd9b4</Anchor>
                </Node>
                <Node>
                 <Name>GetName</Name>
                 <Path>classPLT__StateVariable.html</Path>
-                <Anchor>a3912a728c58b7a0809570e7355695217</Anchor>
+                <Anchor>a0609dbbf5dcca48e52dbe9a13ea22ec2</Anchor>
                </Node>
                <Node>
                 <Name>GetSCPDXML</Name>
@@ -2765,7 +2675,7 @@
                <Node>
                 <Name>GetValue</Name>
                 <Path>classPLT__StateVariable.html</Path>
-                <Anchor>a1d68497e653407d7ea4049afa2299f1e</Anchor>
+                <Anchor>a1c0bcd69e32d949c41c19f401c030176</Anchor>
                </Node>
                <Node>
                 <Name>IsReadyToPublish</Name>
