@@ -706,7 +706,10 @@ public:
         
         NPT_List<NPT_NetworkInterface*>::Iterator iface = if_list.GetFirstItem();
         while (iface) {
-            if((*iface)->IsAddressInNetwork(address)) return true;
+            if((*iface)->IsAddressInNetwork(address)) {
+                if_list.Apply(NPT_ObjectDeleter<NPT_NetworkInterface>());   
+                return true;
+            }
             ++iface;
         }
         
