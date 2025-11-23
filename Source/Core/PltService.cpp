@@ -791,6 +791,23 @@ PLT_Service::NotifyChanged()
 {
     NPT_AutoLock lock(m_Lock);
 
+    // remove timed out subscriptions
+    {
+        NPT_List<PLT_EventSubscriberReference>::Iterator sub_iter = m_Subscribers.GetFirstItem();
+        NPT_TimeStamp now;
+        NPT_System::GetCurrentTimeStamp(now);
+        while (sub_iter) {
+            PLT_EventSubscriberReference sub = *sub_iter;
+            NPT_TimeStamp expiration;
+            expiration = sub->GetExpirationTime();
+            if (expiration < now ) {
+                m_Subscribers.Erase(sub_iter++);
+            } else {
+                ++sub_iter;
+            }
+        }
+    }
+
     // no eventing for now
     if (m_EventingPaused) return NPT_SUCCESS;
 

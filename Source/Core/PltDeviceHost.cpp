@@ -679,8 +679,11 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
                 goto cleanup;
             }
           
-            // default lease
-            NPT_Int32 timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            NPT_Int32 timeout;
+            if (PLT_UPnPMessageHelper::GetTimeOut(request, timeout) != NPT_SUCCESS) {
+                // default lease
+                timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            }
 
             // subscription renewed
             // send the info to the service
@@ -702,8 +705,11 @@ PLT_DeviceHost::ProcessHttpSubscriberRequest(NPT_HttpRequest&              reque
                 return NPT_SUCCESS;
             }
 
-            // default lease time
-            NPT_Int32 timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            NPT_Int32 timeout;
+            if (PLT_UPnPMessageHelper::GetTimeOut(request, timeout) != NPT_SUCCESS) {
+                // default lease
+                timeout = (NPT_Int32)*PLT_Constants::GetInstance().GetDefaultSubscribeLease().AsPointer();
+            }
 
             // send the info to the service
             service->ProcessNewSubscription(m_TaskManager,
